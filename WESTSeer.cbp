@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="WESTSeer" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/WESTSeer" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Compiler>
+					<Add option="-g" />
+					<Add option="-D__WXDEBUG__" />
+					<Add directory="lib/gcc_dll/mswud" />
+					<Add directory="include" />
+				</Compiler>
+				<ResourceCompiler>
+					<Add directory="lib/gcc_dll/mswud" />
+				</ResourceCompiler>
+				<Linker>
+					<Add library="libwxmsw32ud_core.a" />
+					<Add library="libwxbase32ud.a" />
+					<Add library="libwxpngd.a" />
+					<Add library="libwxzlibd.a" />
+					<Add directory="lib/gcc_dll" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/WESTSeer" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add directory="lib/gcc_dll/mswu" />
+					<Add directory="include" />
+				</Compiler>
+				<ResourceCompiler>
+					<Add directory="lib/gcc_dll/mswu" />
+				</ResourceCompiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="libwxmsw32u_core.a" />
+					<Add library="libwxbase32u.a" />
+					<Add library="libwxpng.a" />
+					<Add library="libwxzlib.a" />
+					<Add directory="lib/gcc_dll" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-pipe" />
+			<Add option="-mthreads" />
+			<Add option="-fopenmp" />
+			<Add option="-D__GNUWIN32__" />
+			<Add option="-D__WXMSW__" />
+			<Add option="-DWXUSINGDLL" />
+			<Add option="-DwxUSE_UNICODE" />
+			<Add option="-DSQLITE_THREADSAFE=1" />
+			<Add option="-DTHREADSAFE=1" />
+			<Add directory="include" />
+		</Compiler>
+		<ResourceCompiler>
+			<Add directory="include" />
+		</ResourceCompiler>
+		<Linker>
+			<Add option="-mthreads" />
+			<Add option="-fopenmp" />
+			<Add library="ssl" />
+			<Add library="crypto" />
+			<Add library="crypt32" />
+			<Add library="ws2_32" />
+			<Add directory="lib" />
+		</Linker>
+		<Unit filename="LogDialog.cpp" />
+		<Unit filename="LogDialog.h" />
+		<Unit filename="OpenAlexImportDialog.cpp" />
+		<Unit filename="OpenAlexImportDialog.h" />
+		<Unit filename="README.md" />
+		<Unit filename="SQLDialog.cpp" />
+		<Unit filename="SQLDialog.h" />
+		<Unit filename="SettingsDialog.cpp" />
+		<Unit filename="SettingsDialog.h" />
+		<Unit filename="WESTSeerApp.cpp" />
+		<Unit filename="WESTSeerApp.h" />
+		<Unit filename="WESTSeerMain.cpp" />
+		<Unit filename="WESTSeerMain.h" />
+		<Unit filename="include/AbstractMatcher.h" />
+		<Unit filename="include/AbstractTask.h" />
+		<Unit filename="include/BitermDf.h" />
+		<Unit filename="include/BitermWeight.h" />
+		<Unit filename="include/CallbackData.h" />
+		<Unit filename="include/CandidateIdentification.h" />
+		<Unit filename="include/EmailValidator.h" />
+		<Unit filename="include/GeneralConfig.h" />
+		<Unit filename="include/LLMConfig.h" />
+		<Unit filename="include/Matcher.h" />
+		<Unit filename="include/MetricModel.h" />
+		<Unit filename="include/NeuralNetworkConfig.h" />
+		<Unit filename="include/OpenAlex.h" />
+		<Unit filename="include/PredictionModel.h" />
+		<Unit filename="include/ProgressReporter.h" />
+		<Unit filename="include/Publication.h" />
+		<Unit filename="include/ResearchScope.h" />
+		<Unit filename="include/StopWordMatcher.h" />
+		<Unit filename="include/StopWords.h" />
+		<Unit filename="include/StringProcessing.h" />
+		<Unit filename="include/TermExtraction.h" />
+		<Unit filename="include/TermTfIrdf.h" />
+		<Unit filename="include/TimeSeriesExtraction.h" />
+		<Unit filename="include/TimeSeriesRegression.h" />
+		<Unit filename="include/TopicIdentification.h" />
+		<Unit filename="include/httplib.h" />
+		<Unit filename="include/porter2_stemmer.h" />
+		<Unit filename="include/sqlite3.h" />
+		<Unit filename="include/sqlite3ext.h" />
+		<Unit filename="include/wxFFileLog.h" />
+		<Unit filename="models/lstm_10.py" />
+		<Unit filename="models/lstm_3.py" />
+		<Unit filename="models/lstm_4.py" />
+		<Unit filename="models/lstm_5.py" />
+		<Unit filename="models/lstm_6.py" />
+		<Unit filename="models/lstm_7.py" />
+		<Unit filename="models/lstm_8.py" />
+		<Unit filename="models/lstm_9.py" />
+		<Unit filename="resource.rc">
+			<Option compilerVar="WINDRES" />
+		</Unit>
+		<Unit filename="src/AbstractMatcher.cpp" />
+		<Unit filename="src/AbstractTask.cpp" />
+		<Unit filename="src/BitermDf.cpp" />
+		<Unit filename="src/BitermWeight.cpp" />
+		<Unit filename="src/CallbackData.cpp" />
+		<Unit filename="src/CandidateIdentification.cpp" />
+		<Unit filename="src/EmailValidator.cpp" />
+		<Unit filename="src/GeneralConfig.cpp" />
+		<Unit filename="src/LLMConfig.cpp" />
+		<Unit filename="src/Matcher.cpp" />
+		<Unit filename="src/MetricModel.cpp" />
+		<Unit filename="src/NeuralNetworkConfig.cpp" />
+		<Unit filename="src/OpenAlex.cpp" />
+		<Unit filename="src/PredictionModel.cpp" />
+		<Unit filename="src/ProgressReporter.cpp" />
+		<Unit filename="src/Publication.cpp" />
+		<Unit filename="src/ResearchScope.cpp" />
+		<Unit filename="src/StopWordMatcher.cpp" />
+		<Unit filename="src/StopWords.cpp" />
+		<Unit filename="src/StringProcessing.cpp" />
+		<Unit filename="src/TermExtraction.cpp" />
+		<Unit filename="src/TermTfIrdf.cpp" />
+		<Unit filename="src/TimeSeriesExtraction.cpp" />
+		<Unit filename="src/TimeSeriesRegression.cpp" />
+		<Unit filename="src/TopicIdentification.cpp" />
+		<Unit filename="src/porter2_stemmer.cpp" />
+		<Unit filename="src/sqlite3.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="wxsmith/LogDialog.wxs" />
+		<Unit filename="wxsmith/OpenAlexImportDialog.wxs" />
+		<Unit filename="wxsmith/SQLDialog.wxs" />
+		<Unit filename="wxsmith/SettingsDialog.wxs" />
+		<Unit filename="wxsmith/WESTSeerframe.wxs" />
+		<Extensions>
+			<lib_finder disable_auto="1" />
+			<wxsmith version="1">
+				<gui name="wxWidgets" src="WESTSeerApp.cpp" main="WESTSeerFrame" init_handlers="necessary" language="CPP" />
+				<resources>
+					<wxFrame wxs="wxsmith/WESTSeerframe.wxs" src="WESTSeerMain.cpp" hdr="WESTSeerMain.h" fwddecl="0" i18n="1" name="WESTSeerFrame" language="CPP" />
+					<wxDialog wxs="wxsmith/LogDialog.wxs" src="LogDialog.cpp" hdr="LogDialog.h" fwddecl="0" i18n="1" name="LogDialog" language="CPP" />
+					<wxDialog wxs="wxsmith/SettingsDialog.wxs" src="SettingsDialog.cpp" hdr="SettingsDialog.h" fwddecl="0" i18n="1" name="SettingsDialog" language="CPP" />
+					<wxDialog wxs="wxsmith/OpenAlexImportDialog.wxs" src="OpenAlexImportDialog.cpp" hdr="OpenAlexImportDialog.h" fwddecl="0" i18n="1" name="OpenAlexImportDialog" language="CPP" />
+					<wxDialog wxs="wxsmith/SQLDialog.wxs" src="SQLDialog.cpp" hdr="SQLDialog.h" fwddecl="0" i18n="1" name="SQLDialog" language="CPP" />
+				</resources>
+			</wxsmith>
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
