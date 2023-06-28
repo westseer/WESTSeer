@@ -348,6 +348,15 @@ void WESTSeerFrame::showCandidates()
         ListCtrlPublications->AppendColumn("V-Score");
         ListCtrlPublications->AppendColumn("V-Rank");
     }
+    ListCtrlPublications->AppendColumn("RPYS1-NC");
+    ListCtrlPublications->AppendColumn("RPYS1-NTop10");
+    ListCtrlPublications->AppendColumn("RPYS1-NTop5");
+    ListCtrlPublications->AppendColumn("RPYS1-NTop1");
+    ListCtrlPublications->AppendColumn("RPYS2-NC");
+    ListCtrlPublications->AppendColumn("RPYS2-NTop10");
+    ListCtrlPublications->AppendColumn("RPYS2-NTop5");
+    ListCtrlPublications->AppendColumn("RPYS2-NTop1");
+    ListCtrlPublications->AppendColumn("NC");
     int ye = _exploreMode ? WESTSeerApp::year() + 5 : WESTSeerApp::year();
     GeneralConfig config;
     std::string path = config.getDatabase();
@@ -413,12 +422,46 @@ void WESTSeerFrame::showCandidates()
             ListCtrlPublications->SetItem(i, 4, wxString::Format("%llu", pub.id()));
             double pScore = scores[pub.id()][0];
             double vScore = scores[pub.id()][1];
+            int rpys1NC = (int)scores[pub.id()][32];
+            int rpys1NTop10 = (int)scores[pub.id()][33];
+            int rpys1NTop5 = (int)scores[pub.id()][34];
+            int rpys1NTop1 = (int)scores[pub.id()][35];
+            int rpys2NC = (int)scores[pub.id()][36];
+            int rpys2NTop10 = (int)scores[pub.id()][37];
+            int rpys2NTop5 = (int)scores[pub.id()][38];
+            int rpys2NTop1 = (int)scores[pub.id()][39];
+            int nc = 0;
+            for (int j = 0; j < 10; j++)
+            {
+                nc += (int)scores[pub.id()][17 + j];
+            }
             ListCtrlPublications->SetItem(i, 5, wxString::Format("%lf", pScore));
             ListCtrlPublications->SetItem(i, 6, wxString::Format("%d", (int)i));
-            if (!_exploreMode)
+            if (_exploreMode)
+            {
+                ListCtrlPublications->SetItem(i, 7, wxString::Format("%d", rpys1NC));
+                ListCtrlPublications->SetItem(i, 8, wxString::Format("%d", rpys1NTop10));
+                ListCtrlPublications->SetItem(i, 9, wxString::Format("%d", rpys1NTop5));
+                ListCtrlPublications->SetItem(i, 10, wxString::Format("%d", rpys1NTop1));
+                ListCtrlPublications->SetItem(i, 11, wxString::Format("%d", rpys2NC));
+                ListCtrlPublications->SetItem(i, 12, wxString::Format("%d", rpys2NTop10));
+                ListCtrlPublications->SetItem(i, 13, wxString::Format("%d", rpys2NTop5));
+                ListCtrlPublications->SetItem(i, 14, wxString::Format("%d", rpys2NTop1));
+                ListCtrlPublications->SetItem(i, 15, wxString::Format("%d", nc));
+            }
+            else
             {
                 ListCtrlPublications->SetItem(i, 7, wxString::Format("%lf", vScore));
                 ListCtrlPublications->SetItem(i, 8, wxString::Format("%d", _vRanks[i]));
+                ListCtrlPublications->SetItem(i, 9, wxString::Format("%d", rpys1NC));
+                ListCtrlPublications->SetItem(i, 10, wxString::Format("%d", rpys1NTop10));
+                ListCtrlPublications->SetItem(i, 11, wxString::Format("%d", rpys1NTop5));
+                ListCtrlPublications->SetItem(i, 12, wxString::Format("%d", rpys1NTop1));
+                ListCtrlPublications->SetItem(i, 13, wxString::Format("%d", rpys2NC));
+                ListCtrlPublications->SetItem(i, 14, wxString::Format("%d", rpys2NTop10));
+                ListCtrlPublications->SetItem(i, 15, wxString::Format("%d", rpys2NTop5));
+                ListCtrlPublications->SetItem(i, 16, wxString::Format("%d", rpys2NTop1));
+                ListCtrlPublications->SetItem(i, 17, wxString::Format("%d", nc));
             }
         }
     }

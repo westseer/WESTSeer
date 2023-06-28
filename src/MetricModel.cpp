@@ -193,6 +193,27 @@ bool MetricModel::save(int y, const std::map<uint64_t, std::vector<double>> &sco
     return true;
 }
 
+void median(const std::vector<int> &src, std::vector<int> &dst, int L)
+{
+    dst.resize(src.size());
+    const int m = 2 * L + 1;
+    for (int i = 0; i < (int)src.size(); i++)
+    {
+        std::vector<int> temp(m);
+        for (int j = 0; j < m; j++)
+        {
+            int k = i + j - L;
+            if (k < 0)
+                temp[j] = 0;
+            else if (k >= (int)src.size())
+                temp[j] = src[src.size() - 1];
+            else
+                temp[j] = src[k];
+        }
+        std::sort(temp.begin(), temp.end());
+        dst[i] = temp[L];
+    }
+}
 
 bool MetricModel::process(int y)
 {
@@ -208,6 +229,31 @@ bool MetricModel::process(int y)
     std::map<uint64_t, std::vector<double>> prediction;
     if (!_pm->load(y, &prediction))
         return false;
+    int cy0 = _y1;
+    std::map<uint64_t,Publication> candidates;
+    {
+        std::vector<uint64_t> cids;
+        for (auto &cidToPred: prediction)
+        {
+            cids.push_back(cidToPred.first);
+        }
+
+        std::vector<Publication> temp = _scope.getPublications(cids);
+        for (Publication & pub: temp)
+        {
+            candidates[pub.id()] = pub;
+            if (pub.year() < cy0)
+            {
+                cy0 = pub.year();
+            }
+        }
+    }
+    int nCYs = _y1 - cy0;
+    std::vector<int> cyCitations(nCYs);
+    for (int iCY = 0; iCY < nCYs; iCY++)
+    {
+        cyCitations[iCY] = 0;
+    }
 
     std::map<uint64_t,int> oldCitations[10], newCitations[5];
     double sumOldPubs = 0;
@@ -243,6 +289,10 @@ bool MetricModel::process(int y)
                 {
                     if (prediction.find(refId) != prediction.end())
                     {
+                        int cy = candidates[refId].year();
+                        int iCY = cy - cy0;
+                        if (iCY < nCYs)
+                            cyCitations[iCY]++;
                         auto ridToC = oldCitations[i].find(refId);
                         if (ridToC == oldCitations[i].end())
                         {
@@ -281,6 +331,60 @@ bool MetricModel::process(int y)
 
     // step 5: compute prediction and verification scores for each candidate
     std::map<uint64_t, std::vector<double>> scores;
+
+    std::vector<int> med1CYCitations;
+    median(cyCitations, med1CYCitations, 1);
+
+    std::vector<int> med2CYCitations;
+    median(cyCitations, med2CYCitations, 2);
+
+    std::vector<int> dev1CYCitations(nCYs);
+    std::vector<int> dev2CYCitations(nCYs);
+    for (int iCY = 0; iCY < nCYs; iCY++)
+    {
+        dev1CYCitations[iCY] = cyCitations[iCY] - med1CYCitations[iCY];
+        dev2CYCitations[iCY] = cyCitations[iCY] - med2CYCitations[iCY];
+    }
+
+    std::vector<bool> rpys1Peak(nCYs);
+    std::vector<bool> rpys2Peak(nCYs);
+    for (int iCY = 0; iCY < nCYs; iCY++)
+    {
+        bool peak1 = true;
+        bool peak2 = true;
+        if (iCY > 0)
+        {
+            if (dev1CYCitations[iCY - 1] > dev1CYCitations[iCY])
+                peak1 = false;
+            if (dev2CYCitations[iCY - 1] > dev2CYCitations[iCY])
+                peak2 = false;
+        }
+        if (iCY < nCYs - 1)
+        {
+            if (dev1CYCitations[iCY + 1] > dev1CYCitations[iCY])
+                peak1 = false;
+            if (dev2CYCitations[iCY + 1] > dev2CYCitations[iCY])
+                peak2 = false;
+        }
+        rpys1Peak[iCY] = peak1;
+        rpys2Peak[iCY] = peak2;
+    }
+
+    int nTop10Thres[10], nTop5Thres[10], nTop1Thres[10];
+    for (int i = 0; i < 10; i++)
+    {
+        std::vector<int> temp;
+        for (auto idToC: oldCitations[i])
+        {
+            temp.push_back(idToC.second);
+        }
+        std::sort(temp.begin(), temp.end());
+        int n = (int)temp.size();
+        nTop10Thres[i] = temp[9 * n / 10];
+        nTop5Thres[i] = temp[19 * n / 20];
+        nTop1Thres[i] = temp[99 * n / 100];
+    }
+
     for (auto idToP: prediction)
     {
         uint64_t id = idToP.first;
@@ -349,6 +453,50 @@ bool MetricModel::process(int y)
         // compute scores
         double predScore = predGrowth * predIrdf;
         double realScore = growth * irdf;
+        double rpys1C = 0, rpys2C = 0, rpys1NTop10 = 0, rpys2NTop10 = 0, rpys1NTop5 = 0, rpys2NTop5 = 0, rpys1NTop1 = 0, rpys2NTop1 = 0;
+
+        int cy = candidates[id].year();
+        int iCY = cy - cy0;
+        if (iCY < nCYs)
+        {
+            if (rpys1Peak[iCY])
+            {
+                rpys1C = sumOld;
+                for (int i = 0; i < 10; i++)
+                {
+                    auto idToC = oldCitations[i].find(id);
+                    if (idToC != oldCitations[i].end())
+                    {
+                        int c = idToC->second;
+                        if (c >= nTop10Thres[i])
+                            rpys1NTop10 += 1.0;
+                        if (c >= nTop5Thres[i])
+                            rpys1NTop5 += 1.0;
+                        if (c >= nTop1Thres[i])
+                            rpys1NTop1 += 1.0;
+                    }
+                }
+            }
+
+            if (rpys2Peak[iCY])
+            {
+                rpys2C = sumOld;
+                for (int i = 0; i < 10; i++)
+                {
+                    auto idToC = oldCitations[i].find(id);
+                    if (idToC != oldCitations[i].end())
+                    {
+                        int c = idToC->second;
+                        if (c >= nTop10Thres[i])
+                            rpys2NTop10 += 1.0;
+                        if (c >= nTop5Thres[i])
+                            rpys2NTop5 += 1.0;
+                        if (c >= nTop1Thres[i])
+                            rpys2NTop1 += 1.0;
+                    }
+                }
+            }
+        }
 
         std::vector<double> myScores;
         myScores.push_back(predScore);
@@ -369,6 +517,14 @@ bool MetricModel::process(int y)
         {
             myScores.push_back(newC[i]);
         }
+        myScores.push_back(rpys1C);
+        myScores.push_back(rpys1NTop10);
+        myScores.push_back(rpys1NTop5);
+        myScores.push_back(rpys1NTop1);
+        myScores.push_back(rpys2C);
+        myScores.push_back(rpys2NTop10);
+        myScores.push_back(rpys2NTop5);
+        myScores.push_back(rpys2NTop1);
         scores[id] = myScores;
     }
     return save(y, scores);
