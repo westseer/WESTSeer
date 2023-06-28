@@ -324,7 +324,9 @@ void Publication::writeWoS(std::ofstream &streamOut, const map<uint64_t, Publica
     streamOut << "TI " << _title << endl;
     streamOut << "SO " << _source << endl;
     streamOut << "DT Article" << endl;
-    streamOut << "AB " << _abstract << endl;
+    std::string ab = _abstract.ToStdString();
+    removeCharsFromString(ab, "\r\n");
+    streamOut << "AB " << ab << endl;
 
     int iCR = 0;
     for (size_t i = 0; i < _refIds.size(); i++)
@@ -336,10 +338,12 @@ void Publication::writeWoS(std::ofstream &streamOut, const map<uint64_t, Publica
         streamOut << (iCR == 0 ? "CR ":"   ")
                   << (pubCR._authors.size() == 0 ? "no author":pubCR._authors[0])
                   << ", " << pubCR._year << ", "
-                  << pubCR._title;
+                  << pubCR._title << endl;
+        iCR++;
     }
 
     streamOut << "PY " << _year << endl;
+    streamOut << "ER" << endl;
     streamOut << endl;
 }
 

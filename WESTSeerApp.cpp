@@ -11,7 +11,6 @@
 #include <wx/stdpaths.h>
 #include <wx/filefn.h>
 #include <wx/filename.h>
-#include <wx/stdpaths.h>
 #include <GeneralConfig.h>
 #include <AbstractTask.h>
 #include "SettingsDialog.h"

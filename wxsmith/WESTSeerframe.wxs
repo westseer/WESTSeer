@@ -160,9 +160,11 @@
 				</object>
 				<object class="wxMenuItem" name="ID_MENUITEM4" variable="MenuItem6" member="yes">
 					<label>&amp;Export Web-of-Science Data</label>
+					<handler function="OnExportWoSSelected" entry="EVT_MENU" />
 				</object>
 				<object class="wxMenuItem" name="ID_MENUITEM5" variable="MenuItem7" member="yes">
 					<label>&amp;Save Results</label>
+					<handler function="OnSaveResultsSelected" entry="EVT_MENU" />
 				</object>
 				<object class="wxMenuItem" name="idMenuQuit" variable="MenuItem1" member="no">
 					<label>&amp;Quit</label>

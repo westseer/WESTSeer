@@ -15,6 +15,10 @@
 #include "LogDialog.h"
 #include <GeneralConfig.h>
 #include <wx/msgdlg.h>
+#include <wx/stdpaths.h>
+#include <wx/filedlg.h>
+#include <wx/filename.h>
+#include <fstream>
 
 //(*InternalHeaders(WESTSeerFrame)
 #include <wx/bitmap.h>
@@ -199,6 +203,8 @@ WESTSeerFrame::WESTSeerFrame(wxWindow* parent,wxWindowID id)
     Connect(ID_BUTTON3,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&WESTSeerFrame::OnButtonResumeClick);
     Connect(ID_LISTCTRL1,wxEVT_COMMAND_LIST_ITEM_SELECTED,(wxObjectEventFunction)&WESTSeerFrame::OnListCtrlPublicationsItemSelect);
     Connect(ID_MENUITEM3,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&WESTSeerFrame::OnMenuItemOptionsSelected);
+    Connect(ID_MENUITEM4,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&WESTSeerFrame::OnExportWoSSelected);
+    Connect(ID_MENUITEM5,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&WESTSeerFrame::OnSaveResultsSelected);
     Connect(idMenuQuit,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&WESTSeerFrame::OnQuit);
     Connect(ID_MENUITEM1,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&WESTSeerFrame::OnExploreModeSelected);
     Connect(ID_MENUITEM2,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&WESTSeerFrame::OnTextModeSelected);
@@ -389,11 +395,11 @@ void WESTSeerFrame::showCandidates()
         {
             pubMap[pub.id()] = pub;
         }
-        for (int i = (int)_ids.size() - 1; i >= 0 ; i--)
+        for (int i = 0; i < (int)_ids.size() ; i++)
         {
             Publication pub = pubMap[_ids[i]];
-            long row = ListCtrlPublications->InsertItem(0, wxString::Format("%d", pub.year()));
-            ListCtrlPublications->SetItem(row, 1, pub.title().c_str());
+            ListCtrlPublications->InsertItem(i, wxString::Format("%d", pub.year()));
+            ListCtrlPublications->SetItem(i, 1, pub.title().c_str());
             std::stringstream ssAuthors;
             std::vector<wxString> authors = pub.authors();
             for (size_t i = 0; i < authors.size(); i++)
@@ -402,20 +408,62 @@ void WESTSeerFrame::showCandidates()
                     ssAuthors << ",";
                 ssAuthors << authors[i].ToStdString();
             }
-            ListCtrlPublications->SetItem(row, 2, ssAuthors.str().c_str());
-            ListCtrlPublications->SetItem(row, 3, pub.source().c_str());
-            ListCtrlPublications->SetItem(row, 4, wxString::Format("%llu", pub.id()));
+            ListCtrlPublications->SetItem(i, 2, ssAuthors.str().c_str());
+            ListCtrlPublications->SetItem(i, 3, pub.source().c_str());
+            ListCtrlPublications->SetItem(i, 4, wxString::Format("%llu", pub.id()));
             double pScore = scores[pub.id()][0];
             double vScore = scores[pub.id()][1];
-            ListCtrlPublications->SetItem(row, 5, wxString::Format("%lf", pScore));
-            ListCtrlPublications->SetItem(row, 6, wxString::Format("%d", (int)i));
+            ListCtrlPublications->SetItem(i, 5, wxString::Format("%lf", pScore));
+            ListCtrlPublications->SetItem(i, 6, wxString::Format("%d", (int)i));
             if (!_exploreMode)
             {
-                ListCtrlPublications->SetItem(row, 7, wxString::Format("%lf", vScore));
-                ListCtrlPublications->SetItem(row, 8, wxString::Format("%d", _vRanks[i]));
+                ListCtrlPublications->SetItem(i, 7, wxString::Format("%lf", vScore));
+                ListCtrlPublications->SetItem(i, 8, wxString::Format("%d", _vRanks[i]));
             }
         }
     }
+}
+
+void WESTSeerFrame::saveCandidates()
+{
+    int nCols = ListCtrlPublications->GetColumnCount();
+    int nRows = ListCtrlPublications->GetItemCount();
+    if (nCols == 0 || nRows == 0)
+        return;
+
+    wxString userDataDir = wxStandardPaths::Get().GetUserDataDir();
+    wxFileDialog openFileDialog(this, _("Save results to tsv file."), userDataDir, "results.csv", "csv files (*.csv)|*.csv", wxFD_SAVE);
+    if (openFileDialog.ShowModal() == wxID_CANCEL)
+        return;
+
+    std::string csvFileName = openFileDialog.GetPath().ToStdString();
+    ofstream f(csvFileName);
+    for (int iCol = 0; iCol < nCols; iCol++)
+    {
+        if (iCol > 0)
+            f << ",";
+        wxListItem item;
+        item.SetMask(wxLIST_MASK_TEXT);
+        ListCtrlPublications->GetColumn(iCol, item);
+        wxString colName = item.GetText();
+        f << colName.c_str();
+    }
+    f << std::endl;
+
+    for (int iRow = 0; iRow < nRows; iRow++)
+    {
+        for (int iCol = 0; iCol < nCols; iCol++)
+        {
+            if (iCol > 0)
+                f << ",";
+            wxListItem item;
+            wxString text = ListCtrlPublications->GetItemText(iRow, iCol);
+            text.Replace(",","_");
+            f << text.c_str();
+        }
+        f << std::endl;
+    }
+    f.close();
 }
 
 void WESTSeerFrame::clearCandidates()
@@ -663,4 +711,25 @@ void WESTSeerFrame::OnListCtrlPublicationsItemSelect(wxListEvent& event)
     int idxItem = (int)ListCtrlPublications->GetNextItem(-1, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
     if (idxItem >= 0 && idxItem < (int) _ids.size())
         showCandidate(_ids[idxItem]);
+}
+
+void WESTSeerFrame::OnExportWoSSelected(wxCommandEvent& event)
+{
+    wxString userDataDir = wxStandardPaths::Get().GetUserDataDir();
+    wxFileDialog openFileDialog(this, _("Save to WoS file"), userDataDir, "wos.txt", "WoS files (*.txt)|*.txt", wxFD_SAVE);
+    if (openFileDialog.ShowModal() == wxID_CANCEL)
+        return;
+    std::string wosFileName = openFileDialog.GetPath().ToStdString();
+    GeneralConfig config;
+    std::string path = config.getDatabase();
+    std::string kws = ChoiceScope->GetString(ChoiceScope->GetSelection()).ToStdString();
+    ResearchScope scope(path, kws);
+    int ye = WESTSeerApp::year() - 5;
+    int yb = ye - 10;
+    scope.writeWoS(yb, ye, wosFileName);
+}
+
+void WESTSeerFrame::OnSaveResultsSelected(wxCommandEvent& event)
+{
+    saveCandidates();
 }

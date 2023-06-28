@@ -8,12 +8,11 @@
 
 1687736241 d:\c++\westseer\include\wx\msw\rcdefs.h
 
-1687916688 source:d:\c++\westseer\westseerapp.cpp
+1687940187 source:d:\c++\westseer\westseerapp.cpp
 	"WESTSeerApp.h"
 	<wx/stdpaths.h>
 	<wx/filefn.h>
 	<wx/filename.h>
-	<wx/stdpaths.h>
 	<GeneralConfig.h>
 	<AbstractTask.h>
 	"SettingsDialog.h"
@@ -2829,7 +2828,7 @@
 	"wx/compositewin.h"
 	"wx/textctrl.h"
 
-1687911059 d:\c++\westseer\westseermain.h
+1687951102 d:\c++\westseer\westseermain.h
 	<wx/button.h>
 	<wx/choice.h>
 	<wx/frame.h>
@@ -3402,7 +3401,7 @@
 	<ResearchScope.h>
 	<ProgressReporter.h>
 
-1687736241 d:\c++\westseer\include\researchscope.h
+1687933812 d:\c++\westseer\include\researchscope.h
 	<cstdint>
 	<string>
 	<vector>
@@ -3476,19 +3475,20 @@
 1687736243 source:d:\c++\westseer\src\progressreporter.cpp
 	"ProgressReporter.h"
 
-1687736243 source:d:\c++\westseer\src\publication.cpp
+1687944204 source:d:\c++\westseer\src\publication.cpp
 	"Publication.h"
 	"StringProcessing.h"
 	<sstream>
 	<map>
 	<cassert>
 
-1687755120 source:d:\c++\westseer\src\researchscope.cpp
+1687942982 source:d:\c++\westseer\src\researchscope.cpp
 	"ResearchScope.h"
 	<algorithm>
 	<stdexcept>
 	<string>
 	<sstream>
+	<fstream>
 	<StringProcessing.h>
 	<sqlite3.h>
 	<time.h>
@@ -3571,7 +3571,7 @@
 	<regex>
 	<map>
 
-1687919430 source:d:\c++\westseer\westseermain.cpp
+1687951612 source:d:\c++\westseer\westseermain.cpp
 	"WESTSeerMain.h"
 	"WESTSeerApp.h"
 	"OpenAlexImportDialog.h"
@@ -3580,6 +3580,10 @@
 	"LogDialog.h"
 	<GeneralConfig.h>
 	<wx/msgdlg.h>
+	<wx/stdpaths.h>
+	<wx/filedlg.h>
+	<wx/filename.h>
+	<fstream>
 	<wx/bitmap.h>
 	<wx/icon.h>
 	<wx/image.h>
@@ -11785,7 +11789,7 @@
 	<map>
 	<string>
 
-1687918970 source:d:\c++\westseer\src\topicidentification.cpp
+1687920445 source:d:\c++\westseer\src\topicidentification.cpp
 	"TopicIdentification.h"
 	<../WESTSeerApp.h>
 	<GeneralConfig.h>

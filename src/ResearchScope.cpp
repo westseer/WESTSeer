@@ -3,6 +3,7 @@
 #include <stdexcept>
 #include <string>
 #include <sstream>
+#include <fstream>
 #include <StringProcessing.h>
 #include <sqlite3.h>
 #include <time.h>
@@ -416,6 +417,113 @@ bool ResearchScope::init()
         logError(errorMessage);
     }
     return rc == SQLITE_OK;
+}
+
+bool ResearchScope::load(const int y, std::map<uint64_t, Publication> &pubsOfY, std::map<uint64_t, Publication> &refsOfY)
+{
+    pubsOfY.clear();
+    refsOfY.clear();
+    int nCombs = numCombinations();
+
+    sqlite3 *db = NULL;
+    int rc = sqlite3_open(_path.c_str(), &db);
+    if (rc != SQLITE_OK)
+        return false;
+    char *errorMessage = NULL;
+
+    std::set<uint64_t> ids;
+    for (int iComb = 0; iComb < nCombs; iComb++)
+    {
+        CallbackData data;
+        std::stringstream ss;
+        ss << "SELECT combination, year, ids FROM openalex_queries"
+           " WHERE combination = '" << getCombination(iComb) << "' AND year = " << y << ";";
+        logDebug(ss.str().c_str());
+        rc = sqlite3_exec(db, ss.str().c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
+        if (rc != SQLITE_OK)
+        {
+            logDebug(errorMessage);
+        }
+        if (rc != SQLITE_OK || data.results.size() == 0)
+        {
+            sqlite3_close(db);
+            return false;
+        }
+
+        std::string strIds = data.results[0]["ids"];
+        std::vector<std::string> idStrs = splitString(strIds, ",");
+        for (std::string idStr: idStrs)
+        {
+            ids.insert(std::stoull(idStr));
+        }
+    }
+
+
+    {
+        CallbackData data;
+        std::stringstream ss;
+        ss << "SELECT id, year, title, abstract, source, language, authors, ref_ids FROM publications WHERE id in (";
+        for (auto iter = ids.begin(); iter != ids.end(); iter++)
+        {
+            if (iter != ids.begin())
+                ss << ",";
+            ss << *iter;
+        }
+        ss << ");";
+        logDebug(ss.str().c_str());
+        rc = sqlite3_exec(db, ss.str().c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
+        if (rc != SQLITE_OK)
+        {
+            logDebug(errorMessage);
+            sqlite3_close(db);
+            return false;
+        }
+
+        for (auto &result: data.results)
+        {
+            Publication pub(result);
+            pubsOfY[pub.id()] = pub;
+        }
+    }
+
+    // todo: load references
+    std::set<uint64_t> refIds;
+    for (auto idToPub: pubsOfY)
+    {
+        for (uint64_t refId: idToPub.second.refIds())
+        {
+            refIds.insert(refId);
+        }
+    }
+    {
+        CallbackData data;
+        std::stringstream ss;
+        ss << "SELECT id, year, title, abstract, source, language, authors, ref_ids FROM publications WHERE id in (";
+        for (auto iter = refIds.begin(); iter != refIds.end(); iter++)
+        {
+            if (iter != refIds.begin())
+                ss << ",";
+            ss << *iter;
+        }
+        ss << ");";
+        logDebug(ss.str().c_str());
+        rc = sqlite3_exec(db, ss.str().c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
+        if (rc != SQLITE_OK)
+        {
+            logDebug(errorMessage);
+            sqlite3_close(db);
+            return false;
+        }
+
+        for (auto &result: data.results)
+        {
+            Publication pub(result);
+            refsOfY[pub.id()] = pub;
+        }
+    }
+
+    sqlite3_close(db);
+    return true;
 }
 
 bool ResearchScope::load(int idxComb, const int y, std::map<uint64_t, Publication> &pubsOfY)
@@ -884,4 +992,24 @@ bool ResearchScope::getExistingRefIds(const int y, std::map<uint64_t, std::vecto
 
     sqlite3_close(db);
     return true;
+}
+
+void ResearchScope::writeWoS(int yb, int ye, std::string fileName)
+{
+    std::ofstream f(fileName);
+    for (int y = yb; y < ye; y++)
+    {
+        std::map<uint64_t, Publication> pubsOfY;
+        std::map<uint64_t, Publication> refsOfY;
+        if (!load(y, pubsOfY, refsOfY))
+        {
+            f.close();
+            return;
+        }
+        for (auto idToPub = pubsOfY.begin(); idToPub != pubsOfY.end(); idToPub++)
+        {
+            idToPub->second.writeWoS(f, refsOfY);
+        }
+    }
+    f.close();
 }

@@ -19,6 +19,7 @@ class ResearchScope
         int numCombinations() const;
         std::string getCombination(int i) const;
         int numPublications(const int y) const;
+        bool load(const int y, std::map<uint64_t, Publication> &pubsOfY, std::map<uint64_t, Publication> &refsOfY);
         bool load(int idxComb, const int y, std::map<uint64_t, Publication> &pubOfY);
         bool load(int idxComb, const int y);
         bool save(int idxComb, const int y, const std::map<uint64_t, Publication> &pubsOfY);
@@ -32,6 +33,7 @@ class ResearchScope
         std::vector<Publication> getCitations(uint64_t id, int ye);
         std::vector<Publication> getTopicPublications(uint64_t id, int ye, BitermWeight *bw, TopicIdentification *ti);
         std::pair<std::string,std::string> getTopic(uint64_t id, int ye, TopicIdentification *ti);
+        void writeWoS(int yb, int ye, std::string fileName);
 
         static std::vector<std::string> getResearchScopes(const std::string path);
 

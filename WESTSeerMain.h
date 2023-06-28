@@ -58,6 +58,8 @@ class WESTSeerFrame: public wxFrame
         void OnExploreModeSelected(wxCommandEvent& event);
         void OnTextModeSelected(wxCommandEvent& event);
         void OnListCtrlPublicationsItemSelect(wxListEvent& event);
+        void OnExportWoSSelected(wxCommandEvent& event);
+        void OnSaveResultsSelected(wxCommandEvent& event);
         //*)
 
         //(*Identifiers(WESTSeerFrame)
@@ -154,6 +156,7 @@ class WESTSeerFrame: public wxFrame
         void showCandidates();
         void showCandidate(uint64_t id);
         void clearCandidates();
+        void saveCandidates();
 };
 
 #endif // WESTSEERMAIN_H
