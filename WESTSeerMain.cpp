@@ -202,6 +202,7 @@ WESTSeerFrame::WESTSeerFrame(wxWindow* parent,wxWindowID id)
     Connect(ID_BUTTON2,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&WESTSeerFrame::OnButtonPauseClick);
     Connect(ID_BUTTON3,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&WESTSeerFrame::OnButtonResumeClick);
     Connect(ID_LISTCTRL1,wxEVT_COMMAND_LIST_ITEM_SELECTED,(wxObjectEventFunction)&WESTSeerFrame::OnListCtrlPublicationsItemSelect);
+    Connect(ID_NOTEBOOK1,wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGED,(wxObjectEventFunction)&WESTSeerFrame::OnNotebookInfoPageChanged);
     Connect(ID_MENUITEM3,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&WESTSeerFrame::OnMenuItemOptionsSelected);
     Connect(ID_MENUITEM4,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&WESTSeerFrame::OnExportWoSSelected);
     Connect(ID_MENUITEM5,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&WESTSeerFrame::OnSaveResultsSelected);
@@ -241,7 +242,7 @@ WESTSeerFrame::~WESTSeerFrame()
 
 void WESTSeerFrame::showCandidate(uint64_t id)
 {
-    if (_metricModel == NULL || _topicIdentification == NULL)
+    if (_metricModel == NULL || _topicIdentification == NULL || _timeSeriesExtraction == NULL || _timeSeries.size() == 0)
         return;
 
     GeneralConfig config;
@@ -251,25 +252,51 @@ void WESTSeerFrame::showCandidate(uint64_t id)
     Publication pub = scope.getPublication(id);
     int ye = _exploreMode ? WESTSeerApp::year() + 5 : WESTSeerApp::year();
     Publication me = scope.getPublication(id);
-    std::pair<std::string,string> topic = scope.getTopic(id, ye, _topicIdentification);
-    TextCtrlTopic->SetValue(topic.second);
-    TextCtrlAbstract->SetValue(me.abstract());
-    std::map<uint64_t, std::vector<double>> scores;
-    if (_metricModel->load(ye, &scores))
+    std::pair<std::string,std::string> topic = _topics[id];
     {
-        auto idToScore = scores.find(id);
-        if (idToScore != scores.end())
+        std::stringstream ss;
+        ss << "Topic: " << topic.second << std::endl;
+        auto idToTSM = _timeSeries.find(id);
+        if (idToTSM != _timeSeries.end())
         {
+            std::vector<int> topicLts = idToTSM->second.second.first;
+            std::vector<int> topicRts = idToTSM->second.second.second;
+            for (int i = 0; i < 10; i++)
+            {
+                ss << ye - 15 + i << ":" << topicLts[i] << std::endl;
+            }
+            for (int i = 0; i < 5; i++)
+            {
+                ss << ye - 5 + i << ":" << topicRts[i] << std::endl;
+            }
+        }
+        TextCtrlTopic->SetValue(ss.str());
+    }
+
+    TextCtrlAbstract->SetValue(me.abstract());
+    {
+        auto idToScore = _scores.find(id);
+        auto idToTSM = _timeSeries.find(id);
+        if (idToScore != _scores.end() && idToTSM != _timeSeries.end())
+        {
+            std::vector<int> rts = idToTSM->second.first.second;
             std::stringstream ss;
             ss << "predicted score = " << idToScore->second[0] << std::endl
-                << "citations on topic (the last five values are predicted): " << std::endl;
+                << "citations on topic: " << std::endl;
             for (int i = 0; i < 15; i++)
             {
-                ss << ye - 15 + i << ": " << idToScore->second[2 + i] << std::endl;
+                if (i < 10)
+                {
+                    ss << ye - 15 + i << ": " << idToScore->second[2 + i] << std::endl;
+                }
+                else
+                {
+                    ss << ye - 15 + i << ": " << rts[i - 10] << "(" << idToScore->second[2 + i] << " predicted)" << std::endl;
+                }
             }
             TextCtrlPrediction->SetValue(ss.str().c_str());
         }
-        if (idToScore != scores.end() && !_exploreMode)
+        if (idToScore != _scores.end() && !_exploreMode)
         {
             std::stringstream ss;
             ss << "verified score = " << idToScore->second[1] << std::endl
@@ -333,7 +360,13 @@ void WESTSeerFrame::showCandidate(uint64_t id)
 
 void WESTSeerFrame::showCandidates()
 {
-    if (_candidateIdentification == NULL || _metricModel == NULL)
+    _ids.clear();
+    _vRanks.clear();
+    _timeSeries.clear();
+    _topics.clear();
+    _scores.clear();
+
+    if (_candidateIdentification == NULL || _metricModel == NULL || _timeSeriesExtraction == NULL)
         return;
 
     ListCtrlPublications->AppendColumn("Year");
@@ -358,14 +391,29 @@ void WESTSeerFrame::showCandidates()
     ListCtrlPublications->AppendColumn("RPYS2-NTop1");
     ListCtrlPublications->AppendColumn("NC");
     int ye = _exploreMode ? WESTSeerApp::year() + 5 : WESTSeerApp::year();
+    if (!_timeSeriesExtraction->load(ye, &_timeSeries))
+    {
+        logError("cannot load time series");
+        return;
+    }
+    if (!_topicIdentification->load(ye, &_topics))
+    {
+        logError("cannot load topics");
+        return;
+    }
+    if (!_metricModel->load(ye, &_scores))
+    {
+        logError("cannot load scores");
+        return;
+    }
+
     GeneralConfig config;
     std::string path = config.getDatabase();
     std::string kws = ChoiceScope->GetString(ChoiceScope->GetSelection()).ToStdString();
     ResearchScope scope(path, kws);
     std::vector<uint64_t> ids;
     std::vector<int> pRanks, vRanks;
-    std::map<uint64_t,std::vector<double>> scores;
-    if (_candidateIdentification->load(ye, &ids) && _metricModel->load(ye, &scores))
+    if (_candidateIdentification->load(ye, &ids))
     {
         pRanks.resize(ids.size());
         vRanks.resize(ids.size());
@@ -377,14 +425,14 @@ void WESTSeerFrame::showCandidates()
                 if (j == i)
                     continue;
 
-                if (scores[ids[j]][0] > scores[ids[i]][0])
+                if (_scores[ids[j]][0] > _scores[ids[i]][0])
                     myPRank++;
-                else if (scores[ids[j]][0] == scores[ids[i]][0] && j < i)
+                else if (_scores[ids[j]][0] == _scores[ids[i]][0] && j < i)
                     myPRank++;
 
-                if (scores[ids[j]][1] > scores[ids[i]][1])
+                if (_scores[ids[j]][1] > _scores[ids[i]][1])
                     myVRank++;
-                else if (scores[ids[j]][1] == scores[ids[i]][1] && j < i)
+                else if (_scores[ids[j]][1] == _scores[ids[i]][1] && j < i)
                     myVRank++;
             }
             pRanks[i] = myPRank;
@@ -420,20 +468,20 @@ void WESTSeerFrame::showCandidates()
             ListCtrlPublications->SetItem(i, 2, ssAuthors.str().c_str());
             ListCtrlPublications->SetItem(i, 3, pub.source().c_str());
             ListCtrlPublications->SetItem(i, 4, wxString::Format("%llu", pub.id()));
-            double pScore = scores[pub.id()][0];
-            double vScore = scores[pub.id()][1];
-            int rpys1NC = (int)scores[pub.id()][32];
-            int rpys1NTop10 = (int)scores[pub.id()][33];
-            int rpys1NTop5 = (int)scores[pub.id()][34];
-            int rpys1NTop1 = (int)scores[pub.id()][35];
-            int rpys2NC = (int)scores[pub.id()][36];
-            int rpys2NTop10 = (int)scores[pub.id()][37];
-            int rpys2NTop5 = (int)scores[pub.id()][38];
-            int rpys2NTop1 = (int)scores[pub.id()][39];
+            double pScore = _scores[pub.id()][0];
+            double vScore = _scores[pub.id()][1];
+            int rpys1NC = (int)_scores[pub.id()][32];
+            int rpys1NTop10 = (int)_scores[pub.id()][33];
+            int rpys1NTop5 = (int)_scores[pub.id()][34];
+            int rpys1NTop1 = (int)_scores[pub.id()][35];
+            int rpys2NC = (int)_scores[pub.id()][36];
+            int rpys2NTop10 = (int)_scores[pub.id()][37];
+            int rpys2NTop5 = (int)_scores[pub.id()][38];
+            int rpys2NTop1 = (int)_scores[pub.id()][39];
             int nc = 0;
             for (int j = 0; j < 10; j++)
             {
-                nc += (int)scores[pub.id()][17 + j];
+                nc += (int)_scores[pub.id()][17 + j];
             }
             ListCtrlPublications->SetItem(i, 5, wxString::Format("%lf", pScore));
             ListCtrlPublications->SetItem(i, 6, wxString::Format("%d", (int)i));
@@ -670,6 +718,11 @@ void WESTSeerFrame::OnChoiceScopeSelect(wxCommandEvent& event)
 
 void WESTSeerFrame::clearScope()
 {
+    _ids.clear();
+    _vRanks.clear();
+    _timeSeries.clear();
+    _topics.clear();
+    _scores.clear();
     if (_openAlex != NULL)
     {
         delete _openAlex;
@@ -775,4 +828,8 @@ void WESTSeerFrame::OnExportWoSSelected(wxCommandEvent& event)
 void WESTSeerFrame::OnSaveResultsSelected(wxCommandEvent& event)
 {
     saveCandidates();
+}
+
+void WESTSeerFrame::OnNotebookInfoPageChanged(wxNotebookEvent& event)
+{
 }

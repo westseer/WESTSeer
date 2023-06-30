@@ -49,7 +49,7 @@ void TimeSeriesExtraction::doStep(int stepId)
         process(_y2 + 5);
 }
 
-bool TimeSeriesExtraction::load(int y, std::map<uint64_t, std::pair<std::vector<int>,std::vector<int>>> *timeSeries)
+bool TimeSeriesExtraction::load(int y, std::map<uint64_t, TSM> *timeSeries)
 {
     GeneralConfig config;
     std::string path = config.getDatabase();
@@ -69,7 +69,7 @@ bool TimeSeriesExtraction::load(int y, std::map<uint64_t, std::pair<std::vector<
     {
         CallbackData data;
         std::stringstream ss;
-        ss << "SELECT id, scope_keywords, year, lts, rts FROM pub_scope_time_series WHERE scope_keywords = '"
+        ss << "SELECT id, scope_keywords, year, lts, rts, topic_lts, topic_rts FROM pub_scope_time_series WHERE scope_keywords = '"
             << keywords << "' AND year = " << y << ";";
         std::string strSql = ss.str();
         logDebug(strSql.c_str());
@@ -85,7 +85,11 @@ bool TimeSeriesExtraction::load(int y, std::map<uint64_t, std::pair<std::vector<
             uint64_t id = std::stoull(result["id"]);
             std::vector<int> lts = getIntVector(result["lts"]);
             std::vector<int> rts = getIntVector(result["rts"]);
-            std::pair<std::vector<int>,std::vector<int>> tsm(lts,rts);
+            std::vector<int> topicLts = getIntVector(result["topic_lts"]);
+            std::vector<int> topicRts = getIntVector(result["topic_rts"]);
+            std::pair<std::vector<int>,std::vector<int>> ts(lts,rts);
+            std::pair<std::vector<int>,std::vector<int>> topicTs(topicLts,topicRts);
+            TSM tsm(ts,topicTs);
             (*timeSeries)[id] = tsm;
         }
     }
@@ -115,7 +119,7 @@ bool TimeSeriesExtraction::load(int y, std::map<uint64_t, std::pair<std::vector<
     return true;
 }
 
-bool TimeSeriesExtraction::save(int y, const std::map<uint64_t, std::pair<std::vector<int>,std::vector<int>>> &timeSeries)
+bool TimeSeriesExtraction::save(int y, const std::map<uint64_t, TSM> &timeSeries)
 {
     GeneralConfig config;
     std::string path = config.getDatabase();
@@ -144,6 +148,8 @@ bool TimeSeriesExtraction::save(int y, const std::map<uint64_t, std::pair<std::v
         "year INTEGER,"
         "lts TEXT,"
         "rts TEXT,"
+        "topic_lts TEXT,"
+        "topic_rts TEXT,"
         "PRIMARY KEY(id,scope_keywords,year))",
     };
     for (const char*sql: sqls)
@@ -165,17 +171,21 @@ bool TimeSeriesExtraction::save(int y, const std::map<uint64_t, std::pair<std::v
     if (timeSeries.size() > 0)
     {
         std::stringstream ss;
-        ss << "INSERT OR IGNORE INTO pub_scope_time_series(id, scope_keywords, year, lts, rts) VALUES ";
+        ss << "INSERT OR IGNORE INTO pub_scope_time_series(id, scope_keywords, year, lts, rts, topic_lts, topic_rts) VALUES ";
         for (auto idToTS = timeSeries.begin(); idToTS != timeSeries.end(); idToTS++)
         {
             uint64_t id = idToTS->first;
-            std::vector<int> lts = idToTS->second.first;
-            std::vector<int> rts = idToTS->second.second;
+            std::vector<int> lts = idToTS->second.first.first;
+            std::vector<int> rts = idToTS->second.first.second;
+            std::vector<int> topicLts = idToTS->second.second.first;
+            std::vector<int> topicRts = idToTS->second.second.second;
             std::string strLts = getVectorStr(lts);
             std::string strRts = getVectorStr(rts);
+            std::string strTopicLts = getVectorStr(topicLts);
+            std::string strTopicRts = getVectorStr(topicRts);
             if (idToTS != timeSeries.begin())
                 ss << ",";
-            ss << "(" << id << ",'" << keywords << "'," << y << ",'" << strLts << "','" << strRts << "')";
+            ss << "(" << id << ",'" << keywords << "'," << y << ",'" << strLts << "','" << strRts << "','" << strTopicLts << "','" << strTopicRts << "')";
         }
         ss << ";";
         std::string strSql = ss.str();
@@ -215,7 +225,7 @@ bool TimeSeriesExtraction::process(int y)
         return true;
 
     // step 1: load candidates
-    std::map<uint64_t, std::pair<std::vector<int>,std::vector<int>>> timeSeries;
+    std::map<uint64_t, TSM> timeSeries;
     std::map<uint64_t, int> candidateMap;
     {
         std::vector<uint64_t> candidates;
@@ -234,11 +244,13 @@ bool TimeSeriesExtraction::process(int y)
     GeneralConfig config;
     int numCandidates = (int) candidateMap.size();
     int hits[numCandidates][15];
+    int topicHits[numCandidates][15];
     for (int iC = 0; iC < numCandidates; iC++)
     {
         for (int iY = 0; iY < 15; iY++)
         {
             hits[iC][iY] = 0;
+            topicHits[iC][iY] = 0;
         }
     }
 
@@ -290,7 +302,7 @@ bool TimeSeriesExtraction::process(int y)
             std::set<uint64_t> refs(pubs[idToBWs.first].begin(), pubs[idToBWs.first].end());
 
             // calculate pHits
-            std::set<uint64_t> pHits;
+            std::set<uint64_t> pHits, tHits;
             for (auto &bToW: idToBWs.second)
             {
                 auto bToC = bitermCandidatePositions.find(bToW.first);
@@ -298,6 +310,8 @@ bool TimeSeriesExtraction::process(int y)
                 {
                     for (uint64_t cid: bToC->second)
                     {
+                        // update tHits
+                        tHits.insert(cid);
                         // update pHits
                         if (refs.find(cid) != refs.end())
                         {
@@ -313,6 +327,13 @@ bool TimeSeriesExtraction::process(int y)
                 int iC = candidateMap[cid];
                 hits[iC][iY]++;
             }
+
+            // update topicHits according to tHits
+            for (uint64_t cid: tHits)
+            {
+                int iC = candidateMap[cid];
+                topicHits[iC][iY]++;
+            }
         }
     }
 
@@ -321,16 +342,20 @@ bool TimeSeriesExtraction::process(int y)
     {
         uint64_t id = idToiC.first;
         int iC = idToiC.second;
-        std::vector<int> lts(10), rts(5);
+        std::vector<int> lts(10), rts(5), topicLts(10), topicRts(5);
         for (int iY = 0; iY < 10; iY++)
         {
             lts[iY] = hits[iC][iY];
+            topicLts[iY] = topicHits[iC][iY];
         }
         for (int iY = 10; iY < 15; iY++)
         {
             rts[iY-10] = hits[iC][iY];
+            topicRts[iY - 10] = topicHits[iC][iY];
         }
-        std::pair<std::vector<int>,std::vector<int>> tsm(lts,rts);
+        std::pair<std::vector<int>,std::vector<int>> ts(lts,rts);
+        std::pair<std::vector<int>,std::vector<int>> topicTs(topicLts,topicRts);
+        TSM tsm(ts,topicTs);
         timeSeries[id] = tsm;
     }
 

@@ -7,6 +7,7 @@
 #include <TopicIdentification.h>
 #include <map>
 
+typedef std::pair<std::pair<std::vector<int>,std::vector<int>>,std::pair<std::vector<int>,std::vector<int>>> TSM;
 class TimeSeriesExtraction: public AbstractTask
 {
     public:
@@ -17,10 +18,10 @@ class TimeSeriesExtraction: public AbstractTask
         virtual const char *name();
         virtual int numSteps();
         virtual void doStep(int stepId);
-        bool load(int y, std::map<uint64_t, std::pair<std::vector<int>,std::vector<int>>> *timeSeries);
+        bool load(int y, std::map<uint64_t, TSM> *timeSeries);
 
     protected:
-        bool save(int y, const std::map<uint64_t, std::pair<std::vector<int>,std::vector<int>>> &timeSeries);
+        bool save(int y, const std::map<uint64_t, TSM> &timeSeries);
         bool process(int y);
 
     private:

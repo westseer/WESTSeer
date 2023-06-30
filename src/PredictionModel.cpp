@@ -201,12 +201,12 @@ bool PredictionModel::process(int iStep)
     int y = iStep == 0 ? _y2 : _y2 + 5;
     std::map<uint64_t, std::vector<double>> prediction;
 
-    std::map<uint64_t, std::pair<std::vector<int>,std::vector<int>>> timeSeries;
+    std::map<uint64_t, TSM> timeSeries;
     if (!_tse->load(y, &timeSeries))
         return false;
     for (auto &idToTs: timeSeries)
     {
-        std::vector<int> lts = idToTs.second.first;
+        std::vector<int> lts = idToTs.second.first.first;
         std::vector<double> lts2(lts.size());
         for (size_t i = 0; i < lts.size(); i++)
         {

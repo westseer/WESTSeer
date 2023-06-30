@@ -221,7 +221,7 @@ bool MetricModel::process(int y)
         return true;
 
     // step 1: load time series
-    std::map<uint64_t, std::pair<std::vector<int>,std::vector<int>>> timeSeries;
+    std::map<uint64_t, TSM> timeSeries;
     if (!_tse->load(y, &timeSeries))
         return false;
 
@@ -388,7 +388,7 @@ bool MetricModel::process(int y)
     for (auto idToP: prediction)
     {
         uint64_t id = idToP.first;
-        std::vector<int> lts = timeSeries[idToP.first].first;
+        std::vector<int> lts = timeSeries[idToP.first].first.first;
         std::vector<double> rts = idToP.second;
 
         // get old citations

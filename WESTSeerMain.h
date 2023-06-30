@@ -60,6 +60,7 @@ class WESTSeerFrame: public wxFrame
         void OnListCtrlPublicationsItemSelect(wxListEvent& event);
         void OnExportWoSSelected(wxCommandEvent& event);
         void OnSaveResultsSelected(wxCommandEvent& event);
+        void OnNotebookInfoPageChanged(wxNotebookEvent& event);
         //*)
 
         //(*Identifiers(WESTSeerFrame)
@@ -151,6 +152,9 @@ class WESTSeerFrame: public wxFrame
         bool _exploreMode;
         std::vector<uint64_t> _ids;
         std::vector<int> _vRanks;
+        std::map<uint64_t,TSM> _timeSeries;
+        std::map<uint64_t, std::pair<std::string,std::string>> _topics;
+        std::map<uint64_t, std::vector<double>> _scores;
 
         void clearScope();
         void showCandidates();
