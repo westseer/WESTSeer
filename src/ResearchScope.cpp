@@ -185,6 +185,63 @@ std::vector<Publication> ResearchScope::getCitations(uint64_t id, int ye)
     return myCitations;
 }
 
+std::map<uint64_t,std::vector<Publication>> ResearchScope::getCitations(const std::vector<uint64_t> &ids, int ye)
+{
+    std::map<uint64_t,std::vector<uint64_t>> cids;
+    for (uint64_t id: ids)
+    {
+        std::vector<uint64_t> myCids;
+        cids[id] = myCids;
+    }
+    for (int y = ye - 15; y < ye; y++)
+    {
+        std::map<uint64_t, std::vector<uint64_t>> refIdsOfId;
+        std::vector<uint64_t> myCitIds;
+        if (getExistingRefIds(y, refIdsOfId))
+        {
+            for (auto idToRefIds: refIdsOfId)
+            {
+                for (uint64_t refId: idToRefIds.second)
+                {
+                    auto refIdToCids = cids.find(refId);
+                    if (refIdToCids != cids.end())
+                    {
+                        refIdToCids->second.push_back(idToRefIds.first);
+                    }
+                }
+            }
+        }
+    }
+    std::set<uint64_t> allCids;
+    for (auto &idToCids: cids)
+    {
+        allCids.insert(idToCids.second.begin(), idToCids.second.end());
+    }
+
+    std::map<uint64_t, Publication> cpubs;
+    {
+        std::vector<uint64_t> temp(allCids.begin(), allCids.end());
+        std::vector<Publication> temp2 = getPublications(temp);
+        for (Publication & pub: temp2)
+        {
+            cpubs[pub.id()] = pub;
+        }
+    }
+
+    std::map<uint64_t,std::vector<Publication>> citations;
+    for (auto &idToCids: cids)
+    {
+        uint64_t id = idToCids.first;
+        std::vector<Publication> myCitations;
+        for (uint64_t cid: idToCids.second)
+        {
+            myCitations.push_back(cpubs[cid]);
+        }
+        citations[id] = myCitations;
+    }
+    return citations;
+}
+
 std::pair<std::string,std::string> ResearchScope::getTopic(uint64_t id, int ye, TopicIdentification *ti)
 {
     std::map<uint64_t,std::pair<std::string,std::string>> topics;

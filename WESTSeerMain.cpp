@@ -14,6 +14,7 @@
 #include "SQLDialog.h"
 #include "LogDialog.h"
 #include <GeneralConfig.h>
+#include <StringProcessing.h>
 #include <wx/msgdlg.h>
 #include <wx/stdpaths.h>
 #include <wx/filedlg.h>
@@ -255,7 +256,7 @@ void WESTSeerFrame::showCandidate(uint64_t id)
     std::pair<std::string,std::string> topic = _topics[id];
     {
         std::stringstream ss;
-        ss << "Topic: " << topic.second << std::endl;
+        ss << "Topic: " << simplifyTopic(topic.second) << std::endl;
         auto idToTSM = _timeSeries.find(id);
         if (idToTSM != _timeSeries.end())
         {
@@ -315,7 +316,7 @@ void WESTSeerFrame::showCandidate(uint64_t id)
     ListCtrlCitations->AppendColumn("Authors");
     ListCtrlCitations->AppendColumn("Source");
     ListCtrlCitations->AppendColumn("ID");
-    std::vector<Publication> citations = scope.getCitations(id, ye);
+    std::vector<Publication> citations = _citations[id];
     for (Publication pub: citations)
     {
         long row = ListCtrlCitations->InsertItem(0, wxString::Format("%d", pub.year()));
@@ -365,6 +366,7 @@ void WESTSeerFrame::showCandidates()
     _timeSeries.clear();
     _topics.clear();
     _scores.clear();
+    _citations.clear();
 
     if (_candidateIdentification == NULL || _metricModel == NULL || _timeSeriesExtraction == NULL)
         return;
@@ -445,6 +447,7 @@ void WESTSeerFrame::showCandidates()
             _ids[pRanks[i]] = ids[i];
             _vRanks[pRanks[i]] = vRanks[i];
         }
+        _citations = scope.getCitations(_ids, ye);
 
         std::vector<Publication> pubs = scope.getPublications(_ids);
         std::map<uint64_t,Publication> pubMap;

@@ -89,9 +89,16 @@ private:
 };
 
 #define logError wxLogError
+#ifdef __DEBUG__
 #define logWarning wxLogWarning
 #define logVerbose wxLogVerbose
 #define logDebug wxLogDebug
 #define logMessage wxLogMessage
+#else
+#define logWarning(x)
+#define logVerbose(x)
+#define logDebug(x)
+#define logMessage(x)
+#endif
 
 #endif // WXFFILELOG_H_INCLUDED

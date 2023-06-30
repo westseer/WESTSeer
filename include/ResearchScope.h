@@ -31,6 +31,7 @@ class ResearchScope
         std::vector<Publication> getPublications(std::vector<uint64_t> ids);
         std::vector<Publication> getReferences(uint64_t id);
         std::vector<Publication> getCitations(uint64_t id, int ye);
+        std::map<uint64_t,std::vector<Publication>> getCitations(const std::vector<uint64_t> &ids, int ye);
         std::vector<Publication> getTopicPublications(uint64_t id, int ye, BitermWeight *bw, TopicIdentification *ti);
         std::pair<std::string,std::string> getTopic(uint64_t id, int ye, TopicIdentification *ti);
         void writeWoS(int yb, int ye, std::string fileName);

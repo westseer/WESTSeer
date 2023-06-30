@@ -1,14 +1,14 @@
 # depslib dependency file v1.0
-1687736243 source:d:\c++\westseer\resource.rc
+1688155981 source:d:\c++\westseer\resource.rc
 	"wx/msw/wx.rc"
 
-1687736241 d:\c++\westseer\include\wx\msw\wx.rc
+1688155980 d:\c++\westseer\include\wx\msw\wx.rc
 	<windows.h>
 	"wx/msw/rcdefs.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\rcdefs.h
+1688155980 d:\c++\westseer\include\wx\msw\rcdefs.h
 
-1687940187 source:d:\c++\westseer\westseerapp.cpp
+1688155980 source:d:\c++\westseer\westseerapp.cpp
 	"WESTSeerApp.h"
 	<wx/stdpaths.h>
 	<wx/filefn.h>
@@ -21,12 +21,12 @@
 	"WESTSeerMain.h"
 	<wx/image.h>
 
-1687916697 d:\c++\westseer\westseerapp.h
+1688155980 d:\c++\westseer\westseerapp.h
 	<wx/app.h>
 	<wx/fileconf.h>
 	<wxFFileLog.h>
 
-1687736241 d:\c++\westseer\include\wx\app.h
+1688155980 d:\c++\westseer\include\wx\app.h
 	"wx/event.h"
 	"wx/eventfilter.h"
 	"wx/build.h"
@@ -45,7 +45,7 @@
 	"wx/qt/app.h"
 	"wx/univ/theme.h"
 
-1687736241 d:\c++\westseer\include\wx\event.h
+1688155980 d:\c++\westseer\include\wx\event.h
 	"wx/defs.h"
 	"wx/cpp.h"
 	"wx/object.h"
@@ -63,7 +63,7 @@
 	"wx/meta/convertible.h"
 	"wx/meta/removeref.h"
 
-1687736241 d:\c++\westseer\include\wx\defs.h
+1688155980 d:\c++\westseer\include\wx\defs.h
 	"wx/msw/winundef.h"
 	"wx/platform.h"
 	"wx/version.h"
@@ -75,9 +75,9 @@
 	"wx/qt/defs.h"
 	"wx/features.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\winundef.h
+1688155980 d:\c++\westseer\include\wx\msw\winundef.h
 
-1687736241 d:\c++\westseer\include\wx\platform.h
+1688155980 d:\c++\westseer\include\wx\platform.h
 	<unistd.h>
 	<TargetConditionals.h>
 	<Availability.h>
@@ -91,22 +91,22 @@
 	<Availability.h>
 	"wx/chkconf.h"
 
-1687736241 d:\c++\westseer\include\wx\android\config_android.h
+1688155980 d:\c++\westseer\include\wx\android\config_android.h
 
-1687736241 d:\c++\westseer\include\wx\compiler.h
+1688155980 d:\c++\westseer\include\wx\compiler.h
 
 1674896212 d:\c++\westseer\lib\gcc_dll\mswud\wx\setup.h
 
-1687736241 d:\c++\westseer\include\wx\msw\libraries.h
+1688155980 d:\c++\westseer\include\wx\msw\libraries.h
 
-1687736241 d:\c++\westseer\include\wx\msw\gccpriv.h
+1688155980 d:\c++\westseer\include\wx\msw\gccpriv.h
 	"wx/msw/winver.h"
 	<_mingw.h>
 	<w32api.h>
 
-1687736241 d:\c++\westseer\include\wx\msw\winver.h
+1688155980 d:\c++\westseer\include\wx\msw\winver.h
 
-1687736241 d:\c++\westseer\include\wx\chkconf.h
+1688155980 d:\c++\westseer\include\wx\chkconf.h
 	"wx/msw/chkconf.h"
 	"wx/gtk/chkconf.h"
 	"wx/gtk/chkconf.h"
@@ -118,51 +118,51 @@
 	"wx/unix/chkconf.h"
 	"wx/univ/chkconf.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\chkconf.h
+1688155980 d:\c++\westseer\include\wx\msw\chkconf.h
 
-1687736241 d:\c++\westseer\include\wx\gtk\chkconf.h
+1688155980 d:\c++\westseer\include\wx\gtk\chkconf.h
 
-1687736241 d:\c++\westseer\include\wx\osx\chkconf.h
+1688155980 d:\c++\westseer\include\wx\osx\chkconf.h
 	"wx/osx/iphone/chkconf.h"
 	"wx/osx/cocoa/chkconf.h"
 
-1687736241 d:\c++\westseer\include\wx\osx\iphone\chkconf.h
+1688155980 d:\c++\westseer\include\wx\osx\iphone\chkconf.h
 
-1687736241 d:\c++\westseer\include\wx\osx\cocoa\chkconf.h
+1688155980 d:\c++\westseer\include\wx\osx\cocoa\chkconf.h
 
-1687736241 d:\c++\westseer\include\wx\dfb\chkconf.h
+1688155980 d:\c++\westseer\include\wx\dfb\chkconf.h
 
-1687736241 d:\c++\westseer\include\wx\motif\chkconf.h
+1688155980 d:\c++\westseer\include\wx\motif\chkconf.h
 
-1687736241 d:\c++\westseer\include\wx\x11\chkconf.h
+1688155981 d:\c++\westseer\include\wx\x11\chkconf.h
 
-1687736241 d:\c++\westseer\include\wx\android\chkconf.h
+1688155980 d:\c++\westseer\include\wx\android\chkconf.h
 
-1687736241 d:\c++\westseer\include\wx\unix\chkconf.h
+1688155981 d:\c++\westseer\include\wx\unix\chkconf.h
 
-1687736241 d:\c++\westseer\include\wx\univ\chkconf.h
+1688155981 d:\c++\westseer\include\wx\univ\chkconf.h
 
-1687736241 d:\c++\westseer\include\wx\version.h
+1688155981 d:\c++\westseer\include\wx\version.h
 	"wx/cpp.h"
 
-1687736241 d:\c++\westseer\include\wx\cpp.h
+1688155980 d:\c++\westseer\include\wx\cpp.h
 	"wx/compiler.h"
 
-1687736241 d:\c++\westseer\include\wx\dlimpexp.h
+1688155980 d:\c++\westseer\include\wx\dlimpexp.h
 
-1687736241 d:\c++\westseer\include\wx\types.h
+1688155981 d:\c++\westseer\include\wx\types.h
 	"wx/platform.h"
 	<sys/types.h>
 	<sys/types.h>
 
-1687736241 d:\c++\westseer\include\wx\debug.h
+1688155980 d:\c++\westseer\include\wx\debug.h
 	<assert.h>
 	<limits.h>
 	"wx/chartype.h"
 	"wx/cpp.h"
 	"wx/dlimpexp.h"
 
-1687736241 d:\c++\westseer\include\wx\chartype.h
+1688155980 d:\c++\westseer\include\wx\chartype.h
 	"wx/types.h"
 	<sys/types.h>
 	<wchar.h>
@@ -175,24 +175,24 @@
 	<tchar.h>
 	<ctype.h>
 
-1687736241 d:\c++\westseer\include\wx\qt\defs.h
+1688155981 d:\c++\westseer\include\wx\qt\defs.h
 
-1687736241 d:\c++\westseer\include\wx\features.h
+1688155980 d:\c++\westseer\include\wx\features.h
 
-1687736241 d:\c++\westseer\include\wx\object.h
+1688155980 d:\c++\westseer\include\wx\object.h
 	"wx/memory.h"
 	"wx/xti.h"
 	"wx/rtti.h"
 	"wx/xti2.h"
 	"wx/msw/msvcrt.h"
 
-1687736241 d:\c++\westseer\include\wx\memory.h
+1688155980 d:\c++\westseer\include\wx\memory.h
 	"wx/defs.h"
 	"wx/string.h"
 	"wx/msgout.h"
 	<stddef.h>
 
-1687736241 d:\c++\westseer\include\wx\string.h
+1688155981 d:\c++\westseer\include\wx\string.h
 	"wx/defs.h"
 	<ctype.h>
 	<string.h>
@@ -212,7 +212,7 @@
 	"wx/iosfwrap.h"
 	"wx/crt.h"
 
-1687736241 d:\c++\westseer\include\wx\wxcrtbase.h
+1688155981 d:\c++\westseer\include\wx\wxcrtbase.h
 	"wx/chartype.h"
 	<stdio.h>
 	<string.h>
@@ -221,7 +221,7 @@
 	<time.h>
 	<io.h>
 
-1687736241 d:\c++\westseer\include\wx\strvararg.h
+1688155981 d:\c++\westseer\include\wx\strvararg.h
 	"wx/platform.h"
 	"wx/cpp.h"
 	"wx/chartype.h"
@@ -234,28 +234,28 @@
 	"wx/stringimpl.h"
 	<string_view>
 
-1687736241 d:\c++\westseer\include\wx\strconv.h
+1688155981 d:\c++\westseer\include\wx\strconv.h
 	"wx/defs.h"
 	"wx/chartype.h"
 	"wx/buffer.h"
 	<stdlib.h>
 	"wx/fontenc.h"
 
-1687736241 d:\c++\westseer\include\wx\buffer.h
+1688155980 d:\c++\westseer\include\wx\buffer.h
 	"wx/defs.h"
 	"wx/wxcrtbase.h"
 	<stdlib.h>
 
-1687736241 d:\c++\westseer\include\wx\fontenc.h
+1688155980 d:\c++\westseer\include\wx\fontenc.h
 
-1687736241 d:\c++\westseer\include\wx\unichar.h
+1688155981 d:\c++\westseer\include\wx\unichar.h
 	"wx/defs.h"
 	"wx/chartype.h"
 	"wx/stringimpl.h"
 	<algorithm>
 	<utility>
 
-1687736241 d:\c++\westseer\include\wx\stringimpl.h
+1688155981 d:\c++\westseer\include\wx\stringimpl.h
 	"wx/defs.h"
 	"wx/chartype.h"
 	"wx/wxcrtbase.h"
@@ -264,39 +264,39 @@
 	<string>
 	"wx/afterstd.h"
 
-1687736241 d:\c++\westseer\include\wx\beforestd.h
+1688155980 d:\c++\westseer\include\wx\beforestd.h
 
-1687736241 d:\c++\westseer\include\wx\afterstd.h
+1688155980 d:\c++\westseer\include\wx\afterstd.h
 	"wx/msw/winundef.h"
 
-1687736241 d:\c++\westseer\include\wx\stringops.h
+1688155981 d:\c++\westseer\include\wx\stringops.h
 	"wx/chartype.h"
 	"wx/stringimpl.h"
 	"wx/unichar.h"
 	"wx/buffer.h"
 
-1687736241 d:\c++\westseer\include\wx\tls.h
+1688155981 d:\c++\westseer\include\wx\tls.h
 	"wx/defs.h"
 	"wx/msw/tls.h"
 	"wx/unix/tls.h"
 	<stdlib.h>
 
-1687736241 d:\c++\westseer\include\wx\msw\tls.h
+1688155980 d:\c++\westseer\include\wx\msw\tls.h
 	"wx/msw/wrapwin.h"
 	"wx/thread.h"
 	"wx/vector.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\wrapwin.h
+1688155980 d:\c++\westseer\include\wx\msw\wrapwin.h
 	"wx/platform.h"
 	"wx/msw/winver.h"
 	<winsock2.h>
 	<windows.h>
 	"wx/msw/winundef.h"
 
-1687736241 d:\c++\westseer\include\wx\thread.h
+1688155981 d:\c++\westseer\include\wx\thread.h
 	"wx/defs.h"
 
-1687736241 d:\c++\westseer\include\wx\vector.h
+1688155981 d:\c++\westseer\include\wx\vector.h
 	"wx/defs.h"
 	<vector>
 	<algorithm>
@@ -308,58 +308,58 @@
 	<new>
 	"wx/afterstd.h"
 
-1687736241 d:\c++\westseer\include\wx\scopeguard.h
+1688155981 d:\c++\westseer\include\wx\scopeguard.h
 	"wx/defs.h"
 	"wx/except.h"
 
-1687736241 d:\c++\westseer\include\wx\except.h
+1688155980 d:\c++\westseer\include\wx\except.h
 	"wx/defs.h"
 
-1687736241 d:\c++\westseer\include\wx\meta\movable.h
+1688155980 d:\c++\westseer\include\wx\meta\movable.h
 	"wx/meta/pod.h"
 	"wx/string.h"
 
-1687736241 d:\c++\westseer\include\wx\meta\pod.h
+1688155980 d:\c++\westseer\include\wx\meta\pod.h
 	"wx/defs.h"
 
-1687736241 d:\c++\westseer\include\wx\meta\if.h
+1688155980 d:\c++\westseer\include\wx\meta\if.h
 	"wx/defs.h"
 
-1687736241 d:\c++\westseer\include\wx\unix\tls.h
+1688155981 d:\c++\westseer\include\wx\unix\tls.h
 	<pthread.h>
 
-1687736241 d:\c++\westseer\include\wx\iosfwrap.h
+1688155980 d:\c++\westseer\include\wx\iosfwrap.h
 	<iosfwd>
 	"wx/msw/winundef.h"
 
-1687736241 d:\c++\westseer\include\wx\crt.h
+1688155980 d:\c++\westseer\include\wx\crt.h
 	"wx/defs.h"
 	"wx/chartype.h"
 	"wx/wxcrt.h"
 	"wx/wxcrtvararg.h"
 
-1687736241 d:\c++\westseer\include\wx\wxcrt.h
+1688155981 d:\c++\westseer\include\wx\wxcrt.h
 	"wx/wxcrtbase.h"
 	"wx/string.h"
 	<string.h>
 
-1687736241 d:\c++\westseer\include\wx\wxcrtvararg.h
+1688155981 d:\c++\westseer\include\wx\wxcrtvararg.h
 	"wx/wxcrt.h"
 	"wx/strvararg.h"
 	"wx/string.h"
 	<stdarg.h>
 
-1687736241 d:\c++\westseer\include\wx\msgout.h
+1688155980 d:\c++\westseer\include\wx\msgout.h
 	"wx/defs.h"
 	"wx/chartype.h"
 	"wx/strvararg.h"
 
-1687736241 d:\c++\westseer\include\wx\xti.h
+1688155981 d:\c++\westseer\include\wx\xti.h
 	"wx/defs.h"
 	"wx/xtitypes.h"
 	"wx/xtihandler.h"
 
-1687736241 d:\c++\westseer\include\wx\xtitypes.h
+1688155981 d:\c++\westseer\include\wx\xtitypes.h
 	"wx/defs.h"
 	"wx/string.h"
 	"wx/hashmap.h"
@@ -369,7 +369,7 @@
 	"wx/log.h"
 	<typeinfo>
 
-1687736241 d:\c++\westseer\include\wx\hashmap.h
+1688155980 d:\c++\westseer\include\wx\hashmap.h
 	"wx/string.h"
 	"wx/wxcrt.h"
 	<unordered_map>
@@ -378,7 +378,7 @@
 	<hash_map>
 	<stddef.h>
 
-1687736241 d:\c++\westseer\include\wx\arrstr.h
+1688155980 d:\c++\westseer\include\wx\arrstr.h
 	"wx/defs.h"
 	"wx/string.h"
 	"wx/dynarray.h"
@@ -387,13 +387,13 @@
 	<iterator>
 	"wx/afterstd.h"
 
-1687736241 d:\c++\westseer\include\wx\dynarray.h
+1688155980 d:\c++\westseer\include\wx\dynarray.h
 	"wx/defs.h"
 	"wx/vector.h"
 
-1687736241 d:\c++\westseer\include\wx\flags.h
+1688155980 d:\c++\westseer\include\wx\flags.h
 
-1687736241 d:\c++\westseer\include\wx\intl.h
+1688155980 d:\c++\westseer\include\wx\intl.h
 	"wx/defs.h"
 	"wx/localedefs.h"
 	"wx/string.h"
@@ -401,10 +401,10 @@
 	"wx/fontenc.h"
 	"wx/language.h"
 
-1687736241 d:\c++\westseer\include\wx\localedefs.h
+1688155980 d:\c++\westseer\include\wx\localedefs.h
 	"wx/string.h"
 
-1687736241 d:\c++\westseer\include\wx\translation.h
+1688155981 d:\c++\westseer\include\wx\translation.h
 	"wx/defs.h"
 	"wx/string.h"
 	"wx/buffer.h"
@@ -413,17 +413,17 @@
 	"wx/strconv.h"
 	"wx/scopedptr.h"
 
-1687736241 d:\c++\westseer\include\wx\language.h
+1688155980 d:\c++\westseer\include\wx\language.h
 	"wx/defs.h"
 
-1687736241 d:\c++\westseer\include\wx\scopedptr.h
+1688155981 d:\c++\westseer\include\wx\scopedptr.h
 	"wx/defs.h"
 	"wx/checkeddelete.h"
 
-1687736241 d:\c++\westseer\include\wx\checkeddelete.h
+1688155980 d:\c++\westseer\include\wx\checkeddelete.h
 	"wx/cpp.h"
 
-1687736241 d:\c++\westseer\include\wx\log.h
+1688155980 d:\c++\westseer\include\wx\log.h
 	"wx/defs.h"
 	"wx/cpp.h"
 	"wx/string.h"
@@ -438,10 +438,10 @@
 	"wx/iosfwrap.h"
 	"wx/generic/logg.h"
 
-1687736241 d:\c++\westseer\include\wx\time.h
+1688155981 d:\c++\westseer\include\wx\time.h
 	"wx/longlong.h"
 
-1687736241 d:\c++\westseer\include\wx\longlong.h
+1688155980 d:\c++\westseer\include\wx\longlong.h
 	"wx/defs.h"
 	"wx/string.h"
 	<limits.h>
@@ -449,26 +449,26 @@
 	<limits>
 	"wx/strvararg.h"
 
-1687736241 d:\c++\westseer\include\wx\generic\logg.h
+1688155980 d:\c++\westseer\include\wx\generic\logg.h
 
-1687736241 d:\c++\westseer\include\wx\xtihandler.h
+1688155981 d:\c++\westseer\include\wx\xtihandler.h
 	"wx/defs.h"
 	"wx/xti.h"
 
-1687736241 d:\c++\westseer\include\wx\rtti.h
+1688155981 d:\c++\westseer\include\wx\rtti.h
 	"wx/memory.h"
 	"wx/flags.h"
 
-1687736241 d:\c++\westseer\include\wx\xti2.h
+1688155981 d:\c++\westseer\include\wx\xti2.h
 	"wx/xtiprop.h"
 	"wx/xtictor.h"
 
-1687736241 d:\c++\westseer\include\wx\xtiprop.h
+1688155981 d:\c++\westseer\include\wx\xtiprop.h
 	"wx/defs.h"
 	"wx/xti.h"
 	"wx/any.h"
 
-1687736241 d:\c++\westseer\include\wx\any.h
+1688155980 d:\c++\westseer\include\wx\any.h
 	"wx/defs.h"
 	<new>
 	"wx/string.h"
@@ -478,12 +478,12 @@
 	"wx/datetime.h"
 	"wx/variant.h"
 
-1687736241 d:\c++\westseer\include\wx\typeinfo.h
+1688155981 d:\c++\westseer\include\wx\typeinfo.h
 	"wx/defs.h"
 	<typeinfo>
 	<string.h>
 
-1687736241 d:\c++\westseer\include\wx\list.h
+1688155980 d:\c++\westseer\include\wx\list.h
 	"wx/defs.h"
 	"wx/object.h"
 	"wx/string.h"
@@ -495,7 +495,7 @@
 	"wx/afterstd.h"
 	<iterator>
 
-1687736241 d:\c++\westseer\include\wx\datetime.h
+1688155980 d:\c++\westseer\include\wx\datetime.h
 	"wx/defs.h"
 	<time.h>
 	<limits.h>
@@ -503,10 +503,10 @@
 	"wx/anystr.h"
 	"wx/dynarray.h"
 
-1687736241 d:\c++\westseer\include\wx\anystr.h
+1688155980 d:\c++\westseer\include\wx\anystr.h
 	"wx/string.h"
 
-1687736241 d:\c++\westseer\include\wx\variant.h
+1688155981 d:\c++\westseer\include\wx\variant.h
 	"wx/defs.h"
 	"wx/object.h"
 	"wx/string.h"
@@ -518,28 +518,28 @@
 	"wx/iosfwrap.h"
 	"wx/any.h"
 
-1687736241 d:\c++\westseer\include\wx\xtictor.h
+1688155981 d:\c++\westseer\include\wx\xtictor.h
 	"wx/defs.h"
 	"wx/xti.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\msvcrt.h
+1688155980 d:\c++\westseer\include\wx\msw\msvcrt.h
 	<stdlib.h>
 	<crtdbg.h>
 
-1687736241 d:\c++\westseer\include\wx\clntdata.h
+1688155980 d:\c++\westseer\include\wx\clntdata.h
 	"wx/defs.h"
 	"wx/string.h"
 	"wx/hashmap.h"
 	"wx/object.h"
 
-1687736241 d:\c++\westseer\include\wx\math.h
+1688155980 d:\c++\westseer\include\wx\math.h
 	"wx/defs.h"
 	<math.h>
 	<cmath>
 	<float.h>
 	<ieeefp.h>
 
-1687736241 d:\c++\westseer\include\wx\gdicmn.h
+1688155980 d:\c++\westseer\include\wx\gdicmn.h
 	"wx/defs.h"
 	"wx/list.h"
 	"wx/string.h"
@@ -547,7 +547,7 @@
 	"wx/hashmap.h"
 	"wx/math.h"
 
-1687736241 d:\c++\westseer\include\wx\cursor.h
+1688155980 d:\c++\westseer\include\wx\cursor.h
 	"wx/gdiobj.h"
 	"wx/gdicmn.h"
 	"wx/msw/gdiimage.h"
@@ -561,26 +561,26 @@
 	"wx/qt/cursor.h"
 	"wx/utils.h"
 
-1687736241 d:\c++\westseer\include\wx\gdiobj.h
+1688155980 d:\c++\westseer\include\wx\gdiobj.h
 	"wx/object.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\gdiimage.h
+1688155980 d:\c++\westseer\include\wx\msw\gdiimage.h
 	"wx/gdiobj.h"
 	"wx/gdicmn.h"
 	"wx/list.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\cursor.h
+1688155980 d:\c++\westseer\include\wx\msw\cursor.h
 
-1687736241 d:\c++\westseer\include\wx\motif\cursor.h
+1688155980 d:\c++\westseer\include\wx\motif\cursor.h
 	"wx/gdicmn.h"
 
-1687736241 d:\c++\westseer\include\wx\gtk\cursor.h
+1688155980 d:\c++\westseer\include\wx\gtk\cursor.h
 
-1687736241 d:\c++\westseer\include\wx\gtk1\cursor.h
+1688155980 d:\c++\westseer\include\wx\gtk1\cursor.h
 	"wx/gdicmn.h"
 	"wx/image.h"
 
-1687736241 d:\c++\westseer\include\wx\image.h
+1688155980 d:\c++\westseer\include\wx\image.h
 	"wx/defs.h"
 	"wx/object.h"
 	"wx/string.h"
@@ -600,14 +600,14 @@
 	"wx/imagxpm.h"
 	"wx/imagiff.h"
 
-1687736241 d:\c++\westseer\include\wx\stream.h
+1688155981 d:\c++\westseer\include\wx\stream.h
 	"wx/defs.h"
 	<stdio.h>
 	"wx/object.h"
 	"wx/string.h"
 	"wx/filefn.h"
 
-1687736241 d:\c++\westseer\include\wx\filefn.h
+1688155980 d:\c++\westseer\include\wx\filefn.h
 	"wx/list.h"
 	"wx/arrstr.h"
 	<time.h>
@@ -621,49 +621,49 @@
 	<fcntl.h>
 	<sys/types.h>
 
-1687736241 d:\c++\westseer\include\wx\imagbmp.h
+1688155980 d:\c++\westseer\include\wx\imagbmp.h
 	"wx/image.h"
 
-1687736241 d:\c++\westseer\include\wx\imagpng.h
+1688155980 d:\c++\westseer\include\wx\imagpng.h
 	"wx/defs.h"
 	"wx/image.h"
 	"wx/versioninfo.h"
 
-1687736241 d:\c++\westseer\include\wx\versioninfo.h
+1688155981 d:\c++\westseer\include\wx\versioninfo.h
 	"wx/string.h"
 
-1687736241 d:\c++\westseer\include\wx\imaggif.h
+1688155980 d:\c++\westseer\include\wx\imaggif.h
 	"wx/image.h"
 
-1687736241 d:\c++\westseer\include\wx\imagpcx.h
+1688155980 d:\c++\westseer\include\wx\imagpcx.h
 	"wx/image.h"
 
-1687736241 d:\c++\westseer\include\wx\imagjpeg.h
+1688155980 d:\c++\westseer\include\wx\imagjpeg.h
 	"wx/defs.h"
 	"wx/image.h"
 	"wx/versioninfo.h"
 
-1687736241 d:\c++\westseer\include\wx\imagtga.h
+1688155980 d:\c++\westseer\include\wx\imagtga.h
 	"wx/image.h"
 
-1687736241 d:\c++\westseer\include\wx\imagtiff.h
+1688155980 d:\c++\westseer\include\wx\imagtiff.h
 	"wx/defs.h"
 	"wx/image.h"
 	"wx/versioninfo.h"
 
-1687736241 d:\c++\westseer\include\wx\imagpnm.h
+1688155980 d:\c++\westseer\include\wx\imagpnm.h
 	"wx/image.h"
 
-1687736241 d:\c++\westseer\include\wx\imagxpm.h
+1688155980 d:\c++\westseer\include\wx\imagxpm.h
 	"wx/image.h"
 
-1687736241 d:\c++\westseer\include\wx\imagiff.h
+1688155980 d:\c++\westseer\include\wx\imagiff.h
 	"wx/image.h"
 
-1687736241 d:\c++\westseer\include\wx\x11\cursor.h
+1688155981 d:\c++\westseer\include\wx\x11\cursor.h
 	"wx/colour.h"
 
-1687736241 d:\c++\westseer\include\wx\colour.h
+1688155980 d:\c++\westseer\include\wx\colour.h
 	"wx/defs.h"
 	"wx/gdiobj.h"
 	"wx/variant.h"
@@ -676,23 +676,23 @@
 	"wx/osx/colour.h"
 	"wx/qt/colour.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\colour.h
+1688155980 d:\c++\westseer\include\wx\msw\colour.h
 	"wx/object.h"
 
-1687736241 d:\c++\westseer\include\wx\motif\colour.h
+1688155980 d:\c++\westseer\include\wx\motif\colour.h
 	"wx/object.h"
 	"wx/string.h"
 
-1687736241 d:\c++\westseer\include\wx\gtk\colour.h
+1688155980 d:\c++\westseer\include\wx\gtk\colour.h
 
-1687736241 d:\c++\westseer\include\wx\gtk1\colour.h
+1688155980 d:\c++\westseer\include\wx\gtk1\colour.h
 	"wx/defs.h"
 	"wx/object.h"
 	"wx/string.h"
 	"wx/gdiobj.h"
 	"wx/palette.h"
 
-1687736241 d:\c++\westseer\include\wx\palette.h
+1688155980 d:\c++\westseer\include\wx\palette.h
 	"wx/defs.h"
 	"wx/object.h"
 	"wx/gdiobj.h"
@@ -702,53 +702,53 @@
 	"wx/osx/palette.h"
 	"wx/qt/palette.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\palette.h
+1688155980 d:\c++\westseer\include\wx\msw\palette.h
 	"wx/gdiobj.h"
 
-1687736241 d:\c++\westseer\include\wx\x11\palette.h
+1688155981 d:\c++\westseer\include\wx\x11\palette.h
 	"wx/list.h"
 
-1687736241 d:\c++\westseer\include\wx\generic\paletteg.h
+1688155980 d:\c++\westseer\include\wx\generic\paletteg.h
 	"wx/defs.h"
 	"wx/object.h"
 	"wx/gdiobj.h"
 	"wx/gdicmn.h"
 
-1687736241 d:\c++\westseer\include\wx\osx\palette.h
+1688155980 d:\c++\westseer\include\wx\osx\palette.h
 	"wx/gdiobj.h"
 
-1687736241 d:\c++\westseer\include\wx\qt\palette.h
+1688155981 d:\c++\westseer\include\wx\qt\palette.h
 
-1687736241 d:\c++\westseer\include\wx\generic\colour.h
+1688155980 d:\c++\westseer\include\wx\generic\colour.h
 	"wx/object.h"
 
-1687736241 d:\c++\westseer\include\wx\x11\colour.h
+1688155981 d:\c++\westseer\include\wx\x11\colour.h
 	"wx/defs.h"
 	"wx/object.h"
 	"wx/string.h"
 	"wx/gdiobj.h"
 	"wx/palette.h"
 
-1687736241 d:\c++\westseer\include\wx\osx\colour.h
+1688155980 d:\c++\westseer\include\wx\osx\colour.h
 	"wx/osx/core/colour.h"
 
-1687736241 d:\c++\westseer\include\wx\osx\core\colour.h
+1688155980 d:\c++\westseer\include\wx\osx\core\colour.h
 	"wx/object.h"
 	"wx/string.h"
 	"wx/osx/core/cfref.h"
 
-1687736241 d:\c++\westseer\include\wx\osx\core\cfref.h
+1688155980 d:\c++\westseer\include\wx\osx\core\cfref.h
 	<unistd.h>
 	<Availability.h>
 
-1687736241 d:\c++\westseer\include\wx\qt\colour.h
+1688155981 d:\c++\westseer\include\wx\qt\colour.h
 
-1687736241 d:\c++\westseer\include\wx\dfb\cursor.h
+1688155980 d:\c++\westseer\include\wx\dfb\cursor.h
 
-1687736241 d:\c++\westseer\include\wx\osx\cursor.h
+1688155980 d:\c++\westseer\include\wx\osx\cursor.h
 	"wx/bitmap.h"
 
-1687736241 d:\c++\westseer\include\wx\bitmap.h
+1688155980 d:\c++\westseer\include\wx\bitmap.h
 	"wx/string.h"
 	"wx/gdicmn.h"
 	"wx/colour.h"
@@ -764,37 +764,37 @@
 	"wx/qt/bitmap.h"
 	"wx/generic/mask.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\bitmap.h
+1688155980 d:\c++\westseer\include\wx\msw\bitmap.h
 	"wx/msw/gdiimage.h"
 	"wx/math.h"
 	"wx/palette.h"
 
-1687736241 d:\c++\westseer\include\wx\x11\bitmap.h
+1688155981 d:\c++\westseer\include\wx\x11\bitmap.h
 	"wx/palette.h"
 	"wx/gdiobj.h"
 
-1687736241 d:\c++\westseer\include\wx\gtk\bitmap.h
+1688155980 d:\c++\westseer\include\wx\gtk\bitmap.h
 
-1687736241 d:\c++\westseer\include\wx\gtk1\bitmap.h
+1688155980 d:\c++\westseer\include\wx\gtk1\bitmap.h
 	"wx/palette.h"
 	"wx/gdiobj.h"
 
-1687736241 d:\c++\westseer\include\wx\dfb\bitmap.h
+1688155980 d:\c++\westseer\include\wx\dfb\bitmap.h
 	"wx/dfb/dfbptr.h"
 
-1687736241 d:\c++\westseer\include\wx\dfb\dfbptr.h
+1688155980 d:\c++\westseer\include\wx\dfb\dfbptr.h
 
-1687736241 d:\c++\westseer\include\wx\osx\bitmap.h
+1688155980 d:\c++\westseer\include\wx\osx\bitmap.h
 	"wx/palette.h"
 
-1687736241 d:\c++\westseer\include\wx\qt\bitmap.h
+1688155981 d:\c++\westseer\include\wx\qt\bitmap.h
 
-1687736241 d:\c++\westseer\include\wx\generic\mask.h
+1688155980 d:\c++\westseer\include\wx\generic\mask.h
 
-1687736241 d:\c++\westseer\include\wx\qt\cursor.h
+1688155981 d:\c++\westseer\include\wx\qt\cursor.h
 	"wx/image.h"
 
-1687736241 d:\c++\westseer\include\wx\utils.h
+1688155981 d:\c++\westseer\include\wx\utils.h
 	"wx/object.h"
 	"wx/list.h"
 	"wx/filefn.h"
@@ -810,52 +810,52 @@
 	<unistd.h>
 	<stdio.h>
 
-1687736241 d:\c++\westseer\include\wx\meta\implicitconversion.h
+1688155980 d:\c++\westseer\include\wx\meta\implicitconversion.h
 	"wx/defs.h"
 	"wx/meta/if.h"
 
-1687736241 d:\c++\westseer\include\wx\mousestate.h
+1688155980 d:\c++\westseer\include\wx\mousestate.h
 	"wx/gdicmn.h"
 	"wx/kbdstate.h"
 
-1687736241 d:\c++\westseer\include\wx\kbdstate.h
+1688155980 d:\c++\westseer\include\wx\kbdstate.h
 	"wx/defs.h"
 
-1687736241 d:\c++\westseer\include\wx\platinfo.h
+1688155980 d:\c++\westseer\include\wx\platinfo.h
 	"wx/string.h"
 
-1687736241 d:\c++\westseer\include\wx\tracker.h
+1688155981 d:\c++\westseer\include\wx\tracker.h
 	"wx/defs.h"
 
-1687736241 d:\c++\westseer\include\wx\meta\convertible.h
+1688155980 d:\c++\westseer\include\wx\meta\convertible.h
 
-1687736241 d:\c++\westseer\include\wx\meta\removeref.h
+1688155980 d:\c++\westseer\include\wx\meta\removeref.h
 
-1687736241 d:\c++\westseer\include\wx\eventfilter.h
+1688155980 d:\c++\westseer\include\wx\eventfilter.h
 	"wx/defs.h"
 
-1687736241 d:\c++\westseer\include\wx\build.h
+1688155980 d:\c++\westseer\include\wx\build.h
 	"wx/version.h"
 
-1687736241 d:\c++\westseer\include\wx\cmdargs.h
+1688155980 d:\c++\westseer\include\wx\cmdargs.h
 	"wx/arrstr.h"
 
-1687736241 d:\c++\westseer\include\wx\init.h
+1688155980 d:\c++\westseer\include\wx\init.h
 	"wx/defs.h"
 	"wx/chartype.h"
 	"wx/msw/init.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\init.h
+1688155980 d:\c++\westseer\include\wx\msw\init.h
 	"wx/msw/wrapwin.h"
 
-1687736241 d:\c++\westseer\include\wx\unix\app.h
+1688155981 d:\c++\westseer\include\wx\unix\app.h
 	<signal.h>
 
-1687736241 d:\c++\westseer\include\wx\msw\app.h
+1688155980 d:\c++\westseer\include\wx\msw\app.h
 	"wx/event.h"
 	"wx/icon.h"
 
-1687736241 d:\c++\westseer\include\wx\icon.h
+1688155980 d:\c++\westseer\include\wx\icon.h
 	"wx/iconloc.h"
 	"wx/msw/icon.h"
 	"wx/motif/icon.h"
@@ -868,36 +868,36 @@
 	"wx/generic/icon.h"
 	"wx/variant.h"
 
-1687736241 d:\c++\westseer\include\wx\iconloc.h
+1688155980 d:\c++\westseer\include\wx\iconloc.h
 	"wx/string.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\icon.h
+1688155980 d:\c++\westseer\include\wx\msw\icon.h
 	"wx/msw/gdiimage.h"
 
-1687736241 d:\c++\westseer\include\wx\motif\icon.h
+1688155980 d:\c++\westseer\include\wx\motif\icon.h
 	"wx/bitmap.h"
 
-1687736241 d:\c++\westseer\include\wx\generic\icon.h
+1688155980 d:\c++\westseer\include\wx\generic\icon.h
 	"wx/bitmap.h"
 
-1687736241 d:\c++\westseer\include\wx\motif\app.h
+1688155980 d:\c++\westseer\include\wx\motif\app.h
 	"wx/event.h"
 	"wx/hashmap.h"
 
-1687736241 d:\c++\westseer\include\wx\dfb\app.h
+1688155980 d:\c++\westseer\include\wx\dfb\app.h
 	"wx/dfb/dfbptr.h"
 	"wx/vidmode.h"
 
-1687736241 d:\c++\westseer\include\wx\vidmode.h
+1688155981 d:\c++\westseer\include\wx\vidmode.h
 
-1687736241 d:\c++\westseer\include\wx\gtk\app.h
+1688155980 d:\c++\westseer\include\wx\gtk\app.h
 
-1687736241 d:\c++\westseer\include\wx\gtk1\app.h
+1688155980 d:\c++\westseer\include\wx\gtk1\app.h
 	"wx/frame.h"
 	"wx/icon.h"
 	"wx/strconv.h"
 
-1687736241 d:\c++\westseer\include\wx\frame.h
+1688155980 d:\c++\westseer\include\wx\frame.h
 	"wx/toplevel.h"
 	"wx/statusbr.h"
 	"wx/univ/frame.h"
@@ -908,7 +908,7 @@
 	"wx/osx/frame.h"
 	"wx/qt/frame.h"
 
-1687736241 d:\c++\westseer\include\wx\toplevel.h
+1688155981 d:\c++\westseer\include\wx\toplevel.h
 	"wx/nonownedwnd.h"
 	"wx/iconbndl.h"
 	"wx/weakref.h"
@@ -922,7 +922,7 @@
 	"wx/qt/toplevel.h"
 	"wx/univ/toplevel.h"
 
-1687736241 d:\c++\westseer\include\wx\nonownedwnd.h
+1688155980 d:\c++\westseer\include\wx\nonownedwnd.h
 	"wx/window.h"
 	"wx/dfb/nonownedwnd.h"
 	"wx/gtk/nonownedwnd.h"
@@ -930,7 +930,7 @@
 	"wx/msw/nonownedwnd.h"
 	"wx/qt/nonownedwnd.h"
 
-1687736241 d:\c++\westseer\include\wx\window.h
+1688155981 d:\c++\westseer\include\wx\window.h
 	"wx/event.h"
 	"wx/list.h"
 	"wx/cursor.h"
@@ -954,7 +954,7 @@
 	"wx/qt/window.h"
 	"wx/univ/window.h"
 
-1687736241 d:\c++\westseer\include\wx\font.h
+1688155980 d:\c++\westseer\include\wx\font.h
 	"wx/defs.h"
 	"wx/fontenc.h"
 	"wx/gdiobj.h"
@@ -969,31 +969,31 @@
 	"wx/osx/font.h"
 	"wx/qt/font.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\font.h
+1688155980 d:\c++\westseer\include\wx\msw\font.h
 	"wx/gdicmn.h"
 
-1687736241 d:\c++\westseer\include\wx\motif\font.h
+1688155980 d:\c++\westseer\include\wx\motif\font.h
 
-1687736241 d:\c++\westseer\include\wx\gtk\font.h
+1688155980 d:\c++\westseer\include\wx\gtk\font.h
 
-1687736241 d:\c++\westseer\include\wx\gtk1\font.h
+1688155980 d:\c++\westseer\include\wx\gtk1\font.h
 	"wx/hash.h"
 
-1687736241 d:\c++\westseer\include\wx\hash.h
+1688155980 d:\c++\westseer\include\wx\hash.h
 	"wx/defs.h"
 	"wx/string.h"
 	"wx/object.h"
 
-1687736241 d:\c++\westseer\include\wx\x11\font.h
+1688155981 d:\c++\westseer\include\wx\x11\font.h
 
-1687736241 d:\c++\westseer\include\wx\dfb\font.h
+1688155980 d:\c++\westseer\include\wx\dfb\font.h
 	"wx/dfb/dfbptr.h"
 
-1687736241 d:\c++\westseer\include\wx\osx\font.h
+1688155980 d:\c++\westseer\include\wx\osx\font.h
 
-1687736241 d:\c++\westseer\include\wx\qt\font.h
+1688155981 d:\c++\westseer\include\wx\qt\font.h
 
-1687736241 d:\c++\westseer\include\wx\region.h
+1688155981 d:\c++\westseer\include\wx\region.h
 	"wx/gdiobj.h"
 	"wx/gdicmn.h"
 	"wx/msw/region.h"
@@ -1004,37 +1004,37 @@
 	"wx/osx/region.h"
 	"wx/qt/region.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\region.h
+1688155980 d:\c++\westseer\include\wx\msw\region.h
 
-1687736241 d:\c++\westseer\include\wx\gtk\region.h
+1688155980 d:\c++\westseer\include\wx\gtk\region.h
 
-1687736241 d:\c++\westseer\include\wx\gtk1\region.h
+1688155980 d:\c++\westseer\include\wx\gtk1\region.h
 	"wx/list.h"
 
-1687736241 d:\c++\westseer\include\wx\x11\region.h
+1688155981 d:\c++\westseer\include\wx\x11\region.h
 	"wx/list.h"
 
-1687736241 d:\c++\westseer\include\wx\dfb\region.h
+1688155980 d:\c++\westseer\include\wx\dfb\region.h
 
-1687736241 d:\c++\westseer\include\wx\osx\region.h
+1688155980 d:\c++\westseer\include\wx\osx\region.h
 	"wx/osx/carbon/region.h"
 	"wx/generic/region.h"
 
-1687736241 d:\c++\westseer\include\wx\osx\carbon\region.h
+1688155980 d:\c++\westseer\include\wx\osx\carbon\region.h
 	"wx/list.h"
 
-1687736241 d:\c++\westseer\include\wx\generic\region.h
+1688155980 d:\c++\westseer\include\wx\generic\region.h
 
-1687736241 d:\c++\westseer\include\wx\qt\region.h
+1688155981 d:\c++\westseer\include\wx\qt\region.h
 
-1687736241 d:\c++\westseer\include\wx\validate.h
+1688155981 d:\c++\westseer\include\wx\validate.h
 	"wx/defs.h"
 	"wx/event.h"
 
-1687736241 d:\c++\westseer\include\wx\windowid.h
+1688155981 d:\c++\westseer\include\wx\windowid.h
 	"wx/defs.h"
 
-1687736241 d:\c++\westseer\include\wx\accel.h
+1688155980 d:\c++\westseer\include\wx\accel.h
 	"wx/defs.h"
 	"wx/object.h"
 	"wx/generic/accel.h"
@@ -1045,61 +1045,61 @@
 	"wx/osx/accel.h"
 	"wx/qt/accel.h"
 
-1687736241 d:\c++\westseer\include\wx\generic\accel.h
+1688155980 d:\c++\westseer\include\wx\generic\accel.h
 
-1687736241 d:\c++\westseer\include\wx\msw\accel.h
+1688155980 d:\c++\westseer\include\wx\msw\accel.h
 
-1687736241 d:\c++\westseer\include\wx\motif\accel.h
+1688155980 d:\c++\westseer\include\wx\motif\accel.h
 	"wx/object.h"
 	"wx/string.h"
 	"wx/event.h"
 
-1687736241 d:\c++\westseer\include\wx\gtk\accel.h
+1688155980 d:\c++\westseer\include\wx\gtk\accel.h
 	"wx/generic/accel.h"
 
-1687736241 d:\c++\westseer\include\wx\gtk1\accel.h
+1688155980 d:\c++\westseer\include\wx\gtk1\accel.h
 	"wx/generic/accel.h"
 
-1687736241 d:\c++\westseer\include\wx\osx\accel.h
+1688155980 d:\c++\westseer\include\wx\osx\accel.h
 	"wx/string.h"
 	"wx/event.h"
 
-1687736241 d:\c++\westseer\include\wx\qt\accel.h
+1688155981 d:\c++\westseer\include\wx\qt\accel.h
 	"wx/vector.h"
 
-1687736241 d:\c++\westseer\include\wx\access.h
+1688155980 d:\c++\westseer\include\wx\access.h
 	"wx/defs.h"
 	"wx/variant.h"
 	"wx/msw/ole/access.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\ole\access.h
+1688155980 d:\c++\westseer\include\wx\msw\ole\access.h
 
-1687736241 d:\c++\westseer\include\wx\msw\window.h
+1688155980 d:\c++\westseer\include\wx\msw\window.h
 	"wx/settings.h"
 
-1687736241 d:\c++\westseer\include\wx\settings.h
+1688155981 d:\c++\westseer\include\wx\settings.h
 	"wx/colour.h"
 	"wx/font.h"
 
-1687736241 d:\c++\westseer\include\wx\motif\window.h
+1688155980 d:\c++\westseer\include\wx\motif\window.h
 	"wx/region.h"
 
-1687736241 d:\c++\westseer\include\wx\gtk\window.h
+1688155980 d:\c++\westseer\include\wx\gtk\window.h
 	"wx/dynarray.h"
 
-1687736241 d:\c++\westseer\include\wx\gtk1\window.h
+1688155980 d:\c++\westseer\include\wx\gtk1\window.h
 
-1687736241 d:\c++\westseer\include\wx\x11\window.h
+1688155981 d:\c++\westseer\include\wx\x11\window.h
 	"wx/region.h"
 
-1687736241 d:\c++\westseer\include\wx\dfb\window.h
+1688155980 d:\c++\westseer\include\wx\dfb\window.h
 	"wx/dfb/dfbptr.h"
 
-1687736241 d:\c++\westseer\include\wx\osx\window.h
+1688155980 d:\c++\westseer\include\wx\osx\window.h
 	"wx/brush.h"
 	"wx/dc.h"
 
-1687736241 d:\c++\westseer\include\wx\brush.h
+1688155980 d:\c++\westseer\include\wx\brush.h
 	"wx/defs.h"
 	"wx/object.h"
 	"wx/gdiobj.h"
@@ -1112,35 +1112,35 @@
 	"wx/osx/brush.h"
 	"wx/qt/brush.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\brush.h
+1688155980 d:\c++\westseer\include\wx\msw\brush.h
 
-1687736241 d:\c++\westseer\include\wx\x11\brush.h
+1688155981 d:\c++\westseer\include\wx\x11\brush.h
 	"wx/gdiobj.h"
 
-1687736241 d:\c++\westseer\include\wx\gtk\brush.h
+1688155980 d:\c++\westseer\include\wx\gtk\brush.h
 
-1687736241 d:\c++\westseer\include\wx\gtk1\brush.h
+1688155980 d:\c++\westseer\include\wx\gtk1\brush.h
 	"wx/defs.h"
 	"wx/object.h"
 	"wx/string.h"
 	"wx/gdiobj.h"
 	"wx/bitmap.h"
 
-1687736241 d:\c++\westseer\include\wx\dfb\brush.h
+1688155980 d:\c++\westseer\include\wx\dfb\brush.h
 	"wx/defs.h"
 	"wx/object.h"
 	"wx/string.h"
 	"wx/gdiobj.h"
 	"wx/bitmap.h"
 
-1687736241 d:\c++\westseer\include\wx\osx\brush.h
+1688155980 d:\c++\westseer\include\wx\osx\brush.h
 	"wx/gdicmn.h"
 	"wx/gdiobj.h"
 	"wx/bitmap.h"
 
-1687736241 d:\c++\westseer\include\wx\qt\brush.h
+1688155981 d:\c++\westseer\include\wx\qt\brush.h
 
-1687736241 d:\c++\westseer\include\wx\dc.h
+1688155980 d:\c++\westseer\include\wx\dc.h
 	"wx/object.h"
 	"wx/intl.h"
 	"wx/colour.h"
@@ -1155,7 +1155,7 @@
 	"wx/region.h"
 	"wx/affinematrix2d.h"
 
-1687736241 d:\c++\westseer\include\wx\pen.h
+1688155980 d:\c++\westseer\include\wx\pen.h
 	"wx/gdiobj.h"
 	"wx/peninfobase.h"
 	"wx/msw/pen.h"
@@ -1166,72 +1166,72 @@
 	"wx/osx/pen.h"
 	"wx/qt/pen.h"
 
-1687736241 d:\c++\westseer\include\wx\peninfobase.h
+1688155980 d:\c++\westseer\include\wx\peninfobase.h
 	"wx/bitmap.h"
 	"wx/colour.h"
 	"wx/gdicmn.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\pen.h
+1688155980 d:\c++\westseer\include\wx\msw\pen.h
 	"wx/gdiobj.h"
 	"wx/gdicmn.h"
 
-1687736241 d:\c++\westseer\include\wx\x11\pen.h
+1688155981 d:\c++\westseer\include\wx\x11\pen.h
 	"wx/gdicmn.h"
 	"wx/gdiobj.h"
 
-1687736241 d:\c++\westseer\include\wx\gtk\pen.h
+1688155980 d:\c++\westseer\include\wx\gtk\pen.h
 
-1687736241 d:\c++\westseer\include\wx\gtk1\pen.h
+1688155980 d:\c++\westseer\include\wx\gtk1\pen.h
 	"wx/defs.h"
 	"wx/object.h"
 	"wx/string.h"
 	"wx/gdiobj.h"
 	"wx/gdicmn.h"
 
-1687736241 d:\c++\westseer\include\wx\dfb\pen.h
+1688155980 d:\c++\westseer\include\wx\dfb\pen.h
 	"wx/defs.h"
 	"wx/object.h"
 	"wx/string.h"
 	"wx/gdiobj.h"
 	"wx/gdicmn.h"
 
-1687736241 d:\c++\westseer\include\wx\osx\pen.h
+1688155980 d:\c++\westseer\include\wx\osx\pen.h
 	"wx/gdiobj.h"
 	"wx/colour.h"
 	"wx/bitmap.h"
 
-1687736241 d:\c++\westseer\include\wx\qt\pen.h
+1688155981 d:\c++\westseer\include\wx\qt\pen.h
 
-1687736241 d:\c++\westseer\include\wx\affinematrix2d.h
+1688155980 d:\c++\westseer\include\wx\affinematrix2d.h
 	"wx/defs.h"
 	"wx/affinematrix2dbase.h"
 
-1687736241 d:\c++\westseer\include\wx\affinematrix2dbase.h
+1688155980 d:\c++\westseer\include\wx\affinematrix2dbase.h
 	"wx/defs.h"
 	"wx/geometry.h"
 
-1687736241 d:\c++\westseer\include\wx\geometry.h
+1688155980 d:\c++\westseer\include\wx\geometry.h
 	"wx/defs.h"
 	"wx/utils.h"
 	"wx/gdicmn.h"
 	"wx/math.h"
 
-1687736241 d:\c++\westseer\include\wx\qt\window.h
+1688155981 d:\c++\westseer\include\wx\qt\window.h
 
-1687736241 d:\c++\westseer\include\wx\univ\window.h
+1688155981 d:\c++\westseer\include\wx\univ\window.h
 	"wx/bitmap.h"
 
-1687736241 d:\c++\westseer\include\wx\dfb\nonownedwnd.h
+1688155980 d:\c++\westseer\include\wx\dfb\nonownedwnd.h
 	"wx/window.h"
 	"wx/dfb/dfbptr.h"
 
-1687736241 d:\c++\westseer\include\wx\gtk\nonownedwnd.h
+1688155980 d:\c++\westseer\include\wx\gtk\nonownedwnd.h
 
-1687736241 d:\c++\westseer\include\wx\osx\nonownedwnd.h
+1688155980 d:\c++\westseer\include\wx\osx\nonownedwnd.h
 	"wx/window.h"
 	"wx/graphics.h"
 
-1687736241 d:\c++\westseer\include\wx\graphics.h
+1688155980 d:\c++\westseer\include\wx\graphics.h
 	"wx/defs.h"
 	"wx/affinematrix2d.h"
 	"wx/geometry.h"
@@ -1242,53 +1242,53 @@
 	"wx/peninfobase.h"
 	"wx/vector.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\nonownedwnd.h
+1688155980 d:\c++\westseer\include\wx\msw\nonownedwnd.h
 
-1687736241 d:\c++\westseer\include\wx\qt\nonownedwnd.h
+1688155981 d:\c++\westseer\include\wx\qt\nonownedwnd.h
 
-1687736241 d:\c++\westseer\include\wx\iconbndl.h
+1688155980 d:\c++\westseer\include\wx\iconbndl.h
 	"wx/gdiobj.h"
 	"wx/gdicmn.h"
 	"wx/icon.h"
 	"wx/dynarray.h"
 
-1687736241 d:\c++\westseer\include\wx\weakref.h
+1688155981 d:\c++\westseer\include\wx\weakref.h
 	"wx/tracker.h"
 	"wx/meta/convertible.h"
 	"wx/meta/int2type.h"
 
-1687736241 d:\c++\westseer\include\wx\meta\int2type.h
+1688155980 d:\c++\westseer\include\wx\meta\int2type.h
 
-1687736241 d:\c++\westseer\include\wx\msw\toplevel.h
+1688155980 d:\c++\westseer\include\wx\msw\toplevel.h
 	"wx/weakref.h"
 
-1687736241 d:\c++\westseer\include\wx\gtk\toplevel.h
+1688155980 d:\c++\westseer\include\wx\gtk\toplevel.h
 
-1687736241 d:\c++\westseer\include\wx\gtk1\toplevel.h
+1688155980 d:\c++\westseer\include\wx\gtk1\toplevel.h
 
-1687736241 d:\c++\westseer\include\wx\x11\toplevel.h
+1688155981 d:\c++\westseer\include\wx\x11\toplevel.h
 
-1687736241 d:\c++\westseer\include\wx\dfb\toplevel.h
+1688155980 d:\c++\westseer\include\wx\dfb\toplevel.h
 
-1687736241 d:\c++\westseer\include\wx\osx\toplevel.h
+1688155980 d:\c++\westseer\include\wx\osx\toplevel.h
 
-1687736241 d:\c++\westseer\include\wx\motif\toplevel.h
+1688155980 d:\c++\westseer\include\wx\motif\toplevel.h
 
-1687736241 d:\c++\westseer\include\wx\qt\toplevel.h
+1688155981 d:\c++\westseer\include\wx\qt\toplevel.h
 
-1687736241 d:\c++\westseer\include\wx\univ\toplevel.h
+1688155981 d:\c++\westseer\include\wx\univ\toplevel.h
 	"wx/univ/inpcons.h"
 	"wx/univ/inphand.h"
 	"wx/icon.h"
 
-1687736241 d:\c++\westseer\include\wx\univ\inpcons.h
+1688155981 d:\c++\westseer\include\wx\univ\inpcons.h
 	"wx/object.h"
 	"wx/event.h"
 
-1687736241 d:\c++\westseer\include\wx\univ\inphand.h
+1688155981 d:\c++\westseer\include\wx\univ\inphand.h
 	"wx/univ/inpcons.h"
 
-1687736241 d:\c++\westseer\include\wx\statusbr.h
+1688155981 d:\c++\westseer\include\wx\statusbr.h
 	"wx/defs.h"
 	"wx/control.h"
 	"wx/list.h"
@@ -1300,7 +1300,7 @@
 	"wx/qt/statusbar.h"
 	"wx/generic/statusbr.h"
 
-1687736241 d:\c++\westseer\include\wx\control.h
+1688155980 d:\c++\westseer\include\wx\control.h
 	"wx/defs.h"
 	"wx/window.h"
 	"wx/gdicmn.h"
@@ -1312,39 +1312,39 @@
 	"wx/osx/control.h"
 	"wx/qt/control.h"
 
-1687736241 d:\c++\westseer\include\wx\univ\control.h
+1688155981 d:\c++\westseer\include\wx\univ\control.h
 	"wx/univ/inphand.h"
 	"wx/univ/inpcons.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\control.h
+1688155980 d:\c++\westseer\include\wx\msw\control.h
 	"wx/dynarray.h"
 
-1687736241 d:\c++\westseer\include\wx\motif\control.h
+1688155980 d:\c++\westseer\include\wx\motif\control.h
 	"wx/window.h"
 	"wx/list.h"
 	"wx/validate.h"
 
-1687736241 d:\c++\westseer\include\wx\gtk\control.h
+1688155980 d:\c++\westseer\include\wx\gtk\control.h
 
-1687736241 d:\c++\westseer\include\wx\gtk1\control.h
+1688155980 d:\c++\westseer\include\wx\gtk1\control.h
 	"wx/defs.h"
 	"wx/object.h"
 	"wx/list.h"
 	"wx/window.h"
 
-1687736241 d:\c++\westseer\include\wx\osx\control.h
+1688155980 d:\c++\westseer\include\wx\osx\control.h
 
-1687736241 d:\c++\westseer\include\wx\qt\control.h
+1688155981 d:\c++\westseer\include\wx\qt\control.h
 
-1687736241 d:\c++\westseer\include\wx\univ\statusbr.h
+1688155981 d:\c++\westseer\include\wx\univ\statusbr.h
 	"wx/univ/inpcons.h"
 	"wx/arrstr.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\statusbar.h
+1688155980 d:\c++\westseer\include\wx\msw\statusbar.h
 	"wx/vector.h"
 	"wx/tooltip.h"
 
-1687736241 d:\c++\westseer\include\wx\tooltip.h
+1688155981 d:\c++\westseer\include\wx\tooltip.h
 	"wx/defs.h"
 	"wx/msw/tooltip.h"
 	"wx/gtk/tooltip.h"
@@ -1352,52 +1352,52 @@
 	"wx/osx/tooltip.h"
 	"wx/qt/tooltip.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\tooltip.h
+1688155980 d:\c++\westseer\include\wx\msw\tooltip.h
 	"wx/object.h"
 	"wx/gdicmn.h"
 
-1687736241 d:\c++\westseer\include\wx\gtk\tooltip.h
+1688155980 d:\c++\westseer\include\wx\gtk\tooltip.h
 	"wx/string.h"
 	"wx/object.h"
 
-1687736241 d:\c++\westseer\include\wx\gtk1\tooltip.h
+1688155980 d:\c++\westseer\include\wx\gtk1\tooltip.h
 	"wx/defs.h"
 	"wx/string.h"
 	"wx/object.h"
 
-1687736241 d:\c++\westseer\include\wx\osx\tooltip.h
+1688155980 d:\c++\westseer\include\wx\osx\tooltip.h
 	"wx/string.h"
 	"wx/event.h"
 
-1687736241 d:\c++\westseer\include\wx\qt\tooltip.h
+1688155981 d:\c++\westseer\include\wx\qt\tooltip.h
 	"wx/object.h"
 
-1687736241 d:\c++\westseer\include\wx\generic\statusbr.h
+1688155980 d:\c++\westseer\include\wx\generic\statusbr.h
 	"wx/defs.h"
 	"wx/pen.h"
 	"wx/arrstr.h"
 
-1687736241 d:\c++\westseer\include\wx\osx\statusbr.h
+1688155980 d:\c++\westseer\include\wx\osx\statusbr.h
 
-1687736241 d:\c++\westseer\include\wx\qt\statusbar.h
+1688155981 d:\c++\westseer\include\wx\qt\statusbar.h
 	"wx/statusbr.h"
 
-1687736241 d:\c++\westseer\include\wx\univ\frame.h
+1688155981 d:\c++\westseer\include\wx\univ\frame.h
 
-1687736241 d:\c++\westseer\include\wx\msw\frame.h
+1688155980 d:\c++\westseer\include\wx\msw\frame.h
 
-1687736241 d:\c++\westseer\include\wx\gtk\frame.h
+1688155980 d:\c++\westseer\include\wx\gtk\frame.h
 
-1687736241 d:\c++\westseer\include\wx\gtk1\frame.h
+1688155980 d:\c++\westseer\include\wx\gtk1\frame.h
 
-1687736241 d:\c++\westseer\include\wx\motif\frame.h
+1688155980 d:\c++\westseer\include\wx\motif\frame.h
 
-1687736241 d:\c++\westseer\include\wx\osx\frame.h
+1688155980 d:\c++\westseer\include\wx\osx\frame.h
 	"wx/toolbar.h"
 	"wx/accel.h"
 	"wx/icon.h"
 
-1687736241 d:\c++\westseer\include\wx\toolbar.h
+1688155981 d:\c++\westseer\include\wx\toolbar.h
 	"wx/defs.h"
 	"wx/tbarbase.h"
 	"wx/univ/toolbar.h"
@@ -1408,22 +1408,22 @@
 	"wx/osx/toolbar.h"
 	"wx/qt/toolbar.h"
 
-1687736241 d:\c++\westseer\include\wx\tbarbase.h
+1688155981 d:\c++\westseer\include\wx\tbarbase.h
 	"wx/defs.h"
 	"wx/bitmap.h"
 	"wx/bmpbndl.h"
 	"wx/list.h"
 	"wx/control.h"
 
-1687736241 d:\c++\westseer\include\wx\bmpbndl.h
+1688155980 d:\c++\westseer\include\wx\bmpbndl.h
 	"wx/bitmap.h"
 	"wx/object.h"
 	"wx/vector.h"
 
-1687736241 d:\c++\westseer\include\wx\univ\toolbar.h
+1688155981 d:\c++\westseer\include\wx\univ\toolbar.h
 	"wx/button.h"
 
-1687736241 d:\c++\westseer\include\wx\button.h
+1688155980 d:\c++\westseer\include\wx\button.h
 	"wx/defs.h"
 	"wx/anybutton.h"
 	"wx/univ/button.h"
@@ -1434,7 +1434,7 @@
 	"wx/osx/button.h"
 	"wx/qt/button.h"
 
-1687736241 d:\c++\westseer\include\wx\anybutton.h
+1688155980 d:\c++\westseer\include\wx\anybutton.h
 	"wx/defs.h"
 	"wx/bmpbndl.h"
 	"wx/control.h"
@@ -1444,131 +1444,131 @@
 	"wx/osx/anybutton.h"
 	"wx/qt/anybutton.h"
 
-1687736241 d:\c++\westseer\include\wx\univ\anybutton.h
+1688155981 d:\c++\westseer\include\wx\univ\anybutton.h
 	"wx/univ/inphand.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\anybutton.h
+1688155980 d:\c++\westseer\include\wx\msw\anybutton.h
 
-1687736241 d:\c++\westseer\include\wx\gtk\anybutton.h
+1688155980 d:\c++\westseer\include\wx\gtk\anybutton.h
 
-1687736241 d:\c++\westseer\include\wx\osx\anybutton.h
+1688155980 d:\c++\westseer\include\wx\osx\anybutton.h
 
-1687736241 d:\c++\westseer\include\wx\qt\anybutton.h
+1688155981 d:\c++\westseer\include\wx\qt\anybutton.h
 
-1687736241 d:\c++\westseer\include\wx\univ\button.h
+1688155981 d:\c++\westseer\include\wx\univ\button.h
 
-1687736241 d:\c++\westseer\include\wx\msw\button.h
+1688155980 d:\c++\westseer\include\wx\msw\button.h
 
-1687736241 d:\c++\westseer\include\wx\motif\button.h
+1688155980 d:\c++\westseer\include\wx\motif\button.h
 
-1687736241 d:\c++\westseer\include\wx\gtk\button.h
+1688155980 d:\c++\westseer\include\wx\gtk\button.h
 
-1687736241 d:\c++\westseer\include\wx\gtk1\button.h
+1688155980 d:\c++\westseer\include\wx\gtk1\button.h
 	"wx/defs.h"
 	"wx/object.h"
 	"wx/list.h"
 
-1687736241 d:\c++\westseer\include\wx\osx\button.h
+1688155980 d:\c++\westseer\include\wx\osx\button.h
 	"wx/control.h"
 	"wx/gdicmn.h"
 
-1687736241 d:\c++\westseer\include\wx\qt\button.h
+1688155981 d:\c++\westseer\include\wx\qt\button.h
 	"wx/control.h"
 	"wx/button.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\toolbar.h
+1688155980 d:\c++\westseer\include\wx\msw\toolbar.h
 	"wx/dynarray.h"
 	"wx/imaglist.h"
 
-1687736241 d:\c++\westseer\include\wx\imaglist.h
+1688155980 d:\c++\westseer\include\wx\imaglist.h
 	"wx/defs.h"
 	"wx/msw/imaglist.h"
 	"wx/generic/imaglist.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\imaglist.h
+1688155980 d:\c++\westseer\include\wx\msw\imaglist.h
 	"wx/bitmap.h"
 
-1687736241 d:\c++\westseer\include\wx\generic\imaglist.h
+1688155980 d:\c++\westseer\include\wx\generic\imaglist.h
 	"wx/bitmap.h"
 	"wx/gdicmn.h"
 	"wx/vector.h"
 
-1687736241 d:\c++\westseer\include\wx\motif\toolbar.h
+1688155980 d:\c++\westseer\include\wx\motif\toolbar.h
 
-1687736241 d:\c++\westseer\include\wx\gtk\toolbar.h
+1688155980 d:\c++\westseer\include\wx\gtk\toolbar.h
 
-1687736241 d:\c++\westseer\include\wx\gtk1\toolbar.h
+1688155980 d:\c++\westseer\include\wx\gtk1\toolbar.h
 
-1687736241 d:\c++\westseer\include\wx\osx\toolbar.h
+1688155980 d:\c++\westseer\include\wx\osx\toolbar.h
 	"wx/tbarbase.h"
 	"wx/dynarray.h"
 
-1687736241 d:\c++\westseer\include\wx\qt\toolbar.h
+1688155981 d:\c++\westseer\include\wx\qt\toolbar.h
 
-1687736241 d:\c++\westseer\include\wx\qt\frame.h
+1688155981 d:\c++\westseer\include\wx\qt\frame.h
 	"wx/frame.h"
 
-1687736241 d:\c++\westseer\include\wx\x11\app.h
+1688155981 d:\c++\westseer\include\wx\x11\app.h
 	"wx/gdicmn.h"
 	"wx/event.h"
 
-1687736241 d:\c++\westseer\include\wx\osx\app.h
+1688155980 d:\c++\westseer\include\wx\osx\app.h
 	"wx/defs.h"
 	"wx/object.h"
 	"wx/gdicmn.h"
 	"wx/event.h"
 
-1687736241 d:\c++\westseer\include\wx\qt\app.h
+1688155981 d:\c++\westseer\include\wx\qt\app.h
 	<wx/scopedarray.h>
 
-1687736241 d:\c++\westseer\include\wx\scopedarray.h
+1688155981 d:\c++\westseer\include\wx\scopedarray.h
 	"wx/defs.h"
 	"wx/checkeddelete.h"
 
-1687736241 d:\c++\westseer\include\wx\univ\theme.h
+1688155981 d:\c++\westseer\include\wx\univ\theme.h
 	"wx/string.h"
 
-1687736241 d:\c++\westseer\include\wx\fileconf.h
+1688155980 d:\c++\westseer\include\wx\fileconf.h
 	"wx/defs.h"
 	"wx/textfile.h"
 	"wx/string.h"
 	"wx/confbase.h"
 	"wx/filename.h"
 
-1687736241 d:\c++\westseer\include\wx\textfile.h
+1688155981 d:\c++\westseer\include\wx\textfile.h
 	"wx/defs.h"
 	"wx/textbuf.h"
 	"wx/file.h"
 
-1687736241 d:\c++\westseer\include\wx\textbuf.h
+1688155981 d:\c++\westseer\include\wx\textbuf.h
 	"wx/defs.h"
 	"wx/arrstr.h"
 	"wx/convauto.h"
 	"wx/string.h"
 	"wx/dynarray.h"
 
-1687736241 d:\c++\westseer\include\wx\convauto.h
+1688155980 d:\c++\westseer\include\wx\convauto.h
 	"wx/strconv.h"
 	"wx/fontenc.h"
 
-1687736241 d:\c++\westseer\include\wx\file.h
+1688155980 d:\c++\westseer\include\wx\file.h
 	"wx/defs.h"
 	"wx/string.h"
 	"wx/filefn.h"
 	"wx/convauto.h"
 
-1687736241 d:\c++\westseer\include\wx\confbase.h
+1688155980 d:\c++\westseer\include\wx\confbase.h
 	"wx/defs.h"
 	"wx/string.h"
 	"wx/object.h"
 	"wx/base64.h"
 
-1687736241 d:\c++\westseer\include\wx\base64.h
+1688155980 d:\c++\westseer\include\wx\base64.h
 	"wx/defs.h"
 	"wx/string.h"
 	"wx/buffer.h"
 
-1687736241 d:\c++\westseer\include\wx\filename.h
+1688155980 d:\c++\westseer\include\wx\filename.h
 	"wx/arrstr.h"
 	"wx/filefn.h"
 	"wx/datetime.h"
@@ -1576,7 +1576,7 @@
 	"wx/longlong.h"
 	"wx/file.h"
 
-1687736241 d:\c++\westseer\include\wxffilelog.h
+1688156888 d:\c++\westseer\include\wxffilelog.h
 	<string>
 	<wx/wx.h>
 	<wx/log.h>
@@ -1586,7 +1586,7 @@
 	<wx/stdpaths.h>
 	<wx/filename.h>
 
-1687736241 d:\c++\westseer\include\wx\wx.h
+1688155981 d:\c++\westseer\include\wx\wx.h
 	"wx/defs.h"
 	"wx/object.h"
 	"wx/dynarray.h"
@@ -1668,12 +1668,12 @@
 	"wx/validate.h"
 	"wx/valtext.h"
 
-1687736241 d:\c++\westseer\include\wx\stopwatch.h
+1688155981 d:\c++\westseer\include\wx\stopwatch.h
 	"wx/defs.h"
 	"wx/longlong.h"
 	"wx/time.h"
 
-1687736241 d:\c++\westseer\include\wx\timer.h
+1688155981 d:\c++\westseer\include\wx\timer.h
 	"wx/defs.h"
 	"wx/object.h"
 	"wx/longlong.h"
@@ -1681,44 +1681,44 @@
 	"wx/stopwatch.h"
 	"wx/utils.h"
 
-1687736241 d:\c++\westseer\include\wx\module.h
+1688155980 d:\c++\westseer\include\wx\module.h
 	"wx/object.h"
 	"wx/vector.h"
 
-1687736241 d:\c++\westseer\include\wx\containr.h
+1688155980 d:\c++\westseer\include\wx\containr.h
 	"wx/defs.h"
 	"wx/event.h"
 
-1687736241 d:\c++\westseer\include\wx\panel.h
+1688155980 d:\c++\westseer\include\wx\panel.h
 	"wx/window.h"
 	"wx/containr.h"
 	"wx/univ/panel.h"
 	"wx/msw/panel.h"
 	"wx/generic/panelg.h"
 
-1687736241 d:\c++\westseer\include\wx\univ\panel.h
+1688155981 d:\c++\westseer\include\wx\univ\panel.h
 
-1687736241 d:\c++\westseer\include\wx\msw\panel.h
+1688155980 d:\c++\westseer\include\wx\msw\panel.h
 
-1687736241 d:\c++\westseer\include\wx\generic\panelg.h
+1688155980 d:\c++\westseer\include\wx\generic\panelg.h
 	"wx/bitmap.h"
 
-1687736241 d:\c++\westseer\include\wx\dcclient.h
+1688155980 d:\c++\westseer\include\wx\dcclient.h
 	"wx/dc.h"
 
-1687736241 d:\c++\westseer\include\wx\dcmemory.h
+1688155980 d:\c++\westseer\include\wx\dcmemory.h
 	"wx/dc.h"
 	"wx/bitmap.h"
 
-1687736241 d:\c++\westseer\include\wx\dcprint.h
+1688155980 d:\c++\westseer\include\wx\dcprint.h
 	"wx/defs.h"
 	"wx/dc.h"
 
-1687736241 d:\c++\westseer\include\wx\dcscreen.h
+1688155980 d:\c++\westseer\include\wx\dcscreen.h
 	"wx/defs.h"
 	"wx/dc.h"
 
-1687736241 d:\c++\westseer\include\wx\menuitem.h
+1688155980 d:\c++\westseer\include\wx\menuitem.h
 	"wx/defs.h"
 	"wx/object.h"
 	"wx/bmpbndl.h"
@@ -1732,36 +1732,36 @@
 	"wx/osx/menuitem.h"
 	"wx/qt/menuitem.h"
 
-1687736241 d:\c++\westseer\include\wx\univ\menuitem.h
+1688155981 d:\c++\westseer\include\wx\univ\menuitem.h
 
-1687736241 d:\c++\westseer\include\wx\msw\menuitem.h
+1688155980 d:\c++\westseer\include\wx\msw\menuitem.h
 	"wx/ownerdrw.h"
 
-1687736241 d:\c++\westseer\include\wx\ownerdrw.h
+1688155980 d:\c++\westseer\include\wx\ownerdrw.h
 	"wx/defs.h"
 	"wx/font.h"
 	"wx/colour.h"
 	"wx/msw/ownerdrw.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\ownerdrw.h
+1688155980 d:\c++\westseer\include\wx\msw\ownerdrw.h
 
-1687736241 d:\c++\westseer\include\wx\motif\menuitem.h
+1688155980 d:\c++\westseer\include\wx\motif\menuitem.h
 	"wx/bitmap.h"
 
-1687736241 d:\c++\westseer\include\wx\gtk\menuitem.h
+1688155980 d:\c++\westseer\include\wx\gtk\menuitem.h
 
-1687736241 d:\c++\westseer\include\wx\gtk1\menuitem.h
+1688155980 d:\c++\westseer\include\wx\gtk1\menuitem.h
 	"wx/bitmap.h"
 
-1687736241 d:\c++\westseer\include\wx\osx\menuitem.h
+1688155980 d:\c++\westseer\include\wx\osx\menuitem.h
 	"wx/defs.h"
 	"wx/vector.h"
 
-1687736241 d:\c++\westseer\include\wx\qt\menuitem.h
+1688155981 d:\c++\westseer\include\wx\qt\menuitem.h
 	"wx/menuitem.h"
 	"wx/bitmap.h"
 
-1687736241 d:\c++\westseer\include\wx\menu.h
+1688155980 d:\c++\westseer\include\wx\menu.h
 	"wx/defs.h"
 	"wx/list.h"
 	"wx/window.h"
@@ -1774,30 +1774,30 @@
 	"wx/osx/menu.h"
 	"wx/qt/menu.h"
 
-1687736241 d:\c++\westseer\include\wx\univ\menu.h
+1688155981 d:\c++\westseer\include\wx\univ\menu.h
 	"wx/accel.h"
 	"wx/dynarray.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\menu.h
+1688155980 d:\c++\westseer\include\wx\msw\menu.h
 	"wx/accel.h"
 	"wx/dynarray.h"
 	"wx/arrstr.h"
 
-1687736241 d:\c++\westseer\include\wx\motif\menu.h
+1688155980 d:\c++\westseer\include\wx\motif\menu.h
 	"wx/colour.h"
 	"wx/font.h"
 	"wx/arrstr.h"
 
-1687736241 d:\c++\westseer\include\wx\gtk\menu.h
+1688155980 d:\c++\westseer\include\wx\gtk\menu.h
 
-1687736241 d:\c++\westseer\include\wx\gtk1\menu.h
+1688155980 d:\c++\westseer\include\wx\gtk1\menu.h
 
-1687736241 d:\c++\westseer\include\wx\osx\menu.h
+1688155980 d:\c++\westseer\include\wx\osx\menu.h
 	"wx/arrstr.h"
 
-1687736241 d:\c++\westseer\include\wx\qt\menu.h
+1688155981 d:\c++\westseer\include\wx\qt\menu.h
 
-1687736241 d:\c++\westseer\include\wx\dialog.h
+1688155980 d:\c++\westseer\include\wx\dialog.h
 	"wx/toplevel.h"
 	"wx/containr.h"
 	"wx/sharedptr.h"
@@ -1809,35 +1809,35 @@
 	"wx/osx/dialog.h"
 	"wx/qt/dialog.h"
 
-1687736241 d:\c++\westseer\include\wx\sharedptr.h
+1688155981 d:\c++\westseer\include\wx\sharedptr.h
 	"wx/defs.h"
 	"wx/atomic.h"
 
-1687736241 d:\c++\westseer\include\wx\atomic.h
+1688155980 d:\c++\westseer\include\wx\atomic.h
 	"wx/defs.h"
 	"wx/msw/wrapwin.h"
 	"libkern/OSAtomic.h"
 	<atomic.h>
 	"wx/thread.h"
 
-1687736241 d:\c++\westseer\include\wx\univ\dialog.h
+1688155981 d:\c++\westseer\include\wx\univ\dialog.h
 
-1687736241 d:\c++\westseer\include\wx\msw\dialog.h
+1688155980 d:\c++\westseer\include\wx\msw\dialog.h
 	"wx/panel.h"
 
-1687736241 d:\c++\westseer\include\wx\motif\dialog.h
+1688155980 d:\c++\westseer\include\wx\motif\dialog.h
 
-1687736241 d:\c++\westseer\include\wx\gtk\dialog.h
+1688155980 d:\c++\westseer\include\wx\gtk\dialog.h
 
-1687736241 d:\c++\westseer\include\wx\gtk1\dialog.h
+1688155980 d:\c++\westseer\include\wx\gtk1\dialog.h
 
-1687736241 d:\c++\westseer\include\wx\osx\dialog.h
+1688155980 d:\c++\westseer\include\wx\osx\dialog.h
 	"wx/panel.h"
 
-1687736241 d:\c++\westseer\include\wx\qt\dialog.h
+1688155981 d:\c++\westseer\include\wx\qt\dialog.h
 	"wx/dialog.h"
 
-1687736241 d:\c++\westseer\include\wx\msgdlg.h
+1688155980 d:\c++\westseer\include\wx\msgdlg.h
 	"wx/defs.h"
 	"wx/dialog.h"
 	"wx/stockitem.h"
@@ -1848,26 +1848,26 @@
 	"wx/osx/msgdlg.h"
 	"wx/qt/msgdlg.h"
 
-1687736241 d:\c++\westseer\include\wx\stockitem.h
+1688155981 d:\c++\westseer\include\wx\stockitem.h
 	"wx/defs.h"
 	"wx/chartype.h"
 	"wx/string.h"
 	"wx/accel.h"
 
-1687736241 d:\c++\westseer\include\wx\generic\msgdlgg.h
+1688155980 d:\c++\westseer\include\wx\generic\msgdlgg.h
 
-1687736241 d:\c++\westseer\include\wx\msw\msgdlg.h
+1688155980 d:\c++\westseer\include\wx\msw\msgdlg.h
 
-1687736241 d:\c++\westseer\include\wx\motif\msgdlg.h
+1688155980 d:\c++\westseer\include\wx\motif\msgdlg.h
 
-1687736241 d:\c++\westseer\include\wx\gtk\msgdlg.h
+1688155980 d:\c++\westseer\include\wx\gtk\msgdlg.h
 
-1687736241 d:\c++\westseer\include\wx\osx\msgdlg.h
+1688155980 d:\c++\westseer\include\wx\osx\msgdlg.h
 
-1687736241 d:\c++\westseer\include\wx\qt\msgdlg.h
+1688155981 d:\c++\westseer\include\wx\qt\msgdlg.h
 	"wx/msgdlg.h"
 
-1687736241 d:\c++\westseer\include\wx\dataobj.h
+1688155980 d:\c++\westseer\include\wx\dataobj.h
 	"wx/defs.h"
 	"wx/string.h"
 	"wx/bitmap.h"
@@ -1895,55 +1895,55 @@
 	"wx/osx/dataobj2.h"
 	"wx/qt/dataobj2.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\ole\dataform.h
+1688155980 d:\c++\westseer\include\wx\msw\ole\dataform.h
 
-1687736241 d:\c++\westseer\include\wx\motif\dataform.h
+1688155980 d:\c++\westseer\include\wx\motif\dataform.h
 
-1687736241 d:\c++\westseer\include\wx\gtk\dataform.h
+1688155980 d:\c++\westseer\include\wx\gtk\dataform.h
 
-1687736241 d:\c++\westseer\include\wx\gtk1\dataform.h
+1688155980 d:\c++\westseer\include\wx\gtk1\dataform.h
 
-1687736241 d:\c++\westseer\include\wx\x11\dataform.h
+1688155981 d:\c++\westseer\include\wx\x11\dataform.h
 
-1687736241 d:\c++\westseer\include\wx\osx\dataform.h
+1688155980 d:\c++\westseer\include\wx\osx\dataform.h
 	"wx/osx/core/cfstring.h"
 
-1687736241 d:\c++\westseer\include\wx\osx\core\cfstring.h
+1688155980 d:\c++\westseer\include\wx\osx\core\cfstring.h
 	"wx/dlimpexp.h"
 	"wx/fontenc.h"
 	"wx/osx/core/cfref.h"
 
-1687736241 d:\c++\westseer\include\wx\qt\dataform.h
+1688155981 d:\c++\westseer\include\wx\qt\dataform.h
 
-1687736241 d:\c++\westseer\include\wx\msw\ole\dataobj.h
+1688155980 d:\c++\westseer\include\wx\msw\ole\dataobj.h
 
-1687736241 d:\c++\westseer\include\wx\motif\dataobj.h
+1688155980 d:\c++\westseer\include\wx\motif\dataobj.h
 
-1687736241 d:\c++\westseer\include\wx\x11\dataobj.h
+1688155981 d:\c++\westseer\include\wx\x11\dataobj.h
 
-1687736241 d:\c++\westseer\include\wx\gtk\dataobj.h
+1688155980 d:\c++\westseer\include\wx\gtk\dataobj.h
 
-1687736241 d:\c++\westseer\include\wx\gtk1\dataobj.h
+1688155980 d:\c++\westseer\include\wx\gtk1\dataobj.h
 
-1687736241 d:\c++\westseer\include\wx\osx\dataobj.h
+1688155980 d:\c++\westseer\include\wx\osx\dataobj.h
 
-1687736241 d:\c++\westseer\include\wx\qt\dataobj.h
+1688155981 d:\c++\westseer\include\wx\qt\dataobj.h
 
-1687736241 d:\c++\westseer\include\wx\msw\ole\dataobj2.h
+1688155980 d:\c++\westseer\include\wx\msw\ole\dataobj2.h
 
-1687736241 d:\c++\westseer\include\wx\gtk\dataobj2.h
+1688155980 d:\c++\westseer\include\wx\gtk\dataobj2.h
 
-1687736241 d:\c++\westseer\include\wx\gtk1\dataobj2.h
+1688155980 d:\c++\westseer\include\wx\gtk1\dataobj2.h
 
-1687736241 d:\c++\westseer\include\wx\x11\dataobj2.h
+1688155981 d:\c++\westseer\include\wx\x11\dataobj2.h
 
-1687736241 d:\c++\westseer\include\wx\motif\dataobj2.h
+1688155980 d:\c++\westseer\include\wx\motif\dataobj2.h
 
-1687736241 d:\c++\westseer\include\wx\osx\dataobj2.h
+1688155980 d:\c++\westseer\include\wx\osx\dataobj2.h
 
-1687736241 d:\c++\westseer\include\wx\qt\dataobj2.h
+1688155981 d:\c++\westseer\include\wx\qt\dataobj2.h
 
-1687736241 d:\c++\westseer\include\wx\ctrlsub.h
+1688155980 d:\c++\westseer\include\wx\ctrlsub.h
 	"wx/defs.h"
 	"wx/arrstr.h"
 	"wx/control.h"
@@ -1952,18 +1952,18 @@
 	"wx/motif/ctrlsub.h"
 	"wx/qt/ctrlsub.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\ctrlsub.h
+1688155980 d:\c++\westseer\include\wx\msw\ctrlsub.h
 
-1687736241 d:\c++\westseer\include\wx\motif\ctrlsub.h
+1688155980 d:\c++\westseer\include\wx\motif\ctrlsub.h
 	"wx/dynarray.h"
 	"wx/generic/ctrlsub.h"
 
-1687736241 d:\c++\westseer\include\wx\generic\ctrlsub.h
+1688155980 d:\c++\westseer\include\wx\generic\ctrlsub.h
 	"wx/dynarray.h"
 
-1687736241 d:\c++\westseer\include\wx\qt\ctrlsub.h
+1688155981 d:\c++\westseer\include\wx\qt\ctrlsub.h
 
-1687736241 d:\c++\westseer\include\wx\bmpbuttn.h
+1688155980 d:\c++\westseer\include\wx\bmpbuttn.h
 	"wx/defs.h"
 	"wx/button.h"
 	"wx/univ/bmpbuttn.h"
@@ -1974,30 +1974,30 @@
 	"wx/osx/bmpbuttn.h"
 	"wx/qt/bmpbuttn.h"
 
-1687736241 d:\c++\westseer\include\wx\univ\bmpbuttn.h
+1688155981 d:\c++\westseer\include\wx\univ\bmpbuttn.h
 
-1687736241 d:\c++\westseer\include\wx\msw\bmpbuttn.h
+1688155980 d:\c++\westseer\include\wx\msw\bmpbuttn.h
 	"wx/button.h"
 	"wx/bitmap.h"
 	"wx/brush.h"
 
-1687736241 d:\c++\westseer\include\wx\motif\bmpbuttn.h
+1688155980 d:\c++\westseer\include\wx\motif\bmpbuttn.h
 	"wx/motif/bmpmotif.h"
 
-1687736241 d:\c++\westseer\include\wx\motif\bmpmotif.h
+1688155980 d:\c++\westseer\include\wx\motif\bmpmotif.h
 	"wx/defs.h"
 	"wx/bitmap.h"
 
-1687736241 d:\c++\westseer\include\wx\gtk\bmpbuttn.h
+1688155980 d:\c++\westseer\include\wx\gtk\bmpbuttn.h
 
-1687736241 d:\c++\westseer\include\wx\gtk1\bmpbuttn.h
+1688155980 d:\c++\westseer\include\wx\gtk1\bmpbuttn.h
 
-1687736241 d:\c++\westseer\include\wx\osx\bmpbuttn.h
+1688155980 d:\c++\westseer\include\wx\osx\bmpbuttn.h
 	"wx/button.h"
 
-1687736241 d:\c++\westseer\include\wx\qt\bmpbuttn.h
+1688155981 d:\c++\westseer\include\wx\qt\bmpbuttn.h
 
-1687736241 d:\c++\westseer\include\wx\checkbox.h
+1688155980 d:\c++\westseer\include\wx\checkbox.h
 	"wx/defs.h"
 	"wx/control.h"
 	"wx/univ/checkbox.h"
@@ -2008,25 +2008,25 @@
 	"wx/osx/checkbox.h"
 	"wx/qt/checkbox.h"
 
-1687736241 d:\c++\westseer\include\wx\univ\checkbox.h
+1688155981 d:\c++\westseer\include\wx\univ\checkbox.h
 	"wx/button.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\checkbox.h
+1688155980 d:\c++\westseer\include\wx\msw\checkbox.h
 	"wx/msw/ownerdrawnbutton.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\ownerdrawnbutton.h
+1688155980 d:\c++\westseer\include\wx\msw\ownerdrawnbutton.h
 
-1687736241 d:\c++\westseer\include\wx\motif\checkbox.h
+1688155980 d:\c++\westseer\include\wx\motif\checkbox.h
 
-1687736241 d:\c++\westseer\include\wx\gtk\checkbox.h
+1688155980 d:\c++\westseer\include\wx\gtk\checkbox.h
 
-1687736241 d:\c++\westseer\include\wx\gtk1\checkbox.h
+1688155980 d:\c++\westseer\include\wx\gtk1\checkbox.h
 
-1687736241 d:\c++\westseer\include\wx\osx\checkbox.h
+1688155980 d:\c++\westseer\include\wx\osx\checkbox.h
 
-1687736241 d:\c++\westseer\include\wx\qt\checkbox.h
+1688155981 d:\c++\westseer\include\wx\qt\checkbox.h
 
-1687736241 d:\c++\westseer\include\wx\checklst.h
+1688155980 d:\c++\westseer\include\wx\checklst.h
 	"wx/defs.h"
 	"wx/listbox.h"
 	"wx/univ/checklst.h"
@@ -2037,7 +2037,7 @@
 	"wx/osx/checklst.h"
 	"wx/qt/checklst.h"
 
-1687736241 d:\c++\westseer\include\wx\listbox.h
+1688155980 d:\c++\westseer\include\wx\listbox.h
 	"wx/defs.h"
 	"wx/ctrlsub.h"
 	"wx/univ/listbox.h"
@@ -2048,12 +2048,12 @@
 	"wx/osx/listbox.h"
 	"wx/qt/listbox.h"
 
-1687736241 d:\c++\westseer\include\wx\univ\listbox.h
+1688155981 d:\c++\westseer\include\wx\univ\listbox.h
 	"wx/scrolwin.h"
 	"wx/dynarray.h"
 	"wx/arrstr.h"
 
-1687736241 d:\c++\westseer\include\wx\scrolwin.h
+1688155981 d:\c++\westseer\include\wx\scrolwin.h
 	"wx/control.h"
 	"wx/panel.h"
 	"wx/scrolbar.h"
@@ -2061,7 +2061,7 @@
 	"wx/gtk1/scrolwin.h"
 	"wx/generic/scrolwin.h"
 
-1687736241 d:\c++\westseer\include\wx\scrolbar.h
+1688155981 d:\c++\westseer\include\wx\scrolbar.h
 	"wx/defs.h"
 	"wx/control.h"
 	"wx/univ/scrolbar.h"
@@ -2072,77 +2072,77 @@
 	"wx/osx/scrolbar.h"
 	"wx/qt/scrolbar.h"
 
-1687736241 d:\c++\westseer\include\wx\univ\scrolbar.h
+1688155981 d:\c++\westseer\include\wx\univ\scrolbar.h
 	"wx/univ/scrarrow.h"
 	"wx/renderer.h"
 
-1687736241 d:\c++\westseer\include\wx\univ\scrarrow.h
+1688155981 d:\c++\westseer\include\wx\univ\scrarrow.h
 
-1687736241 d:\c++\westseer\include\wx\renderer.h
+1688155981 d:\c++\westseer\include\wx\renderer.h
 	"wx/gdicmn.h"
 	"wx/colour.h"
 	"wx/font.h"
 	"wx/bitmap.h"
 	"wx/string.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\scrolbar.h
+1688155980 d:\c++\westseer\include\wx\msw\scrolbar.h
 
-1687736241 d:\c++\westseer\include\wx\motif\scrolbar.h
+1688155980 d:\c++\westseer\include\wx\motif\scrolbar.h
 
-1687736241 d:\c++\westseer\include\wx\gtk\scrolbar.h
+1688155980 d:\c++\westseer\include\wx\gtk\scrolbar.h
 
-1687736241 d:\c++\westseer\include\wx\gtk1\scrolbar.h
+1688155980 d:\c++\westseer\include\wx\gtk1\scrolbar.h
 	"wx/defs.h"
 
-1687736241 d:\c++\westseer\include\wx\osx\scrolbar.h
+1688155980 d:\c++\westseer\include\wx\osx\scrolbar.h
 
-1687736241 d:\c++\westseer\include\wx\qt\scrolbar.h
+1688155981 d:\c++\westseer\include\wx\qt\scrolbar.h
 	"wx/scrolbar.h"
 
-1687736241 d:\c++\westseer\include\wx\gtk\scrolwin.h
+1688155980 d:\c++\westseer\include\wx\gtk\scrolwin.h
 
-1687736241 d:\c++\westseer\include\wx\gtk1\scrolwin.h
+1688155980 d:\c++\westseer\include\wx\gtk1\scrolwin.h
 
-1687736241 d:\c++\westseer\include\wx\generic\scrolwin.h
+1688155980 d:\c++\westseer\include\wx\generic\scrolwin.h
 	"wx/recguard.h"
 
-1687736241 d:\c++\westseer\include\wx\recguard.h
+1688155981 d:\c++\westseer\include\wx\recguard.h
 	"wx/defs.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\listbox.h
+1688155980 d:\c++\westseer\include\wx\msw\listbox.h
 	"wx/dynarray.h"
 
-1687736241 d:\c++\westseer\include\wx\motif\listbox.h
+1688155980 d:\c++\westseer\include\wx\motif\listbox.h
 	"wx/ctrlsub.h"
 	"wx/clntdata.h"
 
-1687736241 d:\c++\westseer\include\wx\gtk\listbox.h
+1688155980 d:\c++\westseer\include\wx\gtk\listbox.h
 
-1687736241 d:\c++\westseer\include\wx\gtk1\listbox.h
+1688155980 d:\c++\westseer\include\wx\gtk1\listbox.h
 	"wx/list.h"
 
-1687736241 d:\c++\westseer\include\wx\osx\listbox.h
+1688155980 d:\c++\westseer\include\wx\osx\listbox.h
 	"wx/dynarray.h"
 	"wx/arrstr.h"
 
-1687736241 d:\c++\westseer\include\wx\qt\listbox.h
+1688155981 d:\c++\westseer\include\wx\qt\listbox.h
 
-1687736241 d:\c++\westseer\include\wx\univ\checklst.h
+1688155981 d:\c++\westseer\include\wx\univ\checklst.h
 
-1687736241 d:\c++\westseer\include\wx\msw\checklst.h
+1688155980 d:\c++\westseer\include\wx\msw\checklst.h
 
-1687736241 d:\c++\westseer\include\wx\motif\checklst.h
+1688155980 d:\c++\westseer\include\wx\motif\checklst.h
 	"wx/listbox.h"
 
-1687736241 d:\c++\westseer\include\wx\gtk\checklst.h
+1688155980 d:\c++\westseer\include\wx\gtk\checklst.h
 
-1687736241 d:\c++\westseer\include\wx\gtk1\checklst.h
+1688155980 d:\c++\westseer\include\wx\gtk1\checklst.h
 
-1687736241 d:\c++\westseer\include\wx\osx\checklst.h
+1688155980 d:\c++\westseer\include\wx\osx\checklst.h
 
-1687736241 d:\c++\westseer\include\wx\qt\checklst.h
+1688155981 d:\c++\westseer\include\wx\qt\checklst.h
 
-1687736241 d:\c++\westseer\include\wx\choice.h
+1688155980 d:\c++\westseer\include\wx\choice.h
 	"wx/defs.h"
 	"wx/ctrlsub.h"
 	"wx/univ/choice.h"
@@ -2153,10 +2153,10 @@
 	"wx/osx/choice.h"
 	"wx/qt/choice.h"
 
-1687736241 d:\c++\westseer\include\wx\univ\choice.h
+1688155981 d:\c++\westseer\include\wx\univ\choice.h
 	"wx/combobox.h"
 
-1687736241 d:\c++\westseer\include\wx\combobox.h
+1688155980 d:\c++\westseer\include\wx\combobox.h
 	"wx/defs.h"
 	"wx/textctrl.h"
 	"wx/ctrlsub.h"
@@ -2169,7 +2169,7 @@
 	"wx/osx/combobox.h"
 	"wx/qt/combobox.h"
 
-1687736241 d:\c++\westseer\include\wx\textctrl.h
+1688155981 d:\c++\westseer\include\wx\textctrl.h
 	"wx/defs.h"
 	"wx/control.h"
 	"wx/textentry.h"
@@ -2185,7 +2185,7 @@
 	"wx/osx/textctrl.h"
 	"wx/qt/textctrl.h"
 
-1687736241 d:\c++\westseer\include\wx\textentry.h
+1688155981 d:\c++\westseer\include\wx\textentry.h
 	"wx/filefn.h"
 	"wx/gdicmn.h"
 	"wx/gtk/textentry.h"
@@ -2194,50 +2194,50 @@
 	"wx/motif/textentry.h"
 	"wx/qt/textentry.h"
 
-1687736241 d:\c++\westseer\include\wx\gtk\textentry.h
+1688155980 d:\c++\westseer\include\wx\gtk\textentry.h
 
-1687736241 d:\c++\westseer\include\wx\osx\textentry.h
+1688155980 d:\c++\westseer\include\wx\osx\textentry.h
 	"wx/control.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\textentry.h
+1688155980 d:\c++\westseer\include\wx\msw\textentry.h
 
-1687736241 d:\c++\westseer\include\wx\motif\textentry.h
+1688155980 d:\c++\westseer\include\wx\motif\textentry.h
 
-1687736241 d:\c++\westseer\include\wx\qt\textentry.h
+1688155981 d:\c++\westseer\include\wx\qt\textentry.h
 
-1687736241 d:\c++\westseer\include\wx\ioswrap.h
+1688155980 d:\c++\westseer\include\wx\ioswrap.h
 	"wx/beforestd.h"
 	<iostream>
 	"wx/afterstd.h"
 	"wx/msw/winundef.h"
 
-1687736241 d:\c++\westseer\include\wx\x11\textctrl.h
+1688155981 d:\c++\westseer\include\wx\x11\textctrl.h
 	"wx/univ/textctrl.h"
 	"wx/scrolwin.h"
 	"wx/arrstr.h"
 
-1687736241 d:\c++\westseer\include\wx\univ\textctrl.h
+1688155981 d:\c++\westseer\include\wx\univ\textctrl.h
 	"wx/scrolwin.h"
 	"wx/univ/inphand.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\textctrl.h
+1688155980 d:\c++\westseer\include\wx\msw\textctrl.h
 
-1687736241 d:\c++\westseer\include\wx\motif\textctrl.h
+1688155980 d:\c++\westseer\include\wx\motif\textctrl.h
 
-1687736241 d:\c++\westseer\include\wx\gtk\textctrl.h
+1688155980 d:\c++\westseer\include\wx\gtk\textctrl.h
 
-1687736241 d:\c++\westseer\include\wx\gtk1\textctrl.h
+1688155980 d:\c++\westseer\include\wx\gtk1\textctrl.h
 
-1687736241 d:\c++\westseer\include\wx\osx\textctrl.h
+1688155980 d:\c++\westseer\include\wx\osx\textctrl.h
 	"wx/control.h"
 	"wx/textctrl.h"
 
-1687736241 d:\c++\westseer\include\wx\qt\textctrl.h
+1688155981 d:\c++\westseer\include\wx\qt\textctrl.h
 
-1687736241 d:\c++\westseer\include\wx\univ\combobox.h
+1688155981 d:\c++\westseer\include\wx\univ\combobox.h
 	"wx/combo.h"
 
-1687736241 d:\c++\westseer\include\wx\combo.h
+1688155980 d:\c++\westseer\include\wx\combo.h
 	"wx/defs.h"
 	"wx/control.h"
 	"wx/renderer.h"
@@ -2247,53 +2247,53 @@
 	"wx/msw/combo.h"
 	"wx/generic/combo.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\combo.h
+1688155980 d:\c++\westseer\include\wx\msw\combo.h
 	"wx/timer.h"
 
-1687736241 d:\c++\westseer\include\wx\generic\combo.h
+1688155980 d:\c++\westseer\include\wx\generic\combo.h
 	"wx/containr.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\combobox.h
+1688155980 d:\c++\westseer\include\wx\msw\combobox.h
 	"wx/choice.h"
 	"wx/textentry.h"
 
-1687736241 d:\c++\westseer\include\wx\motif\combobox.h
+1688155980 d:\c++\westseer\include\wx\motif\combobox.h
 	"wx/choice.h"
 	"wx/textentry.h"
 
-1687736241 d:\c++\westseer\include\wx\gtk\combobox.h
+1688155980 d:\c++\westseer\include\wx\gtk\combobox.h
 	"wx/choice.h"
 
-1687736241 d:\c++\westseer\include\wx\gtk1\combobox.h
+1688155980 d:\c++\westseer\include\wx\gtk1\combobox.h
 	"wx/defs.h"
 	"wx/object.h"
 
-1687736241 d:\c++\westseer\include\wx\osx\combobox.h
+1688155980 d:\c++\westseer\include\wx\osx\combobox.h
 	"wx/containr.h"
 	"wx/choice.h"
 	"wx/textctrl.h"
 
-1687736241 d:\c++\westseer\include\wx\qt\combobox.h
+1688155981 d:\c++\westseer\include\wx\qt\combobox.h
 	"wx/choice.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\choice.h
+1688155980 d:\c++\westseer\include\wx\msw\choice.h
 
-1687736241 d:\c++\westseer\include\wx\motif\choice.h
+1688155980 d:\c++\westseer\include\wx\motif\choice.h
 	"wx/clntdata.h"
 	"wx/dynarray.h"
 
-1687736241 d:\c++\westseer\include\wx\gtk\choice.h
+1688155980 d:\c++\westseer\include\wx\gtk\choice.h
 
-1687736241 d:\c++\westseer\include\wx\gtk1\choice.h
+1688155980 d:\c++\westseer\include\wx\gtk1\choice.h
 
-1687736241 d:\c++\westseer\include\wx\osx\choice.h
+1688155980 d:\c++\westseer\include\wx\osx\choice.h
 	"wx/control.h"
 	"wx/dynarray.h"
 	"wx/arrstr.h"
 
-1687736241 d:\c++\westseer\include\wx\qt\choice.h
+1688155981 d:\c++\westseer\include\wx\qt\choice.h
 
-1687736241 d:\c++\westseer\include\wx\stattext.h
+1688155981 d:\c++\westseer\include\wx\stattext.h
 	"wx/defs.h"
 	"wx/control.h"
 	"wx/univ/stattext.h"
@@ -2304,25 +2304,25 @@
 	"wx/osx/stattext.h"
 	"wx/qt/stattext.h"
 
-1687736241 d:\c++\westseer\include\wx\univ\stattext.h
+1688155981 d:\c++\westseer\include\wx\univ\stattext.h
 	"wx/generic/stattextg.h"
 
-1687736241 d:\c++\westseer\include\wx\generic\stattextg.h
+1688155980 d:\c++\westseer\include\wx\generic\stattextg.h
 	"wx/stattext.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\stattext.h
+1688155980 d:\c++\westseer\include\wx\msw\stattext.h
 
-1687736241 d:\c++\westseer\include\wx\motif\stattext.h
+1688155980 d:\c++\westseer\include\wx\motif\stattext.h
 
-1687736241 d:\c++\westseer\include\wx\gtk\stattext.h
+1688155980 d:\c++\westseer\include\wx\gtk\stattext.h
 
-1687736241 d:\c++\westseer\include\wx\gtk1\stattext.h
+1688155980 d:\c++\westseer\include\wx\gtk1\stattext.h
 
-1687736241 d:\c++\westseer\include\wx\osx\stattext.h
+1688155980 d:\c++\westseer\include\wx\osx\stattext.h
 
-1687736241 d:\c++\westseer\include\wx\qt\stattext.h
+1688155981 d:\c++\westseer\include\wx\qt\stattext.h
 
-1687736241 d:\c++\westseer\include\wx\statbmp.h
+1688155981 d:\c++\westseer\include\wx\statbmp.h
 	"wx/defs.h"
 	"wx/control.h"
 	"wx/bmpbndl.h"
@@ -2335,30 +2335,30 @@
 	"wx/osx/statbmp.h"
 	"wx/qt/statbmp.h"
 
-1687736241 d:\c++\westseer\include\wx\univ\statbmp.h
+1688155981 d:\c++\westseer\include\wx\univ\statbmp.h
 	"wx/bitmap.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\statbmp.h
+1688155980 d:\c++\westseer\include\wx\msw\statbmp.h
 	"wx/control.h"
 	"wx/icon.h"
 	"wx/bitmap.h"
 
-1687736241 d:\c++\westseer\include\wx\motif\statbmp.h
+1688155980 d:\c++\westseer\include\wx\motif\statbmp.h
 	"wx/motif/bmpmotif.h"
 	"wx/icon.h"
 
-1687736241 d:\c++\westseer\include\wx\gtk\statbmp.h
+1688155980 d:\c++\westseer\include\wx\gtk\statbmp.h
 	"wx/icon.h"
 
-1687736241 d:\c++\westseer\include\wx\gtk1\statbmp.h
+1688155980 d:\c++\westseer\include\wx\gtk1\statbmp.h
 	"wx/icon.h"
 
-1687736241 d:\c++\westseer\include\wx\osx\statbmp.h
+1688155980 d:\c++\westseer\include\wx\osx\statbmp.h
 	"wx/statbmp.h"
 
-1687736241 d:\c++\westseer\include\wx\qt\statbmp.h
+1688155981 d:\c++\westseer\include\wx\qt\statbmp.h
 
-1687736241 d:\c++\westseer\include\wx\statbox.h
+1688155981 d:\c++\westseer\include\wx\statbox.h
 	"wx/defs.h"
 	"wx/control.h"
 	"wx/containr.h"
@@ -2370,26 +2370,26 @@
 	"wx/osx/statbox.h"
 	"wx/qt/statbox.h"
 
-1687736241 d:\c++\westseer\include\wx\univ\statbox.h
+1688155981 d:\c++\westseer\include\wx\univ\statbox.h
 
-1687736241 d:\c++\westseer\include\wx\msw\statbox.h
+1688155980 d:\c++\westseer\include\wx\msw\statbox.h
 	"wx/compositewin.h"
 
-1687736241 d:\c++\westseer\include\wx\compositewin.h
+1688155980 d:\c++\westseer\include\wx\compositewin.h
 	"wx/window.h"
 	"wx/containr.h"
 
-1687736241 d:\c++\westseer\include\wx\motif\statbox.h
+1688155980 d:\c++\westseer\include\wx\motif\statbox.h
 
-1687736241 d:\c++\westseer\include\wx\gtk\statbox.h
+1688155980 d:\c++\westseer\include\wx\gtk\statbox.h
 
-1687736241 d:\c++\westseer\include\wx\gtk1\statbox.h
+1688155980 d:\c++\westseer\include\wx\gtk1\statbox.h
 
-1687736241 d:\c++\westseer\include\wx\osx\statbox.h
+1688155980 d:\c++\westseer\include\wx\osx\statbox.h
 
-1687736241 d:\c++\westseer\include\wx\qt\statbox.h
+1688155981 d:\c++\westseer\include\wx\qt\statbox.h
 
-1687736241 d:\c++\westseer\include\wx\radiobox.h
+1688155981 d:\c++\westseer\include\wx\radiobox.h
 	"wx/defs.h"
 	"wx/ctrlsub.h"
 	"wx/dynarray.h"
@@ -2401,30 +2401,30 @@
 	"wx/osx/radiobox.h"
 	"wx/qt/radiobox.h"
 
-1687736241 d:\c++\westseer\include\wx\univ\radiobox.h
+1688155981 d:\c++\westseer\include\wx\univ\radiobox.h
 	"wx/statbox.h"
 	"wx/dynarray.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\radiobox.h
+1688155980 d:\c++\westseer\include\wx\msw\radiobox.h
 	"wx/statbox.h"
 
-1687736241 d:\c++\westseer\include\wx\motif\radiobox.h
+1688155980 d:\c++\westseer\include\wx\motif\radiobox.h
 	"wx/dynarray.h"
 	"wx/arrstr.h"
 
-1687736241 d:\c++\westseer\include\wx\gtk\radiobox.h
+1688155980 d:\c++\westseer\include\wx\gtk\radiobox.h
 	"wx/bitmap.h"
 	"wx/list.h"
 
-1687736241 d:\c++\westseer\include\wx\gtk1\radiobox.h
+1688155980 d:\c++\westseer\include\wx\gtk1\radiobox.h
 	"wx/bitmap.h"
 
-1687736241 d:\c++\westseer\include\wx\osx\radiobox.h
+1688155980 d:\c++\westseer\include\wx\osx\radiobox.h
 	"wx/containr.h"
 
-1687736241 d:\c++\westseer\include\wx\qt\radiobox.h
+1688155981 d:\c++\westseer\include\wx\qt\radiobox.h
 
-1687736241 d:\c++\westseer\include\wx\radiobut.h
+1688155981 d:\c++\westseer\include\wx\radiobut.h
 	"wx/defs.h"
 	"wx/control.h"
 	"wx/checkbox.h"
@@ -2436,22 +2436,22 @@
 	"wx/osx/radiobut.h"
 	"wx/qt/radiobut.h"
 
-1687736241 d:\c++\westseer\include\wx\univ\radiobut.h
+1688155981 d:\c++\westseer\include\wx\univ\radiobut.h
 
-1687736241 d:\c++\westseer\include\wx\msw\radiobut.h
+1688155980 d:\c++\westseer\include\wx\msw\radiobut.h
 	"wx/msw/ownerdrawnbutton.h"
 
-1687736241 d:\c++\westseer\include\wx\motif\radiobut.h
+1688155980 d:\c++\westseer\include\wx\motif\radiobut.h
 
-1687736241 d:\c++\westseer\include\wx\gtk\radiobut.h
+1688155980 d:\c++\westseer\include\wx\gtk\radiobut.h
 
-1687736241 d:\c++\westseer\include\wx\gtk1\radiobut.h
+1688155980 d:\c++\westseer\include\wx\gtk1\radiobut.h
 
-1687736241 d:\c++\westseer\include\wx\osx\radiobut.h
+1688155980 d:\c++\westseer\include\wx\osx\radiobut.h
 
-1687736241 d:\c++\westseer\include\wx\qt\radiobut.h
+1688155981 d:\c++\westseer\include\wx\qt\radiobut.h
 
-1687736241 d:\c++\westseer\include\wx\slider.h
+1688155981 d:\c++\westseer\include\wx\slider.h
 	"wx/defs.h"
 	"wx/control.h"
 	"wx/univ/slider.h"
@@ -2462,28 +2462,28 @@
 	"wx/osx/slider.h"
 	"wx/qt/slider.h"
 
-1687736241 d:\c++\westseer\include\wx\univ\slider.h
+1688155981 d:\c++\westseer\include\wx\univ\slider.h
 	"wx/univ/scrthumb.h"
 
-1687736241 d:\c++\westseer\include\wx\univ\scrthumb.h
+1688155981 d:\c++\westseer\include\wx\univ\scrthumb.h
 	"wx/timer.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\slider.h
+1688155980 d:\c++\westseer\include\wx\msw\slider.h
 
-1687736241 d:\c++\westseer\include\wx\motif\slider.h
+1688155980 d:\c++\westseer\include\wx\motif\slider.h
 	"wx/control.h"
 
-1687736241 d:\c++\westseer\include\wx\gtk\slider.h
+1688155980 d:\c++\westseer\include\wx\gtk\slider.h
 
-1687736241 d:\c++\westseer\include\wx\gtk1\slider.h
+1688155980 d:\c++\westseer\include\wx\gtk1\slider.h
 
-1687736241 d:\c++\westseer\include\wx\osx\slider.h
+1688155980 d:\c++\westseer\include\wx\osx\slider.h
 	"wx/compositewin.h"
 	"wx/stattext.h"
 
-1687736241 d:\c++\westseer\include\wx\qt\slider.h
+1688155981 d:\c++\westseer\include\wx\qt\slider.h
 
-1687736241 d:\c++\westseer\include\wx\gauge.h
+1688155980 d:\c++\westseer\include\wx\gauge.h
 	"wx/defs.h"
 	"wx/control.h"
 	"wx/univ/gauge.h"
@@ -2494,22 +2494,22 @@
 	"wx/osx/gauge.h"
 	"wx/qt/gauge.h"
 
-1687736241 d:\c++\westseer\include\wx\univ\gauge.h
+1688155981 d:\c++\westseer\include\wx\univ\gauge.h
 
-1687736241 d:\c++\westseer\include\wx\msw\gauge.h
+1688155980 d:\c++\westseer\include\wx\msw\gauge.h
 
-1687736241 d:\c++\westseer\include\wx\motif\gauge.h
+1688155980 d:\c++\westseer\include\wx\motif\gauge.h
 
-1687736241 d:\c++\westseer\include\wx\gtk\gauge.h
+1688155980 d:\c++\westseer\include\wx\gtk\gauge.h
 
-1687736241 d:\c++\westseer\include\wx\gtk1\gauge.h
+1688155980 d:\c++\westseer\include\wx\gtk1\gauge.h
 
-1687736241 d:\c++\westseer\include\wx\osx\gauge.h
+1688155980 d:\c++\westseer\include\wx\osx\gauge.h
 	"wx/control.h"
 
-1687736241 d:\c++\westseer\include\wx\qt\gauge.h
+1688155981 d:\c++\westseer\include\wx\qt\gauge.h
 
-1687736241 d:\c++\westseer\include\wx\dirdlg.h
+1688155980 d:\c++\westseer\include\wx\dirdlg.h
 	"wx/defs.h"
 	"wx/dialog.h"
 	"wx/generic/dirdlgg.h"
@@ -2521,46 +2521,46 @@
 	"wx/generic/dirdlgg.h"
 	"wx/qt/dirdlg.h"
 
-1687736241 d:\c++\westseer\include\wx\generic\dirdlgg.h
+1688155980 d:\c++\westseer\include\wx\generic\dirdlgg.h
 	"wx/dialog.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\dirdlg.h
+1688155980 d:\c++\westseer\include\wx\msw\dirdlg.h
 
-1687736241 d:\c++\westseer\include\wx\gtk\dirdlg.h
+1688155980 d:\c++\westseer\include\wx\gtk\dirdlg.h
 
-1687736241 d:\c++\westseer\include\wx\osx\dirdlg.h
+1688155980 d:\c++\westseer\include\wx\osx\dirdlg.h
 
-1687736241 d:\c++\westseer\include\wx\qt\dirdlg.h
+1688155981 d:\c++\westseer\include\wx\qt\dirdlg.h
 
-1687736241 d:\c++\westseer\include\wx\layout.h
+1688155980 d:\c++\westseer\include\wx\layout.h
 	"wx/object.h"
 
-1687736241 d:\c++\westseer\include\wx\sizer.h
+1688155981 d:\c++\westseer\include\wx\sizer.h
 	"wx/defs.h"
 	"wx/window.h"
 
-1687736241 d:\c++\westseer\include\wx\choicdlg.h
+1688155980 d:\c++\westseer\include\wx\choicdlg.h
 	"wx/defs.h"
 	"wx/generic/choicdgg.h"
 
-1687736241 d:\c++\westseer\include\wx\generic\choicdgg.h
+1688155980 d:\c++\westseer\include\wx\generic\choicdgg.h
 	"wx/dynarray.h"
 	"wx/dialog.h"
 
-1687736241 d:\c++\westseer\include\wx\textdlg.h
+1688155981 d:\c++\westseer\include\wx\textdlg.h
 	"wx/generic/textdlgg.h"
 
-1687736241 d:\c++\westseer\include\wx\generic\textdlgg.h
+1688155980 d:\c++\westseer\include\wx\generic\textdlgg.h
 	"wx/defs.h"
 	"wx/dialog.h"
 	"wx/valtext.h"
 	"wx/textctrl.h"
 
-1687736241 d:\c++\westseer\include\wx\valtext.h
+1688155981 d:\c++\westseer\include\wx\valtext.h
 	"wx/defs.h"
 	"wx/validate.h"
 
-1687736241 d:\c++\westseer\include\wx\filedlg.h
+1688155980 d:\c++\westseer\include\wx\filedlg.h
 	"wx/defs.h"
 	"wx/dialog.h"
 	"wx/arrstr.h"
@@ -2572,7 +2572,7 @@
 	"wx/osx/filedlg.h"
 	"wx/qt/filedlg.h"
 
-1687736241 d:\c++\westseer\include\wx\generic\filedlgg.h
+1688155980 d:\c++\westseer\include\wx\generic\filedlgg.h
 	"wx/listctrl.h"
 	"wx/datetime.h"
 	"wx/filefn.h"
@@ -2580,14 +2580,14 @@
 	"wx/filedlg.h"
 	"wx/generic/filectrlg.h"
 
-1687736241 d:\c++\westseer\include\wx\listctrl.h
+1688155980 d:\c++\westseer\include\wx\listctrl.h
 	"wx/defs.h"
 	"wx/listbase.h"
 	"wx/msw/listctrl.h"
 	"wx/qt/listctrl.h"
 	"wx/generic/listctrl.h"
 
-1687736241 d:\c++\westseer\include\wx\listbase.h
+1688155980 d:\c++\westseer\include\wx\listbase.h
 	"wx/colour.h"
 	"wx/font.h"
 	"wx/gdicmn.h"
@@ -2597,70 +2597,70 @@
 	"wx/systhemectrl.h"
 	"wx/withimages.h"
 
-1687736241 d:\c++\westseer\include\wx\itemattr.h
+1688155980 d:\c++\westseer\include\wx\itemattr.h
 
-1687736241 d:\c++\westseer\include\wx\systhemectrl.h
+1688155981 d:\c++\westseer\include\wx\systhemectrl.h
 	"wx/defs.h"
 
-1687736241 d:\c++\westseer\include\wx\withimages.h
+1688155981 d:\c++\westseer\include\wx\withimages.h
 	"wx/defs.h"
 	"wx/bmpbndl.h"
 	"wx/icon.h"
 	"wx/imaglist.h"
 	"wx/vector.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\listctrl.h
+1688155980 d:\c++\westseer\include\wx\msw\listctrl.h
 	"wx/textctrl.h"
 	"wx/dynarray.h"
 	"wx/vector.h"
 
-1687736241 d:\c++\westseer\include\wx\qt\listctrl.h
+1688155981 d:\c++\westseer\include\wx\qt\listctrl.h
 	"wx/textctrl.h"
 
-1687736241 d:\c++\westseer\include\wx\generic\listctrl.h
+1688155980 d:\c++\westseer\include\wx\generic\listctrl.h
 	"wx/containr.h"
 	"wx/scrolwin.h"
 	"wx/textctrl.h"
 
-1687736241 d:\c++\westseer\include\wx\artprov.h
+1688155980 d:\c++\westseer\include\wx\artprov.h
 	"wx/string.h"
 	"wx/bitmap.h"
 	"wx/icon.h"
 	"wx/iconbndl.h"
 	"wx/bmpbndl.h"
 
-1687736241 d:\c++\westseer\include\wx\generic\filectrlg.h
+1688155980 d:\c++\westseer\include\wx\generic\filectrlg.h
 	"wx/containr.h"
 	"wx/listctrl.h"
 	"wx/filectrl.h"
 	"wx/filename.h"
 
-1687736241 d:\c++\westseer\include\wx\filectrl.h
+1688155980 d:\c++\westseer\include\wx\filectrl.h
 	"wx/defs.h"
 	"wx/string.h"
 	"wx/event.h"
 	"wx/gtk/filectrl.h"
 	"wx/generic/filectrlg.h"
 
-1687736241 d:\c++\westseer\include\wx\gtk\filectrl.h
+1688155980 d:\c++\westseer\include\wx\gtk\filectrl.h
 	"wx/control.h"
 	"wx/filectrl.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\filedlg.h
+1688155980 d:\c++\westseer\include\wx\msw\filedlg.h
 
-1687736241 d:\c++\westseer\include\wx\motif\filedlg.h
+1688155980 d:\c++\westseer\include\wx\motif\filedlg.h
 
-1687736241 d:\c++\westseer\include\wx\gtk\filedlg.h
+1688155980 d:\c++\westseer\include\wx\gtk\filedlg.h
 	"wx/gtk/filectrl.h"
 
-1687736241 d:\c++\westseer\include\wx\gtk1\filedlg.h
+1688155980 d:\c++\westseer\include\wx\gtk1\filedlg.h
 	"wx/generic/filedlgg.h"
 
-1687736241 d:\c++\westseer\include\wx\osx\filedlg.h
+1688155980 d:\c++\westseer\include\wx\osx\filedlg.h
 
-1687736241 d:\c++\westseer\include\wx\qt\filedlg.h
+1688155981 d:\c++\westseer\include\wx\qt\filedlg.h
 
-1687736241 d:\c++\westseer\include\wx\mdi.h
+1688155980 d:\c++\westseer\include\wx\mdi.h
 	"wx/defs.h"
 	"wx/frame.h"
 	"wx/menu.h"
@@ -2671,30 +2671,30 @@
 	"wx/osx/mdi.h"
 	"wx/qt/mdi.h"
 
-1687736241 d:\c++\westseer\include\wx\generic\mdig.h
+1688155980 d:\c++\westseer\include\wx\generic\mdig.h
 	"wx/panel.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\mdi.h
+1688155980 d:\c++\westseer\include\wx\msw\mdi.h
 	"wx/frame.h"
 
-1687736241 d:\c++\westseer\include\wx\gtk\mdi.h
+1688155980 d:\c++\westseer\include\wx\gtk\mdi.h
 	"wx/frame.h"
 
-1687736241 d:\c++\westseer\include\wx\gtk1\mdi.h
+1688155980 d:\c++\westseer\include\wx\gtk1\mdi.h
 	"wx/frame.h"
 
-1687736241 d:\c++\westseer\include\wx\osx\mdi.h
+1688155980 d:\c++\westseer\include\wx\osx\mdi.h
 
-1687736241 d:\c++\westseer\include\wx\qt\mdi.h
+1688155981 d:\c++\westseer\include\wx\qt\mdi.h
 
-1687736241 d:\c++\westseer\include\wx\ffile.h
+1688155980 d:\c++\westseer\include\wx\ffile.h
 	"wx/defs.h"
 	"wx/string.h"
 	"wx/filefn.h"
 	"wx/convauto.h"
 	<stdio.h>
 
-1687736241 d:\c++\westseer\include\wx\stdpaths.h
+1688155981 d:\c++\westseer\include\wx\stdpaths.h
 	"wx/defs.h"
 	"wx/string.h"
 	"wx/filefn.h"
@@ -2702,16 +2702,16 @@
 	"wx/osx/cocoa/stdpaths.h"
 	"wx/unix/stdpaths.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\stdpaths.h
+1688155980 d:\c++\westseer\include\wx\msw\stdpaths.h
 
-1687736241 d:\c++\westseer\include\wx\osx\cocoa\stdpaths.h
+1688155980 d:\c++\westseer\include\wx\osx\cocoa\stdpaths.h
 
-1687736241 d:\c++\westseer\include\wx\unix\stdpaths.h
+1688155981 d:\c++\westseer\include\wx\unix\stdpaths.h
 
-1687918808 d:\c++\westseer\include\generalconfig.h
+1688155980 d:\c++\westseer\include\generalconfig.h
 	<string>
 
-1687918746 d:\c++\westseer\settingsdialog.h
+1688155980 d:\c++\westseer\settingsdialog.h
 	<wx/button.h>
 	<wx/dialog.h>
 	<wx/notebook.h>
@@ -2721,7 +2721,7 @@
 	<wx/stattext.h>
 	<wx/textctrl.h>
 
-1687736241 d:\c++\westseer\include\wx\notebook.h
+1688155980 d:\c++\westseer\include\wx\notebook.h
 	"wx/defs.h"
 	"wx/bookctrl.h"
 	"wx/univ/notebook.h"
@@ -2732,7 +2732,7 @@
 	"wx/osx/notebook.h"
 	"wx/qt/notebook.h"
 
-1687736241 d:\c++\westseer\include\wx\bookctrl.h
+1688155980 d:\c++\westseer\include\wx\bookctrl.h
 	"wx/defs.h"
 	"wx/control.h"
 	"wx/vector.h"
@@ -2740,34 +2740,34 @@
 	"wx/notebook.h"
 	"wx/choicebk.h"
 
-1687736241 d:\c++\westseer\include\wx\choicebk.h
+1688155980 d:\c++\westseer\include\wx\choicebk.h
 	"wx/defs.h"
 	"wx/bookctrl.h"
 	"wx/choice.h"
 	"wx/containr.h"
 
-1687736241 d:\c++\westseer\include\wx\univ\notebook.h
+1688155981 d:\c++\westseer\include\wx\univ\notebook.h
 	"wx/arrstr.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\notebook.h
+1688155980 d:\c++\westseer\include\wx\msw\notebook.h
 	"wx/control.h"
 
-1687736241 d:\c++\westseer\include\wx\generic\notebook.h
+1688155980 d:\c++\westseer\include\wx\generic\notebook.h
 	"wx/event.h"
 	"wx/control.h"
 
-1687736241 d:\c++\westseer\include\wx\gtk\notebook.h
+1688155980 d:\c++\westseer\include\wx\gtk\notebook.h
 	"wx/list.h"
 
-1687736241 d:\c++\westseer\include\wx\gtk1\notebook.h
+1688155980 d:\c++\westseer\include\wx\gtk1\notebook.h
 	"wx/list.h"
 
-1687736241 d:\c++\westseer\include\wx\osx\notebook.h
+1688155980 d:\c++\westseer\include\wx\osx\notebook.h
 	"wx/event.h"
 
-1687736241 d:\c++\westseer\include\wx\qt\notebook.h
+1688155981 d:\c++\westseer\include\wx\qt\notebook.h
 
-1687736241 d:\c++\westseer\include\wx\spinctrl.h
+1688155981 d:\c++\westseer\include\wx\spinctrl.h
 	"wx/defs.h"
 	"wx/spinbutt.h"
 	"wx/msw/spinctrl.h"
@@ -2776,7 +2776,7 @@
 	"wx/qt/spinctrl.h"
 	"wx/generic/spinctlg.h"
 
-1687736241 d:\c++\westseer\include\wx\spinbutt.h
+1688155981 d:\c++\westseer\include\wx\spinbutt.h
 	"wx/defs.h"
 	"wx/control.h"
 	"wx/event.h"
@@ -2789,46 +2789,46 @@
 	"wx/osx/spinbutt.h"
 	"wx/qt/spinbutt.h"
 
-1687736241 d:\c++\westseer\include\wx\range.h
+1688155981 d:\c++\westseer\include\wx\range.h
 	"wx/defs.h"
 
-1687736241 d:\c++\westseer\include\wx\univ\spinbutt.h
+1688155981 d:\c++\westseer\include\wx\univ\spinbutt.h
 	"wx/univ/scrarrow.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\spinbutt.h
+1688155980 d:\c++\westseer\include\wx\msw\spinbutt.h
 	"wx/control.h"
 	"wx/event.h"
 
-1687736241 d:\c++\westseer\include\wx\motif\spinbutt.h
+1688155980 d:\c++\westseer\include\wx\motif\spinbutt.h
 
-1687736241 d:\c++\westseer\include\wx\gtk\spinbutt.h
+1688155980 d:\c++\westseer\include\wx\gtk\spinbutt.h
 
-1687736241 d:\c++\westseer\include\wx\gtk1\spinbutt.h
+1688155980 d:\c++\westseer\include\wx\gtk1\spinbutt.h
 
-1687736241 d:\c++\westseer\include\wx\osx\spinbutt.h
+1688155980 d:\c++\westseer\include\wx\osx\spinbutt.h
 	"wx/control.h"
 	"wx/event.h"
 
-1687736241 d:\c++\westseer\include\wx\qt\spinbutt.h
+1688155981 d:\c++\westseer\include\wx\qt\spinbutt.h
 	"wx/spinbutt.h"
 
-1687736241 d:\c++\westseer\include\wx\msw\spinctrl.h
+1688155980 d:\c++\westseer\include\wx\msw\spinctrl.h
 	"wx/spinbutt.h"
 	"wx/dynarray.h"
 
-1687736241 d:\c++\westseer\include\wx\gtk\spinctrl.h
+1688155980 d:\c++\westseer\include\wx\gtk\spinctrl.h
 
-1687736241 d:\c++\westseer\include\wx\gtk1\spinctrl.h
+1688155980 d:\c++\westseer\include\wx\gtk1\spinctrl.h
 	"wx/defs.h"
 	"wx/control.h"
 
-1687736241 d:\c++\westseer\include\wx\qt\spinctrl.h
+1688155981 d:\c++\westseer\include\wx\qt\spinctrl.h
 
-1687736241 d:\c++\westseer\include\wx\generic\spinctlg.h
+1688155980 d:\c++\westseer\include\wx\generic\spinctlg.h
 	"wx/compositewin.h"
 	"wx/textctrl.h"
 
-1687951102 d:\c++\westseer\westseermain.h
+1688162670 d:\c++\westseer\westseermain.h
 	<wx/button.h>
 	<wx/choice.h>
 	<wx/frame.h>
@@ -2852,7 +2852,7 @@
 	<PredictionModel.h>
 	<MetricModel.h>
 
-1687736241 source:d:\c++\westseer\logdialog.cpp
+1688155980 source:d:\c++\westseer\logdialog.cpp
 	"LogDialog.h"
 	"WESTSeerApp.h"
 	<GeneralConfig.h>
@@ -2860,7 +2860,7 @@
 	<wx/intl.h>
 	<wx/string.h>
 
-1687736241 d:\c++\westseer\logdialog.h
+1688155980 d:\c++\westseer\logdialog.h
 	<wx/button.h>
 	<wx/dialog.h>
 	<wx/listctrl.h>
@@ -2868,7 +2868,7 @@
 	<wx/stattext.h>
 	<wx/textctrl.h>
 
-1687736241 source:d:\c++\westseer\openaleximportdialog.cpp
+1688155980 source:d:\c++\westseer\openaleximportdialog.cpp
 	"OpenAlexImportDialog.h"
 	<EmailValidator.h>
 	<GeneralConfig.h>
@@ -2876,7 +2876,7 @@
 	<wx/intl.h>
 	<wx/string.h>
 
-1687736241 d:\c++\westseer\openaleximportdialog.h
+1688155980 d:\c++\westseer\openaleximportdialog.h
 	<ProgressReporter.h>
 	<Publication.h>
 	<vector>
@@ -2890,9 +2890,9 @@
 	<wx/stattext.h>
 	<wx/textctrl.h>
 
-1687736241 d:\c++\westseer\include\progressreporter.h
+1688155980 d:\c++\westseer\include\progressreporter.h
 
-1687736241 d:\c++\westseer\include\publication.h
+1688155980 d:\c++\westseer\include\publication.h
 	<string>
 	<vector>
 	<set>
@@ -2901,7 +2901,7 @@
 	<sqlite3.h>
 	<wx/string.h>
 
-1687736241 d:\c++\westseer\include\nlohmann\json.hpp
+1688155980 d:\c++\westseer\include\nlohmann\json.hpp
 	<algorithm>
 	<cstddef>
 	<functional>
@@ -2945,16 +2945,16 @@
 	<string_view>
 	<nlohmann/detail/macro_unscope.hpp>
 
-1687736241 d:\c++\westseer\include\nlohmann\adl_serializer.hpp
+1688155980 d:\c++\westseer\include\nlohmann\adl_serializer.hpp
 	<utility>
 	<nlohmann/detail/abi_macros.hpp>
 	<nlohmann/detail/conversions/from_json.hpp>
 	<nlohmann/detail/conversions/to_json.hpp>
 	<nlohmann/detail/meta/identity_tag.hpp>
 
-1687736241 d:\c++\westseer\include\nlohmann\detail\abi_macros.hpp
+1688155980 d:\c++\westseer\include\nlohmann\detail\abi_macros.hpp
 
-1687736241 d:\c++\westseer\include\nlohmann\detail\conversions\from_json.hpp
+1688155980 d:\c++\westseer\include\nlohmann\detail\conversions\from_json.hpp
 	<algorithm>
 	<array>
 	<forward_list>
@@ -2975,7 +2975,7 @@
 	<nlohmann/detail/string_concat.hpp>
 	<nlohmann/detail/value_t.hpp>
 
-1687736241 d:\c++\westseer\include\nlohmann\detail\exceptions.hpp
+1688155980 d:\c++\westseer\include\nlohmann\detail\exceptions.hpp
 	<cstddef>
 	<exception>
 	<numeric>
@@ -2990,7 +2990,7 @@
 	<nlohmann/detail/meta/type_traits.hpp>
 	<nlohmann/detail/string_concat.hpp>
 
-1687736241 d:\c++\westseer\include\nlohmann\detail\value_t.hpp
+1688155980 d:\c++\westseer\include\nlohmann\detail\value_t.hpp
 	<array>
 	<cstddef>
 	<cstdint>
@@ -2998,7 +2998,7 @@
 	<nlohmann/detail/macro_scope.hpp>
 	<compare>
 
-1687736241 d:\c++\westseer\include\nlohmann\detail\macro_scope.hpp
+1688155980 d:\c++\westseer\include\nlohmann\detail\macro_scope.hpp
 	<utility>
 	<nlohmann/detail/meta/detected.hpp>
 	<nlohmann/thirdparty/hedley/hedley.hpp>
@@ -3007,32 +3007,32 @@
 	<cstdlib>
 	<cassert>
 
-1687736241 d:\c++\westseer\include\nlohmann\detail\meta\detected.hpp
+1688155980 d:\c++\westseer\include\nlohmann\detail\meta\detected.hpp
 	<type_traits>
 	<nlohmann/detail/meta/void_t.hpp>
 
-1687736241 d:\c++\westseer\include\nlohmann\detail\meta\void_t.hpp
+1688155980 d:\c++\westseer\include\nlohmann\detail\meta\void_t.hpp
 	<nlohmann/detail/abi_macros.hpp>
 
-1687736241 d:\c++\westseer\include\nlohmann\thirdparty\hedley\hedley.hpp
+1688155980 d:\c++\westseer\include\nlohmann\thirdparty\hedley\hedley.hpp
 	<stdint.h>
 	<stdint.h>
 
-1687736241 d:\c++\westseer\include\nlohmann\detail\string_escape.hpp
+1688155980 d:\c++\westseer\include\nlohmann\detail\string_escape.hpp
 	<nlohmann/detail/abi_macros.hpp>
 
-1687736241 d:\c++\westseer\include\nlohmann\detail\input\position_t.hpp
+1688155980 d:\c++\westseer\include\nlohmann\detail\input\position_t.hpp
 	<cstddef>
 	<nlohmann/detail/abi_macros.hpp>
 
-1687736241 d:\c++\westseer\include\nlohmann\detail\meta\cpp_future.hpp
+1688155980 d:\c++\westseer\include\nlohmann\detail\meta\cpp_future.hpp
 	<array>
 	<cstddef>
 	<type_traits>
 	<utility>
 	<nlohmann/detail/macro_scope.hpp>
 
-1687736241 d:\c++\westseer\include\nlohmann\detail\meta\type_traits.hpp
+1688155980 d:\c++\westseer\include\nlohmann\detail\meta\type_traits.hpp
 	<limits>
 	<type_traits>
 	<utility>
@@ -3045,19 +3045,19 @@
 	<nlohmann/detail/meta/detected.hpp>
 	<nlohmann/json_fwd.hpp>
 
-1687736241 d:\c++\westseer\include\nlohmann\detail\iterators\iterator_traits.hpp
+1688155980 d:\c++\westseer\include\nlohmann\detail\iterators\iterator_traits.hpp
 	<iterator>
 	<nlohmann/detail/abi_macros.hpp>
 	<nlohmann/detail/meta/void_t.hpp>
 	<nlohmann/detail/meta/cpp_future.hpp>
 
-1687736241 d:\c++\westseer\include\nlohmann\detail\meta\call_std\begin.hpp
+1688155980 d:\c++\westseer\include\nlohmann\detail\meta\call_std\begin.hpp
 	<nlohmann/detail/macro_scope.hpp>
 
-1687736241 d:\c++\westseer\include\nlohmann\detail\meta\call_std\end.hpp
+1688155980 d:\c++\westseer\include\nlohmann\detail\meta\call_std\end.hpp
 	<nlohmann/detail/macro_scope.hpp>
 
-1687736241 d:\c++\westseer\include\nlohmann\json_fwd.hpp
+1688155980 d:\c++\westseer\include\nlohmann\json_fwd.hpp
 	<cstdint>
 	<map>
 	<memory>
@@ -3065,22 +3065,22 @@
 	<vector>
 	<nlohmann/detail/abi_macros.hpp>
 
-1687736241 d:\c++\westseer\include\nlohmann\detail\string_concat.hpp
+1688155980 d:\c++\westseer\include\nlohmann\detail\string_concat.hpp
 	<cstring>
 	<string>
 	<utility>
 	<nlohmann/detail/meta/cpp_future.hpp>
 	<nlohmann/detail/meta/detected.hpp>
 
-1687736241 d:\c++\westseer\include\nlohmann\detail\meta\identity_tag.hpp
+1688155980 d:\c++\westseer\include\nlohmann\detail\meta\identity_tag.hpp
 	<nlohmann/detail/abi_macros.hpp>
 
-1687736241 d:\c++\westseer\include\nlohmann\detail\meta\std_fs.hpp
+1688155980 d:\c++\westseer\include\nlohmann\detail\meta\std_fs.hpp
 	<nlohmann/detail/macro_scope.hpp>
 	<experimental/filesystem>
 	<filesystem>
 
-1687736241 d:\c++\westseer\include\nlohmann\detail\conversions\to_json.hpp
+1688155980 d:\c++\westseer\include\nlohmann\detail\conversions\to_json.hpp
 	<algorithm>
 	<iterator>
 	<string>
@@ -3096,7 +3096,7 @@
 	<nlohmann/detail/meta/type_traits.hpp>
 	<nlohmann/detail/value_t.hpp>
 
-1687736241 d:\c++\westseer\include\nlohmann\detail\iterators\iteration_proxy.hpp
+1688155980 d:\c++\westseer\include\nlohmann\detail\iterators\iteration_proxy.hpp
 	<cstddef>
 	<iterator>
 	<string>
@@ -3107,20 +3107,20 @@
 	<nlohmann/detail/meta/type_traits.hpp>
 	<nlohmann/detail/value_t.hpp>
 
-1687736241 d:\c++\westseer\include\nlohmann\byte_container_with_subtype.hpp
+1688155980 d:\c++\westseer\include\nlohmann\byte_container_with_subtype.hpp
 	<cstdint>
 	<tuple>
 	<utility>
 	<nlohmann/detail/abi_macros.hpp>
 
-1687736241 d:\c++\westseer\include\nlohmann\detail\hash.hpp
+1688155980 d:\c++\westseer\include\nlohmann\detail\hash.hpp
 	<cstdint>
 	<cstddef>
 	<functional>
 	<nlohmann/detail/abi_macros.hpp>
 	<nlohmann/detail/value_t.hpp>
 
-1687736241 d:\c++\westseer\include\nlohmann\detail\input\binary_reader.hpp
+1688155980 d:\c++\westseer\include\nlohmann\detail\input\binary_reader.hpp
 	<algorithm>
 	<array>
 	<cmath>
@@ -3143,7 +3143,7 @@
 	<nlohmann/detail/string_concat.hpp>
 	<nlohmann/detail/value_t.hpp>
 
-1687736241 d:\c++\westseer\include\nlohmann\detail\input\input_adapters.hpp
+1688155980 d:\c++\westseer\include\nlohmann\detail\input\input_adapters.hpp
 	<array>
 	<cstddef>
 	<cstring>
@@ -3158,7 +3158,7 @@
 	<nlohmann/detail/iterators/iterator_traits.hpp>
 	<nlohmann/detail/macro_scope.hpp>
 
-1687736241 d:\c++\westseer\include\nlohmann\detail\input\json_sax.hpp
+1688155980 d:\c++\westseer\include\nlohmann\detail\input\json_sax.hpp
 	<cstddef>
 	<string>
 	<utility>
@@ -3167,7 +3167,7 @@
 	<nlohmann/detail/macro_scope.hpp>
 	<nlohmann/detail/string_concat.hpp>
 
-1687736241 d:\c++\westseer\include\nlohmann\detail\input\lexer.hpp
+1688155980 d:\c++\westseer\include\nlohmann\detail\input\lexer.hpp
 	<array>
 	<clocale>
 	<cstddef>
@@ -3181,7 +3181,7 @@
 	<nlohmann/detail/input/position_t.hpp>
 	<nlohmann/detail/macro_scope.hpp>
 
-1687736241 d:\c++\westseer\include\nlohmann\detail\meta\is_sax.hpp
+1688155980 d:\c++\westseer\include\nlohmann\detail\meta\is_sax.hpp
 	<cstdint>
 	<utility>
 	<string>
@@ -3189,7 +3189,7 @@
 	<nlohmann/detail/meta/detected.hpp>
 	<nlohmann/detail/meta/type_traits.hpp>
 
-1687736241 d:\c++\westseer\include\nlohmann\detail\input\parser.hpp
+1688155980 d:\c++\westseer\include\nlohmann\detail\input\parser.hpp
 	<cmath>
 	<cstdint>
 	<functional>
@@ -3205,16 +3205,16 @@
 	<nlohmann/detail/string_concat.hpp>
 	<nlohmann/detail/value_t.hpp>
 
-1687736241 d:\c++\westseer\include\nlohmann\detail\iterators\internal_iterator.hpp
+1688155980 d:\c++\westseer\include\nlohmann\detail\iterators\internal_iterator.hpp
 	<nlohmann/detail/abi_macros.hpp>
 	<nlohmann/detail/iterators/primitive_iterator.hpp>
 
-1687736241 d:\c++\westseer\include\nlohmann\detail\iterators\primitive_iterator.hpp
+1688155980 d:\c++\westseer\include\nlohmann\detail\iterators\primitive_iterator.hpp
 	<cstddef>
 	<limits>
 	<nlohmann/detail/macro_scope.hpp>
 
-1687736241 d:\c++\westseer\include\nlohmann\detail\iterators\iter_impl.hpp
+1688155980 d:\c++\westseer\include\nlohmann\detail\iterators\iter_impl.hpp
 	<iterator>
 	<type_traits>
 	<nlohmann/detail/exceptions.hpp>
@@ -3225,17 +3225,17 @@
 	<nlohmann/detail/meta/type_traits.hpp>
 	<nlohmann/detail/value_t.hpp>
 
-1687736241 d:\c++\westseer\include\nlohmann\detail\iterators\json_reverse_iterator.hpp
+1688155980 d:\c++\westseer\include\nlohmann\detail\iterators\json_reverse_iterator.hpp
 	<cstddef>
 	<iterator>
 	<utility>
 	<nlohmann/detail/abi_macros.hpp>
 
-1687736241 d:\c++\westseer\include\nlohmann\detail\json_custom_base_class.hpp
+1688155980 d:\c++\westseer\include\nlohmann\detail\json_custom_base_class.hpp
 	<type_traits>
 	<nlohmann/detail/abi_macros.hpp>
 
-1687736241 d:\c++\westseer\include\nlohmann\detail\json_pointer.hpp
+1688155980 d:\c++\westseer\include\nlohmann\detail\json_pointer.hpp
 	<algorithm>
 	<cctype>
 	<cerrno>
@@ -3252,13 +3252,13 @@
 	<nlohmann/detail/string_escape.hpp>
 	<nlohmann/detail/value_t.hpp>
 
-1687736241 d:\c++\westseer\include\nlohmann\detail\json_ref.hpp
+1688155980 d:\c++\westseer\include\nlohmann\detail\json_ref.hpp
 	<initializer_list>
 	<utility>
 	<nlohmann/detail/abi_macros.hpp>
 	<nlohmann/detail/meta/type_traits.hpp>
 
-1687736241 d:\c++\westseer\include\nlohmann\detail\output\binary_writer.hpp
+1688155980 d:\c++\westseer\include\nlohmann\detail\output\binary_writer.hpp
 	<algorithm>
 	<array>
 	<map>
@@ -3274,7 +3274,7 @@
 	<nlohmann/detail/output/output_adapters.hpp>
 	<nlohmann/detail/string_concat.hpp>
 
-1687736241 d:\c++\westseer\include\nlohmann\detail\output\output_adapters.hpp
+1688155980 d:\c++\westseer\include\nlohmann\detail\output\output_adapters.hpp
 	<algorithm>
 	<cstddef>
 	<iterator>
@@ -3285,7 +3285,7 @@
 	<ostream>
 	<nlohmann/detail/macro_scope.hpp>
 
-1687736241 d:\c++\westseer\include\nlohmann\detail\output\serializer.hpp
+1688155980 d:\c++\westseer\include\nlohmann\detail\output\serializer.hpp
 	<algorithm>
 	<array>
 	<clocale>
@@ -3307,7 +3307,7 @@
 	<nlohmann/detail/string_concat.hpp>
 	<nlohmann/detail/value_t.hpp>
 
-1687736241 d:\c++\westseer\include\nlohmann\detail\conversions\to_chars.hpp
+1688155980 d:\c++\westseer\include\nlohmann\detail\conversions\to_chars.hpp
 	<array>
 	<cmath>
 	<cstdint>
@@ -3316,7 +3316,7 @@
 	<type_traits>
 	<nlohmann/detail/macro_scope.hpp>
 
-1687736241 d:\c++\westseer\include\nlohmann\ordered_map.hpp
+1688155980 d:\c++\westseer\include\nlohmann\ordered_map.hpp
 	<functional>
 	<initializer_list>
 	<iterator>
@@ -3328,18 +3328,18 @@
 	<nlohmann/detail/macro_scope.hpp>
 	<nlohmann/detail/meta/type_traits.hpp>
 
-1687736241 d:\c++\westseer\include\nlohmann\detail\macro_unscope.hpp
+1688155980 d:\c++\westseer\include\nlohmann\detail\macro_unscope.hpp
 	<nlohmann/thirdparty/hedley/hedley_undef.hpp>
 
-1687736241 d:\c++\westseer\include\nlohmann\thirdparty\hedley\hedley_undef.hpp
+1688155980 d:\c++\westseer\include\nlohmann\thirdparty\hedley\hedley_undef.hpp
 
-1687736241 d:\c++\westseer\include\sqlite3.h
+1688155980 d:\c++\westseer\include\sqlite3.h
 	<stdarg.h>
 
-1687736241 d:\c++\westseer\include\emailvalidator.h
+1688155980 d:\c++\westseer\include\emailvalidator.h
 	<string>
 
-1687918898 source:d:\c++\westseer\settingsdialog.cpp
+1688155980 source:d:\c++\westseer\settingsdialog.cpp
 	"SettingsDialog.h"
 	<EmailValidator.h>
 	<wx/stdpaths.h>
@@ -3351,7 +3351,7 @@
 	<wx/intl.h>
 	<wx/string.h>
 
-1687736241 source:d:\c++\westseer\sqldialog.cpp
+1688155980 source:d:\c++\westseer\sqldialog.cpp
 	"SQLDialog.h"
 	<algorithm>
 	<stdexcept>
@@ -3367,7 +3367,7 @@
 	<wx/intl.h>
 	<wx/string.h>
 
-1687736241 d:\c++\westseer\sqldialog.h
+1688155980 d:\c++\westseer\sqldialog.h
 	<wx/button.h>
 	<wx/dialog.h>
 	<wx/listctrl.h>
@@ -3375,10 +3375,10 @@
 	<wx/stattext.h>
 	<wx/textctrl.h>
 
-1687736243 source:d:\c++\westseer\src\emailvalidator.cpp
+1688155981 source:d:\c++\westseer\src\emailvalidator.cpp
 	"EmailValidator.h"
 
-1687919139 source:d:\c++\westseer\src\openalex.cpp
+1688155981 source:d:\c++\westseer\src\openalex.cpp
 	<OpenAlex.h>
 	<../WESTSeerApp.h>
 	<StringProcessing.h>
@@ -3390,7 +3390,7 @@
 	<algorithm>
 	<httplib.h>
 
-1687736241 d:\c++\westseer\include\openalex.h
+1688155980 d:\c++\westseer\include\openalex.h
 	<string>
 	<vector>
 	<map>
@@ -3401,19 +3401,19 @@
 	<ResearchScope.h>
 	<ProgressReporter.h>
 
-1687933812 d:\c++\westseer\include\researchscope.h
+1688161665 d:\c++\westseer\include\researchscope.h
 	<cstdint>
 	<string>
 	<vector>
 	<map>
 	<Publication.h>
 
-1687915803 d:\c++\westseer\include\stringprocessing.h
+1688160887 d:\c++\westseer\include\stringprocessing.h
 	<string>
 	<vector>
 	<wx/string.h>
 
-1687736241 d:\c++\westseer\include\httplib.h
+1688155980 d:\c++\westseer\include\httplib.h
 	<io.h>
 	<winsock2.h>
 	<ws2tcpip.h>
@@ -3472,17 +3472,17 @@
 	<brotli/decode.h>
 	<brotli/encode.h>
 
-1687736243 source:d:\c++\westseer\src\progressreporter.cpp
+1688155981 source:d:\c++\westseer\src\progressreporter.cpp
 	"ProgressReporter.h"
 
-1687944204 source:d:\c++\westseer\src\publication.cpp
+1688155981 source:d:\c++\westseer\src\publication.cpp
 	"Publication.h"
 	"StringProcessing.h"
 	<sstream>
 	<map>
 	<cassert>
 
-1687942982 source:d:\c++\westseer\src\researchscope.cpp
+1688162617 source:d:\c++\westseer\src\researchscope.cpp
 	"ResearchScope.h"
 	<algorithm>
 	<stdexcept>
@@ -3497,7 +3497,7 @@
 	<BitermWeight.h>
 	<TopicIdentification.h>
 
-1687736243 source:d:\c++\westseer\src\sqlite3.c
+1688155981 source:d:\c++\westseer\src\sqlite3.c
 	<vxWorks.h>
 	<pthread.h>
 	"mingw.h"
@@ -3559,19 +3559,21 @@
 	<unicode/utf16.h>
 	<math.h>
 
-1687736243 source:d:\c++\westseer\src\stopwords.cpp
+1688155981 source:d:\c++\westseer\src\stopwords.cpp
 	"StopWords.h"
 
-1687736241 d:\c++\westseer\include\stopwords.h
+1688155980 d:\c++\westseer\include\stopwords.h
 
-1687915761 source:d:\c++\westseer\src\stringprocessing.cpp
+1688160665 source:d:\c++\westseer\src\stringprocessing.cpp
 	<StringProcessing.h>
 	<algorithm>
 	<cstring>
 	<regex>
 	<map>
+	<set>
+	<porter2_stemmer.h>
 
-1687951612 source:d:\c++\westseer\westseermain.cpp
+1688162807 source:d:\c++\westseer\westseermain.cpp
 	"WESTSeerMain.h"
 	"WESTSeerApp.h"
 	"OpenAlexImportDialog.h"
@@ -3579,6 +3581,7 @@
 	"SQLDialog.h"
 	"LogDialog.h"
 	<GeneralConfig.h>
+	<StringProcessing.h>
 	<wx/msgdlg.h>
 	<wx/stdpaths.h>
 	<wx/filedlg.h>
@@ -3590,21 +3593,21 @@
 	<wx/intl.h>
 	<wx/string.h>
 
-1687918824 source:d:\c++\westseer\src\generalconfig.cpp
+1688155981 source:d:\c++\westseer\src\generalconfig.cpp
 	"GeneralConfig.h"
 	"../WESTSeerApp.h"
 
-1687736243 source:d:\c++\westseer\src\neuralnetworkconfig.cpp
+1688155981 source:d:\c++\westseer\src\neuralnetworkconfig.cpp
 	"NeuralNetworkConfig.h"
 	"../WESTSeerApp.h"
 
-1687736241 d:\c++\westseer\include\neuralnetworkconfig.h
+1688155980 d:\c++\westseer\include\neuralnetworkconfig.h
 
-1687736243 source:d:\c++\westseer\src\llmconfig.cpp
+1688155981 source:d:\c++\westseer\src\llmconfig.cpp
 	"LLMConfig.h"
 	"../WESTSeerApp.h"
 
-1687736241 d:\c++\westseer\include\llmconfig.h
+1688155980 d:\c++\westseer\include\llmconfig.h
 
 1686708998 source:d:\c++\westseer\src\scopehistory.cpp
 	"ScopeHistory.h"
@@ -3614,74 +3617,74 @@
 	<string>
 	<vector>
 
-1687736241 d:\c++\westseer\include\callbackdata.h
+1688155980 d:\c++\westseer\include\callbackdata.h
 	<string>
 	<vector>
 	<map>
 
-1687736243 source:d:\c++\westseer\src\callbackdata.cpp
+1688155981 source:d:\c++\westseer\src\callbackdata.cpp
 	"CallbackData.h"
 
-1687736243 source:d:\c++\westseer\src\abstracttask.cpp
+1688155981 source:d:\c++\westseer\src\abstracttask.cpp
 	"AbstractTask.h"
 
-1687736241 d:\c++\westseer\include\abstracttask.h
+1688155980 d:\c++\westseer\include\abstracttask.h
 	<cstdlib>
 	<thread>
 	<atomic>
 	<ProgressReporter.h>
 
-1687736243 source:d:\c++\westseer\src\stopwordmatcher.cpp
+1688155981 source:d:\c++\westseer\src\stopwordmatcher.cpp
 	"StopWordMatcher.h"
 	<StopWords.h>
 	<StringProcessing.h>
 	<ctype.h>
 
-1687736241 d:\c++\westseer\include\stopwordmatcher.h
+1688155980 d:\c++\westseer\include\stopwordmatcher.h
 	<AbstractMatcher.h>
 
-1687736243 source:d:\c++\westseer\src\abstractmatcher.cpp
+1688155981 source:d:\c++\westseer\src\abstractmatcher.cpp
 	"AbstractMatcher.h"
 	<sstream>
 
-1687736241 d:\c++\westseer\include\abstractmatcher.h
+1688155980 d:\c++\westseer\include\abstractmatcher.h
 	<string>
 	<vector>
 	<map>
 
-1687736243 source:d:\c++\westseer\src\matcher.cpp
+1688155981 source:d:\c++\westseer\src\matcher.cpp
 	"Matcher.h"
 	<StringProcessing.h>
 	<porter2_stemmer.h>
 
-1687736241 d:\c++\westseer\include\matcher.h
+1688155980 d:\c++\westseer\include\matcher.h
 	<AbstractMatcher.h>
 
-1687736241 d:\c++\westseer\include\porter2_stemmer.h
+1688155980 d:\c++\westseer\include\porter2_stemmer.h
 	<vector>
 	<string>
 	"util/string_view.h"
 
-1687736241 d:\c++\westseer\include\util\string_view.h
+1688155980 d:\c++\westseer\include\util\string_view.h
 	"util/hash.h"
 	<experimental/string_view>
 	<algorithm>
 	<stdexcept>
 	<string>
 
-1687736241 d:\c++\westseer\include\util\hash.h
+1688155980 d:\c++\westseer\include\util\hash.h
 	<array>
 	<cassert>
 	<cstdint>
 	<random>
 
-1687736243 source:d:\c++\westseer\src\porter2_stemmer.cpp
+1688155981 source:d:\c++\westseer\src\porter2_stemmer.cpp
 	<algorithm>
 	<utility>
 	<unordered_map>
 	"porter2_stemmer.h"
 
-1687919047 source:d:\c++\westseer\src\termextraction.cpp
+1688155981 source:d:\c++\westseer\src\termextraction.cpp
 	"TermExtraction.h"
 	<../WESTSeerApp.h>
 	<StringProcessing.h>
@@ -3697,7 +3700,7 @@
 	<mutex>
 	<queue>
 
-1687736241 d:\c++\westseer\include\termextraction.h
+1688155980 d:\c++\westseer\include\termextraction.h
 	<AbstractTask.h>
 	<ResearchScope.h>
 	<map>
@@ -3707,7 +3710,7 @@
 	<StopWordMatcher.h>
 	<Matcher.h>
 
-1687919060 source:d:\c++\westseer\src\termtfirdf.cpp
+1688155981 source:d:\c++\westseer\src\termtfirdf.cpp
 	"TermTfIrdf.h"
 	<../WESTSeerApp.h>
 	<GeneralConfig.h>
@@ -3722,13 +3725,13 @@
 	<mutex>
 	<queue>
 
-1687736241 d:\c++\westseer\include\termtfirdf.h
+1688155980 d:\c++\westseer\include\termtfirdf.h
 	<AbstractTask.h>
 	<TermExtraction.h>
 	<string>
 	<map>
 
-1687736241 d:\c++\westseer\include\openssl\err.h
+1688155980 d:\c++\westseer\include\openssl\err.h
 	<openssl/e_os2.h>
 	<stdio.h>
 	<stdlib.h>
@@ -3737,28 +3740,28 @@
 	<openssl/lhash.h>
 	<errno.h>
 
-1687736241 d:\c++\westseer\include\openssl\e_os2.h
+1688155980 d:\c++\westseer\include\openssl\e_os2.h
 	<openssl/opensslconf.h>
 	<inttypes.h>
 	<stdint.h>
 
-1687736241 d:\c++\westseer\include\openssl\opensslconf.h
+1688155980 d:\c++\westseer\include\openssl\opensslconf.h
 	<openssl/opensslv.h>
 
-1687736241 d:\c++\westseer\include\openssl\opensslv.h
+1688155980 d:\c++\westseer\include\openssl\opensslv.h
 
-1687736241 d:\c++\westseer\include\openssl\ossl_typ.h
+1688155980 d:\c++\westseer\include\openssl\ossl_typ.h
 	<limits.h>
 	<openssl/e_os2.h>
 
-1687736241 d:\c++\westseer\include\openssl\bio.h
+1688155980 d:\c++\westseer\include\openssl\bio.h
 	<openssl/e_os2.h>
 	<stdio.h>
 	<stdarg.h>
 	<openssl/crypto.h>
 	<openssl/bioerr.h>
 
-1687736241 d:\c++\westseer\include\openssl\crypto.h
+1688155980 d:\c++\westseer\include\openssl\crypto.h
 	<stdlib.h>
 	<time.h>
 	<openssl/e_os2.h>
@@ -3773,29 +3776,29 @@
 	<openssl/opensslv.h>
 	<pthread.h>
 
-1687736241 d:\c++\westseer\include\openssl\safestack.h
+1688155980 d:\c++\westseer\include\openssl\safestack.h
 	<openssl/stack.h>
 	<openssl/e_os2.h>
 
-1687736241 d:\c++\westseer\include\openssl\stack.h
+1688155980 d:\c++\westseer\include\openssl\stack.h
 
-1687736241 d:\c++\westseer\include\openssl\cryptoerr.h
+1688155980 d:\c++\westseer\include\openssl\cryptoerr.h
 	<openssl/symhacks.h>
 
-1687736241 d:\c++\westseer\include\openssl\symhacks.h
+1688155980 d:\c++\westseer\include\openssl\symhacks.h
 	<openssl/e_os2.h>
 
-1687736241 d:\c++\westseer\include\openssl\ebcdic.h
+1688155980 d:\c++\westseer\include\openssl\ebcdic.h
 	<stdlib.h>
 
-1687736241 d:\c++\westseer\include\openssl\bioerr.h
+1688155980 d:\c++\westseer\include\openssl\bioerr.h
 	<openssl/symhacks.h>
 
-1687736241 d:\c++\westseer\include\openssl\lhash.h
+1688155980 d:\c++\westseer\include\openssl\lhash.h
 	<openssl/e_os2.h>
 	<openssl/bio.h>
 
-1687736241 d:\c++\westseer\include\openssl\evp.h
+1688155980 d:\c++\westseer\include\openssl\evp.h
 	<openssl/opensslconf.h>
 	<openssl/ossl_typ.h>
 	<openssl/symhacks.h>
@@ -3803,18 +3806,18 @@
 	<openssl/evperr.h>
 	<openssl/objects.h>
 
-1687736241 d:\c++\westseer\include\openssl\evperr.h
+1688155980 d:\c++\westseer\include\openssl\evperr.h
 	<openssl/symhacks.h>
 
-1687736241 d:\c++\westseer\include\openssl\objects.h
+1688155980 d:\c++\westseer\include\openssl\objects.h
 	<openssl/obj_mac.h>
 	<openssl/bio.h>
 	<openssl/asn1.h>
 	<openssl/objectserr.h>
 
-1687736241 d:\c++\westseer\include\openssl\obj_mac.h
+1688155980 d:\c++\westseer\include\openssl\obj_mac.h
 
-1687736241 d:\c++\westseer\include\openssl\asn1.h
+1688155980 d:\c++\westseer\include\openssl\asn1.h
 	<time.h>
 	<openssl/e_os2.h>
 	<openssl/opensslconf.h>
@@ -3825,10 +3828,10 @@
 	<openssl/ossl_typ.h>
 	<openssl/bn.h>
 
-1687736241 d:\c++\westseer\include\openssl\asn1err.h
+1688155980 d:\c++\westseer\include\openssl\asn1err.h
 	<openssl/symhacks.h>
 
-1687736241 d:\c++\westseer\include\openssl\bn.h
+1688155980 d:\c++\westseer\include\openssl\bn.h
 	<openssl/e_os2.h>
 	<stdio.h>
 	<openssl/opensslconf.h>
@@ -3836,13 +3839,13 @@
 	<openssl/crypto.h>
 	<openssl/bnerr.h>
 
-1687736241 d:\c++\westseer\include\openssl\bnerr.h
+1688155980 d:\c++\westseer\include\openssl\bnerr.h
 	<openssl/symhacks.h>
 
-1687736241 d:\c++\westseer\include\openssl\objectserr.h
+1688155980 d:\c++\westseer\include\openssl\objectserr.h
 	<openssl/symhacks.h>
 
-1687736241 d:\c++\westseer\include\openssl\ssl.h
+1688155980 d:\c++\westseer\include\openssl\ssl.h
 	<openssl/e_os2.h>
 	<openssl/opensslconf.h>
 	<openssl/comp.h>
@@ -3864,16 +3867,16 @@
 	<openssl/dtls1.h>
 	<openssl/srtp.h>
 
-1687736241 d:\c++\westseer\include\openssl\comp.h
+1688155980 d:\c++\westseer\include\openssl\comp.h
 	<openssl/opensslconf.h>
 	<openssl/crypto.h>
 	<openssl/comperr.h>
 
-1687736241 d:\c++\westseer\include\openssl\comperr.h
+1688155980 d:\c++\westseer\include\openssl\comperr.h
 	<openssl/symhacks.h>
 	<openssl/opensslconf.h>
 
-1687736241 d:\c++\westseer\include\openssl\x509.h
+1688155980 d:\c++\westseer\include\openssl\x509.h
 	<openssl/e_os2.h>
 	<openssl/ossl_typ.h>
 	<openssl/symhacks.h>
@@ -3891,28 +3894,28 @@
 	<openssl/x509_vfy.h>
 	<openssl/pkcs7.h>
 
-1687736241 d:\c++\westseer\include\openssl\buffer.h
+1688155980 d:\c++\westseer\include\openssl\buffer.h
 	<openssl/ossl_typ.h>
 	<openssl/crypto.h>
 	<openssl/buffererr.h>
 	<stddef.h>
 	<sys/types.h>
 
-1687736241 d:\c++\westseer\include\openssl\buffererr.h
+1688155980 d:\c++\westseer\include\openssl\buffererr.h
 	<openssl/symhacks.h>
 
-1687736241 d:\c++\westseer\include\openssl\ec.h
+1688155980 d:\c++\westseer\include\openssl\ec.h
 	<openssl/opensslconf.h>
 	<openssl/asn1.h>
 	<openssl/symhacks.h>
 	<openssl/bn.h>
 	<openssl/ecerr.h>
 
-1687736241 d:\c++\westseer\include\openssl\ecerr.h
+1688155980 d:\c++\westseer\include\openssl\ecerr.h
 	<openssl/symhacks.h>
 	<openssl/opensslconf.h>
 
-1687736241 d:\c++\westseer\include\openssl\rsa.h
+1688155980 d:\c++\westseer\include\openssl\rsa.h
 	<openssl/opensslconf.h>
 	<openssl/asn1.h>
 	<openssl/bio.h>
@@ -3921,10 +3924,10 @@
 	<openssl/bn.h>
 	<openssl/rsaerr.h>
 
-1687736241 d:\c++\westseer\include\openssl\rsaerr.h
+1688155980 d:\c++\westseer\include\openssl\rsaerr.h
 	<openssl/symhacks.h>
 
-1687736241 d:\c++\westseer\include\openssl\dsa.h
+1688155980 d:\c++\westseer\include\openssl\dsa.h
 	<openssl/opensslconf.h>
 	<openssl/e_os2.h>
 	<openssl/bio.h>
@@ -3934,7 +3937,7 @@
 	<openssl/dh.h>
 	<openssl/dsaerr.h>
 
-1687736241 d:\c++\westseer\include\openssl\dh.h
+1688155980 d:\c++\westseer\include\openssl\dh.h
 	<openssl/opensslconf.h>
 	<openssl/e_os2.h>
 	<openssl/bio.h>
@@ -3943,22 +3946,22 @@
 	<openssl/bn.h>
 	<openssl/dherr.h>
 
-1687736241 d:\c++\westseer\include\openssl\dherr.h
+1688155980 d:\c++\westseer\include\openssl\dherr.h
 	<openssl/symhacks.h>
 	<openssl/opensslconf.h>
 
-1687736241 d:\c++\westseer\include\openssl\dsaerr.h
+1688155980 d:\c++\westseer\include\openssl\dsaerr.h
 	<openssl/symhacks.h>
 	<openssl/opensslconf.h>
 
-1687736241 d:\c++\westseer\include\openssl\sha.h
+1688155980 d:\c++\westseer\include\openssl\sha.h
 	<openssl/e_os2.h>
 	<stddef.h>
 
-1687736241 d:\c++\westseer\include\openssl\x509err.h
+1688155980 d:\c++\westseer\include\openssl\x509err.h
 	<openssl/symhacks.h>
 
-1687736241 d:\c++\westseer\include\openssl\x509_vfy.h
+1688155980 d:\c++\westseer\include\openssl\x509_vfy.h
 	<openssl/x509.h>
 	<openssl/opensslconf.h>
 	<openssl/lhash.h>
@@ -3966,7 +3969,7 @@
 	<openssl/crypto.h>
 	<openssl/symhacks.h>
 
-1687736241 d:\c++\westseer\include\openssl\pkcs7.h
+1688155980 d:\c++\westseer\include\openssl\pkcs7.h
 	<openssl/asn1.h>
 	<openssl/bio.h>
 	<openssl/e_os2.h>
@@ -3974,10 +3977,10 @@
 	<openssl/ossl_typ.h>
 	<openssl/pkcs7err.h>
 
-1687736241 d:\c++\westseer\include\openssl\pkcs7err.h
+1688155980 d:\c++\westseer\include\openssl\pkcs7err.h
 	<openssl/symhacks.h>
 
-1687736241 d:\c++\westseer\include\openssl\pem.h
+1688155980 d:\c++\westseer\include\openssl\pem.h
 	<openssl/e_os2.h>
 	<openssl/bio.h>
 	<openssl/safestack.h>
@@ -3986,58 +3989,58 @@
 	<openssl/pemerr.h>
 	<openssl/symhacks.h>
 
-1687736241 d:\c++\westseer\include\openssl\pemerr.h
+1688155980 d:\c++\westseer\include\openssl\pemerr.h
 	<openssl/symhacks.h>
 
-1687736241 d:\c++\westseer\include\openssl\hmac.h
+1688155980 d:\c++\westseer\include\openssl\hmac.h
 	<openssl/opensslconf.h>
 	<openssl/evp.h>
 
-1687736241 d:\c++\westseer\include\openssl\async.h
+1688155980 d:\c++\westseer\include\openssl\async.h
 	<stdlib.h>
 	<openssl/asyncerr.h>
 
-1687736241 d:\c++\westseer\include\openssl\asyncerr.h
+1688155980 d:\c++\westseer\include\openssl\asyncerr.h
 	<openssl/symhacks.h>
 
-1687736241 d:\c++\westseer\include\openssl\ct.h
+1688155980 d:\c++\westseer\include\openssl\ct.h
 	<openssl/opensslconf.h>
 	<openssl/ossl_typ.h>
 	<openssl/safestack.h>
 	<openssl/x509.h>
 	<openssl/cterr.h>
 
-1687736241 d:\c++\westseer\include\openssl\cterr.h
+1688155980 d:\c++\westseer\include\openssl\cterr.h
 	<openssl/symhacks.h>
 	<openssl/opensslconf.h>
 
-1687736241 d:\c++\westseer\include\openssl\sslerr.h
+1688155980 d:\c++\westseer\include\openssl\sslerr.h
 	<openssl/symhacks.h>
 
-1687736241 d:\c++\westseer\include\openssl\ssl2.h
+1688155980 d:\c++\westseer\include\openssl\ssl2.h
 
-1687736241 d:\c++\westseer\include\openssl\ssl3.h
+1688155980 d:\c++\westseer\include\openssl\ssl3.h
 	<openssl/comp.h>
 	<openssl/buffer.h>
 	<openssl/evp.h>
 	<openssl/ssl.h>
 
-1687736241 d:\c++\westseer\include\openssl\tls1.h
+1688155980 d:\c++\westseer\include\openssl\tls1.h
 	<openssl/buffer.h>
 	<openssl/x509.h>
 
-1687736241 d:\c++\westseer\include\openssl\dtls1.h
+1688155980 d:\c++\westseer\include\openssl\dtls1.h
 
-1687736241 d:\c++\westseer\include\openssl\srtp.h
+1688155980 d:\c++\westseer\include\openssl\srtp.h
 	<openssl/ssl.h>
 
-1687736241 d:\c++\westseer\include\openssl\x509v3.h
+1688155980 d:\c++\westseer\include\openssl\x509v3.h
 	<openssl/bio.h>
 	<openssl/x509.h>
 	<openssl/conf.h>
 	<openssl/x509v3err.h>
 
-1687736241 d:\c++\westseer\include\openssl\conf.h
+1688155980 d:\c++\westseer\include\openssl\conf.h
 	<openssl/bio.h>
 	<openssl/lhash.h>
 	<openssl/safestack.h>
@@ -4045,10 +4048,10 @@
 	<openssl/ossl_typ.h>
 	<openssl/conferr.h>
 
-1687736241 d:\c++\westseer\include\openssl\conferr.h
+1688155980 d:\c++\westseer\include\openssl\conferr.h
 	<openssl/symhacks.h>
 
-1687736241 d:\c++\westseer\include\openssl\x509v3err.h
+1688155980 d:\c++\westseer\include\openssl\x509v3err.h
 	<openssl/symhacks.h>
 
 1684951262 d:\c++\westseer\include\opennn\opennn.h
@@ -7371,7 +7374,7 @@
 	<stdlib.h>
 	<string.h>
 
-1687919919 source:d:\c++\westseer\src\candidateidentification.cpp
+1688155981 source:d:\c++\westseer\src\candidateidentification.cpp
 	"CandidateIdentification.h"
 	<../WESTSeerApp.h>
 	<GeneralConfig.h>
@@ -7382,12 +7385,12 @@
 	<cstdlib>
 	<sstream>
 
-1687736241 d:\c++\westseer\include\candidateidentification.h
+1688155980 d:\c++\westseer\include\candidateidentification.h
 	<AbstractTask.h>
 	<ResearchScope.h>
 	<vector>
 
-1687918954 source:d:\c++\westseer\src\metricmodel.cpp
+1688155981 source:d:\c++\westseer\src\metricmodel.cpp
 	"MetricModel.h"
 	<../WESTSeerApp.h>
 	<GeneralConfig.h>
@@ -7399,14 +7402,14 @@
 	<sstream>
 	<set>
 
-1687736241 d:\c++\westseer\include\metricmodel.h
+1688155980 d:\c++\westseer\include\metricmodel.h
 	<AbstractTask.h>
 	<ResearchScope.h>
 	<TimeSeriesExtraction.h>
 	<PredictionModel.h>
 	<vector>
 
-1687918988 source:d:\c++\westseer\src\bitermdf.cpp
+1688155981 source:d:\c++\westseer\src\bitermdf.cpp
 	"BitermDf.h"
 	<../WESTSeerApp.h>
 	<GeneralConfig.h>
@@ -7420,14 +7423,14 @@
 	<thread>
 	<mutex>
 
-1687736241 d:\c++\westseer\include\bitermdf.h
+1688155980 d:\c++\westseer\include\bitermdf.h
 	<AbstractTask.h>
 	<ResearchScope.h>
 	<TermTfIrdf.h>
 	<string>
 	<map>
 
-1687919018 source:d:\c++\westseer\src\bitermweight.cpp
+1688155981 source:d:\c++\westseer\src\bitermweight.cpp
 	"BitermWeight.h"
 	<../WESTSeerApp.h>
 	<GeneralConfig.h>
@@ -7438,7 +7441,7 @@
 	<thread>
 	<mutex>
 
-1687736241 d:\c++\westseer\include\bitermweight.h
+1688155980 d:\c++\westseer\include\bitermweight.h
 	<AbstractTask.h>
 	<ResearchScope.h>
 	<TermTfIrdf.h>
@@ -7458,7 +7461,7 @@
 	<Eigen/Dense>
 	<map>
 
-1687736241 d:\c++\westseer\include\eigen\dense
+1688155980 d:\c++\westseer\include\eigen\dense
 	"Core"
 	"LU"
 	"Cholesky"
@@ -7467,7 +7470,7 @@
 	"Geometry"
 	"Eigenvalues"
 
-1687736241 d:\c++\westseer\include\eigen\core
+1688155980 d:\c++\westseer\include\eigen\core
 	"src/Core/util/DisableStupidWarnings.h"
 	"src/Core/util/Macros.h"
 	"src/Core/util/ConfigureVectorization.h"
@@ -7668,16 +7671,16 @@
 	"src/Core/GlobalFunctions.h"
 	"src/Core/util/ReenableStupidWarnings.h"
 
-1687736241 d:\c++\westseer\include\eigen\src\core\util\disablestupidwarnings.h
+1688155980 d:\c++\westseer\include\eigen\src\core\util\disablestupidwarnings.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\util\macros.h
+1688155980 d:\c++\westseer\include\eigen\src\core\util\macros.h
 	<cuda.h>
 	<hip/hip_runtime.h>
 	<cmath>
 	<cstdlib>
 	<iostream>
 
-1687736241 d:\c++\westseer\include\eigen\src\core\util\configurevectorization.h
+1688155980 d:\c++\westseer\include\eigen\src\core\util\configurevectorization.h
 	<malloc.h>
 	<immintrin.h>
 	<mmintrin.h>
@@ -7702,120 +7705,120 @@
 	<hip/hip_vector_types.h>
 	<hip/hip_fp16.h>
 
-1687736241 d:\c++\westseer\include\eigen\src\core\util\mkl_support.h
+1688155980 d:\c++\westseer\include\eigen\src\core\util\mkl_support.h
 	<mkl.h>
 	"../../misc/blas.h"
 
-1687736241 d:\c++\westseer\include\eigen\src\misc\blas.h
+1688155980 d:\c++\westseer\include\eigen\src\misc\blas.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\util\constants.h
+1688155980 d:\c++\westseer\include\eigen\src\core\util\constants.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\util\meta.h
+1688155980 d:\c++\westseer\include\eigen\src\core\util\meta.h
 	<cfloat>
 	<math_constants.h>
 	"Eigen/src/Core/arch/HIP/hcc/math_constants.h"
 	<cstdint>
 	<stdint.h>
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\hip\hcc\math_constants.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\hip\hcc\math_constants.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\util\forwarddeclarations.h
+1688155980 d:\c++\westseer\include\eigen\src\core\util\forwarddeclarations.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\util\staticassert.h
+1688155980 d:\c++\westseer\include\eigen\src\core\util\staticassert.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\util\xprhelper.h
+1688155980 d:\c++\westseer\include\eigen\src\core\util\xprhelper.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\util\memory.h
+1688155980 d:\c++\westseer\include\eigen\src\core\util\memory.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\util\integralconstant.h
+1688155980 d:\c++\westseer\include\eigen\src\core\util\integralconstant.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\util\symbolicindex.h
+1688155980 d:\c++\westseer\include\eigen\src\core\util\symbolicindex.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\numtraits.h
+1688155980 d:\c++\westseer\include\eigen\src\core\numtraits.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\mathfunctions.h
+1688155980 d:\c++\westseer\include\eigen\src\core\mathfunctions.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\genericpacketmath.h
+1688155980 d:\c++\westseer\include\eigen\src\core\genericpacketmath.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\mathfunctionsimpl.h
+1688155980 d:\c++\westseer\include\eigen\src\core\mathfunctionsimpl.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\default\conjhelper.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\default\conjhelper.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\default\half.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\default\half.h
 	<sstream>
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\default\bfloat16.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\default\bfloat16.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\default\typecasting.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\default\typecasting.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\default\genericpacketmathfunctionsfwd.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\default\genericpacketmathfunctionsfwd.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\sse\packetmath.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\sse\packetmath.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\sse\typecasting.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\sse\typecasting.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\sse\complex.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\sse\complex.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\avx\packetmath.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\avx\packetmath.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\avx\typecasting.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\avx\typecasting.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\avx\complex.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\avx\complex.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\avx512\packetmath.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\avx512\packetmath.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\avx512\typecasting.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\avx512\typecasting.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\avx512\complex.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\avx512\complex.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\sse\mathfunctions.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\sse\mathfunctions.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\avx\mathfunctions.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\avx\mathfunctions.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\avx512\mathfunctions.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\avx512\mathfunctions.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\altivec\packetmath.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\altivec\packetmath.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\altivec\mathfunctions.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\altivec\mathfunctions.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\altivec\complex.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\altivec\complex.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\neon\packetmath.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\neon\packetmath.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\neon\typecasting.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\neon\typecasting.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\neon\mathfunctions.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\neon\mathfunctions.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\neon\complex.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\neon\complex.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\sve\packetmath.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\sve\packetmath.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\sve\typecasting.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\sve\typecasting.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\sve\mathfunctions.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\sve\mathfunctions.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\zvector\packetmath.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\zvector\packetmath.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\zvector\mathfunctions.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\zvector\mathfunctions.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\zvector\complex.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\zvector\complex.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\msa\packetmath.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\msa\packetmath.h
 	<iostream>
 	<string>
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\msa\mathfunctions.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\msa\mathfunctions.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\msa\complex.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\msa\complex.h
 	<iostream>
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\gpu\packetmath.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\gpu\packetmath.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\gpu\mathfunctions.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\gpu\mathfunctions.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\gpu\typecasting.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\gpu\typecasting.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\sycl\syclmemorymodel.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\sycl\syclmemorymodel.h
 	<CL/sycl.hpp>
 	<stdexcept>
 	<cstddef>
@@ -7823,261 +7826,261 @@
 	<set>
 	<unordered_map>
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\sycl\interopheaders.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\sycl\interopheaders.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\sycl\packetmath.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\sycl\packetmath.h
 	<type_traits>
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\sycl\mathfunctions.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\sycl\mathfunctions.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\sycl\typecasting.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\sycl\typecasting.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\default\settings.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\default\settings.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\default\genericpacketmathfunctions.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\default\genericpacketmathfunctions.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\functors\ternaryfunctors.h
+1688155980 d:\c++\westseer\include\eigen\src\core\functors\ternaryfunctors.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\functors\binaryfunctors.h
+1688155980 d:\c++\westseer\include\eigen\src\core\functors\binaryfunctors.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\functors\unaryfunctors.h
+1688155980 d:\c++\westseer\include\eigen\src\core\functors\unaryfunctors.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\functors\nullaryfunctors.h
+1688155980 d:\c++\westseer\include\eigen\src\core\functors\nullaryfunctors.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\functors\stlfunctors.h
+1688155980 d:\c++\westseer\include\eigen\src\core\functors\stlfunctors.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\functors\assignmentfunctors.h
+1688155980 d:\c++\westseer\include\eigen\src\core\functors\assignmentfunctors.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\cuda\complex.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\cuda\complex.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\util\indexedviewhelper.h
+1688155980 d:\c++\westseer\include\eigen\src\core\util\indexedviewhelper.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\util\reshapedhelper.h
+1688155980 d:\c++\westseer\include\eigen\src\core\util\reshapedhelper.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arithmeticsequence.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arithmeticsequence.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\io.h
+1688155980 d:\c++\westseer\include\eigen\src\core\io.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\densecoeffsbase.h
+1688155980 d:\c++\westseer\include\eigen\src\core\densecoeffsbase.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\densebase.h
+1688155980 d:\c++\westseer\include\eigen\src\core\densebase.h
 	"../plugins/CommonCwiseUnaryOps.h"
 	"../plugins/BlockMethods.h"
 	"../plugins/IndexedViewMethods.h"
 	"../plugins/ReshapedMethods.h"
 
-1687736241 d:\c++\westseer\include\eigen\src\plugins\commoncwiseunaryops.h
+1688155980 d:\c++\westseer\include\eigen\src\plugins\commoncwiseunaryops.h
 
-1687736241 d:\c++\westseer\include\eigen\src\plugins\blockmethods.h
+1688155980 d:\c++\westseer\include\eigen\src\plugins\blockmethods.h
 
-1687736241 d:\c++\westseer\include\eigen\src\plugins\indexedviewmethods.h
+1688155980 d:\c++\westseer\include\eigen\src\plugins\indexedviewmethods.h
 	"IndexedViewMethods.h"
 
-1687736241 d:\c++\westseer\include\eigen\src\plugins\reshapedmethods.h
+1688155980 d:\c++\westseer\include\eigen\src\plugins\reshapedmethods.h
 	"ReshapedMethods.h"
 
-1687736241 d:\c++\westseer\include\eigen\src\core\matrixbase.h
+1688155980 d:\c++\westseer\include\eigen\src\core\matrixbase.h
 	"../plugins/CommonCwiseBinaryOps.h"
 	"../plugins/MatrixCwiseUnaryOps.h"
 	"../plugins/MatrixCwiseBinaryOps.h"
 
-1687736241 d:\c++\westseer\include\eigen\src\plugins\commoncwisebinaryops.h
+1688155980 d:\c++\westseer\include\eigen\src\plugins\commoncwisebinaryops.h
 
-1687736241 d:\c++\westseer\include\eigen\src\plugins\matrixcwiseunaryops.h
+1688155980 d:\c++\westseer\include\eigen\src\plugins\matrixcwiseunaryops.h
 
-1687736241 d:\c++\westseer\include\eigen\src\plugins\matrixcwisebinaryops.h
+1688155980 d:\c++\westseer\include\eigen\src\plugins\matrixcwisebinaryops.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\eigenbase.h
+1688155980 d:\c++\westseer\include\eigen\src\core\eigenbase.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\product.h
+1688155980 d:\c++\westseer\include\eigen\src\core\product.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\coreevaluators.h
+1688155980 d:\c++\westseer\include\eigen\src\core\coreevaluators.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\assignevaluator.h
+1688155980 d:\c++\westseer\include\eigen\src\core\assignevaluator.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\assign.h
+1688155980 d:\c++\westseer\include\eigen\src\core\assign.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arraybase.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arraybase.h
 	"../plugins/MatrixCwiseUnaryOps.h"
 	"../plugins/ArrayCwiseUnaryOps.h"
 	"../plugins/CommonCwiseBinaryOps.h"
 	"../plugins/MatrixCwiseBinaryOps.h"
 	"../plugins/ArrayCwiseBinaryOps.h"
 
-1687736241 d:\c++\westseer\include\eigen\src\plugins\arraycwiseunaryops.h
+1688155980 d:\c++\westseer\include\eigen\src\plugins\arraycwiseunaryops.h
 
-1687736241 d:\c++\westseer\include\eigen\src\plugins\arraycwisebinaryops.h
+1688155980 d:\c++\westseer\include\eigen\src\plugins\arraycwisebinaryops.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\util\blasutil.h
+1688155980 d:\c++\westseer\include\eigen\src\core\util\blasutil.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\densestorage.h
+1688155980 d:\c++\westseer\include\eigen\src\core\densestorage.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\nestbyvalue.h
+1688155980 d:\c++\westseer\include\eigen\src\core\nestbyvalue.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\returnbyvalue.h
+1688155980 d:\c++\westseer\include\eigen\src\core\returnbyvalue.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\noalias.h
+1688155980 d:\c++\westseer\include\eigen\src\core\noalias.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\plainobjectbase.h
+1688155980 d:\c++\westseer\include\eigen\src\core\plainobjectbase.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\matrix.h
+1688155980 d:\c++\westseer\include\eigen\src\core\matrix.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\array.h
+1688155980 d:\c++\westseer\include\eigen\src\core\array.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\cwiseternaryop.h
+1688155980 d:\c++\westseer\include\eigen\src\core\cwiseternaryop.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\cwisebinaryop.h
+1688155980 d:\c++\westseer\include\eigen\src\core\cwisebinaryop.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\cwiseunaryop.h
+1688155980 d:\c++\westseer\include\eigen\src\core\cwiseunaryop.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\cwisenullaryop.h
+1688155980 d:\c++\westseer\include\eigen\src\core\cwisenullaryop.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\cwiseunaryview.h
+1688155980 d:\c++\westseer\include\eigen\src\core\cwiseunaryview.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\selfcwisebinaryop.h
+1688155980 d:\c++\westseer\include\eigen\src\core\selfcwisebinaryop.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\dot.h
+1688155980 d:\c++\westseer\include\eigen\src\core\dot.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\stablenorm.h
+1688155980 d:\c++\westseer\include\eigen\src\core\stablenorm.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\stride.h
+1688155980 d:\c++\westseer\include\eigen\src\core\stride.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\mapbase.h
+1688155980 d:\c++\westseer\include\eigen\src\core\mapbase.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\map.h
+1688155980 d:\c++\westseer\include\eigen\src\core\map.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\ref.h
+1688155980 d:\c++\westseer\include\eigen\src\core\ref.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\block.h
+1688155980 d:\c++\westseer\include\eigen\src\core\block.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\vectorblock.h
+1688155980 d:\c++\westseer\include\eigen\src\core\vectorblock.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\indexedview.h
+1688155980 d:\c++\westseer\include\eigen\src\core\indexedview.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\reshaped.h
+1688155980 d:\c++\westseer\include\eigen\src\core\reshaped.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\transpose.h
+1688155980 d:\c++\westseer\include\eigen\src\core\transpose.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\diagonalmatrix.h
+1688155980 d:\c++\westseer\include\eigen\src\core\diagonalmatrix.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\diagonal.h
+1688155980 d:\c++\westseer\include\eigen\src\core\diagonal.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\diagonalproduct.h
+1688155980 d:\c++\westseer\include\eigen\src\core\diagonalproduct.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\redux.h
+1688155980 d:\c++\westseer\include\eigen\src\core\redux.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\visitor.h
+1688155980 d:\c++\westseer\include\eigen\src\core\visitor.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\fuzzy.h
+1688155980 d:\c++\westseer\include\eigen\src\core\fuzzy.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\swap.h
+1688155980 d:\c++\westseer\include\eigen\src\core\swap.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\commainitializer.h
+1688155980 d:\c++\westseer\include\eigen\src\core\commainitializer.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\generalproduct.h
+1688155980 d:\c++\westseer\include\eigen\src\core\generalproduct.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\solve.h
+1688155980 d:\c++\westseer\include\eigen\src\core\solve.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\inverse.h
+1688155980 d:\c++\westseer\include\eigen\src\core\inverse.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\solverbase.h
+1688155980 d:\c++\westseer\include\eigen\src\core\solverbase.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\permutationmatrix.h
+1688155980 d:\c++\westseer\include\eigen\src\core\permutationmatrix.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\transpositions.h
+1688155980 d:\c++\westseer\include\eigen\src\core\transpositions.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\triangularmatrix.h
+1688155980 d:\c++\westseer\include\eigen\src\core\triangularmatrix.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\selfadjointview.h
+1688155980 d:\c++\westseer\include\eigen\src\core\selfadjointview.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\products\generalblockpanelkernel.h
+1688155980 d:\c++\westseer\include\eigen\src\core\products\generalblockpanelkernel.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\products\parallelizer.h
+1688155980 d:\c++\westseer\include\eigen\src\core\products\parallelizer.h
 	<atomic>
 
-1687736241 d:\c++\westseer\include\eigen\src\core\productevaluators.h
+1688155980 d:\c++\westseer\include\eigen\src\core\productevaluators.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\products\generalmatrixvector.h
+1688155980 d:\c++\westseer\include\eigen\src\core\products\generalmatrixvector.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\products\generalmatrixmatrix.h
+1688155980 d:\c++\westseer\include\eigen\src\core\products\generalmatrixmatrix.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\solvetriangular.h
+1688155980 d:\c++\westseer\include\eigen\src\core\solvetriangular.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\products\generalmatrixmatrixtriangular.h
+1688155980 d:\c++\westseer\include\eigen\src\core\products\generalmatrixmatrixtriangular.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\products\selfadjointmatrixvector.h
+1688155980 d:\c++\westseer\include\eigen\src\core\products\selfadjointmatrixvector.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\products\selfadjointmatrixmatrix.h
+1688155980 d:\c++\westseer\include\eigen\src\core\products\selfadjointmatrixmatrix.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\products\selfadjointproduct.h
+1688155980 d:\c++\westseer\include\eigen\src\core\products\selfadjointproduct.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\products\selfadjointrank2update.h
+1688155980 d:\c++\westseer\include\eigen\src\core\products\selfadjointrank2update.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\products\triangularmatrixvector.h
+1688155980 d:\c++\westseer\include\eigen\src\core\products\triangularmatrixvector.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\products\triangularmatrixmatrix.h
+1688155980 d:\c++\westseer\include\eigen\src\core\products\triangularmatrixmatrix.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\products\triangularsolvermatrix.h
+1688155980 d:\c++\westseer\include\eigen\src\core\products\triangularsolvermatrix.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\products\triangularsolvervector.h
+1688155980 d:\c++\westseer\include\eigen\src\core\products\triangularsolvervector.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\bandmatrix.h
+1688155980 d:\c++\westseer\include\eigen\src\core\bandmatrix.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\coreiterators.h
+1688155980 d:\c++\westseer\include\eigen\src\core\coreiterators.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\conditionestimator.h
+1688155980 d:\c++\westseer\include\eigen\src\core\conditionestimator.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\altivec\matrixproduct.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\altivec\matrixproduct.h
 	"MatrixProductCommon.h"
 	"MatrixProductMMA.h"
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\altivec\matrixproductcommon.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\altivec\matrixproductcommon.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\altivec\matrixproductmma.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\altivec\matrixproductmma.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arch\neon\generalblockpanelkernel.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arch\neon\generalblockpanelkernel.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\booleanredux.h
+1688155980 d:\c++\westseer\include\eigen\src\core\booleanredux.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\select.h
+1688155980 d:\c++\westseer\include\eigen\src\core\select.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\vectorwiseop.h
+1688155980 d:\c++\westseer\include\eigen\src\core\vectorwiseop.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\partialreduxevaluator.h
+1688155980 d:\c++\westseer\include\eigen\src\core\partialreduxevaluator.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\random.h
+1688155980 d:\c++\westseer\include\eigen\src\core\random.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\replicate.h
+1688155980 d:\c++\westseer\include\eigen\src\core\replicate.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\reverse.h
+1688155980 d:\c++\westseer\include\eigen\src\core\reverse.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\arraywrapper.h
+1688155980 d:\c++\westseer\include\eigen\src\core\arraywrapper.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\stliterators.h
+1688155980 d:\c++\westseer\include\eigen\src\core\stliterators.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\products\generalmatrixmatrix_blas.h
+1688155980 d:\c++\westseer\include\eigen\src\core\products\generalmatrixmatrix_blas.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\products\generalmatrixvector_blas.h
+1688155980 d:\c++\westseer\include\eigen\src\core\products\generalmatrixvector_blas.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\products\generalmatrixmatrixtriangular_blas.h
+1688155980 d:\c++\westseer\include\eigen\src\core\products\generalmatrixmatrixtriangular_blas.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\products\selfadjointmatrixmatrix_blas.h
+1688155980 d:\c++\westseer\include\eigen\src\core\products\selfadjointmatrixmatrix_blas.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\products\selfadjointmatrixvector_blas.h
+1688155980 d:\c++\westseer\include\eigen\src\core\products\selfadjointmatrixvector_blas.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\products\triangularmatrixmatrix_blas.h
+1688155980 d:\c++\westseer\include\eigen\src\core\products\triangularmatrixmatrix_blas.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\products\triangularmatrixvector_blas.h
+1688155980 d:\c++\westseer\include\eigen\src\core\products\triangularmatrixvector_blas.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\products\triangularsolvermatrix_blas.h
+1688155980 d:\c++\westseer\include\eigen\src\core\products\triangularsolvermatrix_blas.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\assign_mkl.h
+1688155980 d:\c++\westseer\include\eigen\src\core\assign_mkl.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\globalfunctions.h
+1688155980 d:\c++\westseer\include\eigen\src\core\globalfunctions.h
 
-1687736241 d:\c++\westseer\include\eigen\src\core\util\reenablestupidwarnings.h
+1688155980 d:\c++\westseer\include\eigen\src\core\util\reenablestupidwarnings.h
 
-1687736241 d:\c++\westseer\include\eigen\lu
+1688155980 d:\c++\westseer\include\eigen\lu
 	"Core"
 	"src/Core/util/DisableStupidWarnings.h"
 	"src/misc/Kernel.h"
@@ -8092,32 +8095,32 @@
 	"src/LU/arch/InverseSize4.h"
 	"src/Core/util/ReenableStupidWarnings.h"
 
-1687736241 d:\c++\westseer\include\eigen\src\misc\kernel.h
+1688155980 d:\c++\westseer\include\eigen\src\misc\kernel.h
 
-1687736241 d:\c++\westseer\include\eigen\src\misc\image.h
+1688155980 d:\c++\westseer\include\eigen\src\misc\image.h
 
-1687736241 d:\c++\westseer\include\eigen\src\lu\fullpivlu.h
+1688155980 d:\c++\westseer\include\eigen\src\lu\fullpivlu.h
 
-1687736241 d:\c++\westseer\include\eigen\src\lu\partialpivlu.h
+1688155980 d:\c++\westseer\include\eigen\src\lu\partialpivlu.h
 
-1687736241 d:\c++\westseer\include\eigen\src\misc\lapacke.h
+1688155980 d:\c++\westseer\include\eigen\src\misc\lapacke.h
 	"lapacke_config.h"
 	<stdlib.h>
 	<complex.h>
 	<complex.h>
 	"lapacke_mangling.h"
 
-1687736241 d:\c++\westseer\include\eigen\src\misc\lapacke_mangling.h
+1688155980 d:\c++\westseer\include\eigen\src\misc\lapacke_mangling.h
 
-1687736241 d:\c++\westseer\include\eigen\src\lu\partialpivlu_lapacke.h
+1688155980 d:\c++\westseer\include\eigen\src\lu\partialpivlu_lapacke.h
 
-1687736241 d:\c++\westseer\include\eigen\src\lu\determinant.h
+1688155980 d:\c++\westseer\include\eigen\src\lu\determinant.h
 
-1687736241 d:\c++\westseer\include\eigen\src\lu\inverseimpl.h
+1688155980 d:\c++\westseer\include\eigen\src\lu\inverseimpl.h
 
-1687736241 d:\c++\westseer\include\eigen\src\lu\arch\inversesize4.h
+1688155980 d:\c++\westseer\include\eigen\src\lu\arch\inversesize4.h
 
-1687736241 d:\c++\westseer\include\eigen\cholesky
+1688155980 d:\c++\westseer\include\eigen\cholesky
 	"Core"
 	"Jacobi"
 	"src/Core/util/DisableStupidWarnings.h"
@@ -8128,21 +8131,21 @@
 	"src/Cholesky/LLT_LAPACKE.h"
 	"src/Core/util/ReenableStupidWarnings.h"
 
-1687736241 d:\c++\westseer\include\eigen\jacobi
+1688155980 d:\c++\westseer\include\eigen\jacobi
 	"Core"
 	"src/Core/util/DisableStupidWarnings.h"
 	"src/Jacobi/Jacobi.h"
 	"src/Core/util/ReenableStupidWarnings.h"
 
-1687736241 d:\c++\westseer\include\eigen\src\jacobi\jacobi.h
+1688155980 d:\c++\westseer\include\eigen\src\jacobi\jacobi.h
 
-1687736241 d:\c++\westseer\include\eigen\src\cholesky\llt.h
+1688155980 d:\c++\westseer\include\eigen\src\cholesky\llt.h
 
-1687736241 d:\c++\westseer\include\eigen\src\cholesky\ldlt.h
+1688155980 d:\c++\westseer\include\eigen\src\cholesky\ldlt.h
 
-1687736241 d:\c++\westseer\include\eigen\src\cholesky\llt_lapacke.h
+1688155980 d:\c++\westseer\include\eigen\src\cholesky\llt_lapacke.h
 
-1687736241 d:\c++\westseer\include\eigen\qr
+1688155980 d:\c++\westseer\include\eigen\qr
 	"Core"
 	"Cholesky"
 	"Jacobi"
@@ -8158,7 +8161,7 @@
 	"src/QR/ColPivHouseholderQR_LAPACKE.h"
 	"src/Core/util/ReenableStupidWarnings.h"
 
-1687736241 d:\c++\westseer\include\eigen\householder
+1688155980 d:\c++\westseer\include\eigen\householder
 	"Core"
 	"src/Core/util/DisableStupidWarnings.h"
 	"src/Householder/Householder.h"
@@ -8166,25 +8169,25 @@
 	"src/Householder/BlockHouseholder.h"
 	"src/Core/util/ReenableStupidWarnings.h"
 
-1687736241 d:\c++\westseer\include\eigen\src\householder\householder.h
+1688155980 d:\c++\westseer\include\eigen\src\householder\householder.h
 
-1687736241 d:\c++\westseer\include\eigen\src\householder\householdersequence.h
+1688155980 d:\c++\westseer\include\eigen\src\householder\householdersequence.h
 
-1687736241 d:\c++\westseer\include\eigen\src\householder\blockhouseholder.h
+1688155980 d:\c++\westseer\include\eigen\src\householder\blockhouseholder.h
 
-1687736241 d:\c++\westseer\include\eigen\src\qr\householderqr.h
+1688155980 d:\c++\westseer\include\eigen\src\qr\householderqr.h
 
-1687736241 d:\c++\westseer\include\eigen\src\qr\fullpivhouseholderqr.h
+1688155980 d:\c++\westseer\include\eigen\src\qr\fullpivhouseholderqr.h
 
-1687736241 d:\c++\westseer\include\eigen\src\qr\colpivhouseholderqr.h
+1688155980 d:\c++\westseer\include\eigen\src\qr\colpivhouseholderqr.h
 
-1687736241 d:\c++\westseer\include\eigen\src\qr\completeorthogonaldecomposition.h
+1688155980 d:\c++\westseer\include\eigen\src\qr\completeorthogonaldecomposition.h
 
-1687736241 d:\c++\westseer\include\eigen\src\qr\householderqr_lapacke.h
+1688155980 d:\c++\westseer\include\eigen\src\qr\householderqr_lapacke.h
 
-1687736241 d:\c++\westseer\include\eigen\src\qr\colpivhouseholderqr_lapacke.h
+1688155980 d:\c++\westseer\include\eigen\src\qr\colpivhouseholderqr_lapacke.h
 
-1687736241 d:\c++\westseer\include\eigen\svd
+1688155980 d:\c++\westseer\include\eigen\svd
 	"QR"
 	"Householder"
 	"Jacobi"
@@ -8199,19 +8202,19 @@
 	"src/SVD/JacobiSVD_LAPACKE.h"
 	"src/Core/util/ReenableStupidWarnings.h"
 
-1687736241 d:\c++\westseer\include\eigen\src\misc\realsvd2x2.h
+1688155980 d:\c++\westseer\include\eigen\src\misc\realsvd2x2.h
 
-1687736241 d:\c++\westseer\include\eigen\src\svd\upperbidiagonalization.h
+1688155980 d:\c++\westseer\include\eigen\src\svd\upperbidiagonalization.h
 
-1687736241 d:\c++\westseer\include\eigen\src\svd\svdbase.h
+1688155980 d:\c++\westseer\include\eigen\src\svd\svdbase.h
 
-1687736241 d:\c++\westseer\include\eigen\src\svd\jacobisvd.h
+1688155980 d:\c++\westseer\include\eigen\src\svd\jacobisvd.h
 
-1687736241 d:\c++\westseer\include\eigen\src\svd\bdcsvd.h
+1688155980 d:\c++\westseer\include\eigen\src\svd\bdcsvd.h
 
-1687736241 d:\c++\westseer\include\eigen\src\svd\jacobisvd_lapacke.h
+1688155980 d:\c++\westseer\include\eigen\src\svd\jacobisvd_lapacke.h
 
-1687736241 d:\c++\westseer\include\eigen\geometry
+1688155980 d:\c++\westseer\include\eigen\geometry
 	"Core"
 	"SVD"
 	"LU"
@@ -8234,37 +8237,37 @@
 	"src/Geometry/arch/Geometry_SIMD.h"
 	"src/Core/util/ReenableStupidWarnings.h"
 
-1687736241 d:\c++\westseer\include\eigen\src\geometry\orthomethods.h
+1688155980 d:\c++\westseer\include\eigen\src\geometry\orthomethods.h
 
-1687736241 d:\c++\westseer\include\eigen\src\geometry\eulerangles.h
+1688155980 d:\c++\westseer\include\eigen\src\geometry\eulerangles.h
 
-1687736241 d:\c++\westseer\include\eigen\src\geometry\homogeneous.h
+1688155980 d:\c++\westseer\include\eigen\src\geometry\homogeneous.h
 
-1687736241 d:\c++\westseer\include\eigen\src\geometry\rotationbase.h
+1688155980 d:\c++\westseer\include\eigen\src\geometry\rotationbase.h
 
-1687736241 d:\c++\westseer\include\eigen\src\geometry\rotation2d.h
+1688155980 d:\c++\westseer\include\eigen\src\geometry\rotation2d.h
 
-1687736241 d:\c++\westseer\include\eigen\src\geometry\quaternion.h
+1688155980 d:\c++\westseer\include\eigen\src\geometry\quaternion.h
 
-1687736241 d:\c++\westseer\include\eigen\src\geometry\angleaxis.h
+1688155980 d:\c++\westseer\include\eigen\src\geometry\angleaxis.h
 
-1687736241 d:\c++\westseer\include\eigen\src\geometry\transform.h
+1688155980 d:\c++\westseer\include\eigen\src\geometry\transform.h
 
-1687736241 d:\c++\westseer\include\eigen\src\geometry\translation.h
+1688155980 d:\c++\westseer\include\eigen\src\geometry\translation.h
 
-1687736241 d:\c++\westseer\include\eigen\src\geometry\scaling.h
+1688155980 d:\c++\westseer\include\eigen\src\geometry\scaling.h
 
-1687736241 d:\c++\westseer\include\eigen\src\geometry\hyperplane.h
+1688155980 d:\c++\westseer\include\eigen\src\geometry\hyperplane.h
 
-1687736241 d:\c++\westseer\include\eigen\src\geometry\parametrizedline.h
+1688155980 d:\c++\westseer\include\eigen\src\geometry\parametrizedline.h
 
-1687736241 d:\c++\westseer\include\eigen\src\geometry\alignedbox.h
+1688155980 d:\c++\westseer\include\eigen\src\geometry\alignedbox.h
 
-1687736241 d:\c++\westseer\include\eigen\src\geometry\umeyama.h
+1688155980 d:\c++\westseer\include\eigen\src\geometry\umeyama.h
 
-1687736241 d:\c++\westseer\include\eigen\src\geometry\arch\geometry_simd.h
+1688155980 d:\c++\westseer\include\eigen\src\geometry\arch\geometry_simd.h
 
-1687736241 d:\c++\westseer\include\eigen\eigenvalues
+1688155980 d:\c++\westseer\include\eigen\eigenvalues
 	"Core"
 	"Cholesky"
 	"Jacobi"
@@ -8291,42 +8294,42 @@
 	"src/Eigenvalues/SelfAdjointEigenSolver_LAPACKE.h"
 	"src/Core/util/ReenableStupidWarnings.h"
 
-1687736241 d:\c++\westseer\include\eigen\src\eigenvalues\tridiagonalization.h
+1688155980 d:\c++\westseer\include\eigen\src\eigenvalues\tridiagonalization.h
 
-1687736241 d:\c++\westseer\include\eigen\src\eigenvalues\realschur.h
+1688155980 d:\c++\westseer\include\eigen\src\eigenvalues\realschur.h
 	"./HessenbergDecomposition.h"
 
-1687736241 d:\c++\westseer\include\eigen\src\eigenvalues\hessenbergdecomposition.h
+1688155980 d:\c++\westseer\include\eigen\src\eigenvalues\hessenbergdecomposition.h
 
-1687736241 d:\c++\westseer\include\eigen\src\eigenvalues\eigensolver.h
+1688155980 d:\c++\westseer\include\eigen\src\eigenvalues\eigensolver.h
 	"./RealSchur.h"
 
-1687736241 d:\c++\westseer\include\eigen\src\eigenvalues\selfadjointeigensolver.h
+1688155980 d:\c++\westseer\include\eigen\src\eigenvalues\selfadjointeigensolver.h
 	"./Tridiagonalization.h"
 
-1687736241 d:\c++\westseer\include\eigen\src\eigenvalues\generalizedselfadjointeigensolver.h
+1688155980 d:\c++\westseer\include\eigen\src\eigenvalues\generalizedselfadjointeigensolver.h
 	"./Tridiagonalization.h"
 
-1687736241 d:\c++\westseer\include\eigen\src\eigenvalues\complexschur.h
+1688155980 d:\c++\westseer\include\eigen\src\eigenvalues\complexschur.h
 	"./HessenbergDecomposition.h"
 
-1687736241 d:\c++\westseer\include\eigen\src\eigenvalues\complexeigensolver.h
+1688155980 d:\c++\westseer\include\eigen\src\eigenvalues\complexeigensolver.h
 	"./ComplexSchur.h"
 
-1687736241 d:\c++\westseer\include\eigen\src\eigenvalues\realqz.h
+1688155980 d:\c++\westseer\include\eigen\src\eigenvalues\realqz.h
 
-1687736241 d:\c++\westseer\include\eigen\src\eigenvalues\generalizedeigensolver.h
+1688155980 d:\c++\westseer\include\eigen\src\eigenvalues\generalizedeigensolver.h
 	"./RealQZ.h"
 
-1687736241 d:\c++\westseer\include\eigen\src\eigenvalues\matrixbaseeigenvalues.h
+1688155980 d:\c++\westseer\include\eigen\src\eigenvalues\matrixbaseeigenvalues.h
 
-1687736241 d:\c++\westseer\include\eigen\src\eigenvalues\realschur_lapacke.h
+1688155980 d:\c++\westseer\include\eigen\src\eigenvalues\realschur_lapacke.h
 
-1687736241 d:\c++\westseer\include\eigen\src\eigenvalues\complexschur_lapacke.h
+1688155980 d:\c++\westseer\include\eigen\src\eigenvalues\complexschur_lapacke.h
 
-1687736241 d:\c++\westseer\include\eigen\src\eigenvalues\selfadjointeigensolver_lapacke.h
+1688155980 d:\c++\westseer\include\eigen\src\eigenvalues\selfadjointeigensolver_lapacke.h
 
-1687919106 source:d:\c++\westseer\src\predictionmodel.cpp
+1688155981 source:d:\c++\westseer\src\predictionmodel.cpp
 	"PredictionModel.h"
 	<../WESTSeerApp.h>
 	<GeneralConfig.h>
@@ -8334,7 +8337,7 @@
 	<CallbackData.h>
 	<TimeSeriesRegression.h>
 
-1687919121 d:\c++\westseer\include\predictionmodel.h
+1688155980 d:\c++\westseer\include\predictionmodel.h
 	<AbstractTask.h>
 	<ResearchScope.h>
 	<TimeSeriesExtraction.h>
@@ -11740,10 +11743,10 @@
 	<Eigen/Dense>
 	<vector>
 
-1687736241 d:\c++\westseer\include\timeseriesregression.h
+1688155980 d:\c++\westseer\include\timeseriesregression.h
 	<vector>
 
-1687905846 source:d:\c++\westseer\src\timeseriesregression.cpp
+1688155981 source:d:\c++\westseer\src\timeseriesregression.cpp
 	"TimeSeriesRegression.h"
 	<Eigen/Dense>
 	<wxFFileLog.h>
@@ -11765,7 +11768,7 @@
 	<map>
 	<string>
 
-1687915904 d:\c++\westseer\include\timeseriesextraction.h
+1688155980 d:\c++\westseer\include\timeseriesextraction.h
 	<AbstractTask.h>
 	<ResearchScope.h>
 	<BitermWeight.h>
@@ -11773,14 +11776,14 @@
 	<TopicIdentification.h>
 	<map>
 
-1687919926 source:d:\c++\westseer\src\timeseriesextraction.cpp
+1688155981 source:d:\c++\westseer\src\timeseriesextraction.cpp
 	"TimeSeriesExtraction.h"
 	<../WESTSeerApp.h>
 	<GeneralConfig.h>
 	<StringProcessing.h>
 	<CallbackData.h>
 
-1687736241 d:\c++\westseer\include\topicidentification.h
+1688155980 d:\c++\westseer\include\topicidentification.h
 	<AbstractTask.h>
 	<ResearchScope.h>
 	<CandidateIdentification.h>
@@ -11789,7 +11792,7 @@
 	<map>
 	<string>
 
-1687920445 source:d:\c++\westseer\src\topicidentification.cpp
+1688155981 source:d:\c++\westseer\src\topicidentification.cpp
 	"TopicIdentification.h"
 	<../WESTSeerApp.h>
 	<GeneralConfig.h>

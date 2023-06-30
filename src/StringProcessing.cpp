@@ -3,6 +3,8 @@
 #include <cstring>
 #include <regex>
 #include <map>
+#include <set>
+#include <porter2_stemmer.h>
 
 void removeCharsFromString(string &str, const char* charsToRemove)
 {
@@ -261,4 +263,109 @@ std::vector<int> getIntVector(const string &strV)
         result.push_back(atoi(s.c_str()));
     }
     return result;
+}
+
+// check wether a is a subset of b
+bool subset(const vector<string> &a, const vector<string> &b)
+{
+    if (a.size() > b.size())
+        return false;
+
+    vector<string> tempA = a;
+    vector<string> tempB = b;
+    for (size_t ja = 0; ja < tempA.size(); ja++)
+    {
+        Porter2Stemmer::stem(tempA[ja]);
+    }
+    for (size_t jb = 0; jb < tempB.size(); jb++)
+    {
+        Porter2Stemmer::stem(tempB[jb]);
+    }
+    for (size_t offset = 0; offset + a.size() <= b.size(); offset++)
+    {
+        bool matched = true;
+        for (size_t ja = 0; ja < tempA.size(); ja++)
+        {
+            if (tempB[offset + ja] != tempA[ja])
+            {
+                matched = false;
+                break;
+            }
+        }
+        if (matched)
+            return true;
+    }
+    return false;
+}
+
+pair<vector<string>, vector<pair<string,string>>> simplifyBiterms(const vector<pair<string,string>> &biterms)
+{
+    // check whether a biterm is actually a term, i.e., one term includes the other term
+    set<string> mergedTerms;
+    vector<pair<string,string>> reductedBiterms;
+    for (size_t i = 0; i < biterms.size(); i++)
+    {
+        vector<string> tokens1 = splitString(biterms[i].first, " ");
+        vector<string> tokens2 = splitString(biterms[i].second, " ");
+        if (subset(tokens1, tokens2))
+        {
+            mergedTerms.insert(biterms[i].second);
+        }
+        else if (subset(tokens2, tokens1))
+        {
+            mergedTerms.insert(biterms[i].first);
+        }
+        else
+        {
+            reductedBiterms.push_back(biterms[i]);
+        }
+    }
+
+    vector<string> mergedTerms2(mergedTerms.begin(), mergedTerms.end());
+    pair<vector<string>, vector<pair<string,string>>> result(mergedTerms2, reductedBiterms);
+    return result;
+}
+
+string simplifyTopic(const string &strTopic)
+{
+    // decompose topic string to biterms
+    vector<pair<string,string>> biterms;
+    {
+        vector<string> temp1 = splitString(strTopic, "|");
+        for (size_t i = 0; i < temp1.size(); i++)
+        {
+            vector<string> temp2 = splitString(temp1[i], "&");
+            pair<string,string> temp3(temp2[0],temp2[1]);
+            biterms.push_back(temp3);
+        }
+    }
+
+    pair<vector<string>,vector<pair<string,string>>> simplified = simplifyBiterms(biterms);
+    std::stringstream ss;
+    bool first = true;
+    for (size_t i1 = 0; i1 < simplified.first.size(); i1++)
+    {
+        if (first)
+        {
+            first = false;
+        }
+        else
+        {
+            ss << "|";
+        }
+        ss << simplified.first[i1];
+    }
+    for (size_t i2 = 0; i2 < simplified.second.size(); i2++)
+    {
+        if (first)
+        {
+            first = false;
+        }
+        else
+        {
+            ss << "|";
+        }
+        ss << simplified.second[i2].first << "&" << simplified.second[i2].second;
+    }
+    return ss.str();
 }

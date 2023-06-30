@@ -155,6 +155,7 @@ class WESTSeerFrame: public wxFrame
         std::map<uint64_t,TSM> _timeSeries;
         std::map<uint64_t, std::pair<std::string,std::string>> _topics;
         std::map<uint64_t, std::vector<double>> _scores;
+        std::map<uint64_t, std::vector<Publication>> _citations;
 
         void clearScope();
         void showCandidates();

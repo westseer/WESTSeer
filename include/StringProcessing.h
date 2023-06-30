@@ -32,4 +32,6 @@ std::vector<double> getDoubleVector(const string &strV);
 
 std::vector<int> getIntVector(const string &strV);
 
+string simplifyTopic(const string &strTopic);
+
 #endif // STRINGPROCESSING_H_INCLUDED
