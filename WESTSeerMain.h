@@ -35,6 +35,7 @@
 #include <TimeSeriesExtraction.h>
 #include <PredictionModel.h>
 #include <MetricModel.h>
+#include <ctime>
 
 class WESTSeerFrame: public wxFrame
 {
@@ -156,12 +157,14 @@ class WESTSeerFrame: public wxFrame
         std::map<uint64_t, std::pair<std::string,std::string>> _topics;
         std::map<uint64_t, std::vector<double>> _scores;
         std::map<uint64_t, std::vector<Publication>> _citations;
+        time_t _timeStart;
 
         void clearScope();
         void showCandidates();
         void showCandidate(uint64_t id);
         void clearCandidates();
         void saveCandidates();
+        int getElapseSeconds();
 };
 
 #endif // WESTSEERMAIN_H

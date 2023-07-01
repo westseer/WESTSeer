@@ -588,7 +588,7 @@ void WESTSeerFrame::MyProgressReporter::report(
     _frame->StatusBar1->SetStatusText(ss1.str().c_str(), 0);
     _frame->StatusBar1->SetStatusText(taskName, 1);
     std::stringstream ss2;
-    ss2 << taskProgress << "%";
+    ss2 << taskProgress << "%(" << _frame->getElapseSeconds() << " seconds)";
     _frame->StatusBar1->SetStatusText(ss2.str().c_str(), 2);
     _frame->GaugeStep->SetValue(taskProgress);
     _frame->GaugeOverall->SetValue(100 * taskId / numTasks);
@@ -687,6 +687,7 @@ void WESTSeerFrame::OnChoiceScopeSelect(wxCommandEvent& event)
     GeneralConfig config;
     std::string path = config.getDatabase();
     std::string kws = ChoiceScope->GetString(ChoiceScope->GetSelection()).ToStdString();
+    time(&_timeStart);
     _openAlex = new OpenAlex(config.getEmail(), path, kws);
 
     _termExtraction = new TermExtraction(path, kws);
@@ -835,4 +836,11 @@ void WESTSeerFrame::OnSaveResultsSelected(wxCommandEvent& event)
 
 void WESTSeerFrame::OnNotebookInfoPageChanged(wxNotebookEvent& event)
 {
+}
+
+int WESTSeerFrame::getElapseSeconds()
+{
+    time_t t;
+    time(&t);
+    return t - _timeStart;
 }

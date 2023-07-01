@@ -6,13 +6,11 @@ Sciences are continuously evolving and fragmentising into increasingly more spec
 ## 2. Basic Idea
 Since widely known specialties are usually already explored, the exploration should focus on the unrecognised specialties, i.e., the emerging topics. In this computing program, a user can specify a research scope using two different groups of keywords, each group consisting of similar keywords. The two groups are required because using only one group usually specifies too broad a scope, causing long and excessive data collection as well as endless data analysis. Then our program collects meta data of papers in the scope from OpenAlex, extract important terms and biterms in each paper, and analyse the emerging topic trends. More importantly, the program identifies the most important paper of each emerging topic, i.e., the one that initiated the basic idea of the topic. We called such a paper the influential innovative publication of the emerging topic. Knowing the influential innovative publication can help understand the emerging topic.
 
-## 3. Comparison of Existing Computer Programs
-There are some programs based on the RPYS method (e.g., CR Explorer), but RPYS is retrospective, i.e., only good for looking backward in time. The exploration should focusing on looking forward in time instead.
-
-There is also CiteSpace, which is excellent for visualising the current hot spots of the research scope, but the hot spots are in the present, and aiming the research to a hot spot will typically leads to working on a mature specialty where the main research problems have already been well answered; CiteSeer also has a burst detection for detecting the increasingly hot papers, but the increasing hotness of a paper have many reasons, not always due to an emerging topic. The exploration should guarantee the results are emerging-topic relevent.
+## 3. Binary Releases for Windows.
+Users who want binary releases should visit [WESTSeer Binary Releases for Windows](https://github.com/westseer/WESTSeer-Binary-Releases-for-Windows).
 
 ## 4. Outline of the Design
-There are four main modules of the program: the data collector (OpenAlex.cpp and OpenAlex.h) module collects data from OpenAlex, the data storage module (ResearchScope.cpp and ResearchScope.h) maintains the database for the collected data and the intermediate results of the analysis, the topic trend analysis module (AETT.cpp and AETT.h) finds influential innovative publications and their emerging topics, the topic inspection module (ResearchTopic.cpp and ResearchTopic.h) analyses an emerging topic's current stat and predicts its trend.
+The pipeline of data analysis in this program is devided into tasks. For example, the task of data collection is implemented in OpenAlex.cpp and OpenAlex.h, the task of term extraction is implemented in TermExtraction.cpp and TermExtraction.h. All these tasks are written in a c++ class inherited from AbstractTask, which is a base class implemented in AbstractTask.cpp and AbstractTask.h. You can find these source files in src folder and include folder.
 
 ## 5. Development Environment
 CodeBlocks with TDM GCC x64 Toolchain. Unzip lib.zip.* before development. If dialogs are not shown in the Resources explorer, execute the following commands in the script console of CodeBlocks (under the View menu):
