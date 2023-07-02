@@ -77,8 +77,8 @@ const long WESTSeerFrame::ID_MENUITEM3 = wxNewId();
 const long WESTSeerFrame::ID_MENUITEM4 = wxNewId();
 const long WESTSeerFrame::ID_MENUITEM5 = wxNewId();
 const long WESTSeerFrame::idMenuQuit = wxNewId();
-const long WESTSeerFrame::ID_MENUITEM1 = wxNewId();
 const long WESTSeerFrame::ID_MENUITEM2 = wxNewId();
+const long WESTSeerFrame::ID_MENUITEM1 = wxNewId();
 const long WESTSeerFrame::ID_MENUITEM6 = wxNewId();
 const long WESTSeerFrame::ID_MENUITEM7 = wxNewId();
 const long WESTSeerFrame::ID_MENUITEM8 = wxNewId();
@@ -167,10 +167,10 @@ WESTSeerFrame::WESTSeerFrame(wxWindow* parent,wxWindowID id)
     Menu1->Append(MenuItem1);
     MenuBar1->Append(Menu1, _("&File"));
     Menu3 = new wxMenu();
-    MenuItem3 = new wxMenuItem(Menu3, ID_MENUITEM1, _("&Explore"), wxEmptyString, wxITEM_RADIO);
-    Menu3->Append(MenuItem3);
     MenuItem4 = new wxMenuItem(Menu3, ID_MENUITEM2, _("&Test"), wxEmptyString, wxITEM_RADIO);
     Menu3->Append(MenuItem4);
+    MenuItem3 = new wxMenuItem(Menu3, ID_MENUITEM1, _("&Explore"), wxEmptyString, wxITEM_RADIO);
+    Menu3->Append(MenuItem3);
     MenuBar1->Append(Menu3, _("&Mode"));
     Menu4 = new wxMenu();
     MenuItemSQL = new wxMenuItem(Menu4, ID_MENUITEM6, _("&SQL"), wxEmptyString, wxITEM_NORMAL);
@@ -203,13 +203,12 @@ WESTSeerFrame::WESTSeerFrame(wxWindow* parent,wxWindowID id)
     Connect(ID_BUTTON2,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&WESTSeerFrame::OnButtonPauseClick);
     Connect(ID_BUTTON3,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&WESTSeerFrame::OnButtonResumeClick);
     Connect(ID_LISTCTRL1,wxEVT_COMMAND_LIST_ITEM_SELECTED,(wxObjectEventFunction)&WESTSeerFrame::OnListCtrlPublicationsItemSelect);
-    Connect(ID_NOTEBOOK1,wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGED,(wxObjectEventFunction)&WESTSeerFrame::OnNotebookInfoPageChanged);
     Connect(ID_MENUITEM3,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&WESTSeerFrame::OnMenuItemOptionsSelected);
     Connect(ID_MENUITEM4,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&WESTSeerFrame::OnExportWoSSelected);
     Connect(ID_MENUITEM5,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&WESTSeerFrame::OnSaveResultsSelected);
     Connect(idMenuQuit,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&WESTSeerFrame::OnQuit);
-    Connect(ID_MENUITEM1,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&WESTSeerFrame::OnExploreModeSelected);
     Connect(ID_MENUITEM2,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&WESTSeerFrame::OnTextModeSelected);
+    Connect(ID_MENUITEM1,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&WESTSeerFrame::OnExploreModeSelected);
     Connect(ID_MENUITEM6,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&WESTSeerFrame::OnMenuItemSQLSelected);
     Connect(ID_MENUITEM7,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&WESTSeerFrame::OnMenuItemLogSelected);
     Connect(idMenuAbout,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&WESTSeerFrame::OnAbout);
@@ -225,7 +224,8 @@ WESTSeerFrame::WESTSeerFrame(wxWindow* parent,wxWindowID id)
     _timeSeriesExtraction = NULL;
     _predictionModel = NULL;
     _metricModel = NULL;
-    _exploreMode = true;
+    _exploreMode = false;
+    _displayThread = NULL;
     _progressReporter = new MyProgressReporter(this);
     GeneralConfig config;
     std::vector<std::string> scopes = ResearchScope::getResearchScopes(config.getDatabase());
@@ -246,276 +246,338 @@ void WESTSeerFrame::showCandidate(uint64_t id)
     if (_metricModel == NULL || _topicIdentification == NULL || _timeSeriesExtraction == NULL || _timeSeries.size() == 0)
         return;
 
-    GeneralConfig config;
-    std::string path = config.getDatabase();
-    std::string kws = ChoiceScope->GetString(ChoiceScope->GetSelection()).ToStdString();
-    ResearchScope scope(path, kws);
-    Publication pub = scope.getPublication(id);
-    int ye = _exploreMode ? WESTSeerApp::year() + 5 : WESTSeerApp::year();
-    Publication me = scope.getPublication(id);
-    std::pair<std::string,std::string> topic = _topics[id];
+    if (_displayThread != NULL)
     {
-        std::stringstream ss;
-        ss << "Topic: " << simplifyTopic(topic.second) << std::endl;
-        auto idToTSM = _timeSeries.find(id);
-        if (idToTSM != _timeSeries.end())
-        {
-            std::vector<int> topicLts = idToTSM->second.second.first;
-            std::vector<int> topicRts = idToTSM->second.second.second;
-            for (int i = 0; i < 10; i++)
-            {
-                ss << ye - 15 + i << ":" << topicLts[i] << std::endl;
-            }
-            for (int i = 0; i < 5; i++)
-            {
-                ss << ye - 5 + i << ":" << topicRts[i] << std::endl;
-            }
-        }
-        TextCtrlTopic->SetValue(ss.str());
+        _displayThread->join();
+        delete _displayThread;
+        _displayThread = NULL;
     }
 
-    TextCtrlAbstract->SetValue(me.abstract());
-    {
-        auto idToScore = _scores.find(id);
-        auto idToTSM = _timeSeries.find(id);
-        if (idToScore != _scores.end() && idToTSM != _timeSeries.end())
-        {
-            std::vector<int> rts = idToTSM->second.first.second;
-            std::stringstream ss;
-            ss << "predicted score = " << idToScore->second[0] << std::endl
-                << "citations on topic: " << std::endl;
-            for (int i = 0; i < 15; i++)
-            {
-                if (i < 10)
-                {
-                    ss << ye - 15 + i << ": " << idToScore->second[2 + i] << std::endl;
-                }
-                else
-                {
-                    ss << ye - 15 + i << ": " << rts[i - 10] << "(" << idToScore->second[2 + i] << " predicted)" << std::endl;
-                }
-            }
-            TextCtrlPrediction->SetValue(ss.str().c_str());
-        }
-        if (idToScore != _scores.end() && !_exploreMode)
+    _displayThread = new std::thread([this, id]{
+        ListCtrlPublications->Disable();
+        NotebookInfo->Disable();
+        StatusBar1->SetStatusText("Publication Info Retrieval (0%)", 1);
+
+        GeneralConfig config;
+        std::string path = config.getDatabase();
+        std::string kws = ChoiceScope->GetString(ChoiceScope->GetSelection()).ToStdString();
+        ResearchScope scope(path, kws);
+        Publication pub = scope.getPublication(id);
+        int ye = _exploreMode ? WESTSeerApp::year() + 5 : WESTSeerApp::year();
+        Publication me = scope.getPublication(id);
+        std::pair<std::string,std::string> topic = _topics[id];
         {
             std::stringstream ss;
-            ss << "verified score = " << idToScore->second[1] << std::endl
-                << "citations: " << std::endl;
-            for (int i = 0; i < 15; i++)
+            ss << "Topic: " << simplifyTopic(topic.second) << std::endl;
+            auto idToTSM = _timeSeries.find(id);
+            if (idToTSM != _timeSeries.end())
             {
-                ss << ye - 15 + i << ": " << idToScore->second[17 + i] << std::endl;
+                std::vector<int> topicLts = idToTSM->second.second.first;
+                std::vector<int> topicRts = idToTSM->second.second.second;
+                for (int i = 0; i < 10; i++)
+                {
+                    ss << ye - 15 + i << ":" << topicLts[i] << std::endl;
+                }
+                for (int i = 0; i < 5; i++)
+                {
+                    ss << ye - 5 + i << ":" << topicRts[i] << std::endl;
+                }
             }
-            TextCtrlVerification->SetValue(ss.str().c_str());
+            TextCtrlTopic->SetValue(ss.str());
         }
-    }
+        StatusBar1->SetStatusText("Publication Info Retrieval (20%)", 1);
 
-    ListCtrlCitations->ClearAll();
-    ListCtrlCitations->AppendColumn("Year");
-    ListCtrlCitations->AppendColumn("Title", wxLIST_FORMAT_LEFT, 600);
-    ListCtrlCitations->AppendColumn("Authors");
-    ListCtrlCitations->AppendColumn("Source");
-    ListCtrlCitations->AppendColumn("ID");
-    std::vector<Publication> citations = _citations[id];
-    for (Publication pub: citations)
-    {
-        long row = ListCtrlCitations->InsertItem(0, wxString::Format("%d", pub.year()));
-        ListCtrlCitations->SetItem(row, 1, pub.title().c_str());
-        std::stringstream ssAuthors;
-        std::vector<wxString> authors = pub.authors();
-        for (size_t i = 0; i < authors.size(); i++)
+        TextCtrlAbstract->SetValue(me.abstract());
         {
-            if (i > 0)
-                ssAuthors << ",";
-            ssAuthors << authors[i].ToStdString();
+            auto idToScore = _scores.find(id);
+            auto idToTSM = _timeSeries.find(id);
+            if (idToScore != _scores.end() && idToTSM != _timeSeries.end())
+            {
+                std::vector<int> rts = idToTSM->second.first.second;
+                std::stringstream ss;
+                ss << "predicted score = " << idToScore->second[0] << std::endl
+                    << "citations on topic: " << std::endl;
+                for (int i = 0; i < 15; i++)
+                {
+                    if (i < 10)
+                    {
+                        ss << ye - 15 + i << ": " << idToScore->second[2 + i] << std::endl;
+                    }
+                    else
+                    {
+                        ss << ye - 15 + i << ": " << rts[i - 10] << "(" << idToScore->second[2 + i] << " predicted)" << std::endl;
+                    }
+                }
+                TextCtrlPrediction->SetValue(ss.str().c_str());
+            }
+            if (idToScore != _scores.end() && !_exploreMode)
+            {
+                std::stringstream ss;
+                ss << "verified score = " << idToScore->second[1] << std::endl
+                    << "citations: " << std::endl;
+                for (int i = 0; i < 15; i++)
+                {
+                    ss << ye - 15 + i << ": " << idToScore->second[17 + i] << std::endl;
+                }
+                TextCtrlVerification->SetValue(ss.str().c_str());
+            }
         }
-        ListCtrlCitations->SetItem(row, 2, ssAuthors.str().c_str());
-        ListCtrlCitations->SetItem(row, 3, pub.source().c_str());
-        ListCtrlCitations->SetItem(row, 4, wxString::Format("%llu", pub.id()));
-    }
+        StatusBar1->SetStatusText("Publication Info Retrieval (60%)", 1);
 
-    ListCtrlReferences->ClearAll();
-    ListCtrlReferences->AppendColumn("Year");
-    ListCtrlReferences->AppendColumn("Title", wxLIST_FORMAT_LEFT, 600);
-    ListCtrlReferences->AppendColumn("Authors");
-    ListCtrlReferences->AppendColumn("Source");
-    ListCtrlReferences->AppendColumn("ID");
-    std::vector<Publication> references = scope.getReferences(id);
-    for (Publication pub: references)
-    {
-        long row = ListCtrlReferences->InsertItem(0, wxString::Format("%d", pub.year()));
-        ListCtrlReferences->SetItem(row, 1, pub.title().c_str());
-        std::stringstream ssAuthors;
-        std::vector<wxString> authors = pub.authors();
-        for (size_t i = 0; i < authors.size(); i++)
+        ListCtrlCitations->ClearAll();
+        ListCtrlCitations->AppendColumn("Year");
+        ListCtrlCitations->AppendColumn("Title", wxLIST_FORMAT_LEFT, 600);
+        ListCtrlCitations->AppendColumn("Authors");
+        ListCtrlCitations->AppendColumn("Source");
+        ListCtrlCitations->AppendColumn("ID");
+        std::vector<Publication> citations = _citations[id];
+        for (size_t i = 0; i < citations.size(); i++)
         {
-            if (i > 0)
-                ssAuthors << ",";
-            ssAuthors << authors[i].ToStdString();
+            Publication pub = citations[i];
+            ListCtrlCitations->InsertItem(i, wxString::Format("%d", pub.year()));
+            ListCtrlCitations->SetItem(i, 1, pub.title().c_str());
+            std::stringstream ssAuthors;
+            std::vector<wxString> authors = pub.authors();
+            for (size_t j = 0; j < authors.size(); j++)
+            {
+                if (j > 0)
+                    ssAuthors << ",";
+                ssAuthors << authors[j].ToStdString();
+            }
+            ListCtrlCitations->SetItem(i, 2, ssAuthors.str().c_str());
+            ListCtrlCitations->SetItem(i, 3, pub.source().c_str());
+            ListCtrlCitations->SetItem(i, 4, wxString::Format("%llu", pub.id()));
         }
-        ListCtrlReferences->SetItem(row, 2, ssAuthors.str().c_str());
-        ListCtrlReferences->SetItem(row, 3, pub.source().c_str());
-        ListCtrlReferences->SetItem(row, 4, wxString::Format("%llu", pub.id()));
-    }
+        StatusBar1->SetStatusText("Publication Info Retrieval (80%)", 1);
+
+        ListCtrlReferences->ClearAll();
+        ListCtrlReferences->AppendColumn("Year");
+        ListCtrlReferences->AppendColumn("Title", wxLIST_FORMAT_LEFT, 600);
+        ListCtrlReferences->AppendColumn("Authors");
+        ListCtrlReferences->AppendColumn("Source");
+        ListCtrlReferences->AppendColumn("ID");
+        std::vector<Publication> references = scope.getReferences(id);
+        for (size_t i = 0; i < references.size(); i++)
+        {
+            Publication pub = references[i];
+            ListCtrlReferences->InsertItem(i, wxString::Format("%d", pub.year()));
+            ListCtrlReferences->SetItem(i, 1, pub.title().c_str());
+            std::stringstream ssAuthors;
+            std::vector<wxString> authors = pub.authors();
+            for (size_t j = 0; j < authors.size(); j++)
+            {
+                if (j > 0)
+                    ssAuthors << ",";
+                ssAuthors << authors[j].ToStdString();
+            }
+            ListCtrlReferences->SetItem(i, 2, ssAuthors.str().c_str());
+            ListCtrlReferences->SetItem(i, 3, pub.source().c_str());
+            ListCtrlReferences->SetItem(i, 4, wxString::Format("%llu", pub.id()));
+        }
+        ListCtrlPublications->Enable();
+        NotebookInfo->Enable();
+        StatusBar1->SetStatusText("Publication Info Retrieval (100%)", 1);
+    });
 }
 
 void WESTSeerFrame::showCandidates()
 {
-    _ids.clear();
-    _vRanks.clear();
-    _timeSeries.clear();
-    _topics.clear();
-    _scores.clear();
-    _citations.clear();
-
     if (_candidateIdentification == NULL || _metricModel == NULL || _timeSeriesExtraction == NULL)
         return;
 
-    ListCtrlPublications->AppendColumn("Year");
-    ListCtrlPublications->AppendColumn("Title", wxLIST_FORMAT_LEFT, 600);
-    ListCtrlPublications->AppendColumn("Authors");
-    ListCtrlPublications->AppendColumn("Source");
-    ListCtrlPublications->AppendColumn("ID");
-    ListCtrlPublications->AppendColumn("P-Score");
-    ListCtrlPublications->AppendColumn("P-Rank");
-    if (!_exploreMode)
+    if (_displayThread != NULL)
     {
-        ListCtrlPublications->AppendColumn("V-Score");
-        ListCtrlPublications->AppendColumn("V-Rank");
-    }
-    ListCtrlPublications->AppendColumn("RPYS1-NC");
-    ListCtrlPublications->AppendColumn("RPYS1-NTop10");
-    ListCtrlPublications->AppendColumn("RPYS1-NTop5");
-    ListCtrlPublications->AppendColumn("RPYS1-NTop1");
-    ListCtrlPublications->AppendColumn("RPYS2-NC");
-    ListCtrlPublications->AppendColumn("RPYS2-NTop10");
-    ListCtrlPublications->AppendColumn("RPYS2-NTop5");
-    ListCtrlPublications->AppendColumn("RPYS2-NTop1");
-    ListCtrlPublications->AppendColumn("NC");
-    int ye = _exploreMode ? WESTSeerApp::year() + 5 : WESTSeerApp::year();
-    if (!_timeSeriesExtraction->load(ye, &_timeSeries))
-    {
-        logError("cannot load time series");
-        return;
-    }
-    if (!_topicIdentification->load(ye, &_topics))
-    {
-        logError("cannot load topics");
-        return;
-    }
-    if (!_metricModel->load(ye, &_scores))
-    {
-        logError("cannot load scores");
-        return;
+        _displayThread->join();
+        delete _displayThread;
+        _displayThread = NULL;
     }
 
-    GeneralConfig config;
-    std::string path = config.getDatabase();
-    std::string kws = ChoiceScope->GetString(ChoiceScope->GetSelection()).ToStdString();
-    ResearchScope scope(path, kws);
-    std::vector<uint64_t> ids;
-    std::vector<int> pRanks, vRanks;
-    if (_candidateIdentification->load(ye, &ids))
-    {
-        pRanks.resize(ids.size());
-        vRanks.resize(ids.size());
-        for (size_t i = 0; i < ids.size(); i++)
-        {
-            int myPRank = 0, myVRank = 0;
-            for (size_t j = 0; j < ids.size(); j++)
-            {
-                if (j == i)
-                    continue;
+    _displayThread = new std::thread([this]{
+        ListCtrlPublications->Disable();
+        NotebookInfo->Disable();
 
-                if (_scores[ids[j]][0] > _scores[ids[i]][0])
-                    myPRank++;
-                else if (_scores[ids[j]][0] == _scores[ids[i]][0] && j < i)
-                    myPRank++;
+        _ids.clear();
+        _vRanks.clear();
+        _timeSeries.clear();
+        _topics.clear();
+        _scores.clear();
+        _citations.clear();
 
-                if (_scores[ids[j]][1] > _scores[ids[i]][1])
-                    myVRank++;
-                else if (_scores[ids[j]][1] == _scores[ids[i]][1] && j < i)
-                    myVRank++;
-            }
-            pRanks[i] = myPRank;
-            vRanks[i] = myVRank;
-        }
-        _ids.resize(ids.size());
-        _vRanks.resize(ids.size());
-        for (size_t i = 0; i < ids.size(); i++)
-        {
-            _ids[pRanks[i]] = ids[i];
-            _vRanks[pRanks[i]] = vRanks[i];
-        }
-        _citations = scope.getCitations(_ids, ye);
+        StatusBar1->SetStatusText("Result Info Retrieval (0%)", 1);
 
-        std::vector<Publication> pubs = scope.getPublications(_ids);
-        std::map<uint64_t,Publication> pubMap;
-        for (Publication pub: pubs)
+        ListCtrlPublications->AppendColumn("Year");
+        ListCtrlPublications->AppendColumn("Title", wxLIST_FORMAT_LEFT, 600);
+        ListCtrlPublications->AppendColumn("Authors");
+        ListCtrlPublications->AppendColumn("Source");
+        ListCtrlPublications->AppendColumn("ID");
+        ListCtrlPublications->AppendColumn("P-Score");
+        ListCtrlPublications->AppendColumn("P-Rank");
+        if (!_exploreMode)
         {
-            pubMap[pub.id()] = pub;
+            ListCtrlPublications->AppendColumn("V-Score");
+            ListCtrlPublications->AppendColumn("V-Rank");
         }
-        for (int i = 0; i < (int)_ids.size() ; i++)
+        ListCtrlPublications->AppendColumn("RPYS1-NC");
+        ListCtrlPublications->AppendColumn("RPYS1-NTop10");
+        ListCtrlPublications->AppendColumn("RPYS1-NTop5");
+        ListCtrlPublications->AppendColumn("RPYS1-NTop1");
+        ListCtrlPublications->AppendColumn("RPYS2-NC");
+        ListCtrlPublications->AppendColumn("RPYS2-NTop10");
+        ListCtrlPublications->AppendColumn("RPYS2-NTop5");
+        ListCtrlPublications->AppendColumn("RPYS2-NTop1");
+        ListCtrlPublications->AppendColumn("NC");
+        int ye = _exploreMode ? WESTSeerApp::year() + 5 : WESTSeerApp::year();
+        if (!_timeSeriesExtraction->load(ye, &_timeSeries))
         {
-            Publication pub = pubMap[_ids[i]];
-            ListCtrlPublications->InsertItem(i, wxString::Format("%d", pub.year()));
-            ListCtrlPublications->SetItem(i, 1, pub.title().c_str());
-            std::stringstream ssAuthors;
-            std::vector<wxString> authors = pub.authors();
-            for (size_t i = 0; i < authors.size(); i++)
+            logError("cannot load time series");
+            return;
+        }
+        StatusBar1->SetStatusText("Result Info Retrieval (10%)", 1);
+
+        if (!_topicIdentification->load(ye, &_topics))
+        {
+            logError("cannot load topics");
+            return;
+        }
+        StatusBar1->SetStatusText("Result Info Retrieval (20%)", 1);
+
+        if (!_metricModel->load(ye, &_scores))
+        {
+            logError("cannot load scores");
+            return;
+        }
+        StatusBar1->SetStatusText("Result Info Retrieval (30%)", 1);
+
+        GeneralConfig config;
+        std::string path = config.getDatabase();
+        std::string kws = ChoiceScope->GetString(ChoiceScope->GetSelection()).ToStdString();
+        ResearchScope scope(path, kws);
+        std::vector<uint64_t> ids;
+        std::vector<int> pRanks, vRanks;
+        if (_candidateIdentification->load(ye, &ids))
+        {
+            StatusBar1->SetStatusText("Result Info Retrieval (35%)", 1);
+
+            pRanks.resize(ids.size());
+            vRanks.resize(ids.size());
+            for (size_t i = 0; i < ids.size(); i++)
             {
-                if (i > 0)
-                    ssAuthors << ",";
-                ssAuthors << authors[i].ToStdString();
+                int myPRank = 0, myVRank = 0;
+                for (size_t j = 0; j < ids.size(); j++)
+                {
+                    if (j == i)
+                        continue;
+
+                    if (_scores[ids[j]][0] > _scores[ids[i]][0])
+                        myPRank++;
+                    else if (_scores[ids[j]][0] == _scores[ids[i]][0] && j < i)
+                        myPRank++;
+
+                    if (_scores[ids[j]][1] > _scores[ids[i]][1])
+                        myVRank++;
+                    else if (_scores[ids[j]][1] == _scores[ids[i]][1] && j < i)
+                        myVRank++;
+                }
+                pRanks[i] = myPRank;
+                vRanks[i] = myVRank;
             }
-            ListCtrlPublications->SetItem(i, 2, ssAuthors.str().c_str());
-            ListCtrlPublications->SetItem(i, 3, pub.source().c_str());
-            ListCtrlPublications->SetItem(i, 4, wxString::Format("%llu", pub.id()));
-            double pScore = _scores[pub.id()][0];
-            double vScore = _scores[pub.id()][1];
-            int rpys1NC = (int)_scores[pub.id()][32];
-            int rpys1NTop10 = (int)_scores[pub.id()][33];
-            int rpys1NTop5 = (int)_scores[pub.id()][34];
-            int rpys1NTop1 = (int)_scores[pub.id()][35];
-            int rpys2NC = (int)_scores[pub.id()][36];
-            int rpys2NTop10 = (int)_scores[pub.id()][37];
-            int rpys2NTop5 = (int)_scores[pub.id()][38];
-            int rpys2NTop1 = (int)_scores[pub.id()][39];
-            int nc = 0;
-            for (int j = 0; j < 10; j++)
+            _ids.resize(ids.size());
+            _vRanks.resize(ids.size());
+            for (size_t i = 0; i < ids.size(); i++)
             {
-                nc += (int)_scores[pub.id()][17 + j];
+                _ids[pRanks[i]] = ids[i];
+                _vRanks[pRanks[i]] = vRanks[i];
             }
-            ListCtrlPublications->SetItem(i, 5, wxString::Format("%lf", pScore));
-            ListCtrlPublications->SetItem(i, 6, wxString::Format("%d", (int)i));
-            if (_exploreMode)
+            _citations = scope.getCitations(_ids, ye);
+            StatusBar1->SetStatusText("Result Info Retrieval (40%)", 1);
+
+            std::vector<Publication> pubs = scope.getPublications(_ids);
+            std::map<uint64_t,Publication> pubMap;
+            for (Publication pub: pubs)
             {
-                ListCtrlPublications->SetItem(i, 7, wxString::Format("%d", rpys1NC));
-                ListCtrlPublications->SetItem(i, 8, wxString::Format("%d", rpys1NTop10));
-                ListCtrlPublications->SetItem(i, 9, wxString::Format("%d", rpys1NTop5));
-                ListCtrlPublications->SetItem(i, 10, wxString::Format("%d", rpys1NTop1));
-                ListCtrlPublications->SetItem(i, 11, wxString::Format("%d", rpys2NC));
-                ListCtrlPublications->SetItem(i, 12, wxString::Format("%d", rpys2NTop10));
-                ListCtrlPublications->SetItem(i, 13, wxString::Format("%d", rpys2NTop5));
-                ListCtrlPublications->SetItem(i, 14, wxString::Format("%d", rpys2NTop1));
-                ListCtrlPublications->SetItem(i, 15, wxString::Format("%d", nc));
+                int progress0 = 40 + 50 * pubMap.size() / pubs.size();
+                pubMap[pub.id()] = pub;
+                int progress1 = 40 + 50 * pubMap.size() / pubs.size();
+                if (progress1 > progress0)
+                {
+                    wxString s = wxString::Format("Result Info Retrieval (%d)", progress1);
+                    StatusBar1->SetStatusText(s, 1);
+                }
             }
-            else
+            StatusBar1->SetStatusText("Result Info Retrieval (90%)", 1);
+
+            for (int i = 0; i < (int)_ids.size() ; i++)
             {
-                ListCtrlPublications->SetItem(i, 7, wxString::Format("%lf", vScore));
-                ListCtrlPublications->SetItem(i, 8, wxString::Format("%d", _vRanks[i]));
-                ListCtrlPublications->SetItem(i, 9, wxString::Format("%d", rpys1NC));
-                ListCtrlPublications->SetItem(i, 10, wxString::Format("%d", rpys1NTop10));
-                ListCtrlPublications->SetItem(i, 11, wxString::Format("%d", rpys1NTop5));
-                ListCtrlPublications->SetItem(i, 12, wxString::Format("%d", rpys1NTop1));
-                ListCtrlPublications->SetItem(i, 13, wxString::Format("%d", rpys2NC));
-                ListCtrlPublications->SetItem(i, 14, wxString::Format("%d", rpys2NTop10));
-                ListCtrlPublications->SetItem(i, 15, wxString::Format("%d", rpys2NTop5));
-                ListCtrlPublications->SetItem(i, 16, wxString::Format("%d", rpys2NTop1));
-                ListCtrlPublications->SetItem(i, 17, wxString::Format("%d", nc));
+                Publication pub = pubMap[_ids[i]];
+                ListCtrlPublications->InsertItem(i, wxString::Format("%d", pub.year()));
+                ListCtrlPublications->SetItem(i, 1, pub.title().c_str());
+                std::stringstream ssAuthors;
+                std::vector<wxString> authors = pub.authors();
+                for (size_t i = 0; i < authors.size(); i++)
+                {
+                    if (i > 0)
+                        ssAuthors << ",";
+                    ssAuthors << authors[i].ToStdString();
+                }
+                ListCtrlPublications->SetItem(i, 2, ssAuthors.str().c_str());
+                ListCtrlPublications->SetItem(i, 3, pub.source().c_str());
+                ListCtrlPublications->SetItem(i, 4, wxString::Format("%llu", pub.id()));
+                double pScore = _scores[pub.id()][0];
+                double vScore = _scores[pub.id()][1];
+                int rpys1NC = (int)_scores[pub.id()][32];
+                int rpys1NTop10 = (int)_scores[pub.id()][33];
+                int rpys1NTop5 = (int)_scores[pub.id()][34];
+                int rpys1NTop1 = (int)_scores[pub.id()][35];
+                int rpys2NC = (int)_scores[pub.id()][36];
+                int rpys2NTop10 = (int)_scores[pub.id()][37];
+                int rpys2NTop5 = (int)_scores[pub.id()][38];
+                int rpys2NTop1 = (int)_scores[pub.id()][39];
+                int nc = 0;
+                for (int j = 0; j < 10; j++)
+                {
+                    nc += (int)_scores[pub.id()][17 + j];
+                }
+                ListCtrlPublications->SetItem(i, 5, wxString::Format("%lf", pScore));
+                ListCtrlPublications->SetItem(i, 6, wxString::Format("%d", (int)i));
+                if (_exploreMode)
+                {
+                    ListCtrlPublications->SetItem(i, 7, wxString::Format("%d", rpys1NC));
+                    ListCtrlPublications->SetItem(i, 8, wxString::Format("%d", rpys1NTop10));
+                    ListCtrlPublications->SetItem(i, 9, wxString::Format("%d", rpys1NTop5));
+                    ListCtrlPublications->SetItem(i, 10, wxString::Format("%d", rpys1NTop1));
+                    ListCtrlPublications->SetItem(i, 11, wxString::Format("%d", rpys2NC));
+                    ListCtrlPublications->SetItem(i, 12, wxString::Format("%d", rpys2NTop10));
+                    ListCtrlPublications->SetItem(i, 13, wxString::Format("%d", rpys2NTop5));
+                    ListCtrlPublications->SetItem(i, 14, wxString::Format("%d", rpys2NTop1));
+                    ListCtrlPublications->SetItem(i, 15, wxString::Format("%d", nc));
+                }
+                else
+                {
+                    ListCtrlPublications->SetItem(i, 7, wxString::Format("%lf", vScore));
+                    ListCtrlPublications->SetItem(i, 8, wxString::Format("%d", _vRanks[i]));
+                    ListCtrlPublications->SetItem(i, 9, wxString::Format("%d", rpys1NC));
+                    ListCtrlPublications->SetItem(i, 10, wxString::Format("%d", rpys1NTop10));
+                    ListCtrlPublications->SetItem(i, 11, wxString::Format("%d", rpys1NTop5));
+                    ListCtrlPublications->SetItem(i, 12, wxString::Format("%d", rpys1NTop1));
+                    ListCtrlPublications->SetItem(i, 13, wxString::Format("%d", rpys2NC));
+                    ListCtrlPublications->SetItem(i, 14, wxString::Format("%d", rpys2NTop10));
+                    ListCtrlPublications->SetItem(i, 15, wxString::Format("%d", rpys2NTop5));
+                    ListCtrlPublications->SetItem(i, 16, wxString::Format("%d", rpys2NTop1));
+                    ListCtrlPublications->SetItem(i, 17, wxString::Format("%d", nc));
+                }
+                int progress0 = 90 + 10 * i / (int)_ids.size();
+                int progress1 = 90 + 10 * (i + 1) / (int)_ids.size();
+                if (progress1 > progress0)
+                {
+                    wxString s = wxString::Format("Result Info Retrieval (%d\%)", progress1);
+                    StatusBar1->SetStatusText(s, 1);
+                }
             }
         }
-    }
+
+        ListCtrlPublications->Enable();
+        NotebookInfo->Enable();
+    });
 }
 
 void WESTSeerFrame::saveCandidates()
@@ -603,8 +665,6 @@ void WESTSeerFrame::MyProgressReporter::report(
         _frame->ButtonResume->Disable();
         _frame->ChoiceScope->Enable();
         _frame->ButtonNew->Enable();
-        _frame->ListCtrlPublications->Enable();
-        _frame->NotebookInfo->Enable();
     }
     else
     {
@@ -612,8 +672,6 @@ void WESTSeerFrame::MyProgressReporter::report(
         _frame->ButtonResume->Disable();
         _frame->ChoiceScope->Disable();
         _frame->ButtonNew->Disable();
-        _frame->ListCtrlPublications->Disable();
-        _frame->NotebookInfo->Disable();
     }
 }
 
@@ -630,6 +688,11 @@ void WESTSeerFrame::OnAbout(wxCommandEvent& event)
 
 void WESTSeerFrame::OnButtonNewClick(wxCommandEvent& event)
 {
+    if (_displayThread != NULL)
+    {
+        wxMessageBox("Busy displaying results. Please try later.");
+        return;
+    }
     // pop up an OpenAlexImportDialog
     OpenAlexImportDialog dlg(this, -1);
     if (dlg.ShowModal())
@@ -663,6 +726,11 @@ void WESTSeerFrame::OnButtonNewClick(wxCommandEvent& event)
 
 void WESTSeerFrame::OnMenuItemOptionsSelected(wxCommandEvent& event)
 {
+    if (_displayThread != NULL)
+    {
+        wxMessageBox("Busy displaying results. Please try later.");
+        return;
+    }
     SettingsDialog dlg(this);
     dlg.ShowModal();
 }
@@ -681,6 +749,13 @@ void WESTSeerFrame::OnMenuItemLogSelected(wxCommandEvent& event)
 
 void WESTSeerFrame::OnChoiceScopeSelect(wxCommandEvent& event)
 {
+    if (_displayThread != NULL)
+    {
+        _displayThread->join();
+        delete _displayThread;
+        _displayThread = NULL;
+    }
+
     clearCandidates();
     clearScope();
     AbstractTask::setProgressReporter(_progressReporter);
@@ -794,6 +869,12 @@ void WESTSeerFrame::OnButtonResumeClick(wxCommandEvent& event)
 
 void WESTSeerFrame::OnExploreModeSelected(wxCommandEvent& event)
 {
+    if (_displayThread != NULL)
+    {
+        _displayThread->join();
+        delete _displayThread;
+        _displayThread = NULL;
+    }
     _exploreMode = true;
     clearCandidates();
     showCandidates();
@@ -801,6 +882,12 @@ void WESTSeerFrame::OnExploreModeSelected(wxCommandEvent& event)
 
 void WESTSeerFrame::OnTextModeSelected(wxCommandEvent& event)
 {
+    if (_displayThread != NULL)
+    {
+        _displayThread->join();
+        delete _displayThread;
+        _displayThread = NULL;
+    }
     _exploreMode = false;
     clearCandidates();
     showCandidates();

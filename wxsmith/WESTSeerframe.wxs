@@ -175,14 +175,14 @@
 			</object>
 			<object class="wxMenu" variable="Menu3" member="yes">
 				<label>&amp;Mode</label>
-				<object class="wxMenuItem" name="ID_MENUITEM1" variable="MenuItem3" member="yes">
-					<label>&amp;Explore</label>
-					<handler function="OnExploreModeSelected" entry="EVT_MENU" />
-					<radio>1</radio>
-				</object>
 				<object class="wxMenuItem" name="ID_MENUITEM2" variable="MenuItem4" member="yes">
 					<label>&amp;Test</label>
 					<handler function="OnTextModeSelected" entry="EVT_MENU" />
+					<radio>1</radio>
+				</object>
+				<object class="wxMenuItem" name="ID_MENUITEM1" variable="MenuItem3" member="yes">
+					<label>&amp;Explore</label>
+					<handler function="OnExploreModeSelected" entry="EVT_MENU" />
 					<radio>1</radio>
 				</object>
 			</object>

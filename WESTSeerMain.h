@@ -86,8 +86,8 @@ class WESTSeerFrame: public wxFrame
         static const long ID_MENUITEM4;
         static const long ID_MENUITEM5;
         static const long idMenuQuit;
-        static const long ID_MENUITEM1;
         static const long ID_MENUITEM2;
+        static const long ID_MENUITEM1;
         static const long ID_MENUITEM6;
         static const long ID_MENUITEM7;
         static const long ID_MENUITEM8;
@@ -158,6 +158,7 @@ class WESTSeerFrame: public wxFrame
         std::map<uint64_t, std::vector<double>> _scores;
         std::map<uint64_t, std::vector<Publication>> _citations;
         time_t _timeStart;
+        std::thread *_displayThread;
 
         void clearScope();
         void showCandidates();
