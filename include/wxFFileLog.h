@@ -9,6 +9,7 @@
 #include <wx/msgdlg.h>
 #include <wx/stdpaths.h>
 #include <wx/filename.h>
+#define __DEBUG__
 
 class wxFFileLog : public wxLog
 {

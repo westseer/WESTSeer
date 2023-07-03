@@ -1576,7 +1576,7 @@
 	"wx/longlong.h"
 	"wx/file.h"
 
-1688169264 d:\c++\westseer\include\wxffilelog.h
+1688350136 d:\c++\westseer\include\wxffilelog.h
 	<string>
 	<wx/wx.h>
 	<wx/log.h>
@@ -3574,7 +3574,7 @@
 	<set>
 	<porter2_stemmer.h>
 
-1688338785 source:d:\c++\westseer\westseermain.cpp
+1688347662 source:d:\c++\westseer\westseermain.cpp
 	"WESTSeerMain.h"
 	"WESTSeerApp.h"
 	"OpenAlexImportDialog.h"
