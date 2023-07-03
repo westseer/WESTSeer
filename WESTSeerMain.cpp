@@ -690,8 +690,9 @@ void WESTSeerFrame::OnButtonNewClick(wxCommandEvent& event)
 {
     if (_displayThread != NULL)
     {
-        wxMessageBox("Busy displaying results. Please try later.");
-        return;
+        _displayThread->join();
+        delete _displayThread;
+        _displayThread = NULL;
     }
     // pop up an OpenAlexImportDialog
     OpenAlexImportDialog dlg(this, -1);
@@ -728,8 +729,9 @@ void WESTSeerFrame::OnMenuItemOptionsSelected(wxCommandEvent& event)
 {
     if (_displayThread != NULL)
     {
-        wxMessageBox("Busy displaying results. Please try later.");
-        return;
+        _displayThread->join();
+        delete _displayThread;
+        _displayThread = NULL;
     }
     SettingsDialog dlg(this);
     dlg.ShowModal();
