@@ -380,9 +380,18 @@ bool MetricModel::process(int y)
         }
         std::sort(temp.begin(), temp.end());
         int n = (int)temp.size();
-        nTop10Thres[i] = temp[9 * n / 10];
-        nTop5Thres[i] = temp[19 * n / 20];
-        nTop1Thres[i] = temp[99 * n / 100];
+        if (n > 0)
+        {
+            nTop10Thres[i] = temp[9 * n / 10];
+            nTop5Thres[i] = temp[19 * n / 20];
+            nTop1Thres[i] = temp[99 * n / 100];
+        }
+        else
+        {
+            nTop10Thres[i] = 0;
+            nTop5Thres[i] = 0;
+            nTop1Thres[i] = 0;
+        }
     }
 
     for (auto idToP: prediction)
