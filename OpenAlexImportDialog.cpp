@@ -11,9 +11,6 @@
 //(*IdInit(OpenAlexImportDialog)
 const long OpenAlexImportDialog::ID_STATICTEXT2 = wxNewId();
 const long OpenAlexImportDialog::ID_TEXTCTRL2 = wxNewId();
-const long OpenAlexImportDialog::ID_STATICTEXT3 = wxNewId();
-const long OpenAlexImportDialog::ID_STATICTEXT4 = wxNewId();
-const long OpenAlexImportDialog::ID_TEXTCTRL3 = wxNewId();
 const long OpenAlexImportDialog::ID_BUTTON2 = wxNewId();
 const long OpenAlexImportDialog::ID_STATICTEXT5 = wxNewId();
 const long OpenAlexImportDialog::ID_GAUGE1 = wxNewId();
@@ -39,25 +36,20 @@ OpenAlexImportDialog::OpenAlexImportDialog(wxWindow* parent,wxWindowID id)
 	wxFlexGridSizer* FlexGridSizer2;
 	wxFlexGridSizer* FlexGridSizer3;
 
-	Create(parent, id, _("Import Data from OpenAlex"), wxDefaultPosition, wxDefaultSize, wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxBORDER_DOUBLE, _T("id"));
+	Create(parent, wxID_ANY, _("Import Data from OpenAlex"), wxDefaultPosition, wxDefaultSize, wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxBORDER_DOUBLE, _T("wxID_ANY"));
 	FlexGridSizer1 = new wxFlexGridSizer(0, 1, 0, 0);
 	FlexGridSizer1->AddGrowableCol(0);
 	FlexGridSizer1->AddGrowableRow(1);
 	FlexGridSizer2 = new wxFlexGridSizer(0, 3, 0, 0);
 	FlexGridSizer2->AddGrowableCol(1);
-	StaticText2 = new wxStaticText(this, ID_STATICTEXT2, _("Keywords in Group 1:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT2"));
-	FlexGridSizer2->Add(StaticText2, 1, wxALL|wxEXPAND, 5);
-	TextCtrlKeywords1 = new wxTextCtrl(this, ID_TEXTCTRL2, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_TEXTCTRL2"));
-	FlexGridSizer2->Add(TextCtrlKeywords1, 1, wxALL|wxEXPAND, 5);
-	StaticText3 = new wxStaticText(this, ID_STATICTEXT3, _("AND"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT3"));
-	FlexGridSizer2->Add(StaticText3, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
-	StaticText4 = new wxStaticText(this, ID_STATICTEXT4, _("Keywords in Group 2"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT4"));
-	FlexGridSizer2->Add(StaticText4, 1, wxALL|wxEXPAND, 5);
-	TextCtrlKeywords2 = new wxTextCtrl(this, ID_TEXTCTRL3, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_TEXTCTRL3"));
-	FlexGridSizer2->Add(TextCtrlKeywords2, 1, wxALL|wxEXPAND, 5);
+	StaticText2 = new wxStaticText(this, ID_STATICTEXT2, _("Keywords:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT2"));
+	FlexGridSizer2->Add(StaticText2, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5);
+	TextCtrlKeywords = new wxTextCtrl(this, ID_TEXTCTRL2, wxEmptyString, wxDefaultPosition, wxSize(-1,150), wxTE_MULTILINE|wxTE_WORDWRAP|wxVSCROLL, wxDefaultValidator, _T("ID_TEXTCTRL2"));
+	TextCtrlKeywords->SetToolTip(_("Seperate synonyms in each group with commas. Seperate groups with semicolons."));
+	FlexGridSizer2->Add(TextCtrlKeywords, 1, wxALL|wxEXPAND, 5);
 	ButtonGetSamples = new wxButton(this, ID_BUTTON2, _("&Get Samples"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON2"));
 	ButtonGetSamples->Disable();
-	FlexGridSizer2->Add(ButtonGetSamples, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+	FlexGridSizer2->Add(ButtonGetSamples, 1, wxALL|wxEXPAND, 5);
 	StaticText5 = new wxStaticText(this, ID_STATICTEXT5, _("Sampling Progress:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT5"));
 	FlexGridSizer2->Add(StaticText5, 1, wxALL|wxEXPAND, 5);
 	GaugeSamplingProgress = new wxGauge(this, ID_GAUGE1, 100, wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_GAUGE1"));
@@ -96,7 +88,6 @@ OpenAlexImportDialog::OpenAlexImportDialog(wxWindow* parent,wxWindowID id)
 	FlexGridSizer1->SetSizeHints(this);
 
 	Connect(ID_TEXTCTRL2,wxEVT_COMMAND_TEXT_UPDATED,(wxObjectEventFunction)&OpenAlexImportDialog::OnTextCtrlKeywords1Text);
-	Connect(ID_TEXTCTRL3,wxEVT_COMMAND_TEXT_UPDATED,(wxObjectEventFunction)&OpenAlexImportDialog::OnTextCtrlKeywords2Text);
 	Connect(ID_BUTTON2,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&OpenAlexImportDialog::OnButtonGetSamplesClick);
 	Connect(ID_CHOICE1,wxEVT_COMMAND_CHOICE_SELECTED,(wxObjectEventFunction)&OpenAlexImportDialog::OnChoiceKeywordPairSelect);
 	Connect(ID_LISTCTRL2,wxEVT_COMMAND_LIST_ITEM_SELECTED,(wxObjectEventFunction)&OpenAlexImportDialog::OnListCtrlSamplesItemSelect);
@@ -135,8 +126,7 @@ void OpenAlexImportDialog::OnButtonGetSamplesClick(wxCommandEvent& event)
         delete _openAlex;
         _openAlex = NULL;
     }
-    TextCtrlKeywords1->Disable();
-    TextCtrlKeywords2->Disable();
+    TextCtrlKeywords->Disable();
     ButtonGetSamples->Disable();
     ButtonOK->Disable();
     ChoiceKeywordPair->Disable();
@@ -147,8 +137,7 @@ void OpenAlexImportDialog::OnButtonGetSamplesClick(wxCommandEvent& event)
     AbstractTask::setProgressReporter(_progressReporter);
     GeneralConfig config;
     _openAlex = new OpenAlex(config.getEmail(), config.getDatabase(),
-                             TextCtrlKeywords1->GetValue().ToStdString(),
-                             TextCtrlKeywords2->GetValue().ToStdString());
+                             TextCtrlKeywords->GetValue().ToStdString());
     _openAlex->setSamplesOnly(true);
     _openAlex->runAll();
 }
@@ -238,7 +227,7 @@ void OpenAlexImportDialog::OnTextCtrlEmailText(wxCommandEvent& event)
 void OpenAlexImportDialog::OnTextCtrlKeywords2Text(wxCommandEvent& event)
 {
     ButtonOK->Disable();
-    if (TextCtrlKeywords1->GetValue().size() > 0 && TextCtrlKeywords2->GetValue().size() > 0)
+    if (TextCtrlKeywords->GetValue().size() > 0)
     {
         ButtonGetSamples->Enable();
     }
@@ -251,7 +240,7 @@ void OpenAlexImportDialog::OnTextCtrlKeywords2Text(wxCommandEvent& event)
 void OpenAlexImportDialog::OnTextCtrlKeywords1Text(wxCommandEvent& event)
 {
     ButtonOK->Disable();
-    if (TextCtrlKeywords1->GetValue().size() > 0 && TextCtrlKeywords2->GetValue().size() > 0)
+    if (TextCtrlKeywords->GetValue().size() > 0)
     {
         ButtonGetSamples->Enable();
     }

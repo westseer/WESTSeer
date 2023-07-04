@@ -34,13 +34,10 @@ class OpenAlexImportDialog: public wxDialog
 		wxListCtrl* ListCtrlSamples;
 		wxStaticText* StaticText1;
 		wxStaticText* StaticText2;
-		wxStaticText* StaticText3;
-		wxStaticText* StaticText4;
 		wxStaticText* StaticText5;
 		wxStaticText* StaticText6;
 		wxStaticText* StaticTextSamplingPrompt;
-		wxTextCtrl* TextCtrlKeywords1;
-		wxTextCtrl* TextCtrlKeywords2;
+		wxTextCtrl* TextCtrlKeywords;
 		wxTextCtrl* TextCtrlSampleAbstract;
 		//*)
 
@@ -49,9 +46,6 @@ class OpenAlexImportDialog: public wxDialog
 		//(*Identifiers(OpenAlexImportDialog)
 		static const long ID_STATICTEXT2;
 		static const long ID_TEXTCTRL2;
-		static const long ID_STATICTEXT3;
-		static const long ID_STATICTEXT4;
-		static const long ID_TEXTCTRL3;
 		static const long ID_BUTTON2;
 		static const long ID_STATICTEXT5;
 		static const long ID_GAUGE1;
@@ -119,8 +113,7 @@ class OpenAlexImportDialog: public wxDialog
                                 _dlg->showSamples(0);
                             }
                         }
-                        _dlg->TextCtrlKeywords1->Enable();
-                        _dlg->TextCtrlKeywords2->Enable();
+                        _dlg->TextCtrlKeywords->Enable();
                         _dlg->ButtonGetSamples->Enable();
                         _dlg->ButtonOK->Enable();
                         _dlg->ChoiceKeywordPair->Enable();

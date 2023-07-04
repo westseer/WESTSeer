@@ -2,6 +2,7 @@
 <wxsmith>
 	<object class="wxDialog" name="OpenAlexImportDialog">
 		<title>Import Data from OpenAlex</title>
+		<id_arg>0</id_arg>
 		<style>wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxBORDER_DOUBLE</style>
 		<object class="wxFlexGridSizer" variable="FlexGridSizer1" member="no">
 			<cols>1</cols>
@@ -13,39 +14,18 @@
 					<growablecols>1</growablecols>
 					<object class="sizeritem">
 						<object class="wxStaticText" name="ID_STATICTEXT2" variable="StaticText2" member="yes">
-							<label>Keywords in Group 1:</label>
+							<label>Keywords:</label>
 						</object>
-						<flag>wxALL|wxEXPAND</flag>
+						<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
 						<border>5</border>
 						<option>1</option>
 					</object>
 					<object class="sizeritem">
-						<object class="wxTextCtrl" name="ID_TEXTCTRL2" variable="TextCtrlKeywords1" member="yes">
+						<object class="wxTextCtrl" name="ID_TEXTCTRL2" variable="TextCtrlKeywords" member="yes">
+							<size>-1,150</size>
+							<tooltip>Seperate synonyms in each group with commas. Seperate groups with semicolons.</tooltip>
+							<style>wxTE_MULTILINE|wxTE_WORDWRAP|wxVSCROLL</style>
 							<handler function="OnTextCtrlKeywords1Text" entry="EVT_TEXT" />
-						</object>
-						<flag>wxALL|wxEXPAND</flag>
-						<border>5</border>
-						<option>1</option>
-					</object>
-					<object class="sizeritem">
-						<object class="wxStaticText" name="ID_STATICTEXT3" variable="StaticText3" member="yes">
-							<label>AND</label>
-						</object>
-						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
-						<border>5</border>
-						<option>1</option>
-					</object>
-					<object class="sizeritem">
-						<object class="wxStaticText" name="ID_STATICTEXT4" variable="StaticText4" member="yes">
-							<label>Keywords in Group 2</label>
-						</object>
-						<flag>wxALL|wxEXPAND</flag>
-						<border>5</border>
-						<option>1</option>
-					</object>
-					<object class="sizeritem">
-						<object class="wxTextCtrl" name="ID_TEXTCTRL3" variable="TextCtrlKeywords2" member="yes">
-							<handler function="OnTextCtrlKeywords2Text" entry="EVT_TEXT" />
 						</object>
 						<flag>wxALL|wxEXPAND</flag>
 						<border>5</border>
@@ -57,7 +37,7 @@
 							<enabled>0</enabled>
 							<handler function="OnButtonGetSamplesClick" entry="EVT_BUTTON" />
 						</object>
-						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<flag>wxALL|wxEXPAND</flag>
 						<border>5</border>
 						<option>1</option>
 					</object>

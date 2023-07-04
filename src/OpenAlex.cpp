@@ -43,13 +43,6 @@ void OpenAlex::init()
     _samplesOnly = false;
 }
 
-OpenAlex::OpenAlex(const std::string email, const std::string path,
-                   const std::string kws1, const std::string kws2) : _scope(path, kws1, kws2)
-{
-    _email = email;
-    init();
-}
-
 OpenAlex::OpenAlex(const std::string email, const std::string path, const std::string kws): _scope(path, kws)
 {
     _email = email;
@@ -259,6 +252,7 @@ void OpenAlex::doStep(int stepId)
             {
 				return;
 			}
+			std::this_thread::sleep_for(std::chrono::milliseconds(100));
 		}
 		_scope.save(refsOfY);
      }

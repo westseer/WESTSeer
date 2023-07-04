@@ -43,27 +43,17 @@ std::vector<std::string> ResearchScope::getResearchScopes(const std::string path
     return results;
 }
 
-ResearchScope::ResearchScope(const std::string path, const std::string kws1, const std::string kws2)
-{
-    //ctor
-    _path = path;
-    _kws1 = splitString(normalize(kws1), ",");
-    _kws2 = splitString(normalize(kws2), ",");
-    std::sort(_kws1.begin(), _kws1.end());
-    std::sort(_kws2.begin(), _kws2.end());
-}
-
 ResearchScope::ResearchScope(const std::string path, const std::string keywords)
 {
     //ctor
     _path = path;
-    std::vector<std::string> kws = splitString(keywords,";");
-    if (kws.size() != 2)
-        throw std::invalid_argument("invalid keywords");
-    _kws1 = splitString(kws[0], ",");
-    _kws2 = splitString(kws[1], ",");
-    std::sort(_kws1.begin(), _kws1.end());
-    std::sort(_kws2.begin(), _kws2.end());
+    std::vector<std::string> kwss = splitString(keywords,";");
+    for (std::string kwsStr: kwss)
+    {
+        std::vector<std::string> kws = splitString(kwsStr,",");
+        std::sort(kws.begin(), kws.end());
+        _kwss.push_back(kws);
+    }
 }
 
 ResearchScope::~ResearchScope()
@@ -349,22 +339,16 @@ bool ResearchScope::storable()
 std::string ResearchScope::getKeywords() const
 {
     std::stringstream ss;
-    for (size_t i = 0; i < _kws1.size(); i++)
+    for (size_t i1 = 0; i1 <_kwss.size(); i1++)
     {
-        if (i > 0)
+        if (i1 >0)
+            ss << ";";
+        for (size_t i2 = 0; i2 < _kwss[i1].size(); i2++)
         {
-            ss << ",";
+            if (i2 > 0)
+                ss << ",";
+            ss << _kwss[i1][i2];
         }
-        ss << _kws1[i];
-    }
-    ss << ";";
-    for (size_t i = 0; i < _kws2.size(); i++)
-    {
-        if (i > 0)
-        {
-            ss << ",";
-        }
-        ss << _kws2[i];
     }
     return ss.str();
 }
@@ -372,38 +356,47 @@ std::string ResearchScope::getKeywords() const
 std::string ResearchScope::getCombinations()
 {
     std::stringstream ss;
-    for (size_t i1 = 0; i1 < _kws1.size(); i1++)
+    int numCombs = numCombinations();
+    for (int i = 0; i < numCombs; i++)
     {
-        std::string s1 = _kws1[i1];
-        for (size_t i2 = 0; i2 < _kws2.size(); i2++)
-        {
-            if (i1 > 0 || i2 > 0)
-                ss << ",";
-            std::string s2 = _kws2[i2];
-            if (s1 < s2)
-                ss << s1 << "&" << s2;
-            else
-                ss << s2 << "&" << s1;
-        }
+        if (i > 0)
+            ss << ",";
+        ss << getCombination(i);
     }
+
     return ss.str();
 }
 
 int ResearchScope::numCombinations() const
 {
-    return _kws1.size() * _kws2.size();
+    size_t numCombs = 1;
+    for (size_t i1 = 0; i1 <_kwss.size(); i1++)
+    {
+        numCombs *= _kwss[i1].size();
+    }
+    return (int) numCombs;
 }
 
 std::string ResearchScope::getCombination(int i) const
 {
     int temp = i % numCombinations();
-    int i1 = temp % _kws1.size();
-    temp /= _kws1.size();
-    int i2 = temp;
-    if (_kws1[i1] < _kws2[i2])
-        return _kws1[i1] + "&" + _kws2[i2];
-    else
-        return _kws2[i2] + "&" + _kws1[i1];
+    std::vector<std::string> comb;
+    for (size_t i1 = 0; i1 < _kwss.size(); i1++)
+    {
+        int s1 = (int)_kwss[i1].size();
+        int i2 = temp % s1;
+        temp /= s1;
+        comb.push_back(_kwss[i1][i2]);
+    }
+    std::sort(comb.begin(), comb.end());
+    std::stringstream ss;
+    for (size_t i = 0; i < comb.size(); i++)
+    {
+        if (i > 0)
+            ss << "&";
+        ss << comb[i];
+    }
+    return ss.str();
 }
 
 int ResearchScope::numPublications(const int y) const

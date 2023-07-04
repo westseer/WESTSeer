@@ -1576,7 +1576,7 @@
 	"wx/longlong.h"
 	"wx/file.h"
 
-1688350136 d:\c++\westseer\include\wxffilelog.h
+1688496491 d:\c++\westseer\include\wxffilelog.h
 	<string>
 	<wx/wx.h>
 	<wx/log.h>
@@ -2869,7 +2869,7 @@
 	<wx/stattext.h>
 	<wx/textctrl.h>
 
-1688169264 source:d:\c++\westseer\openaleximportdialog.cpp
+1688462429 source:d:\c++\westseer\openaleximportdialog.cpp
 	"OpenAlexImportDialog.h"
 	<EmailValidator.h>
 	<GeneralConfig.h>
@@ -2877,7 +2877,7 @@
 	<wx/intl.h>
 	<wx/string.h>
 
-1688169264 d:\c++\westseer\openaleximportdialog.h
+1688462381 d:\c++\westseer\openaleximportdialog.h
 	<ProgressReporter.h>
 	<Publication.h>
 	<vector>
@@ -3379,7 +3379,7 @@
 1688169265 source:d:\c++\westseer\src\emailvalidator.cpp
 	"EmailValidator.h"
 
-1688169265 source:d:\c++\westseer\src\openalex.cpp
+1688496705 source:d:\c++\westseer\src\openalex.cpp
 	<OpenAlex.h>
 	<../WESTSeerApp.h>
 	<StringProcessing.h>
@@ -3391,7 +3391,7 @@
 	<algorithm>
 	<httplib.h>
 
-1688169264 d:\c++\westseer\include\openalex.h
+1688462510 d:\c++\westseer\include\openalex.h
 	<string>
 	<vector>
 	<map>
@@ -3402,7 +3402,7 @@
 	<ResearchScope.h>
 	<ProgressReporter.h>
 
-1688169264 d:\c++\westseer\include\researchscope.h
+1688453626 d:\c++\westseer\include\researchscope.h
 	<cstdint>
 	<string>
 	<vector>
@@ -3483,7 +3483,7 @@
 	<map>
 	<cassert>
 
-1688169265 source:d:\c++\westseer\src\researchscope.cpp
+1688454489 source:d:\c++\westseer\src\researchscope.cpp
 	"ResearchScope.h"
 	<algorithm>
 	<stdexcept>
@@ -3574,7 +3574,7 @@
 	<set>
 	<porter2_stemmer.h>
 
-1688347662 source:d:\c++\westseer\westseermain.cpp
+1688361554 source:d:\c++\westseer\westseermain.cpp
 	"WESTSeerMain.h"
 	"WESTSeerApp.h"
 	"OpenAlexImportDialog.h"

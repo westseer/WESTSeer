@@ -913,9 +913,18 @@ void WESTSeerFrame::OnExportWoSSelected(wxCommandEvent& event)
     std::string path = config.getDatabase();
     std::string kws = ChoiceScope->GetString(ChoiceScope->GetSelection()).ToStdString();
     ResearchScope scope(path, kws);
-    int ye = WESTSeerApp::year() - 5;
-    int yb = ye - 10;
-    scope.writeWoS(yb, ye, wosFileName);
+    if (_exploreMode)
+    {
+        int ye = WESTSeerApp::year();
+        int yb = ye - 15;
+        scope.writeWoS(yb, ye, wosFileName);
+    }
+    else
+    {
+        int ye = WESTSeerApp::year() - 5;
+        int yb = ye - 10;
+        scope.writeWoS(yb, ye, wosFileName);
+    }
 }
 
 void WESTSeerFrame::OnSaveResultsSelected(wxCommandEvent& event)

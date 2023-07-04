@@ -23,8 +23,6 @@ class OpenAlex: public AbstractTask {
 
 	public:
 		OpenAlex(const std::string email, const std::string path,
-            const std::string kws1, const std::string kws2);
-        OpenAlex(const std::string email, const std::string path,
             const std::string kws);
 		~OpenAlex();
 		virtual bool finished();

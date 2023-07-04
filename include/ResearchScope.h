@@ -11,7 +11,6 @@ class TopicIdentification;
 class ResearchScope
 {
     public:
-        ResearchScope(const std::string path, const std::string kws1, const std::string kws2);
         ResearchScope(const std::string path, const std::string keywords);
         virtual ~ResearchScope();
         std::string getKeywords() const;
@@ -44,8 +43,7 @@ class ResearchScope
 
     private:
         std::string _path;
-        std::vector<std::string> _kws1;
-        std::vector<std::string> _kws2;
+        std::vector<std::vector<std::string>> _kwss;
 };
 
 #endif // RESEARCHSCOPE_H
