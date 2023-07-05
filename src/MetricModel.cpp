@@ -79,6 +79,60 @@ std::map<uint64_t, std::vector<double>> getScores(std::string scoreStr)
     return scores;
 }
 
+bool MetricModel::load(const std::string keywords, int y, std::map<uint64_t, std::vector<double>> *scores)
+{
+    GeneralConfig config;
+    std::string path = config.getDatabase();
+
+    sqlite3 *db = NULL;
+    int rc = sqlite3_open(path.c_str(), &db);
+    if (rc != SQLITE_OK)
+    {
+        logError(wxT("Cannot open database at" + path));
+        return false;
+    }
+    char *errorMessage = NULL;
+
+    // step 1: load scope metric
+    if (scores != NULL)
+    {
+        CallbackData data;
+        std::stringstream ss;
+        ss << "SELECT keywords, year, scores FROM scope_metric WHERE keywords = '"
+            << keywords << "' AND year = " << y << ";";
+        std::string strSql = ss.str();
+        logDebug(strSql.c_str());
+        rc = sqlite3_exec(db, strSql.c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
+        if (rc != SQLITE_OK || data.results.size() == 0)
+        {
+            logDebug(errorMessage);
+            sqlite3_close(db);
+            return false;
+        }
+        *scores = getScores(data.results[0]["scores"]);
+    }
+    else
+    {
+        CallbackData data;
+        std::stringstream ss;
+        ss << "SELECT keywords, year FROM scope_metric WHERE keywords = '"
+            << keywords << "' AND year = " << y << ";";
+        std::string strSql = ss.str();
+        logDebug(strSql.c_str());
+        rc = sqlite3_exec(db, strSql.c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
+        if (rc != SQLITE_OK || data.results.size() == 0)
+        {
+            if (rc!=SQLITE_OK)
+                logDebug(errorMessage);
+            sqlite3_close(db);
+            return false;
+        }
+    }
+
+    sqlite3_close(db);
+    return true;
+}
+
 bool MetricModel::load(int y, std::map<uint64_t, std::vector<double>> *scores)
 {
     GeneralConfig config;
@@ -537,4 +591,46 @@ bool MetricModel::process(int y)
         scores[id] = myScores;
     }
     return save(y, scores);
+}
+
+std::vector<std::string> MetricModel::getScopesWithMetrics(const std::string path)
+{
+    std::vector<std::string> scopes = ResearchScope::getResearchScopes(path);
+    if (scopes.size() == 0)
+        return scopes;
+
+    std::vector<std::string> evaluatedScopes;
+    sqlite3 *db = NULL;
+    int rc = sqlite3_open(path.c_str(), &db);
+    if (rc != SQLITE_OK)
+    {
+        logError(wxT("Cannot open database at" + path));
+        return evaluatedScopes;
+    }
+    char *errorMessage = NULL;
+
+    // step 1: load scope metric
+    int y = WESTSeerApp::year();
+    for (std::string keywords: scopes)
+    {
+        CallbackData data;
+        std::stringstream ss;
+        ss << "SELECT keywords, year FROM scope_metric WHERE keywords = '"
+            << keywords << "' AND year = " << y << ";";
+        std::string strSql = ss.str();
+        logDebug(strSql.c_str());
+        rc = sqlite3_exec(db, strSql.c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
+        if (rc != SQLITE_OK)
+        {
+            logDebug(errorMessage);
+            continue;
+        }
+        if (data.results.size() > 0)
+        {
+            evaluatedScopes.push_back(keywords);
+        }
+    }
+
+    sqlite3_close(db);
+    return evaluatedScopes;
 }

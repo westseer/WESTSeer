@@ -19,6 +19,7 @@ class TopicIdentification: public AbstractTask
         virtual int numSteps();
         virtual void doStep(int stepId);
         bool load(int y, std::map<uint64_t,std::pair<std::string,std::string>> *topics);
+        static bool load(const std::string keywords, int y, std::map<uint64_t,std::pair<std::string,std::string>> *topics);
 
     protected:
         bool save(int y, std::map<uint64_t,std::pair<std::string,std::string>> &topics);

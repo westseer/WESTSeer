@@ -19,6 +19,7 @@ class TermExtraction: public AbstractTask
         virtual int numSteps();
         virtual void doStep(int stepId);
         bool load(int y, std::map<uint64_t, std::map<std::string, std::pair<std::string,int>>> *termFreqs, bool loadTerms = true);
+        static bool load(const std::string keywords, int y, std::map<uint64_t, std::map<std::string, std::pair<std::string,int>>> *termFreqs);
 
     protected:
         bool load(int y, std::map<uint64_t, std::vector<std::string>> &texts);

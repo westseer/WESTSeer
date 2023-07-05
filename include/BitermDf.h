@@ -16,6 +16,7 @@ class BitermDf: public AbstractTask
         virtual int numSteps();
         virtual void doStep(int stepId);
         bool load(int y, std::map<std::string, int> *bitermDfs);
+        static bool load(const std::string keywords, int y, std::map<std::string, int> *bitermDfs);
 
     protected:
         bool save(int y, const std::map<std::string, int> &bitermDfs);

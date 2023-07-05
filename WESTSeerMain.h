@@ -62,6 +62,7 @@ class WESTSeerFrame: public wxFrame
         void OnExportWoSSelected(wxCommandEvent& event);
         void OnSaveResultsSelected(wxCommandEvent& event);
         void OnNotebookInfoPageChanged(wxNotebookEvent& event);
+        void OnMenuFinishedScopesSelected(wxCommandEvent& event);
         //*)
 
         //(*Identifiers(WESTSeerFrame)
@@ -88,11 +89,9 @@ class WESTSeerFrame: public wxFrame
         static const long idMenuQuit;
         static const long ID_MENUITEM2;
         static const long ID_MENUITEM1;
+        static const long ID_MENUITEM8;
         static const long ID_MENUITEM6;
         static const long ID_MENUITEM7;
-        static const long ID_MENUITEM8;
-        static const long ID_MENUITEM9;
-        static const long ID_MENUITEM10;
         static const long idMenuAbout;
         static const long ID_STATUSBAR1;
         //*)
@@ -114,8 +113,6 @@ class WESTSeerFrame: public wxFrame
         wxMenuItem* MenuItem5;
         wxMenuItem* MenuItem6;
         wxMenuItem* MenuItem7;
-        wxMenuItem* MenuItemBackward;
-        wxMenuItem* MenuItemForward;
         wxMenuItem* MenuItemLog;
         wxMenuItem* MenuItemOptions;
         wxMenuItem* MenuItemSQL;

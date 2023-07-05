@@ -207,11 +207,18 @@ void OpenAlex::doStep(int stepId)
         // get new references
 		for (size_t idxRef0 = 0; idxRef0 < newRefIds.size(); idxRef0 += 50)
         {
-			size_t idxRef1 = idxRef0 + 50;
+            size_t idxRef1 = idxRef0 + 50;
 			if (idxRef1 > newRefIds.size())
 			{
 				idxRef1 = newRefIds.size();
 			}
+
+			{
+                std::stringstream ss;
+                ss << "getting " << idxRef0 << " to " << idxRef1 << " of " << newRefIds.size() << " new references";
+                logDebug(ss.str().c_str());
+            }
+
 
 			// create url
 			std::stringstream ssURL;

@@ -49,7 +49,7 @@ void BitermWeight::doStep(int stepId)
     process(_y0 + stepId);
 }
 
-bool BitermWeight::load(int y, std::map<uint64_t, std::map<std::string, double>> *bitermWeights)
+bool BitermWeight::load(const std::string keywords, int y, std::map<uint64_t, std::map<std::string, double>> *bitermWeights)
 {
     GeneralConfig config;
     std::string path = config.getDatabase();
@@ -65,7 +65,6 @@ bool BitermWeight::load(int y, std::map<uint64_t, std::map<std::string, double>>
     char *errorMessage = NULL;
 
     // step 1: load scope bitermWeights
-    std::string keywords = _scope.getKeywords();
     if (bitermWeights != NULL)
     {
         bitermWeights->clear();
@@ -113,6 +112,11 @@ bool BitermWeight::load(int y, std::map<uint64_t, std::map<std::string, double>>
     }
     sqlite3_close(db);
     return data.results.size() > 0;
+}
+
+bool BitermWeight::load(int y, std::map<uint64_t, std::map<std::string, double>> *bitermWeights)
+{
+    return load(_scope.getKeywords(), y, bitermWeights);
 }
 
 bool BitermWeight::save(int y, std::map<uint64_t, std::map<std::string, double>> &bitermWeights)

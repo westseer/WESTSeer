@@ -14,6 +14,7 @@ class PredictionModel: public AbstractTask
         virtual int numSteps();
         virtual void doStep(int stepId);
         bool load(int y, std::map<uint64_t, std::vector<double>> *prediction);
+        static bool load(const std::string keywords, int y, std::map<uint64_t, std::vector<double>> *prediction);
 
     protected:
         bool save(int y, std::map<uint64_t, std::vector<double>> &prediction);

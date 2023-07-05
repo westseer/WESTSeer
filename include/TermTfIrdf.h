@@ -15,6 +15,7 @@ class TermTfIrdf: public AbstractTask
         virtual int numSteps();
         virtual void doStep(int stepId);
         bool load(int y, std::map<uint64_t, std::map<std::string, double>> *tfirdfs, bool loadDfs = true);
+        static bool load(const std::string keywords, int y, std::map<uint64_t, std::map<std::string, double>> *tfirdfs);
 
     protected:
         bool save(int y, const std::map<uint64_t, std::map<std::string, double>> &tfirdfs);

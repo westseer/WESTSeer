@@ -49,7 +49,7 @@ void CandidateIdentification::doStep(int stepId)
         process(_y2 + 5);
 }
 
-bool CandidateIdentification::load(int y, std::vector<uint64_t> *candidates)
+bool CandidateIdentification::load(const std::string keywords, int y, std::vector<uint64_t> *candidates)
 {
     GeneralConfig config;
     std::string path = config.getDatabase();
@@ -65,7 +65,6 @@ bool CandidateIdentification::load(int y, std::vector<uint64_t> *candidates)
     char *errorMessage = NULL;
 
     // step 1: load scope candidates
-    std::string keywords = _scope.getKeywords();
     if (candidates != NULL)
     {
         candidates->clear();
@@ -108,6 +107,11 @@ bool CandidateIdentification::load(int y, std::vector<uint64_t> *candidates)
 
     sqlite3_close(db);
     return (data.results.size() > 0);
+}
+
+bool CandidateIdentification::load(int y, std::vector<uint64_t> *candidates)
+{
+    return load(_scope.getKeywords(), y, candidates);
 }
 
 bool CandidateIdentification::save(int y, const std::vector<uint64_t> &candidates)

@@ -49,7 +49,7 @@ void TimeSeriesExtraction::doStep(int stepId)
         process(_y2 + 5);
 }
 
-bool TimeSeriesExtraction::load(int y, std::map<uint64_t, TSM> *timeSeries)
+bool TimeSeriesExtraction::load(const std::string keywords, int y, std::map<uint64_t, TSM> *timeSeries)
 {
     GeneralConfig config;
     std::string path = config.getDatabase();
@@ -64,7 +64,6 @@ bool TimeSeriesExtraction::load(int y, std::map<uint64_t, TSM> *timeSeries)
     char *errorMessage = NULL;
 
     // step 1: load time series
-    std::string keywords = _scope.getKeywords();
     if (timeSeries != NULL)
     {
         CallbackData data;
@@ -117,6 +116,11 @@ bool TimeSeriesExtraction::load(int y, std::map<uint64_t, TSM> *timeSeries)
     }
     sqlite3_close(db);
     return true;
+}
+
+bool TimeSeriesExtraction::load(int y, std::map<uint64_t, TSM> *timeSeries)
+{
+    return load(_scope.getKeywords(), y, timeSeries);
 }
 
 bool TimeSeriesExtraction::save(int y, const std::map<uint64_t, TSM> &timeSeries)

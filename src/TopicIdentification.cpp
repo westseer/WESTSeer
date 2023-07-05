@@ -53,7 +53,7 @@ void TopicIdentification::doStep(int stepId)
         process(_y2 + 5);
 }
 
-bool TopicIdentification::load(int y, std::map<uint64_t,std::pair<std::string,std::string>> *topics)
+bool TopicIdentification::load(const std::string keywords, int y, std::map<uint64_t,std::pair<std::string,std::string>> *topics)
 {
     GeneralConfig config;
     std::string path = config.getDatabase();
@@ -68,7 +68,6 @@ bool TopicIdentification::load(int y, std::map<uint64_t,std::pair<std::string,st
     char *errorMessage = NULL;
 
     // step 1: load topics
-    std::string keywords = _scope.getKeywords();
     if (topics != NULL)
     {
         CallbackData data;
@@ -114,6 +113,11 @@ bool TopicIdentification::load(int y, std::map<uint64_t,std::pair<std::string,st
     }
     sqlite3_close(db);
     return true;
+}
+
+bool TopicIdentification::load(int y, std::map<uint64_t,std::pair<std::string,std::string>> *topics)
+{
+    return load(_scope.getKeywords(), y, topics);
 }
 
 bool TopicIdentification::save(int y, std::map<uint64_t,std::pair<std::string,std::string>> &topics)

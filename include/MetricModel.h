@@ -16,6 +16,8 @@ class MetricModel: public AbstractTask
         virtual int numSteps();
         virtual void doStep(int stepId);
         bool load(int y, std::map<uint64_t, std::vector<double>> *scores);
+        static bool load(const std::string keywords, int y, std::map<uint64_t, std::vector<double>> *scores);
+        static std::vector<std::string> getScopesWithMetrics(const std::string path);
 
     protected:
         bool save(int y, const std::map<uint64_t, std::vector<double>> &scores);

@@ -19,6 +19,7 @@ class TimeSeriesExtraction: public AbstractTask
         virtual int numSteps();
         virtual void doStep(int stepId);
         bool load(int y, std::map<uint64_t, TSM> *timeSeries);
+        static bool load(const std::string keywords, int y, std::map<uint64_t, TSM> *timeSeries);
 
     protected:
         bool save(int y, const std::map<uint64_t, TSM> &timeSeries);

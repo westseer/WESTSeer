@@ -304,6 +304,57 @@ bool TermExtraction::save(int y, const std::map<uint64_t, std::map<std::string, 
     return true;
 }
 
+bool TermExtraction::load(const std::string keywords, int y, std::map<uint64_t, std::map<std::string, std::pair<std::string,int>>> *termFreqs)
+{
+    GeneralConfig config;
+    std::string path = config.getDatabase();
+
+    sqlite3 *db = NULL;
+    int rc = sqlite3_open(path.c_str(), &db);
+    if (rc != SQLITE_OK)
+    {
+        logError(wxT("Cannot open database at" + path));
+        return false;
+    }
+    CallbackData data;
+    char *errorMessage = NULL;
+
+    // step 1: load publication scope terms
+    if (termFreqs != NULL)
+    {
+        termFreqs->clear();
+        {
+            std::stringstream ss;
+            ss << "SELECT id, scope_keywords, year, terms FROM pub_scope_terms WHERE scope_keywords = '"
+                << keywords << "' AND year = " << y << ";";
+            logDebug(ss.str().c_str());
+            rc = sqlite3_exec(db, ss.str().c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
+            if (rc != SQLITE_OK)
+            {
+                logDebug(errorMessage);
+                sqlite3_close(db);
+                return false;
+            }
+            for (auto &result: data.results)
+            {
+                std::map<std::string, std::pair<std::string,int>> myTermFreqs;
+                uint64_t id = std::stoull(result["id"]);
+                std::string strTermFreqs = result["terms"];
+                std::vector<std::string> fields = splitString(strTermFreqs, ",");
+                for (std::string field: fields)
+                {
+                    std::vector<std::string> kv = splitString(field, ":");
+                    std::pair<std::string,int> tf(kv[1],atoi(kv[2].c_str()));
+                    myTermFreqs[kv[0]] = tf;
+                }
+                (*termFreqs)[id] = myTermFreqs;
+            }
+        }
+    }
+    sqlite3_close(db);
+    return true;
+}
+
 bool TermExtraction::load(int y, std::map<uint64_t, std::map<std::string, std::pair<std::string, int>>> *termFreqs, bool loadTerms)
 {
     GeneralConfig config;

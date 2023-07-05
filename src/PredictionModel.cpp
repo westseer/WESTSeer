@@ -44,6 +44,45 @@ void PredictionModel::doStep(int stepId)
     process(stepId);
 }
 
+bool PredictionModel::load(const std::string keywords, int y, std::map<uint64_t, std::vector<double>> *prediction)
+{
+    GeneralConfig config;
+    std::string path = config.getDatabase();
+
+    sqlite3 *db = NULL;
+    int rc = sqlite3_open(path.c_str(), &db);
+    if (rc != SQLITE_OK)
+    {
+        logError(wxT("Cannot open database at" + path));
+        return false;
+    }
+    char *errorMessage = NULL;
+
+    if (prediction != NULL)
+    {
+        CallbackData data;
+        std::stringstream ss;
+        ss << "SELECT id, scope_keywords, year, rts FROM pub_scope_prediction WHERE scope_keywords = '"
+            << keywords << "' AND year = " << y << ";";
+        std::string strSql = ss.str();
+        rc = sqlite3_exec(db, strSql.c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
+        if (rc != SQLITE_OK)
+        {
+            logDebug(errorMessage);
+            sqlite3_close(db);
+            return false;
+        }
+        for (auto result: data.results)
+        {
+            uint64_t id = std::stoull(result["id"]);
+            std::vector<double> rts = getDoubleVector(result["rts"]);
+            (*prediction)[id] = rts;
+        }
+    }
+
+    return true;
+}
+
 bool PredictionModel::load(int y, std::map<uint64_t, std::vector<double>> *prediction)
 {
     GeneralConfig config;

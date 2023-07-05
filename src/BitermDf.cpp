@@ -64,7 +64,7 @@ void getBitermDfs(std::string strBdfs, std::map<std::string, int> *bitermDfs)
     }
 }
 
-bool BitermDf::load(int y, std::map<std::string, int> *bitermDfs)
+bool BitermDf::load(const std::string keywords, int y, std::map<std::string, int> *bitermDfs)
 {
     GeneralConfig config;
     std::string path = config.getDatabase();
@@ -80,7 +80,6 @@ bool BitermDf::load(int y, std::map<std::string, int> *bitermDfs)
     char *errorMessage = NULL;
 
     // step 1: load scope bitermDfs
-    std::string keywords = _scope.getKeywords();
     if (bitermDfs != NULL)
     {
         bitermDfs->clear();
@@ -128,6 +127,11 @@ bool BitermDf::load(int y, std::map<std::string, int> *bitermDfs)
 
     sqlite3_close(db);
     return data.results.size() > 0;
+}
+
+bool BitermDf::load(int y, std::map<std::string, int> *bitermDfs)
+{
+    return load(_scope.getKeywords(), y, bitermDfs);
 }
 
 std::string getStrBdfs(const std::map<std::string, int> &bitermDfs)

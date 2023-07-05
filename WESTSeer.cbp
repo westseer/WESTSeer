@@ -78,6 +78,8 @@
 			<Add library="ws2_32" />
 			<Add directory="lib" />
 		</Linker>
+		<Unit filename="FinishedScopeDialog.cpp" />
+		<Unit filename="FinishedScopeDialog.h" />
 		<Unit filename="LogDialog.cpp" />
 		<Unit filename="LogDialog.h" />
 		<Unit filename="OpenAlexImportDialog.cpp" />
@@ -161,6 +163,7 @@
 		<Unit filename="src/sqlite3.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="wxsmith/FinishedScopeDialog.wxs" />
 		<Unit filename="wxsmith/LogDialog.wxs" />
 		<Unit filename="wxsmith/OpenAlexImportDialog.wxs" />
 		<Unit filename="wxsmith/SQLDialog.wxs" />
@@ -176,6 +179,7 @@
 					<wxDialog wxs="wxsmith/SettingsDialog.wxs" src="SettingsDialog.cpp" hdr="SettingsDialog.h" fwddecl="0" i18n="1" name="SettingsDialog" language="CPP" />
 					<wxDialog wxs="wxsmith/OpenAlexImportDialog.wxs" src="OpenAlexImportDialog.cpp" hdr="OpenAlexImportDialog.h" fwddecl="0" i18n="1" name="OpenAlexImportDialog" language="CPP" />
 					<wxDialog wxs="wxsmith/SQLDialog.wxs" src="SQLDialog.cpp" hdr="SQLDialog.h" fwddecl="0" i18n="1" name="SQLDialog" language="CPP" />
+					<wxDialog wxs="wxsmith/FinishedScopeDialog.wxs" src="FinishedScopeDialog.cpp" hdr="FinishedScopeDialog.h" fwddecl="0" i18n="1" name="FinishedScopeDialog" language="CPP" />
 				</resources>
 			</wxsmith>
 		</Extensions>

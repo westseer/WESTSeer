@@ -157,6 +157,56 @@ bool TermTfIrdf::save(int y, const std::map<uint64_t, std::map<std::string, doub
     return true;
 }
 
+bool TermTfIrdf::load(const std::string keywords, int y, std::map<uint64_t, std::map<std::string, double>> *tfirdfs)
+{
+    GeneralConfig config;
+    std::string path = config.getDatabase();
+
+    sqlite3 *db = NULL;
+    int rc = sqlite3_open(path.c_str(), &db);
+    if (rc != SQLITE_OK)
+    {
+        logError(wxT("Cannot open database at" + path));
+        return false;
+    }
+    CallbackData data;
+    char *errorMessage = NULL;
+
+    // step 1: load publication scope tfirdfs
+    if (tfirdfs != NULL)
+    {
+        tfirdfs->clear();
+        {
+            std::stringstream ss;
+            ss << "SELECT id, scope_keywords, year, tfirdfs FROM pub_scope_tfirdfs WHERE scope_keywords = '"
+                << keywords << "' AND year = " << y << ";";
+            logDebug(ss.str().c_str());
+            rc = sqlite3_exec(db, ss.str().c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
+            if (rc != SQLITE_OK)
+            {
+                logDebug(errorMessage);
+                sqlite3_close(db);
+                return false;
+            }
+            for (auto &result: data.results)
+            {
+                std::map<std::string, double> myTfirdfs;
+                uint64_t id = std::stoull(result["id"]);
+                std::string strTfirdfs = result["tfirdfs"];
+                std::vector<std::string> fields = splitString(strTfirdfs, ",");
+                for (std::string field: fields)
+                {
+                    std::vector<std::string> kv = splitString(field, ":");
+                    myTfirdfs[kv[0]] = atof(kv[1].c_str());
+                }
+                (*tfirdfs)[id] = myTfirdfs;
+            }
+        }
+    }
+    sqlite3_close(db);
+    return true;
+}
+
 bool TermTfIrdf::load(int y, std::map<uint64_t, std::map<std::string, double>> *tfirdfs, bool loadDfs)
 {
     GeneralConfig config;
