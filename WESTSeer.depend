@@ -3379,7 +3379,7 @@
 1688169265 source:d:\c++\westseer\src\emailvalidator.cpp
 	"EmailValidator.h"
 
-1688496705 source:d:\c++\westseer\src\openalex.cpp
+1688512817 source:d:\c++\westseer\src\openalex.cpp
 	<OpenAlex.h>
 	<../WESTSeerApp.h>
 	<StringProcessing.h>
