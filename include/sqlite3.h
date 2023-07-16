@@ -38,6 +38,8 @@
 ** Make sure we can call this stuff from C++.
 */
 #ifdef __cplusplus
+#include <thread>
+#include <chrono>
 extern "C" {
 #endif
 
@@ -474,6 +476,25 @@ SQLITE_API int sqlite3_exec(
 #define SQLITE_ROW         100  /* sqlite3_step() has another row ready */
 #define SQLITE_DONE        101  /* sqlite3_step() has finished executing */
 /* end-of-error-codes */
+
+#ifdef __cplusplus
+inline int sqlite3x_exec(
+  sqlite3* db,                                  /* An open database */
+  const char *sql,                           /* SQL to be evaluated */
+  int (*callback)(void*,int,char**,char**),  /* Callback function */
+  void * data,                                    /* 1st argument to callback */
+  char **errmsg                              /* Error msg written here */
+)
+{
+    int rc = sqlite3_exec(db, sql, callback, data, errmsg);
+    while (rc == SQLITE_BUSY)
+    {
+        std::this_thread::sleep_for(std::chrono::milliseconds(rand() % 100));
+        rc = sqlite3_exec(db, sql, callback, data, errmsg);
+    }
+    return rc;
+}
+#endif
 
 /*
 ** CAPI3REF: Extended Result Codes

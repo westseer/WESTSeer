@@ -72,7 +72,7 @@ bool CandidateIdentification::load(const std::string keywords, int y, std::vecto
         ss << "SELECT keywords, year, candidates FROM scope_candidates WHERE keywords = '"
             << keywords << "' AND year = " << y << ";";
         logDebug(ss.str().c_str());
-        rc = sqlite3_exec(db, ss.str().c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
+        rc = sqlite3x_exec(db, ss.str().c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logDebug(errorMessage);
@@ -95,7 +95,7 @@ bool CandidateIdentification::load(const std::string keywords, int y, std::vecto
         ss << "SELECT keywords, year FROM scope_candidates WHERE keywords = '"
             << keywords << "' AND year = " << y << ";";
         logDebug(ss.str().c_str());
-        rc = sqlite3_exec(db, ss.str().c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
+        rc = sqlite3x_exec(db, ss.str().c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logDebug(errorMessage);
@@ -141,7 +141,7 @@ bool CandidateIdentification::save(int y, const std::vector<uint64_t> &candidate
     for (const char*sql: sqls)
     {
         logDebug(sql);
-        rc = sqlite3_exec(db, sql, NULL, NULL, &errorMessage);
+        rc = sqlite3x_exec(db, sql, NULL, NULL, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logError(errorMessage);
@@ -168,7 +168,7 @@ bool CandidateIdentification::save(int y, const std::vector<uint64_t> &candidate
         std::string strSql = ss.str();
         CallbackData::updateWriteCount(candidates.size(), strSql.size());
         logDebug(strSql.c_str());
-        rc = sqlite3_exec(db, strSql.c_str(), NULL, NULL, &errorMessage);
+        rc = sqlite3x_exec(db, strSql.c_str(), NULL, NULL, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logError(errorMessage);
@@ -257,7 +257,7 @@ bool CandidateIdentification::removeOneYear(const std::string keywords, int y)
         std::string strSql = ss.str();
         CallbackData::updateWriteCount(1, strSql.size());
         logDebug(strSql.c_str());
-        rc = sqlite3_exec(db, ss.str().c_str(), NULL, NULL, &errorMessage);
+        rc = sqlite3x_exec(db, ss.str().c_str(), NULL, NULL, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logError(errorMessage);

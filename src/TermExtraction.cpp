@@ -80,7 +80,7 @@ bool TermExtraction::load(int y, std::map<uint64_t, std::vector<std::string>> &t
            " WHERE combination = '" << _scope.getCombination(idxComb) << "' AND year = " << y << ";";
         std::string strSql = ss.str();
         logDebug(strSql.c_str());
-        rc = sqlite3_exec(db, strSql.c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
+        rc = sqlite3x_exec(db, strSql.c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logDebug(errorMessage);
@@ -119,7 +119,7 @@ bool TermExtraction::load(int y, std::map<uint64_t, std::vector<std::string>> &t
         ss << ");";
         std::string strSql = ss.str();
         logDebug(strSql.c_str());
-        rc = sqlite3_exec(db, strSql.c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
+        rc = sqlite3x_exec(db, strSql.c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logDebug(errorMessage);
@@ -155,7 +155,7 @@ bool TermExtraction::load(int y, std::map<uint64_t, std::vector<std::string>> &t
         }
         ss << ");";
         logDebug(ss.str().c_str());
-        rc = sqlite3_exec(db, ss.str().c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
+        rc = sqlite3x_exec(db, ss.str().c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logDebug(errorMessage);
@@ -242,7 +242,7 @@ bool TermExtraction::save(int y, const std::map<uint64_t, std::map<std::string, 
     for (const char*sql: sqls)
     {
         logDebug(sql);
-        rc = sqlite3_exec(db, sql, NULL, NULL, &errorMessage);
+        rc = sqlite3x_exec(db, sql, NULL, NULL, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logError(errorMessage);
@@ -276,7 +276,7 @@ bool TermExtraction::save(int y, const std::map<uint64_t, std::map<std::string, 
         std::string strSql = ss.str();
         CallbackData::updateWriteCount(termFreqs.size(), strSql.size());
         logDebug(strSql.c_str());
-        rc = sqlite3_exec(db, strSql.c_str(), NULL, NULL, &errorMessage);
+        rc = sqlite3x_exec(db, strSql.c_str(), NULL, NULL, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logError(errorMessage);
@@ -294,7 +294,7 @@ bool TermExtraction::save(int y, const std::map<uint64_t, std::map<std::string, 
         std::string strSql = ss.str();
         CallbackData::updateWriteCount(1, strSql.size());
         logDebug(strSql.c_str());
-        rc = sqlite3_exec(db, strSql.c_str(), NULL, NULL, &errorMessage);
+        rc = sqlite3x_exec(db, strSql.c_str(), NULL, NULL, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logError(errorMessage);
@@ -330,7 +330,7 @@ bool TermExtraction::load(const std::string keywords, int y, std::map<uint64_t, 
             ss << "SELECT id, scope_keywords, year, terms FROM pub_scope_terms WHERE scope_keywords = '"
                 << keywords << "' AND year = " << y << ";";
             logDebug(ss.str().c_str());
-            rc = sqlite3_exec(db, ss.str().c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
+            rc = sqlite3x_exec(db, ss.str().c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
             if (rc != SQLITE_OK)
             {
                 logDebug(errorMessage);
@@ -382,7 +382,7 @@ bool TermExtraction::load(int y, std::map<uint64_t, std::map<std::string, std::p
             ss << "SELECT id, scope_keywords, year, terms FROM pub_scope_terms WHERE scope_keywords = '"
                 << keywords << "' AND year = " << y << ";";
             logDebug(ss.str().c_str());
-            rc = sqlite3_exec(db, ss.str().c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
+            rc = sqlite3x_exec(db, ss.str().c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
             if (rc != SQLITE_OK)
             {
                 logDebug(errorMessage);
@@ -415,7 +415,7 @@ bool TermExtraction::load(int y, std::map<uint64_t, std::map<std::string, std::p
         ss << "SELECT keywords, year, terms FROM scope_terms WHERE keywords = '"
             << keywords << "' AND year = " << y << ";";
         logDebug(ss.str().c_str());
-        rc = sqlite3_exec(db, ss.str().c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
+        rc = sqlite3x_exec(db, ss.str().c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logDebug(errorMessage);
@@ -434,7 +434,7 @@ bool TermExtraction::load(int y, std::map<uint64_t, std::map<std::string, std::p
         ss << "SELECT keywords, year FROM scope_terms WHERE keywords = '"
             << keywords << "' AND year = " << y << ";";
         logDebug(ss.str().c_str());
-        rc = sqlite3_exec(db, ss.str().c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
+        rc = sqlite3x_exec(db, ss.str().c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logDebug(errorMessage);
@@ -670,7 +670,7 @@ bool TermExtraction::removeOneYear(const std::string keywords, int y)
         std::string strSql = ss.str();
         CallbackData::updateWriteCount(1, strSql.size());
         logDebug(strSql.c_str());
-        rc = sqlite3_exec(db, ss.str().c_str(), NULL, NULL, &errorMessage);
+        rc = sqlite3x_exec(db, ss.str().c_str(), NULL, NULL, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logError(errorMessage);
@@ -683,7 +683,7 @@ bool TermExtraction::removeOneYear(const std::string keywords, int y)
         std::string strSql = ss.str();
         CallbackData::updateWriteCount(1, strSql.size());
         logDebug(strSql.c_str());
-        rc = sqlite3_exec(db, ss.str().c_str(), NULL, NULL, &errorMessage);
+        rc = sqlite3x_exec(db, ss.str().c_str(), NULL, NULL, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logError(errorMessage);

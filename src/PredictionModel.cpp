@@ -65,7 +65,7 @@ bool PredictionModel::load(const std::string keywords, int y, std::map<uint64_t,
         ss << "SELECT id, scope_keywords, year, rts FROM pub_scope_prediction WHERE scope_keywords = '"
             << keywords << "' AND year = " << y << ";";
         std::string strSql = ss.str();
-        rc = sqlite3_exec(db, strSql.c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
+        rc = sqlite3x_exec(db, strSql.c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logDebug(errorMessage);
@@ -106,7 +106,7 @@ bool PredictionModel::load(int y, std::map<uint64_t, std::vector<double>> *predi
         ss << "SELECT id, scope_keywords, year, rts FROM pub_scope_prediction WHERE scope_keywords = '"
             << keywords << "' AND year = " << y << ";";
         std::string strSql = ss.str();
-        rc = sqlite3_exec(db, strSql.c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
+        rc = sqlite3x_exec(db, strSql.c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logDebug(errorMessage);
@@ -128,7 +128,7 @@ bool PredictionModel::load(int y, std::map<uint64_t, std::vector<double>> *predi
         ss << "SELECT keywords, year FROM scope_prediction_token WHERE keywords = '"
             << keywords << "' AND year = " << _y2 << ";";
         std::string strSql = ss.str();
-        rc = sqlite3_exec(db, strSql.c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
+        rc = sqlite3x_exec(db, strSql.c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logDebug(errorMessage);
@@ -178,7 +178,7 @@ bool PredictionModel::save(int y, std::map<uint64_t, std::vector<double>> &predi
     for (const char*sql: sqls)
     {
         logDebug(sql);
-        rc = sqlite3_exec(db, sql, NULL, NULL, &errorMessage);
+        rc = sqlite3x_exec(db, sql, NULL, NULL, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logError(errorMessage);
@@ -205,7 +205,7 @@ bool PredictionModel::save(int y, std::map<uint64_t, std::vector<double>> &predi
         std::string strSql = ss.str();
         CallbackData::updateWriteCount(prediction.size(), strSql.size());
         logDebug(strSql.c_str());
-        rc = sqlite3_exec(db, strSql.c_str(), NULL, NULL, &errorMessage);
+        rc = sqlite3x_exec(db, strSql.c_str(), NULL, NULL, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logError(errorMessage);
@@ -224,7 +224,7 @@ bool PredictionModel::save(int y, std::map<uint64_t, std::vector<double>> &predi
         std::string strSql = ss.str();
         CallbackData::updateWriteCount(1, strSql.size());
         logDebug(strSql.c_str());
-        rc = sqlite3_exec(db, strSql.c_str(), NULL, NULL, &errorMessage);
+        rc = sqlite3x_exec(db, strSql.c_str(), NULL, NULL, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logError(errorMessage);
@@ -295,7 +295,7 @@ bool PredictionModel::removeOneYear(const std::string keywords, int y)
         std::string strSql = ss.str();
         CallbackData::updateWriteCount(1, strSql.size());
         logDebug(strSql.c_str());
-        rc = sqlite3_exec(db, ss.str().c_str(), NULL, NULL, &errorMessage);
+        rc = sqlite3x_exec(db, ss.str().c_str(), NULL, NULL, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logError(errorMessage);
@@ -308,7 +308,7 @@ bool PredictionModel::removeOneYear(const std::string keywords, int y)
         std::string strSql = ss.str();
         CallbackData::updateWriteCount(1, strSql.size());
         logDebug(strSql.c_str());
-        rc = sqlite3_exec(db, ss.str().c_str(), NULL, NULL, &errorMessage);
+        rc = sqlite3x_exec(db, ss.str().c_str(), NULL, NULL, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logError(errorMessage);

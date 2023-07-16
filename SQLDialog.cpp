@@ -109,7 +109,7 @@ void SQLDialog::OnButtonExecuteClick(wxCommandEvent& event)
 
     CallbackData data(1000);
     char *errorMessage = NULL;
-    rc = sqlite3_exec(db, TextCtrlSQL->GetValue().ToAscii(), CallbackData::sqliteCallback, &data, &errorMessage);
+    rc = sqlite3x_exec(db, TextCtrlSQL->GetValue().ToAscii(), CallbackData::sqliteCallback, &data, &errorMessage);
     if (rc == SQLITE_OK || data.results.size() > 0)
     {
         if (data.results.size() > 0)

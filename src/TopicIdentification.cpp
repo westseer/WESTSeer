@@ -75,7 +75,7 @@ bool TopicIdentification::load(const std::string keywords, int y, std::map<uint6
         ss << "SELECT id, scope_keywords, year, topic FROM pub_scope_topics WHERE scope_keywords = '"
             << keywords << "' AND year = " << y << ";";
         std::string strSql = ss.str();
-        rc = sqlite3_exec(db, strSql.c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
+        rc = sqlite3x_exec(db, strSql.c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logDebug(errorMessage);
@@ -98,7 +98,7 @@ bool TopicIdentification::load(const std::string keywords, int y, std::map<uint6
         ss << "SELECT keywords, year FROM scope_topic_token WHERE keywords = '"
             << keywords << "' AND year = " << y << ";";
         std::string strSql = ss.str();
-        rc = sqlite3_exec(db, strSql.c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
+        rc = sqlite3x_exec(db, strSql.c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logDebug(errorMessage);
@@ -153,7 +153,7 @@ bool TopicIdentification::save(int y, std::map<uint64_t,std::pair<std::string,st
     for (const char*sql: sqls)
     {
         logDebug(sql);
-        rc = sqlite3_exec(db, sql, NULL, NULL, &errorMessage);
+        rc = sqlite3x_exec(db, sql, NULL, NULL, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logError(errorMessage);
@@ -180,7 +180,7 @@ bool TopicIdentification::save(int y, std::map<uint64_t,std::pair<std::string,st
         std::string strSql = ss.str();
         CallbackData::updateWriteCount(topics.size(), strSql.size());
         logDebug(strSql.c_str());
-        rc = sqlite3_exec(db, strSql.c_str(), NULL, NULL, &errorMessage);
+        rc = sqlite3x_exec(db, strSql.c_str(), NULL, NULL, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logError(errorMessage);
@@ -199,7 +199,7 @@ bool TopicIdentification::save(int y, std::map<uint64_t,std::pair<std::string,st
         std::string strSql = ss.str();
         CallbackData::updateWriteCount(1, strSql.size());
         logDebug(strSql.c_str());
-        rc = sqlite3_exec(db, strSql.c_str(), NULL, NULL, &errorMessage);
+        rc = sqlite3x_exec(db, strSql.c_str(), NULL, NULL, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logError(errorMessage);
@@ -552,7 +552,7 @@ bool TopicIdentification::removeOneYear(const std::string keywords, int y)
         std::string strSql = ss.str();
         CallbackData::updateWriteCount(1, strSql.size());
         logDebug(strSql.c_str());
-        rc = sqlite3_exec(db, ss.str().c_str(), NULL, NULL, &errorMessage);
+        rc = sqlite3x_exec(db, ss.str().c_str(), NULL, NULL, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logError(errorMessage);
@@ -565,7 +565,7 @@ bool TopicIdentification::removeOneYear(const std::string keywords, int y)
         std::string strSql = ss.str();
         CallbackData::updateWriteCount(1, strSql.size());
         logDebug(strSql.c_str());
-        rc = sqlite3_exec(db, ss.str().c_str(), NULL, NULL, &errorMessage);
+        rc = sqlite3x_exec(db, ss.str().c_str(), NULL, NULL, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logError(errorMessage);

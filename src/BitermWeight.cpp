@@ -73,7 +73,7 @@ bool BitermWeight::load(const std::string keywords, int y, std::map<uint64_t, st
             ss << "SELECT id, scope_keywords, year, biterm_weights FROM pub_scope_bws WHERE scope_keywords = '"
                 << keywords << "' AND year = " << y << ";";
             logDebug(ss.str().c_str());
-            rc = sqlite3_exec(db, ss.str().c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
+            rc = sqlite3x_exec(db, ss.str().c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
             if (rc != SQLITE_OK)
             {
                 logDebug(errorMessage);
@@ -102,7 +102,7 @@ bool BitermWeight::load(const std::string keywords, int y, std::map<uint64_t, st
         ss << "SELECT keywords, year FROM scope_bw_tokens WHERE keywords = '"
             << keywords << "' AND year = " << y << ";";
         logDebug(ss.str().c_str());
-        rc = sqlite3_exec(db, ss.str().c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
+        rc = sqlite3x_exec(db, ss.str().c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logDebug(errorMessage);
@@ -150,7 +150,7 @@ bool BitermWeight::load(const std::string keywords, const std::set<uint64_t>& id
             }
             ss << ");";
             logDebug(ss.str().c_str());
-            rc = sqlite3_exec(db, ss.str().c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
+            rc = sqlite3x_exec(db, ss.str().c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
             if (rc != SQLITE_OK)
             {
                 logDebug(errorMessage);
@@ -218,7 +218,7 @@ bool BitermWeight::save(int y, std::map<uint64_t, std::map<std::string, double>>
     for (const char*sql: sqls)
     {
         logDebug(sql);
-        rc = sqlite3_exec(db, sql, NULL, NULL, &errorMessage);
+        rc = sqlite3x_exec(db, sql, NULL, NULL, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logError(errorMessage);
@@ -263,7 +263,7 @@ bool BitermWeight::save(int y, std::map<uint64_t, std::map<std::string, double>>
             std::string strSql = ss.str();
             CallbackData::updateWriteCount(i1 - i0, strSql.size());
             logDebug(strSql.c_str());
-            rc = sqlite3_exec(db, strSql.c_str(), NULL, NULL, &errorMessage);
+            rc = sqlite3x_exec(db, strSql.c_str(), NULL, NULL, &errorMessage);
             if (rc != SQLITE_OK)
             {
                 logError(errorMessage);
@@ -284,7 +284,7 @@ bool BitermWeight::save(int y, std::map<uint64_t, std::map<std::string, double>>
         std::string strSql = ss.str();
         CallbackData::updateWriteCount(1, strSql.size());
         logDebug(strSql.c_str());
-        rc = sqlite3_exec(db, strSql.c_str(), NULL, NULL, &errorMessage);
+        rc = sqlite3x_exec(db, strSql.c_str(), NULL, NULL, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logError(errorMessage);
@@ -687,7 +687,7 @@ bool BitermWeight::removeOneYear(const std::string keywords, int y)
         std::string strSql = ss.str();
         CallbackData::updateWriteCount(1, strSql.size());
         logDebug(strSql.c_str());
-        rc = sqlite3_exec(db, ss.str().c_str(), NULL, NULL, &errorMessage);
+        rc = sqlite3x_exec(db, ss.str().c_str(), NULL, NULL, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logError(errorMessage);
@@ -700,7 +700,7 @@ bool BitermWeight::removeOneYear(const std::string keywords, int y)
         std::string strSql = ss.str();
         CallbackData::updateWriteCount(1, strSql.size());
         logDebug(strSql.c_str());
-        rc = sqlite3_exec(db, ss.str().c_str(), NULL, NULL, &errorMessage);
+        rc = sqlite3x_exec(db, ss.str().c_str(), NULL, NULL, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logError(errorMessage);

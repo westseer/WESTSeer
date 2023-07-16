@@ -89,7 +89,7 @@ bool TermTfIrdf::save(int y, const std::map<uint64_t, std::map<std::string, doub
     for (const char*sql: sqls)
     {
         logDebug(sql);
-        rc = sqlite3_exec(db, sql, NULL, NULL, &errorMessage);
+        rc = sqlite3x_exec(db, sql, NULL, NULL, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logError(errorMessage);
@@ -123,7 +123,7 @@ bool TermTfIrdf::save(int y, const std::map<uint64_t, std::map<std::string, doub
         std::string strSql = ss.str();
         CallbackData::updateWriteCount(tfirdfs.size(),strSql.size());
         logDebug(strSql.c_str());
-        rc = sqlite3_exec(db, strSql.c_str(), NULL, NULL, &errorMessage);
+        rc = sqlite3x_exec(db, strSql.c_str(), NULL, NULL, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logError(errorMessage);
@@ -147,7 +147,7 @@ bool TermTfIrdf::save(int y, const std::map<uint64_t, std::map<std::string, doub
         std::string strSql = ss.str();
         CallbackData::updateWriteCount(1, strSql.size());
         logDebug(strSql.c_str());
-        rc = sqlite3_exec(db, strSql.c_str(), NULL, NULL, &errorMessage);
+        rc = sqlite3x_exec(db, strSql.c_str(), NULL, NULL, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logError(errorMessage);
@@ -183,7 +183,7 @@ bool TermTfIrdf::load(const std::string keywords, int y, std::map<uint64_t, std:
             ss << "SELECT id, scope_keywords, year, tfirdfs FROM pub_scope_tfirdfs WHERE scope_keywords = '"
                 << keywords << "' AND year = " << y << ";";
             logDebug(ss.str().c_str());
-            rc = sqlite3_exec(db, ss.str().c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
+            rc = sqlite3x_exec(db, ss.str().c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
             if (rc != SQLITE_OK)
             {
                 logDebug(errorMessage);
@@ -240,7 +240,7 @@ bool TermTfIrdf::load(const std::string keywords, const std::set<uint64_t>& ids,
             }
             ss << ");";
             logDebug(ss.str().c_str());
-            rc = sqlite3_exec(db, ss.str().c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
+            rc = sqlite3x_exec(db, ss.str().c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
             if (rc != SQLITE_OK)
             {
                 logDebug(errorMessage);
@@ -291,7 +291,7 @@ bool TermTfIrdf::load(int y, std::map<uint64_t, std::map<std::string, double>> *
             ss << "SELECT id, scope_keywords, year, tfirdfs FROM pub_scope_tfirdfs WHERE scope_keywords = '"
                 << keywords << "' AND year = " << y << ";";
             logDebug(ss.str().c_str());
-            rc = sqlite3_exec(db, ss.str().c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
+            rc = sqlite3x_exec(db, ss.str().c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
             if (rc != SQLITE_OK)
             {
                 logDebug(errorMessage);
@@ -323,7 +323,7 @@ bool TermTfIrdf::load(int y, std::map<uint64_t, std::map<std::string, double>> *
         ss << "SELECT keywords, year, num_works, dfs FROM scope_dfs WHERE keywords = '"
             << keywords << "' AND year = " << y << ";";
         logDebug(ss.str().c_str());
-        rc = sqlite3_exec(db, ss.str().c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
+        rc = sqlite3x_exec(db, ss.str().c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logDebug(errorMessage);
@@ -349,7 +349,7 @@ bool TermTfIrdf::load(int y, std::map<uint64_t, std::map<std::string, double>> *
         ss << "SELECT keywords, year FROM scope_dfs WHERE keywords = '"
             << keywords << "' AND year = " << y << ";";
         logDebug(ss.str().c_str());
-        rc = sqlite3_exec(db, ss.str().c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
+        rc = sqlite3x_exec(db, ss.str().c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logDebug(errorMessage);
@@ -645,7 +645,7 @@ bool TermTfIrdf::removeOneYear(const std::string keywords, int y)
         std::string strSql = ss.str();
         CallbackData::updateWriteCount(1, strSql.size());
         logDebug(strSql.c_str());
-        rc = sqlite3_exec(db, ss.str().c_str(), NULL, NULL, &errorMessage);
+        rc = sqlite3x_exec(db, ss.str().c_str(), NULL, NULL, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logError(errorMessage);
@@ -658,7 +658,7 @@ bool TermTfIrdf::removeOneYear(const std::string keywords, int y)
         std::string strSql = ss.str();
         CallbackData::updateWriteCount(1, strSql.size());
         logDebug(strSql.c_str());
-        rc = sqlite3_exec(db, ss.str().c_str(), NULL, NULL, &errorMessage);
+        rc = sqlite3x_exec(db, ss.str().c_str(), NULL, NULL, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logError(errorMessage);

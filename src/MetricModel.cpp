@@ -128,7 +128,7 @@ bool MetricModel::load(const std::string keywords, int y, std::map<uint64_t, std
             << keywords << "' AND year = " << y << ";";
         std::string strSql = ss.str();
         logDebug(strSql.c_str());
-        rc = sqlite3_exec(db, strSql.c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
+        rc = sqlite3x_exec(db, strSql.c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
         if (rc != SQLITE_OK || data.results.size() == 0)
         {
             logDebug(errorMessage);
@@ -185,7 +185,7 @@ bool MetricModel::save(int y, const std::map<uint64_t, std::vector<double>> &sco
     for (const char*sql: sqls)
     {
         logDebug(sql);
-        rc = sqlite3_exec(db, sql, NULL, NULL, &errorMessage);
+        rc = sqlite3x_exec(db, sql, NULL, NULL, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logError(errorMessage);
@@ -205,7 +205,7 @@ bool MetricModel::save(int y, const std::map<uint64_t, std::vector<double>> &sco
         std::string strSql = ss.str();
         CallbackData::updateWriteCount(1,strSql.size());
         logDebug(strSql.c_str());
-        rc = sqlite3_exec(db, strSql.c_str(), NULL, NULL, &errorMessage);
+        rc = sqlite3x_exec(db, strSql.c_str(), NULL, NULL, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logError(errorMessage);
@@ -622,7 +622,7 @@ std::vector<std::string> MetricModel::getScopesWithMetrics(const std::string pat
             << keywords << "' AND year = " << y << ";";
         std::string strSql = ss.str();
         logDebug(strSql.c_str());
-        rc = sqlite3_exec(db, strSql.c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
+        rc = sqlite3x_exec(db, strSql.c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logDebug(errorMessage);
@@ -658,7 +658,7 @@ bool MetricModel::removeOneYear(const std::string keywords, int y)
         std::string strSql = ss.str();
         CallbackData::updateWriteCount(1, strSql.size());
         logDebug(strSql.c_str());
-        rc = sqlite3_exec(db, ss.str().c_str(), NULL, NULL, &errorMessage);
+        rc = sqlite3x_exec(db, ss.str().c_str(), NULL, NULL, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logError(errorMessage);

@@ -3340,8 +3340,10 @@
 
 1688169264 d:\c++\westseer\include\nlohmann\thirdparty\hedley\hedley_undef.hpp
 
-1688169264 d:\c++\westseer\include\sqlite3.h
+1689536709 d:\c++\westseer\include\sqlite3.h
 	<stdarg.h>
+	<thread>
+	<chrono>
 
 1688169264 d:\c++\westseer\include\emailvalidator.h
 	<string>
@@ -3358,7 +3360,7 @@
 	<wx/intl.h>
 	<wx/string.h>
 
-1688169264 source:d:\c++\westseer\sqldialog.cpp
+1689536791 source:d:\c++\westseer\sqldialog.cpp
 	"SQLDialog.h"
 	<algorithm>
 	<stdexcept>
@@ -3581,7 +3583,7 @@
 	<set>
 	<porter2_stemmer.h>
 
-1689478460 source:d:\c++\westseer\westseermain.cpp
+1689483997 source:d:\c++\westseer\westseermain.cpp
 	"WESTSeerMain.h"
 	"WESTSeerApp.h"
 	"OpenAlexImportDialog.h"
@@ -7429,7 +7431,7 @@
 	<PredictionModel.h>
 	<vector>
 
-1689451158 source:d:\c++\westseer\src\bitermdf.cpp
+1689536866 source:d:\c++\westseer\src\bitermdf.cpp
 	"BitermDf.h"
 	<../WESTSeerApp.h>
 	<GeneralConfig.h>
