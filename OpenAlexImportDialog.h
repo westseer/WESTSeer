@@ -22,6 +22,7 @@ class OpenAlexImportDialog: public wxDialog
 
 		OpenAlexImportDialog(wxWindow* parent,wxWindowID id=wxID_ANY);
 		virtual ~OpenAlexImportDialog();
+		std::string addScope();
 
 		OpenAlex *_openAlex;
 

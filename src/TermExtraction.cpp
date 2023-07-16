@@ -274,6 +274,7 @@ bool TermExtraction::save(int y, const std::map<uint64_t, std::map<std::string, 
         }
         ss << ";";
         std::string strSql = ss.str();
+        CallbackData::updateWriteCount(termFreqs.size(), strSql.size());
         logDebug(strSql.c_str());
         rc = sqlite3_exec(db, strSql.c_str(), NULL, NULL, &errorMessage);
         if (rc != SQLITE_OK)
@@ -291,6 +292,7 @@ bool TermExtraction::save(int y, const std::map<uint64_t, std::map<std::string, 
         ss << "INSERT OR IGNORE INTO scope_terms(keywords, year, update_time, terms) VALUES ('"
             << keywords << "'," << y << "," << (int)t <<",'" << terms << "');";
         std::string strSql = ss.str();
+        CallbackData::updateWriteCount(1, strSql.size());
         logDebug(strSql.c_str());
         rc = sqlite3_exec(db, strSql.c_str(), NULL, NULL, &errorMessage);
         if (rc != SQLITE_OK)
@@ -636,7 +638,7 @@ bool TermExtraction::process(int y)
         delete threads[tid];
     }
 
-    if (termFreqs.size() < texts.size())
+    if (_cancelled.load() == true || termFreqs.size() < texts.size())
         return false;
     // step 4: save extraction results
     save(y, termFreqs);
@@ -646,4 +648,48 @@ bool TermExtraction::process(int y)
         _stopWordMatcher.clear();
     }
     return true;
+}
+
+bool TermExtraction::removeOneYear(const std::string keywords, int y)
+{
+    GeneralConfig config;
+    std::string path = config.getDatabase();
+    sqlite3 *db = NULL;
+    int rc = sqlite3_open(path.c_str(), &db);
+    if (rc != SQLITE_OK)
+    {
+        logError(wxT("Cannot open database at" + path));
+        return false;
+    }
+    CallbackData data;
+    char *errorMessage = NULL;
+
+    {
+        std::stringstream ss;
+        ss << "DELETE FROM pub_scope_terms WHERE year = " << y << " AND scope_keywords = '" << keywords << "';";
+        std::string strSql = ss.str();
+        CallbackData::updateWriteCount(1, strSql.size());
+        logDebug(strSql.c_str());
+        rc = sqlite3_exec(db, ss.str().c_str(), NULL, NULL, &errorMessage);
+        if (rc != SQLITE_OK)
+        {
+            logError(errorMessage);
+        }
+    }
+
+    {
+        std::stringstream ss;
+        ss << "DELETE FROM scope_terms WHERE year = " << y << " AND keywords = '" << keywords << "';";
+        std::string strSql = ss.str();
+        CallbackData::updateWriteCount(1, strSql.size());
+        logDebug(strSql.c_str());
+        rc = sqlite3_exec(db, ss.str().c_str(), NULL, NULL, &errorMessage);
+        if (rc != SQLITE_OK)
+        {
+            logError(errorMessage);
+        }
+    }
+
+    sqlite3_close(db);
+    return rc == SQLITE_OK;
 }

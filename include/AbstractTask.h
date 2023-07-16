@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <thread>
 #include <atomic>
+#include <vector>
 #include <ProgressReporter.h>
 
 class AbstractTask
@@ -18,6 +19,8 @@ class AbstractTask
         static void cancel();
         static void setProgressReporter(ProgressReporter *value);
         static void finalize();
+        static std::vector<std::pair<std::string,std::string>> loadSchedule(bool *paused);
+        static bool saveSchedule(std::vector<std::pair<std::string,std::string>> &schedule, bool paused);
         inline void setPrev(AbstractTask *value)
         {
             _prev = value;
@@ -53,6 +56,14 @@ class AbstractTask
                 prev = prev->_prev;
             }
             return result;
+        }
+        inline static std::thread *taskThread()
+        {
+            return _taskThread;
+        }
+        inline static bool cancelled()
+        {
+            return _cancelled.load();
         }
 
     protected:

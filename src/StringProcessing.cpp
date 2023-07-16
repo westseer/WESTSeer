@@ -369,3 +369,29 @@ string simplifyTopic(const string &strTopic)
     }
     return ss.str();
 }
+
+vector<vector<string>> stemHLKWs(string text)
+{
+    vector<vector<string>> result;
+    vector<string> temp1 = splitString(normalize(text),";");
+    for (string s1:temp1)
+    {
+        vector<string> temp2 = splitString(s1,",");
+        vector<string> result1;
+        for (string s2:temp2)
+        {
+            vector<string> temp3 = tokenize(s2);
+            string s3;
+            for (size_t i = 0; i < temp3.size(); i++)
+            {
+                Porter2Stemmer::stem(temp3[i]);
+                if (i > 0)
+                    s3 += " ";
+                s3 += temp3[i];
+            }
+            result1.push_back(s3);
+        }
+        result.push_back(result1);
+    }
+    return result;
+}

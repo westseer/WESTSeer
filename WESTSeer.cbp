@@ -62,8 +62,6 @@
 			<Add option="-D__WXMSW__" />
 			<Add option="-DWXUSINGDLL" />
 			<Add option="-DwxUSE_UNICODE" />
-			<Add option="-DSQLITE_THREADSAFE=1" />
-			<Add option="-DTHREADSAFE=1" />
 			<Add directory="include" />
 		</Compiler>
 		<ResourceCompiler>
@@ -78,8 +76,10 @@
 			<Add library="ws2_32" />
 			<Add directory="lib" />
 		</Linker>
-		<Unit filename="FinishedScopeDialog.cpp" />
-		<Unit filename="FinishedScopeDialog.h" />
+		<Unit filename="AddScheduleDialog.cpp" />
+		<Unit filename="AddScheduleDialog.h" />
+		<Unit filename="DownloadsDialog.cpp" />
+		<Unit filename="DownloadsDialog.h" />
 		<Unit filename="LogDialog.cpp" />
 		<Unit filename="LogDialog.h" />
 		<Unit filename="OpenAlexImportDialog.cpp" />
@@ -87,6 +87,8 @@
 		<Unit filename="README.md" />
 		<Unit filename="SQLDialog.cpp" />
 		<Unit filename="SQLDialog.h" />
+		<Unit filename="SchedulesDialog.cpp" />
+		<Unit filename="SchedulesDialog.h" />
 		<Unit filename="SettingsDialog.cpp" />
 		<Unit filename="SettingsDialog.h" />
 		<Unit filename="WESTSeerApp.cpp" />
@@ -123,14 +125,6 @@
 		<Unit filename="include/sqlite3.h" />
 		<Unit filename="include/sqlite3ext.h" />
 		<Unit filename="include/wxFFileLog.h" />
-		<Unit filename="models/lstm_10.py" />
-		<Unit filename="models/lstm_3.py" />
-		<Unit filename="models/lstm_4.py" />
-		<Unit filename="models/lstm_5.py" />
-		<Unit filename="models/lstm_6.py" />
-		<Unit filename="models/lstm_7.py" />
-		<Unit filename="models/lstm_8.py" />
-		<Unit filename="models/lstm_9.py" />
 		<Unit filename="resource.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>
@@ -163,10 +157,12 @@
 		<Unit filename="src/sqlite3.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="wxsmith/FinishedScopeDialog.wxs" />
+		<Unit filename="wxsmith/AddScheduleDialog.wxs" />
+		<Unit filename="wxsmith/DownloadsDialog.wxs" />
 		<Unit filename="wxsmith/LogDialog.wxs" />
 		<Unit filename="wxsmith/OpenAlexImportDialog.wxs" />
 		<Unit filename="wxsmith/SQLDialog.wxs" />
+		<Unit filename="wxsmith/SchedulesDialog.wxs" />
 		<Unit filename="wxsmith/SettingsDialog.wxs" />
 		<Unit filename="wxsmith/WESTSeerframe.wxs" />
 		<Extensions>
@@ -180,6 +176,9 @@
 					<wxDialog wxs="wxsmith/OpenAlexImportDialog.wxs" src="OpenAlexImportDialog.cpp" hdr="OpenAlexImportDialog.h" fwddecl="0" i18n="1" name="OpenAlexImportDialog" language="CPP" />
 					<wxDialog wxs="wxsmith/SQLDialog.wxs" src="SQLDialog.cpp" hdr="SQLDialog.h" fwddecl="0" i18n="1" name="SQLDialog" language="CPP" />
 					<wxDialog wxs="wxsmith/FinishedScopeDialog.wxs" src="FinishedScopeDialog.cpp" hdr="FinishedScopeDialog.h" fwddecl="0" i18n="1" name="FinishedScopeDialog" language="CPP" />
+					<wxDialog wxs="wxsmith/DownloadsDialog.wxs" src="DownloadsDialog.cpp" hdr="DownloadsDialog.h" fwddecl="0" i18n="1" name="DownloadsDialog" language="CPP" />
+					<wxDialog wxs="wxsmith/SchedulesDialog.wxs" src="SchedulesDialog.cpp" hdr="SchedulesDialog.h" fwddecl="0" i18n="1" name="SchedulesDialog" language="CPP" />
+					<wxDialog wxs="wxsmith/AddScheduleDialog.wxs" src="AddScheduleDialog.cpp" hdr="AddScheduleDialog.h" fwddecl="0" i18n="1" name="AddScheduleDialog" language="CPP" />
 				</resources>
 			</wxsmith>
 		</Extensions>

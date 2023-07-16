@@ -193,6 +193,7 @@ bool TimeSeriesExtraction::save(int y, const std::map<uint64_t, TSM> &timeSeries
         }
         ss << ";";
         std::string strSql = ss.str();
+        CallbackData::updateWriteCount(timeSeries.size(), strSql.size());
         logDebug(strSql.c_str());
         rc = sqlite3_exec(db, strSql.c_str(), NULL, NULL, &errorMessage);
         if (rc != SQLITE_OK)
@@ -209,6 +210,7 @@ bool TimeSeriesExtraction::save(int y, const std::map<uint64_t, TSM> &timeSeries
         ss << "INSERT OR IGNORE INTO scope_time_series_token(keywords,year,update_time) VALUES ('"
             << keywords << "'," << y << "," << (int) t << ");";
         std::string strSql = ss.str();
+        CallbackData::updateWriteCount(1, strSql.size());
         logDebug(strSql.c_str());
         rc = sqlite3_exec(db, strSql.c_str(), NULL, NULL, &errorMessage);
         if (rc != SQLITE_OK)
@@ -235,11 +237,15 @@ bool TimeSeriesExtraction::process(int y)
         std::vector<uint64_t> candidates;
         if (!_ci->load(y, &candidates))
             return false;
+        if (cancelled())
+            return false;
         for (int i = 0; i < (int)candidates.size(); i++)
         {
             candidateMap[candidates[i]] = i;
         }
     }
+    if (cancelled())
+        return false;
     if (candidateMap.size() == 0)
     {
         save(y, timeSeries);
@@ -262,6 +268,8 @@ bool TimeSeriesExtraction::process(int y)
     std::map<uint64_t,std::pair<std::string,std::string>> topics;
     if (!_ti->load(y, &topics))
         return false;
+    if (cancelled())
+        return false;
 
     // step 3: create mapping that maps biterm to candidates
     std::map<std::string, std::vector<uint64_t>> bitermCandidatePositions;
@@ -283,6 +291,8 @@ bool TimeSeriesExtraction::process(int y)
                 bitermCandidatePositions[biterms[i]].push_back(cid);
             }
         }
+        if (cancelled())
+            return false;
     }
 
     // step 4: scan through publications to find biterm hits
@@ -296,9 +306,13 @@ bool TimeSeriesExtraction::process(int y)
         std::map<uint64_t, std::vector<uint64_t>> pubs;
         if (!_scope.getExistingRefIds(yi, pubs))
             return false;
+        if (cancelled())
+            return false;
 
         std::map<uint64_t, std::map<std::string, double>> pubBWs;
         if (!_bw->load(yi, &pubBWs))
+            return false;
+        if (cancelled())
             return false;
 
         for (auto &idToBWs: pubBWs)
@@ -338,7 +352,13 @@ bool TimeSeriesExtraction::process(int y)
                 int iC = candidateMap[cid];
                 topicHits[iC][iY]++;
             }
+
+            if (cancelled())
+                return false;
         }
+
+        if (cancelled())
+            return false;
     }
 
     // step 5: encode hits to time series
@@ -361,9 +381,58 @@ bool TimeSeriesExtraction::process(int y)
         std::pair<std::vector<int>,std::vector<int>> topicTs(topicLts,topicRts);
         TSM tsm(ts,topicTs);
         timeSeries[id] = tsm;
+
+        if (cancelled())
+            return false;
     }
 
     // step 8: save time series
+    if (cancelled())
+        return false;
     save(y, timeSeries);
     return true;
+}
+
+bool TimeSeriesExtraction::removeOneYear(const std::string keywords, int y)
+{
+    GeneralConfig config;
+    std::string path = config.getDatabase();
+    sqlite3 *db = NULL;
+    int rc = sqlite3_open(path.c_str(), &db);
+    if (rc != SQLITE_OK)
+    {
+        logError(wxT("Cannot open database at" + path));
+        return false;
+    }
+    CallbackData data;
+    char *errorMessage = NULL;
+
+    {
+        std::stringstream ss;
+        ss << "DELETE FROM pub_scope_time_series WHERE year = " << y << " AND scope_keywords = '" << keywords << "';";
+        std::string strSql = ss.str();
+        CallbackData::updateWriteCount(1, strSql.size());
+        logDebug(strSql.c_str());
+        rc = sqlite3_exec(db, ss.str().c_str(), NULL, NULL, &errorMessage);
+        if (rc != SQLITE_OK)
+        {
+            logError(errorMessage);
+        }
+    }
+
+    {
+        std::stringstream ss;
+        ss << "DELETE FROM scope_time_series_token WHERE year = " << y << " AND keywords = '" << keywords << "';";
+        std::string strSql = ss.str();
+        CallbackData::updateWriteCount(1, strSql.size());
+        logDebug(strSql.c_str());
+        rc = sqlite3_exec(db, ss.str().c_str(), NULL, NULL, &errorMessage);
+        if (rc != SQLITE_OK)
+        {
+            logError(errorMessage);
+        }
+    }
+
+    sqlite3_close(db);
+    return rc == SQLITE_OK;
 }

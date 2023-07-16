@@ -121,6 +121,7 @@ bool TermTfIrdf::save(int y, const std::map<uint64_t, std::map<std::string, doub
         }
         ss << ";";
         std::string strSql = ss.str();
+        CallbackData::updateWriteCount(tfirdfs.size(),strSql.size());
         logDebug(strSql.c_str());
         rc = sqlite3_exec(db, strSql.c_str(), NULL, NULL, &errorMessage);
         if (rc != SQLITE_OK)
@@ -144,6 +145,7 @@ bool TermTfIrdf::save(int y, const std::map<uint64_t, std::map<std::string, doub
         }
         ss << "');";
         std::string strSql = ss.str();
+        CallbackData::updateWriteCount(1, strSql.size());
         logDebug(strSql.c_str());
         rc = sqlite3_exec(db, strSql.c_str(), NULL, NULL, &errorMessage);
         if (rc != SQLITE_OK)
@@ -180,6 +182,63 @@ bool TermTfIrdf::load(const std::string keywords, int y, std::map<uint64_t, std:
             std::stringstream ss;
             ss << "SELECT id, scope_keywords, year, tfirdfs FROM pub_scope_tfirdfs WHERE scope_keywords = '"
                 << keywords << "' AND year = " << y << ";";
+            logDebug(ss.str().c_str());
+            rc = sqlite3_exec(db, ss.str().c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
+            if (rc != SQLITE_OK)
+            {
+                logDebug(errorMessage);
+                sqlite3_close(db);
+                return false;
+            }
+            for (auto &result: data.results)
+            {
+                std::map<std::string, double> myTfirdfs;
+                uint64_t id = std::stoull(result["id"]);
+                std::string strTfirdfs = result["tfirdfs"];
+                std::vector<std::string> fields = splitString(strTfirdfs, ",");
+                for (std::string field: fields)
+                {
+                    std::vector<std::string> kv = splitString(field, ":");
+                    myTfirdfs[kv[0]] = atof(kv[1].c_str());
+                }
+                (*tfirdfs)[id] = myTfirdfs;
+            }
+        }
+    }
+    sqlite3_close(db);
+    return true;
+}
+
+bool TermTfIrdf::load(const std::string keywords, const std::set<uint64_t>& ids, std::map<uint64_t, std::map<std::string, double>> *tfirdfs)
+{
+    GeneralConfig config;
+    std::string path = config.getDatabase();
+
+    sqlite3 *db = NULL;
+    int rc = sqlite3_open(path.c_str(), &db);
+    if (rc != SQLITE_OK)
+    {
+        logError(wxT("Cannot open database at" + path));
+        return false;
+    }
+    CallbackData data;
+    char *errorMessage = NULL;
+
+    // step 1: load publication scope tfirdfs
+    if (tfirdfs != NULL)
+    {
+        tfirdfs->clear();
+        {
+            std::stringstream ss;
+            ss << "SELECT id, scope_keywords, tfirdfs FROM pub_scope_tfirdfs WHERE scope_keywords = '"
+                << keywords << "' AND id in (";
+            for (auto iter = ids.begin(); iter != ids.end(); iter++)
+            {
+                if (iter != ids.begin())
+                    ss << ",";
+                ss << *iter;
+            }
+            ss << ");";
             logDebug(ss.str().c_str());
             rc = sqlite3_exec(db, ss.str().c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
             if (rc != SQLITE_OK)
@@ -397,10 +456,215 @@ bool TermTfIrdf::process(int y)
         delete threads[tid];
     }
 
-    if (tfirdfs.size() < termFreqs.size())
+    if (_cancelled.load() == true || tfirdfs.size() < termFreqs.size())
         return false;
 
     // step 4: save results
     save(y, tfirdfs);
     return true;
+}
+
+std::map<uint64_t, std::map<uint64_t, std::vector<double>>> TermTfIrdf::getCitationHighlights(const std::string keywords,
+        const std::map<uint64_t,std::vector<uint64_t>> &citations, const std::vector<std::vector<std::string>> &highlightKWs)
+{
+    // step 1: get the set of citation ids and the set of highlight kws
+    std::map<uint64_t, std::map<uint64_t, std::vector<double>>> highlights;
+    std::vector<std::set<std::string>> hkws;
+    for (size_t i1 = 0; i1 < highlightKWs.size(); i1++)
+    {
+        std::set<std::string> myHkws;
+        for (size_t i2 = 0; i2 < highlightKWs[i1].size(); i2++)
+        {
+            myHkws.insert(highlightKWs[i1][i2]);
+        }
+        hkws.push_back(myHkws);
+    }
+    if (hkws.size() == 0)
+        return highlights;
+    if (cancelled())
+        return highlights;
+
+    std::set<uint64_t> cids;
+    for (auto &idToCids: citations)
+    {
+        cids.insert(idToCids.second.begin(), idToCids.second.end());
+    }
+    if (cancelled())
+        return highlights;
+
+    // step 2: get these cid's term tfirdfs
+    std::map<uint64_t, std::map<std::string, double>> tfirdfs;
+    if (!load(keywords, cids, &tfirdfs))
+        return highlights;
+    if (cancelled())
+        return highlights;
+
+    // step 3: get highlight weights of these citations
+    std::map<uint64_t, std::vector<double>> cHighlights;
+    std::queue<uint64_t> q;
+    std::mutex mq;
+    for (auto iter = tfirdfs.begin(); iter != tfirdfs.end(); iter++)
+    {
+        q.push(iter->first);
+    }
+    int nThreads = std::thread::hardware_concurrency();
+    std::thread *threads[nThreads];
+    std::vector<double> zeros(hkws.size());
+    for (size_t i = 0; i < hkws.size(); i++)
+    {
+        zeros[i] = 0.0;
+    }
+    for (int tid = 0; tid < nThreads; tid++)
+    {
+        threads[tid] = new std::thread([&q, &mq, &hkws, &tfirdfs, &cHighlights,&zeros]
+            {
+                std::map<uint64_t, std::vector<double>> myCHighlights;
+                const double sqrt2 = sqrt(2);
+                for (;;)
+                {
+                    // get id and my tfirdfs
+                    std::map<std::string, double> myTfirdfs;
+                    uint64_t id = 0;
+                    {
+                        std::lock_guard<std::mutex> lock(mq);
+                        if (!q.empty())
+                        {
+                            id = q.front();
+                            q.pop();
+                            myTfirdfs = tfirdfs[id];
+                        }
+                        else
+                            break;
+                    }
+                    if (cancelled())
+                        return;
+
+                    if (myTfirdfs.size() == 0)
+                    {
+                        myCHighlights[id] = zeros;
+                        continue;
+                    }
+
+                    // compute mean and variance of tfirdfs
+                    double sum1 = 0, sum2 = 0;
+                    for (auto termToW = myTfirdfs.begin(); termToW != myTfirdfs.end(); termToW++)
+                    {
+                        sum1 += termToW->second;
+                        sum2 += termToW->second * termToW->second;
+                    }
+                    double mean = sum1 / myTfirdfs.size();
+                    double varSqr = sum2 / myTfirdfs.size() - mean * mean;
+                    double var = varSqr < 0 ? 0 : sqrt(varSqr);
+                    if (cancelled())
+                        return;
+
+                    // compute the sum of normalized weights and the sum of highlight weights
+                    double maxNorm = 1e-6;
+                    std::vector<double> maxHigh(hkws.size());
+                    for (size_t i = 0; i < hkws.size(); i++)
+                    {
+                        maxHigh[i] = 0;
+                    }
+                    for (auto termToW = myTfirdfs.begin(); termToW != myTfirdfs.end(); termToW++)
+                    {
+                        double w = 0.5 + 0.5 * erf((termToW->second - mean) / (sqrt2 * var));
+                        if (w > maxNorm)
+                            maxNorm = w;
+                        for (size_t i = 0; i < hkws.size(); i++)
+                        {
+                            if (hkws[i].find(termToW->first) != hkws[i].end() && w > maxHigh[i])
+                                maxHigh[i] = w;
+                        }
+
+                    }
+                    if (cancelled())
+                        return;
+
+                    for (size_t i = 0; i < maxHigh.size(); i++)
+                    {
+                        maxHigh[i] /= maxNorm;
+                    }
+                    myCHighlights[id] = maxHigh;
+
+                    if (_cancelled.load() == true)
+                    {
+                        return;
+                    }
+                }
+                if (myCHighlights.size() > 0)
+                {
+                    std::lock_guard<std::mutex> lock(mq);
+                    cHighlights.insert(myCHighlights.begin(), myCHighlights.end());
+                }
+            });
+    }
+    for (int tid = 0; tid < nThreads; tid++)
+    {
+        threads[tid]->join();
+        delete threads[tid];
+    }
+    if (cancelled())
+        return highlights;
+
+    // step 4: assemble highlights from cHighlights
+    for (auto &idToCids: citations)
+    {
+        std::map<uint64_t, std::vector<double>> myH;
+        for (auto cid: idToCids.second)
+        {
+            auto myCH = cHighlights.find(cid);
+            if (myCH != cHighlights.end())
+                myH[cid] = myCH->second;
+            else
+                myH[cid] = zeros;
+        }
+        highlights[idToCids.first] = myH;
+        if (cancelled())
+            return highlights;
+    }
+    return highlights;
+}
+
+bool TermTfIrdf::removeOneYear(const std::string keywords, int y)
+{
+    GeneralConfig config;
+    std::string path = config.getDatabase();
+    sqlite3 *db = NULL;
+    int rc = sqlite3_open(path.c_str(), &db);
+    if (rc != SQLITE_OK)
+    {
+        logError(wxT("Cannot open database at" + path));
+        return false;
+    }
+    CallbackData data;
+    char *errorMessage = NULL;
+
+    {
+        std::stringstream ss;
+        ss << "DELETE FROM pub_scope_tfirdfs WHERE year = " << y << " AND scope_keywords = '" << keywords << "';";
+        std::string strSql = ss.str();
+        CallbackData::updateWriteCount(1, strSql.size());
+        logDebug(strSql.c_str());
+        rc = sqlite3_exec(db, ss.str().c_str(), NULL, NULL, &errorMessage);
+        if (rc != SQLITE_OK)
+        {
+            logError(errorMessage);
+        }
+    }
+
+    {
+        std::stringstream ss;
+        ss << "DELETE FROM scope_dfs WHERE year = " << y << " AND keywords = '" << keywords << "';";
+        std::string strSql = ss.str();
+        CallbackData::updateWriteCount(1, strSql.size());
+        logDebug(strSql.c_str());
+        rc = sqlite3_exec(db, ss.str().c_str(), NULL, NULL, &errorMessage);
+        if (rc != SQLITE_OK)
+        {
+            logError(errorMessage);
+        }
+    }
+
+    sqlite3_close(db);
+    return rc == SQLITE_OK;
 }

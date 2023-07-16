@@ -16,6 +16,11 @@ class TermTfIrdf: public AbstractTask
         virtual void doStep(int stepId);
         bool load(int y, std::map<uint64_t, std::map<std::string, double>> *tfirdfs, bool loadDfs = true);
         static bool load(const std::string keywords, int y, std::map<uint64_t, std::map<std::string, double>> *tfirdfs);
+        static bool load(const std::string keywords, const std::set<uint64_t>& ids, std::map<uint64_t, std::map<std::string, double>> *tfirdfs);
+        static bool removeOneYear(const std::string keywords, int y);
+        static std::map<uint64_t, std::map<uint64_t, std::vector<double>>> getCitationHighlights(const std::string keywords,
+                                                                                 const std::map<uint64_t,std::vector<uint64_t>> &citations,
+                                                                                 const std::vector<std::vector<std::string>> &highlightKWs);
 
     protected:
         bool save(int y, const std::map<uint64_t, std::map<std::string, double>> &tfirdfs);

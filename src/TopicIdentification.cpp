@@ -178,6 +178,7 @@ bool TopicIdentification::save(int y, std::map<uint64_t,std::pair<std::string,st
         }
         ss << ";";
         std::string strSql = ss.str();
+        CallbackData::updateWriteCount(topics.size(), strSql.size());
         logDebug(strSql.c_str());
         rc = sqlite3_exec(db, strSql.c_str(), NULL, NULL, &errorMessage);
         if (rc != SQLITE_OK)
@@ -196,6 +197,7 @@ bool TopicIdentification::save(int y, std::map<uint64_t,std::pair<std::string,st
         ss << "INSERT OR IGNORE INTO scope_topic_token(keywords, year, update_time) VALUES ('"
             << keywords << "'," << y << "," << (int)t << ");";
         std::string strSql = ss.str();
+        CallbackData::updateWriteCount(1, strSql.size());
         logDebug(strSql.c_str());
         rc = sqlite3_exec(db, strSql.c_str(), NULL, NULL, &errorMessage);
         if (rc != SQLITE_OK)
@@ -223,8 +225,12 @@ bool TopicIdentification::process(int y)
         std::vector<uint64_t> candidates;
         if (!_ci->load(y, &candidates))
             return false;
+        if (cancelled())
+            return false;
         candidateSet.insert(candidates.begin(), candidates.end());
     }
+    if (cancelled())
+        return false;
     if (candidateSet.size() == 0)
     {
         return save(y, topics);
@@ -238,6 +244,8 @@ bool TopicIdentification::process(int y)
         int yi = y - 6 - i;
         std::map<uint64_t, std::vector<uint64_t>> pubs;
         if (!_scope.getExistingRefIds(yi, pubs))
+            return false;
+        if (cancelled())
             return false;
         for (auto &idToRefIds: pubs)
         {
@@ -259,6 +267,8 @@ bool TopicIdentification::process(int y)
                     }
                 }
             }
+            if (cancelled())
+                return false;
         }
     }
 
@@ -270,6 +280,8 @@ bool TopicIdentification::process(int y)
         int yi = y - 6 - i;
         std::map<uint64_t, std::map<std::string, std::pair<std::string,int>>> pubTermsOfYi;
         if (!_te->load(yi, &pubTermsOfYi, false))
+            return false;
+        if (cancelled())
             return false;
         pubTerms.insert(pubTermsOfYi.begin(), pubTermsOfYi.end());
     }
@@ -283,6 +295,8 @@ bool TopicIdentification::process(int y)
         std::map<uint64_t, std::map<std::string, double>> pubBWsOfYi;
         if (!_bw->load(yi, &pubBWsOfYi))
             return false;
+        if (cancelled())
+            return false;
         pubBWs.insert(pubBWsOfYi.begin(), pubBWsOfYi.end());
     }
 
@@ -295,6 +309,8 @@ bool TopicIdentification::process(int y)
     {
         q.push(c);
     }
+    if (cancelled())
+        return false;
     std::mutex mq;
 
     int nThreads = std::thread::hardware_concurrency();
@@ -315,6 +331,8 @@ bool TopicIdentification::process(int y)
                     }
                 }
                 if (cid == 0)
+                    return;
+                if (cancelled())
                     return;
 
                 // create counters for the biterms
@@ -360,9 +378,14 @@ bool TopicIdentification::process(int y)
                             sumBWs[bToW.first] = w;
                         }
                     }
+
+                    if (cancelled())
+                        return;
                 }
 
                 // find top k biterms
+                if (cancelled())
+                    return;
                 std::vector<double> ws;
                 for (auto bToSumW: sumBWs)
                 {
@@ -383,6 +406,8 @@ bool TopicIdentification::process(int y)
                     }
                 }
                 // handles the situation where some top k weights equal threshold
+                if (cancelled())
+                    return;
                 if (topKBiterms.size() < numBitermsPerTopic && topKBiterms.size() < sumBWs.size())
                 {
                     for (auto bToSumW: sumBWs)
@@ -397,6 +422,8 @@ bool TopicIdentification::process(int y)
                 }
 
                 // find the most frequent representations of the top k biterms
+                if (cancelled())
+                    return;
                 std::vector<std::string> topKBiterms2;
                 topKBiterms2.resize(topKBiterms.size());
                 for (size_t i = 0; i < topKBiterms.size(); i++)
@@ -466,6 +493,8 @@ bool TopicIdentification::process(int y)
                     }
 
                     topKBiterms2[i] = term1 + "&" + term2;
+                    if (cancelled())
+                        return;
                 }
 
                 // create topic representation
@@ -480,6 +509,8 @@ bool TopicIdentification::process(int y)
                     rep1 += topKBiterms[i];
                     rep2 += topKBiterms2[i];
                 }
+                if (cancelled())
+                    return;
 
                 // record topic
                 std::pair<std::string,std::string> topic(rep1,rep2);
@@ -496,5 +527,51 @@ bool TopicIdentification::process(int y)
         threads[tid]->join();
         delete threads[tid];
     }
+    if (cancelled())
+        return false;
     return save(y, topics);
+}
+
+bool TopicIdentification::removeOneYear(const std::string keywords, int y)
+{
+    GeneralConfig config;
+    std::string path = config.getDatabase();
+    sqlite3 *db = NULL;
+    int rc = sqlite3_open(path.c_str(), &db);
+    if (rc != SQLITE_OK)
+    {
+        logError(wxT("Cannot open database at" + path));
+        return false;
+    }
+    CallbackData data;
+    char *errorMessage = NULL;
+
+    {
+        std::stringstream ss;
+        ss << "DELETE FROM pub_scope_topics WHERE year = " << y << " AND scope_keywords = '" << keywords << "';";
+        std::string strSql = ss.str();
+        CallbackData::updateWriteCount(1, strSql.size());
+        logDebug(strSql.c_str());
+        rc = sqlite3_exec(db, ss.str().c_str(), NULL, NULL, &errorMessage);
+        if (rc != SQLITE_OK)
+        {
+            logError(errorMessage);
+        }
+    }
+
+    {
+        std::stringstream ss;
+        ss << "DELETE FROM scope_topic_token WHERE year = " << y << " AND keywords = '" << keywords << "';";
+        std::string strSql = ss.str();
+        CallbackData::updateWriteCount(1, strSql.size());
+        logDebug(strSql.c_str());
+        rc = sqlite3_exec(db, ss.str().c_str(), NULL, NULL, &errorMessage);
+        if (rc != SQLITE_OK)
+        {
+            logError(errorMessage);
+        }
+    }
+
+    sqlite3_close(db);
+    return rc == SQLITE_OK;
 }

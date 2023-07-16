@@ -23,7 +23,7 @@ class OpenAlex: public AbstractTask {
 
 	public:
 		OpenAlex(const std::string email, const std::string path,
-            const std::string kws);
+            const std::string kws, bool sampleOnly);
 		~OpenAlex();
 		virtual bool finished();
         virtual const char *name();
@@ -42,13 +42,19 @@ class OpenAlex: public AbstractTask {
 		{
 		    return _samples;
 		}
-		inline void setSamplesOnly(bool value)
+		static inline uint64_t numDownloaded()
 		{
-		    _samplesOnly = value;
+		    return _numDownloaded;
+		}
+		static inline uint64_t sizeDownloaded()
+		{
+		    return _sizeDownloaded;
 		}
 
 	protected:
-	    void init();
+	    void init(bool sampleOnly);
+	    static uint64_t _numDownloaded;
+	    static uint64_t _sizeDownloaded;
 
 };
 #endif

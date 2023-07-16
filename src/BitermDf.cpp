@@ -85,6 +85,27 @@ bool BitermDf::load(const std::string keywords, int y, std::map<std::string, int
         bitermDfs->clear();
         {
             std::stringstream ss;
+            ss << "SELECT keywords, year, bdfs FROM scope_xbdfs WHERE keywords = '"
+                << keywords << "' AND year = " << y << ";";
+            logDebug(ss.str().c_str());
+            rc = sqlite3_exec(db, ss.str().c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
+            if (rc != SQLITE_OK)
+            {
+                logDebug(errorMessage);
+                sqlite3_close(db);
+                return false;
+            }
+            if (data.results.size() > 0)
+            {
+                for (size_t i = 0; i < data.results.size(); i++)
+                {
+                    getBitermDfs(data.results[i]["bdfs"], bitermDfs);
+                }
+                data.results.clear();
+            }
+        }
+        {
+            std::stringstream ss;
             ss << "SELECT keywords, year, bdfs FROM scope_bdfs WHERE keywords = '"
                 << keywords << "' AND year = " << y << ";";
             logDebug(ss.str().c_str());
@@ -134,16 +155,28 @@ bool BitermDf::load(int y, std::map<std::string, int> *bitermDfs)
     return load(_scope.getKeywords(), y, bitermDfs);
 }
 
-std::string getStrBdfs(const std::map<std::string, int> &bitermDfs)
+void getStrBdfsBlocks(const std::map<std::string, int> &bitermDfs, std::vector<std::string> *blocks)
 {
     std::stringstream ss;
+    int counter = 0;
     for (auto bToF = bitermDfs.begin(); bToF != bitermDfs.end(); bToF++)
     {
         if (bToF != bitermDfs.begin())
             ss << ",";
         ss << bToF->first << ":" << bToF->second;
+        counter++;
+        if (counter > 10000000)
+        {
+            blocks->push_back(ss.str());
+            ss.str("");
+            ss.clear();
+            counter = 0;
+        }
     }
-    return ss.str();
+    if (counter > 0)
+    {
+        blocks->push_back(ss.str());
+    }
 }
 
 bool BitermDf::save(int y, const std::map<std::string, int> &bitermDfs)
@@ -169,6 +202,14 @@ bool BitermDf::save(int y, const std::map<std::string, int> &bitermDfs)
         "bdfs TEXT,"
         "update_time INTEGER,"
         "PRIMARY KEY(keywords,year))",
+
+        "CREATE TABLE IF NOT EXISTS scope_xbdfs("
+        "keywords TEXT,"
+        "year INTEGER,"
+        "block_id INTEGER,"
+        "bdfs TEXT,"
+        "update_time INTEGER,"
+        "PRIMARY KEY(keywords,year,block_id))",
     };
     for (const char*sql: sqls)
     {
@@ -187,18 +228,42 @@ bool BitermDf::save(int y, const std::map<std::string, int> &bitermDfs)
     {
         time_t t;
         time(&t);
-        std::stringstream ss;
-        std::string strBdfs = getStrBdfs(bitermDfs);
-        ss << "INSERT OR IGNORE INTO scope_bdfs(keywords, year, bdfs, update_time) VALUES ('"
-            << keywords << "'," << y << ",'" << strBdfs << "'," << (int)t << ");";
-        std::string strSql = ss.str();
-        logDebug(strSql.c_str());
-        rc = sqlite3_exec(db, strSql.c_str(), NULL, NULL, &errorMessage);
-        if (rc != SQLITE_OK)
+        std::vector<std::string> blocks;
         {
-            logError(errorMessage);
-            sqlite3_close(db);
-            return false;
+            std::stringstream ss;
+            getStrBdfsBlocks(bitermDfs, &blocks);
+            ss << "INSERT OR IGNORE INTO scope_bdfs(keywords, year, bdfs, update_time) VALUES ('"
+                << keywords << "'," << y << ",'" << blocks[0] << "'," << (int)t << ");";
+            std::string strSql = ss.str();
+            CallbackData::updateWriteCount(1, strSql.size());
+            logDebug(strSql.c_str());
+            rc = sqlite3_exec(db, strSql.c_str(), NULL, NULL, &errorMessage);
+            if (rc != SQLITE_OK)
+            {
+                logError(errorMessage);
+                sqlite3_close(db);
+                return false;
+            }
+        }
+
+        if (blocks.size() > 1)
+        {
+            for (size_t i = 1; i < blocks.size(); i++)
+            {
+                std::stringstream ss;
+                ss << "INSERT OR IGNORE INTO scope_xbdfs(keywords, year, block_id, bdfs, update_time) VALUES ('"
+                    << keywords << "'," << y << "," << i << ",'" << blocks[i] << "'," << (int)t << ");";
+                std::string strSql = ss.str();
+                CallbackData::updateWriteCount(1, strSql.size());
+                logDebug(strSql.c_str());
+                rc = sqlite3_exec(db, strSql.c_str(), NULL, NULL, &errorMessage);
+                if (rc != SQLITE_OK)
+                {
+                    logError(errorMessage);
+                    sqlite3_close(db);
+                    return false;
+                }
+            }
         }
     }
     sqlite3_close(db);
@@ -214,6 +279,8 @@ bool BitermDf::process(int y)
     std::map<uint64_t, std::map<std::string, double>> tfirdfs;
     if (!_tt->load(y, &tfirdfs, false))
         return false;
+    if (cancelled())
+        return false;
 
     // step 2: compute mean tfirdf in publication
     std::map<uint64_t, double> meanTfirdfs;
@@ -223,6 +290,8 @@ bool BitermDf::process(int y)
     {
         q.push(idToWorkTfirdfs->first);
     }
+    if (cancelled())
+        return false;
     std::mutex mq;
     std::thread *threads[nThreads];
     for (int tid = 0; tid < nThreads; tid++)
@@ -271,7 +340,7 @@ bool BitermDf::process(int y)
         delete threads[tid];
     }
 
-    if (meanTfirdfs.size() < tfirdfs.size())
+    if (cancelled() || meanTfirdfs.size() < tfirdfs.size())
         return false;
 
     // step 3: count biterm df for those with two terms of tfirdf above mean
@@ -280,6 +349,8 @@ bool BitermDf::process(int y)
     {
         q.push(idToWorkTfirdfs->first);
     }
+    if (cancelled())
+        return false;
     for (int tid = 0; tid < nThreads; tid++)
     {
         threads[tid] = new std::thread(
@@ -306,6 +377,8 @@ bool BitermDf::process(int y)
 
                     for (auto iter1 = idToWorkTfirdfs->second.begin(); iter1 != idToWorkTfirdfs->second.end(); iter1++)
                     {
+                        if (cancelled())
+                            return;
                         if (iter1->second < mean)
                             continue;
                         for (auto iter2 = idToWorkTfirdfs->second.begin(); iter2 != idToWorkTfirdfs->second.end(); iter2++)
@@ -361,4 +434,48 @@ bool BitermDf::process(int y)
 
     // step 4: save biterm dfs
     return save(y, bdfs);
+}
+
+bool BitermDf::removeOneYear(const std::string keywords, int y)
+{
+    GeneralConfig config;
+    std::string path = config.getDatabase();
+    sqlite3 *db = NULL;
+    int rc = sqlite3_open(path.c_str(), &db);
+    if (rc != SQLITE_OK)
+    {
+        logError(wxT("Cannot open database at" + path));
+        return false;
+    }
+    CallbackData data;
+    char *errorMessage = NULL;
+
+    {
+        std::stringstream ss;
+        ss << "DELETE FROM scope_bdfs WHERE year = " << y << " AND keywords = '" << keywords << "';";
+        std::string strSql = ss.str();
+        CallbackData::updateWriteCount(1, strSql.size());
+        logDebug(strSql.c_str());
+        rc = sqlite3_exec(db, ss.str().c_str(), NULL, NULL, &errorMessage);
+        if (rc != SQLITE_OK)
+        {
+            logError(errorMessage);
+        }
+    }
+
+    {
+        std::stringstream ss;
+        ss << "DELETE FROM scope_xbdfs WHERE year = " << y << " AND keywords = '" << keywords << "';";
+        std::string strSql = ss.str();
+        CallbackData::updateWriteCount(1, strSql.size());
+        logDebug(strSql.c_str());
+        rc = sqlite3_exec(db, ss.str().c_str(), NULL, NULL, &errorMessage);
+        if (rc != SQLITE_OK)
+        {
+            logError(errorMessage);
+        }
+    }
+
+    sqlite3_close(db);
+    return rc == SQLITE_OK;
 }

@@ -17,6 +17,7 @@ class BitermDf: public AbstractTask
         virtual void doStep(int stepId);
         bool load(int y, std::map<std::string, int> *bitermDfs);
         static bool load(const std::string keywords, int y, std::map<std::string, int> *bitermDfs);
+        static bool removeOneYear(const std::string keywords, int y);
 
     protected:
         bool save(int y, const std::map<std::string, int> &bitermDfs);

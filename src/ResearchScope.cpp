@@ -11,6 +11,7 @@
 #include <wxFFileLog.h>
 #include <BitermWeight.h>
 #include <TopicIdentification.h>
+#include <GeneralConfig.h>
 
 std::vector<std::string> ResearchScope::getResearchScopes(const std::string path)
 {
@@ -459,6 +460,7 @@ bool ResearchScope::init()
        << keywords << "','" << combinations << "'," << (int)t
        << ");";
     std::string sql = ss.str();
+    CallbackData::updateWriteCount(1, sql.size());
     logDebug(sql.c_str());
     rc = sqlite3_exec(db, sql.c_str(), NULL, NULL, &errorMessage);
     sqlite3_close(db);
@@ -657,6 +659,106 @@ bool ResearchScope::load(int idxComb, const int y)
     return true;
 }
 
+bool ResearchScope::removeOneYear(const int y)
+{
+    sqlite3 *db = NULL;
+    int rc = sqlite3_open(_path.c_str(), &db);
+    if (rc != SQLITE_OK)
+        return false;
+    CallbackData data;
+    char *errorMessage = NULL;
+
+    // remove tokens
+    int nCombs = numCombinations();
+    int rc1, rc2;
+    {
+        std::stringstream ss;
+        ss << "DELETE FROM openalex_tokens WHERE year = " << y << " AND combination IN (";
+        for (int idxComb = 0; idxComb < nCombs; idxComb++)
+        {
+            if (idxComb > 0)
+                ss << ",";
+            ss << "'" << getCombination(idxComb) << "'";
+        }
+        ss << ");";
+
+        std::string strSql = ss.str();
+        CallbackData::updateWriteCount(nCombs, strSql.size());
+        logDebug(strSql.c_str());
+        rc1 = sqlite3_exec(db, strSql.c_str(), NULL, NULL, &errorMessage);
+        if (rc1 != SQLITE_OK)
+        {
+            logError(errorMessage);
+        }
+    }
+
+    // remove queries
+    {
+        std::stringstream ss;
+        ss << "DELETE FROM openalex_queries WHERE year = " << y << " AND combination IN (";
+        for (int idxComb = 0; idxComb < nCombs; idxComb++)
+        {
+            if (idxComb > 0)
+                ss << ",";
+            ss << "'" << getCombination(idxComb) << "'";
+        }
+        ss << ");";
+
+        std::string strSql = ss.str();
+        CallbackData::updateWriteCount(nCombs, strSql.size());
+        logDebug(strSql.c_str());
+        rc2 = sqlite3_exec(db, strSql.c_str(), NULL, NULL, &errorMessage);
+        if (rc2 != SQLITE_OK)
+        {
+            logError(errorMessage);
+        }
+    }
+
+    sqlite3_close(db);
+    return rc1 == SQLITE_OK && rc2 == SQLITE_OK;
+}
+
+int ResearchScope::getLatestYear(int yb, int ye)
+{
+    int nY = ye - yb;
+    int nCombs = numCombinations();
+    int n = nY * nCombs;
+    if (n <= 0)
+        return 0;
+
+    for (int iY = nY-1; iY >= 0; iY--)
+    {
+        int y = yb + iY;
+        for (int iComb = 0; iComb < nCombs; iComb ++)
+        {
+            if (load(iComb, y))
+                return y;
+        }
+    }
+    return 0;
+}
+
+int ResearchScope::getProgress(int yb, int ye)
+{
+    int nY = ye - yb;
+    int nCombs = numCombinations();
+    int n = nY * nCombs;
+    if (n <= 0)
+        return 0;
+
+    int nFinished = 0;
+    for (int iY = 0; iY < nY; iY++)
+    {
+        int y = yb + iY;
+        for (int iComb = 0; iComb < nCombs; iComb ++)
+        {
+            if (load(iComb, y))
+                nFinished++;
+        }
+    }
+    return 100 * nFinished / n;
+}
+
 bool ResearchScope::save(const std::map<uint64_t, Publication> &pubs)
 {
     sqlite3 *db = NULL;
@@ -745,7 +847,9 @@ bool ResearchScope::save(const std::map<uint64_t, Publication> &pubs)
             ss << "')";
         }
         ss << ";";
-        rc = sqlite3_exec(db, ss.str().c_str(), NULL, NULL, &errorMessage);
+        std::string strSql = ss.str();
+        CallbackData::updateWriteCount(pubs.size(), strSql.size());
+        rc = sqlite3_exec(db, strSql.c_str(), NULL, NULL, &errorMessage);
         if (rc != SQLITE_OK)
         {
             logError(errorMessage);
@@ -806,7 +910,9 @@ bool ResearchScope::save(int idxComb, const int y, const std::map<uint64_t, Publ
         ss << refId;
     }
     ss << "');";
-    logDebug(ss.str().c_str());
+    std::string strSql = ss.str();
+    CallbackData::updateWriteCount(1, strSql.size());
+    logDebug(strSql.c_str());
     rc = sqlite3_exec(db, ss.str().c_str(), NULL, NULL, &errorMessage);
     if (rc != SQLITE_OK)
     {
@@ -834,7 +940,9 @@ bool ResearchScope::save(int idxComb, const int y)
     std::stringstream ss;
     ss << "INSERT OR IGNORE INTO openalex_tokens(combination,year,update_time) VALUES ('"
        << combination << "'," << y << "," << (int) t << ");";
-    logDebug(ss.str().c_str());
+    std::string strSql = ss.str();
+    CallbackData::updateWriteCount(1, strSql.size());
+    logDebug(strSql.c_str());
     rc = sqlite3_exec(db, ss.str().c_str(), NULL, NULL, &errorMessage);
     if (rc != SQLITE_OK)
     {
@@ -1062,4 +1170,41 @@ void ResearchScope::writeWoS(int yb, int ye, std::string fileName)
         }
     }
     f.close();
+}
+
+bool ResearchScope::remove(const std::string path, const std::string keywords)
+{
+    sqlite3 *db = NULL;
+    int rc = sqlite3_open(path.c_str(), &db);
+    if (rc != SQLITE_OK)
+    {
+        logError(wxT("Cannot open database at" + path));
+        return false;
+    }
+    CallbackData data;
+    char *errorMessage = NULL;
+
+    std::stringstream ss;
+    ss << "DELETE FROM research_scopes WHERE keywords = '" << keywords << "';";
+    std::string strSql = ss.str();
+    CallbackData::updateWriteCount(1, strSql.size());
+    logDebug(strSql.c_str());
+    rc = sqlite3_exec(db, ss.str().c_str(), NULL, NULL, &errorMessage);
+    if (rc != SQLITE_OK)
+    {
+        logError(errorMessage);
+    }
+    sqlite3_close(db);
+    return rc == SQLITE_OK;
+}
+
+bool ResearchScope::remove(const std::string keywords)
+{
+    GeneralConfig config;
+    return remove(config.getDatabase(), keywords);
+}
+
+bool ResearchScope::remove()
+{
+    return remove(_path, getKeywords());
 }

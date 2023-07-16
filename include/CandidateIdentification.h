@@ -15,6 +15,7 @@ class CandidateIdentification: public AbstractTask
         virtual void doStep(int stepId);
         bool load(int y, std::vector<uint64_t> *candidates);
         static bool load(const std::string keywords, int y, std::vector<uint64_t> *candidates);
+        static bool removeOneYear(const std::string keywords, int y);
 
     protected:
         bool save(int y, const std::vector<uint64_t> &candidates);

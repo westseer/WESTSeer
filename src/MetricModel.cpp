@@ -27,7 +27,7 @@ MetricModel::~MetricModel()
 
 bool MetricModel::finished()
 {
-    return load(_y2, NULL) && load(_y2 + 5, NULL);
+    return load(_y2, NULL, NULL, NULL) && load(_y2 + 5, NULL, NULL, NULL);
 }
 
 const char *MetricModel::name()
@@ -60,6 +60,18 @@ std::string getScoreStr(const std::map<uint64_t, std::vector<double>> &scores)
     return ss.str();
 }
 
+std::string getHLStr(const std::map<uint64_t, std::map<uint64_t, std::vector<double>>> &hl)
+{
+    std::stringstream ss;
+    for (auto idToCHL = hl.begin(); idToCHL != hl.end(); idToCHL++)
+    {
+        if (idToCHL != hl.begin())
+            ss << "!";
+        ss << idToCHL->first << "@" << getScoreStr(idToCHL->second);
+    }
+    return ss.str();
+}
+
 std::map<uint64_t, std::vector<double>> getScores(std::string scoreStr)
 {
     std::vector<std::string> idScoreStrs = splitString(scoreStr,";");
@@ -79,7 +91,22 @@ std::map<uint64_t, std::vector<double>> getScores(std::string scoreStr)
     return scores;
 }
 
-bool MetricModel::load(const std::string keywords, int y, std::map<uint64_t, std::vector<double>> *scores)
+std::map<uint64_t, std::map<uint64_t,std::vector<double>>> getHLs(std::string hlStr)
+{
+    std::vector<std::string> idCHLStrs = splitString(hlStr,"!");
+    std::map<uint64_t, std::map<uint64_t,std::vector<double>>> hls;
+    for (std::string s: idCHLStrs)
+    {
+        std::vector<std::string> fields = splitString(s,"@");
+        uint64_t id = std::stoull(fields[0]);
+        hls[id] = getScores(fields[1]);
+    }
+    return hls;
+}
+
+bool MetricModel::load(const std::string keywords, int y, std::map<uint64_t, std::vector<double>> *scores,
+                    std::map<uint64_t, std::map<uint64_t, std::vector<double>>> *termHighlights,
+                    std::map<uint64_t, std::map<uint64_t, std::vector<double>>> *bitermHighlights)
 {
     GeneralConfig config;
     std::string path = config.getDatabase();
@@ -94,11 +121,10 @@ bool MetricModel::load(const std::string keywords, int y, std::map<uint64_t, std
     char *errorMessage = NULL;
 
     // step 1: load scope metric
-    if (scores != NULL)
     {
         CallbackData data;
         std::stringstream ss;
-        ss << "SELECT keywords, year, scores FROM scope_metric WHERE keywords = '"
+        ss << "SELECT keywords, year, scores, term_highlights, biterm_highlights FROM scope_metric WHERE keywords = '"
             << keywords << "' AND year = " << y << ";";
         std::string strSql = ss.str();
         logDebug(strSql.c_str());
@@ -109,86 +135,28 @@ bool MetricModel::load(const std::string keywords, int y, std::map<uint64_t, std
             sqlite3_close(db);
             return false;
         }
-        *scores = getScores(data.results[0]["scores"]);
-    }
-    else
-    {
-        CallbackData data;
-        std::stringstream ss;
-        ss << "SELECT keywords, year FROM scope_metric WHERE keywords = '"
-            << keywords << "' AND year = " << y << ";";
-        std::string strSql = ss.str();
-        logDebug(strSql.c_str());
-        rc = sqlite3_exec(db, strSql.c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
-        if (rc != SQLITE_OK || data.results.size() == 0)
-        {
-            if (rc!=SQLITE_OK)
-                logDebug(errorMessage);
-            sqlite3_close(db);
-            return false;
-        }
+        if (scores != NULL)
+            *scores = getScores(data.results[0]["scores"]);
+        if (termHighlights != NULL)
+            *termHighlights = getHLs(data.results[0]["term_highlights"]);
+        if (bitermHighlights != NULL)
+            *bitermHighlights = getHLs(data.results[0]["biterm_highlights"]);
     }
 
     sqlite3_close(db);
     return true;
 }
 
-bool MetricModel::load(int y, std::map<uint64_t, std::vector<double>> *scores)
+bool MetricModel::load(int y, std::map<uint64_t, std::vector<double>> *scores,
+                    std::map<uint64_t, std::map<uint64_t, std::vector<double>>> *termHighlights,
+                    std::map<uint64_t, std::map<uint64_t, std::vector<double>>> *bitermHighlights)
 {
-    GeneralConfig config;
-    std::string path = config.getDatabase();
-
-    sqlite3 *db = NULL;
-    int rc = sqlite3_open(path.c_str(), &db);
-    if (rc != SQLITE_OK)
-    {
-        logError(wxT("Cannot open database at" + path));
-        return false;
-    }
-    char *errorMessage = NULL;
-
-    // step 1: load scope metric
-    std::string keywords = _scope.getKeywords();
-    if (scores != NULL)
-    {
-        CallbackData data;
-        std::stringstream ss;
-        ss << "SELECT keywords, year, scores FROM scope_metric WHERE keywords = '"
-            << keywords << "' AND year = " << y << ";";
-        std::string strSql = ss.str();
-        logDebug(strSql.c_str());
-        rc = sqlite3_exec(db, strSql.c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
-        if (rc != SQLITE_OK || data.results.size() == 0)
-        {
-            logDebug(errorMessage);
-            sqlite3_close(db);
-            return false;
-        }
-        *scores = getScores(data.results[0]["scores"]);
-    }
-    else
-    {
-        CallbackData data;
-        std::stringstream ss;
-        ss << "SELECT keywords, year FROM scope_metric WHERE keywords = '"
-            << keywords << "' AND year = " << y << ";";
-        std::string strSql = ss.str();
-        logDebug(strSql.c_str());
-        rc = sqlite3_exec(db, strSql.c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
-        if (rc != SQLITE_OK || data.results.size() == 0)
-        {
-            if (rc!=SQLITE_OK)
-                logDebug(errorMessage);
-            sqlite3_close(db);
-            return false;
-        }
-    }
-
-    sqlite3_close(db);
-    return true;
+    return MetricModel::load(_scope.getKeywords(), y, scores, termHighlights, bitermHighlights);
 }
 
-bool MetricModel::save(int y, const std::map<uint64_t, std::vector<double>> &scores)
+bool MetricModel::save(int y, const std::map<uint64_t, std::vector<double>> &scores,
+                       const std::map<uint64_t, std::map<uint64_t, std::vector<double>>> &termHighlights,
+                       const std::map<uint64_t, std::map<uint64_t, std::vector<double>>> &bitermHighlights)
 {
     GeneralConfig config;
     std::string path = config.getDatabase();
@@ -209,6 +177,8 @@ bool MetricModel::save(int y, const std::map<uint64_t, std::vector<double>> &sco
         "keywords TEXT,"
         "year INTEGER,"
         "scores TEXT,"
+        "term_highlights TEXT,"
+        "biterm_highlights TEXT,"
         "update_time INTEGER,"
         "PRIMARY KEY(keywords,year));"
     };
@@ -230,9 +200,10 @@ bool MetricModel::save(int y, const std::map<uint64_t, std::vector<double>> &sco
     time(&t);
     {
         std::stringstream ss;
-        ss << "INSERT OR IGNORE INTO scope_metric(keywords, year, scores, update_time) VALUES ('"
-            << keywords << "'," << y << ",'" << getScoreStr(scores) << "'," << (int)t << ");";
+        ss << "INSERT OR IGNORE INTO scope_metric(keywords, year, scores, term_highlights, biterm_highlights, update_time) VALUES ('"
+            << keywords << "'," << y << ",'" << getScoreStr(scores) << "','" << getHLStr(termHighlights) << "','" << getHLStr(bitermHighlights) << "'," << (int)t << ");";
         std::string strSql = ss.str();
+        CallbackData::updateWriteCount(1,strSql.size());
         logDebug(strSql.c_str());
         rc = sqlite3_exec(db, strSql.c_str(), NULL, NULL, &errorMessage);
         if (rc != SQLITE_OK)
@@ -271,25 +242,32 @@ void median(const std::vector<int> &src, std::vector<int> &dst, int L)
 
 bool MetricModel::process(int y)
 {
-    if (load(y, NULL))
+    if (load(y, NULL, NULL, NULL))
         return true;
 
     // step 1: load time series
     std::map<uint64_t, TSM> timeSeries;
     if (!_tse->load(y, &timeSeries))
         return false;
+    if (cancelled())
+        return false;
 
     // step 2: load prediction
     std::map<uint64_t, std::vector<double>> prediction;
     if (!_pm->load(y, &prediction))
         return false;
+    if (cancelled())
+        return false;
     int cy0 = _y1;
     std::map<uint64_t,Publication> candidates;
+    std::map<uint64_t,std::vector<uint64_t>> citations;
+    std::vector<uint64_t> emptyVector;
     {
         std::vector<uint64_t> cids;
         for (auto &cidToPred: prediction)
         {
             cids.push_back(cidToPred.first);
+            citations[cidToPred.first] = emptyVector;
         }
 
         std::vector<Publication> temp = _scope.getPublications(cids);
@@ -302,6 +280,9 @@ bool MetricModel::process(int y)
             }
         }
     }
+
+    if (cancelled())
+        return false;
     int nCYs = _y1 - cy0;
     std::vector<int> cyCitations(nCYs);
     for (int iCY = 0; iCY < nCYs; iCY++)
@@ -343,6 +324,7 @@ bool MetricModel::process(int y)
                 {
                     if (prediction.find(refId) != prediction.end())
                     {
+                        citations[refId].push_back(idToRefIds.first);
                         int cy = candidates[refId].year();
                         int iCY = cy - cy0;
                         if (iCY < nCYs)
@@ -368,6 +350,7 @@ bool MetricModel::process(int y)
                 {
                     if (prediction.find(refId) != prediction.end())
                     {
+                        citations[refId].push_back(idToRefIds.first);
                         auto ridToC = newCitations[i].find(refId);
                         if (ridToC == newCitations[i].end())
                         {
@@ -382,6 +365,8 @@ bool MetricModel::process(int y)
             }
         }
     }
+    if (cancelled())
+        return false;
 
     // step 5: compute prediction and verification scores for each candidate
     std::map<uint64_t, std::vector<double>> scores;
@@ -399,6 +384,8 @@ bool MetricModel::process(int y)
         dev1CYCitations[iCY] = cyCitations[iCY] - med1CYCitations[iCY];
         dev2CYCitations[iCY] = cyCitations[iCY] - med2CYCitations[iCY];
     }
+    if (cancelled())
+        return false;
 
     std::vector<bool> rpys1Peak(nCYs);
     std::vector<bool> rpys2Peak(nCYs);
@@ -423,6 +410,8 @@ bool MetricModel::process(int y)
         rpys1Peak[iCY] = peak1;
         rpys2Peak[iCY] = peak2;
     }
+    if (cancelled())
+        return false;
 
     int nTop10Thres[10], nTop5Thres[10], nTop1Thres[10];
     for (int i = 0; i < 10; i++)
@@ -447,6 +436,8 @@ bool MetricModel::process(int y)
             nTop1Thres[i] = 0;
         }
     }
+    if (cancelled())
+        return false;
 
     for (auto idToP: prediction)
     {
@@ -589,8 +580,20 @@ bool MetricModel::process(int y)
         myScores.push_back(rpys2NTop5);
         myScores.push_back(rpys2NTop1);
         scores[id] = myScores;
+        if (cancelled())
+            return false;
     }
-    return save(y, scores);
+    if (cancelled())
+        return false;
+
+    std::vector<std::vector<std::string>> highlightKWs = stemHLKWs(_scope.getKeywords());
+    std::map<uint64_t, std::map<uint64_t, std::vector<double>>> termHighlights = TermTfIrdf::getCitationHighlights(_scope.getKeywords(), citations, highlightKWs);
+    if (cancelled())
+        return false;
+    std::map<uint64_t, std::map<uint64_t, std::vector<double>>> bitermHighlights = BitermWeight::getCitationHighlights(_scope.getKeywords(), citations, highlightKWs);
+    if (cancelled())
+        return false;
+    return save(y, scores, termHighlights, bitermHighlights);
 }
 
 std::vector<std::string> MetricModel::getScopesWithMetrics(const std::string path)
@@ -633,4 +636,35 @@ std::vector<std::string> MetricModel::getScopesWithMetrics(const std::string pat
 
     sqlite3_close(db);
     return evaluatedScopes;
+}
+
+bool MetricModel::removeOneYear(const std::string keywords, int y)
+{
+    GeneralConfig config;
+    std::string path = config.getDatabase();
+    sqlite3 *db = NULL;
+    int rc = sqlite3_open(path.c_str(), &db);
+    if (rc != SQLITE_OK)
+    {
+        logError(wxT("Cannot open database at" + path));
+        return false;
+    }
+    CallbackData data;
+    char *errorMessage = NULL;
+
+    {
+        std::stringstream ss;
+        ss << "DELETE FROM scope_metric WHERE year = " << y << " AND keywords = '" << keywords << "';";
+        std::string strSql = ss.str();
+        CallbackData::updateWriteCount(1, strSql.size());
+        logDebug(strSql.c_str());
+        rc = sqlite3_exec(db, ss.str().c_str(), NULL, NULL, &errorMessage);
+        if (rc != SQLITE_OK)
+        {
+            logError(errorMessage);
+        }
+    }
+
+    sqlite3_close(db);
+    return rc == SQLITE_OK;
 }

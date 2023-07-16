@@ -34,4 +34,6 @@ std::vector<int> getIntVector(const string &strV);
 
 string simplifyTopic(const string &strTopic);
 
+vector<vector<string>> stemHLKWs(string text);
+
 #endif // STRINGPROCESSING_H_INCLUDED

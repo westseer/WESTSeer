@@ -166,6 +166,7 @@ bool CandidateIdentification::save(int y, const std::vector<uint64_t> &candidate
         }
         ss << "');";
         std::string strSql = ss.str();
+        CallbackData::updateWriteCount(candidates.size(), strSql.size());
         logDebug(strSql.c_str());
         rc = sqlite3_exec(db, strSql.c_str(), NULL, NULL, &errorMessage);
         if (rc != SQLITE_OK)
@@ -208,6 +209,8 @@ bool CandidateIdentification::process(int y)
                     refCounts[refId] = refIdToCount->second + 1;
                 }
             }
+            if (cancelled())
+                return false;
         }
         if (_cancelled.load() == true)
         {
@@ -232,4 +235,35 @@ bool CandidateIdentification::process(int y)
 
     save(y, candidates);
     return true;
+}
+
+bool CandidateIdentification::removeOneYear(const std::string keywords, int y)
+{
+    GeneralConfig config;
+    std::string path = config.getDatabase();
+    sqlite3 *db = NULL;
+    int rc = sqlite3_open(path.c_str(), &db);
+    if (rc != SQLITE_OK)
+    {
+        logError(wxT("Cannot open database at" + path));
+        return false;
+    }
+    CallbackData data;
+    char *errorMessage = NULL;
+
+    {
+        std::stringstream ss;
+        ss << "DELETE FROM scope_candidates WHERE year = " << y << " AND keywords = '" << keywords << "';";
+        std::string strSql = ss.str();
+        CallbackData::updateWriteCount(1, strSql.size());
+        logDebug(strSql.c_str());
+        rc = sqlite3_exec(db, ss.str().c_str(), NULL, NULL, &errorMessage);
+        if (rc != SQLITE_OK)
+        {
+            logError(errorMessage);
+        }
+    }
+
+    sqlite3_close(db);
+    return rc == SQLITE_OK;
 }

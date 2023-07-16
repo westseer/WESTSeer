@@ -2,6 +2,7 @@
 #include <EmailValidator.h>
 #include <GeneralConfig.h>
 #include <wx/msgdlg.h>
+#include <ResearchScope.h>
 
 //(*InternalHeaders(OpenAlexImportDialog)
 #include <wx/intl.h>
@@ -137,8 +138,7 @@ void OpenAlexImportDialog::OnButtonGetSamplesClick(wxCommandEvent& event)
     AbstractTask::setProgressReporter(_progressReporter);
     GeneralConfig config;
     _openAlex = new OpenAlex(config.getEmail(), config.getDatabase(),
-                             TextCtrlKeywords->GetValue().ToStdString());
-    _openAlex->setSamplesOnly(true);
+                             TextCtrlKeywords->GetValue().ToStdString(), true);
     _openAlex->runAll();
 }
 
@@ -248,4 +248,49 @@ void OpenAlexImportDialog::OnTextCtrlKeywords1Text(wxCommandEvent& event)
     {
         ButtonGetSamples->Disable();
     }
+}
+
+std::string OpenAlexImportDialog::addScope()
+{
+    if (AbstractTask::taskThread() != NULL)
+    {
+        wxMessageBox("Cannot add scope when schedule is running. Please pause the schedule or wait until it is done.");
+        return "";
+    }
+
+    // pop up an OpenAlexImportDialog
+    if (ShowModal())
+    {
+        if (_openAlex != NULL)
+        {
+            // find whether it is in the old choices
+            GeneralConfig config;
+            std::vector<std::string> scopes = ResearchScope::getResearchScopes(config.getDatabase());
+            std::string keywords = _openAlex->scope().getKeywords();
+            int idxKW = -1;
+            for (unsigned int i = 0; i < scopes.size(); i++)
+            {
+                if (scopes[i] == keywords)
+                {
+                    idxKW = (int) i;
+                    break;
+                }
+            }
+            if (idxKW >= 0)
+            {
+                wxMessageBox("Scope " + scopes[idxKW] + " already exists.");
+                return "";
+            }
+            else
+            {
+                bool paused = true;
+                std::vector<std::pair<std::string,std::string>> schedule = AbstractTask::loadSchedule(&paused);
+                std::pair<std::string,std::string> item(keywords, "Pending");
+                schedule.push_back(item);
+                AbstractTask::saveSchedule(schedule, paused);
+                return item.first;
+            }
+        }
+    }
+    return "";
 }

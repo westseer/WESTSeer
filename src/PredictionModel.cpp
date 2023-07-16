@@ -203,6 +203,7 @@ bool PredictionModel::save(int y, std::map<uint64_t, std::vector<double>> &predi
         }
         ss << ";";
         std::string strSql = ss.str();
+        CallbackData::updateWriteCount(prediction.size(), strSql.size());
         logDebug(strSql.c_str());
         rc = sqlite3_exec(db, strSql.c_str(), NULL, NULL, &errorMessage);
         if (rc != SQLITE_OK)
@@ -221,6 +222,7 @@ bool PredictionModel::save(int y, std::map<uint64_t, std::vector<double>> &predi
         ss << "INSERT OR IGNORE INTO scope_prediction_token(keywords,year,update_time) VALUES ('"
             << keywords << "'," << y << "," << (int) t << ");";
         std::string strSql = ss.str();
+        CallbackData::updateWriteCount(1, strSql.size());
         logDebug(strSql.c_str());
         rc = sqlite3_exec(db, strSql.c_str(), NULL, NULL, &errorMessage);
         if (rc != SQLITE_OK)
@@ -243,6 +245,8 @@ bool PredictionModel::process(int iStep)
     std::map<uint64_t, TSM> timeSeries;
     if (!_tse->load(y, &timeSeries))
         return false;
+    if (cancelled())
+        return false;
     for (auto &idToTs: timeSeries)
     {
         std::vector<int> lts = idToTs.second.first.first;
@@ -259,10 +263,58 @@ bool PredictionModel::process(int iStep)
             rts[i] = regression.predict(10 + i) * cosErr;
         }
         prediction[idToTs.first] = rts;
+        if (cancelled())
+            return false;
     }
 
+    if (cancelled())
+        return false;
     save(y, prediction);
 
 
     return true;
+}
+
+bool PredictionModel::removeOneYear(const std::string keywords, int y)
+{
+    GeneralConfig config;
+    std::string path = config.getDatabase();
+    sqlite3 *db = NULL;
+    int rc = sqlite3_open(path.c_str(), &db);
+    if (rc != SQLITE_OK)
+    {
+        logError(wxT("Cannot open database at" + path));
+        return false;
+    }
+    CallbackData data;
+    char *errorMessage = NULL;
+
+    {
+        std::stringstream ss;
+        ss << "DELETE FROM pub_scope_prediction WHERE year = " << y << " AND scope_keywords = '" << keywords << "';";
+        std::string strSql = ss.str();
+        CallbackData::updateWriteCount(1, strSql.size());
+        logDebug(strSql.c_str());
+        rc = sqlite3_exec(db, ss.str().c_str(), NULL, NULL, &errorMessage);
+        if (rc != SQLITE_OK)
+        {
+            logError(errorMessage);
+        }
+    }
+
+    {
+        std::stringstream ss;
+        ss << "DELETE FROM scope_prediction_token WHERE year = " << y << " AND keywords = '" << keywords << "';";
+        std::string strSql = ss.str();
+        CallbackData::updateWriteCount(1, strSql.size());
+        logDebug(strSql.c_str());
+        rc = sqlite3_exec(db, ss.str().c_str(), NULL, NULL, &errorMessage);
+        if (rc != SQLITE_OK)
+        {
+            logError(errorMessage);
+        }
+    }
+
+    sqlite3_close(db);
+    return rc == SQLITE_OK;
 }

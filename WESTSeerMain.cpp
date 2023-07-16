@@ -13,17 +13,23 @@
 #include "SettingsDialog.h"
 #include "SQLDialog.h"
 #include "LogDialog.h"
-#include "FinishedScopeDialog.h"
+#include "DownloadsDialog.h"
+#include "SchedulesDialog.h"
 #include <GeneralConfig.h>
 #include <StringProcessing.h>
+#include <ResearchScope.h>
+#include <CallbackData.h>
+#include <OpenAlex.h>
 #include <wx/msgdlg.h>
 #include <wx/stdpaths.h>
 #include <wx/filedlg.h>
 #include <wx/filename.h>
 #include <fstream>
+#include <MetricModel.h>
 
 //(*InternalHeaders(WESTSeerFrame)
 #include <wx/bitmap.h>
+#include <wx/font.h>
 #include <wx/icon.h>
 #include <wx/image.h>
 #include <wx/intl.h>
@@ -61,11 +67,11 @@ const long WESTSeerFrame::ID_STATICTEXT1 = wxNewId();
 const long WESTSeerFrame::ID_CHOICE1 = wxNewId();
 const long WESTSeerFrame::ID_BUTTON1 = wxNewId();
 const long WESTSeerFrame::ID_STATICTEXT2 = wxNewId();
-const long WESTSeerFrame::ID_GAUGE1 = wxNewId();
-const long WESTSeerFrame::ID_BUTTON2 = wxNewId();
-const long WESTSeerFrame::ID_STATICTEXT7 = wxNewId();
-const long WESTSeerFrame::ID_GAUGE2 = wxNewId();
-const long WESTSeerFrame::ID_BUTTON3 = wxNewId();
+const long WESTSeerFrame::ID_CHOICE2 = wxNewId();
+const long WESTSeerFrame::ID_RADIOBOX1 = wxNewId();
+const long WESTSeerFrame::ID_STATICTEXT3 = wxNewId();
+const long WESTSeerFrame::ID_CHOICE3 = wxNewId();
+const long WESTSeerFrame::ID_RADIOBOX2 = wxNewId();
 const long WESTSeerFrame::ID_LISTCTRL1 = wxNewId();
 const long WESTSeerFrame::ID_LISTCTRL2 = wxNewId();
 const long WESTSeerFrame::ID_LISTCTRL3 = wxNewId();
@@ -74,17 +80,20 @@ const long WESTSeerFrame::ID_TEXTCTRL2 = wxNewId();
 const long WESTSeerFrame::ID_TEXTCTRL3 = wxNewId();
 const long WESTSeerFrame::ID_TEXTCTRL4 = wxNewId();
 const long WESTSeerFrame::ID_NOTEBOOK1 = wxNewId();
+const long WESTSeerFrame::ID_MENUITEM10 = wxNewId();
 const long WESTSeerFrame::ID_MENUITEM3 = wxNewId();
 const long WESTSeerFrame::ID_MENUITEM4 = wxNewId();
 const long WESTSeerFrame::ID_MENUITEM5 = wxNewId();
 const long WESTSeerFrame::idMenuQuit = wxNewId();
 const long WESTSeerFrame::ID_MENUITEM2 = wxNewId();
 const long WESTSeerFrame::ID_MENUITEM1 = wxNewId();
+const long WESTSeerFrame::ID_MENUITEM9 = wxNewId();
 const long WESTSeerFrame::ID_MENUITEM8 = wxNewId();
 const long WESTSeerFrame::ID_MENUITEM6 = wxNewId();
 const long WESTSeerFrame::ID_MENUITEM7 = wxNewId();
 const long WESTSeerFrame::idMenuAbout = wxNewId();
 const long WESTSeerFrame::ID_STATUSBAR1 = wxNewId();
+const long WESTSeerFrame::ID_TIMER1 = wxNewId();
 //*)
 
 BEGIN_EVENT_TABLE(WESTSeerFrame,wxFrame)
@@ -118,24 +127,40 @@ WESTSeerFrame::WESTSeerFrame(wxWindow* parent,wxWindowID id)
     FlexGridSizer2->AddGrowableCol(1);
     StaticText1 = new wxStaticText(this, ID_STATICTEXT1, _("Scope:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT1"));
     FlexGridSizer2->Add(StaticText1, 1, wxALL|wxEXPAND, 5);
-    ChoiceScope = new wxChoice(this, ID_CHOICE1, wxDefaultPosition, wxDefaultSize, 0, 0, 0, wxDefaultValidator, _T("ID_CHOICE1"));
+    ChoiceScope = new wxChoice(this, ID_CHOICE1, wxDefaultPosition, wxDefaultSize, 0, 0, wxVSCROLL|wxHSCROLL, wxDefaultValidator, _T("ID_CHOICE1"));
     FlexGridSizer2->Add(ChoiceScope, 1, wxALL|wxEXPAND, 5);
-    ButtonNew = new wxButton(this, ID_BUTTON1, _("New"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON1"));
-    FlexGridSizer2->Add(ButtonNew, 1, wxALL|wxEXPAND, 5);
-    StaticText2 = new wxStaticText(this, ID_STATICTEXT2, _("Overall Progress:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT2"));
+    ButtonRefresh = new wxButton(this, ID_BUTTON1, _("Refresh"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON1"));
+    FlexGridSizer2->Add(ButtonRefresh, 1, wxALL|wxEXPAND, 5);
+    StaticText2 = new wxStaticText(this, ID_STATICTEXT2, _("Highlight 1:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT2"));
     FlexGridSizer2->Add(StaticText2, 1, wxALL|wxEXPAND, 5);
-    GaugeOverall = new wxGauge(this, ID_GAUGE1, 100, wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_GAUGE1"));
-    FlexGridSizer2->Add(GaugeOverall, 1, wxALL|wxEXPAND, 5);
-    ButtonPause = new wxButton(this, ID_BUTTON2, _("Pause"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON2"));
-    ButtonPause->Disable();
-    FlexGridSizer2->Add(ButtonPause, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
-    StaticText3 = new wxStaticText(this, ID_STATICTEXT7, _("Step Progress:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT7"));
+    ChoiceHL1 = new wxChoice(this, ID_CHOICE2, wxDefaultPosition, wxDefaultSize, 0, 0, wxVSCROLL|wxHSCROLL, wxDefaultValidator, _T("ID_CHOICE2"));
+    FlexGridSizer2->Add(ChoiceHL1, 1, wxALL|wxEXPAND, 5);
+    wxString __wxRadioBoxChoices_1[3] =
+    {
+    	_("R"),
+    	_("G"),
+    	_("B")
+    };
+    RadioBox1 = new wxRadioBox(this, ID_RADIOBOX1, wxEmptyString, wxDefaultPosition, wxDefaultSize, 3, __wxRadioBoxChoices_1, 1, wxRA_VERTICAL, wxDefaultValidator, _T("ID_RADIOBOX1"));
+    RadioBox1->SetSelection(1);
+    wxFont RadioBox1Font(8,wxFONTFAMILY_SWISS,wxFONTSTYLE_NORMAL,wxFONTWEIGHT_BOLD,false,_T("@System"),wxFONTENCODING_DEFAULT);
+    RadioBox1->SetFont(RadioBox1Font);
+    FlexGridSizer2->Add(RadioBox1, 1, wxALL|wxEXPAND, 5);
+    StaticText3 = new wxStaticText(this, ID_STATICTEXT3, _("Highlight 2:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT3"));
     FlexGridSizer2->Add(StaticText3, 1, wxALL|wxEXPAND, 5);
-    GaugeStep = new wxGauge(this, ID_GAUGE2, 100, wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_GAUGE2"));
-    FlexGridSizer2->Add(GaugeStep, 1, wxALL|wxEXPAND, 5);
-    ButtonResume = new wxButton(this, ID_BUTTON3, _("Resume"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON3"));
-    ButtonResume->Disable();
-    FlexGridSizer2->Add(ButtonResume, 1, wxALL|wxEXPAND, 5);
+    ChoiceHL2 = new wxChoice(this, ID_CHOICE3, wxDefaultPosition, wxDefaultSize, 0, 0, wxVSCROLL|wxHSCROLL, wxDefaultValidator, _T("ID_CHOICE3"));
+    FlexGridSizer2->Add(ChoiceHL2, 1, wxALL|wxEXPAND, 5);
+    wxString __wxRadioBoxChoices_2[3] =
+    {
+    	_("R"),
+    	_("G"),
+    	_("B")
+    };
+    RadioBox2 = new wxRadioBox(this, ID_RADIOBOX2, wxEmptyString, wxDefaultPosition, wxDefaultSize, 3, __wxRadioBoxChoices_2, 1, wxRA_VERTICAL, wxDefaultValidator, _T("ID_RADIOBOX2"));
+    RadioBox2->SetSelection(2);
+    wxFont RadioBox2Font(8,wxFONTFAMILY_SWISS,wxFONTSTYLE_NORMAL,wxFONTWEIGHT_BOLD,false,_T("@System"),wxFONTENCODING_DEFAULT);
+    RadioBox2->SetFont(RadioBox2Font);
+    FlexGridSizer2->Add(RadioBox2, 1, wxALL|wxEXPAND, 5);
     FlexGridSizer1->Add(FlexGridSizer2, 1, wxALL|wxEXPAND, 5);
     ListCtrlPublications = new wxListCtrl(this, ID_LISTCTRL1, wxDefaultPosition, wxDefaultSize, wxLC_REPORT|wxVSCROLL|wxHSCROLL, wxDefaultValidator, _T("ID_LISTCTRL1"));
     FlexGridSizer1->Add(ListCtrlPublications, 1, wxALL|wxEXPAND, 5);
@@ -156,6 +181,8 @@ WESTSeerFrame::WESTSeerFrame(wxWindow* parent,wxWindowID id)
     SetSizer(FlexGridSizer1);
     MenuBar1 = new wxMenuBar();
     Menu1 = new wxMenu();
+    MenuItem9 = new wxMenuItem(Menu1, ID_MENUITEM10, _("&Add Scope"), wxEmptyString, wxITEM_NORMAL);
+    Menu1->Append(MenuItem9);
     MenuItemOptions = new wxMenuItem(Menu1, ID_MENUITEM3, _("&Options"), wxEmptyString, wxITEM_NORMAL);
     Menu1->Append(MenuItemOptions);
     MenuItem6 = new wxMenuItem(Menu1, ID_MENUITEM4, _("&Export Web-of-Science Data"), wxEmptyString, wxITEM_NORMAL);
@@ -172,7 +199,9 @@ WESTSeerFrame::WESTSeerFrame(wxWindow* parent,wxWindowID id)
     Menu3->Append(MenuItem3);
     MenuBar1->Append(Menu3, _("&Mode"));
     Menu4 = new wxMenu();
-    MenuItem5 = new wxMenuItem(Menu4, ID_MENUITEM8, _("&Finished Scopes"), wxEmptyString, wxITEM_NORMAL);
+    MenuItem8 = new wxMenuItem(Menu4, ID_MENUITEM9, _("&Schedules"), wxEmptyString, wxITEM_NORMAL);
+    Menu4->Append(MenuItem8);
+    MenuItem5 = new wxMenuItem(Menu4, ID_MENUITEM8, _("&Downloads"), wxEmptyString, wxITEM_NORMAL);
     Menu4->Append(MenuItem5);
     MenuItemSQL = new wxMenuItem(Menu4, ID_MENUITEM6, _("&SQL"), wxEmptyString, wxITEM_NORMAL);
     Menu4->Append(MenuItemSQL);
@@ -190,45 +219,46 @@ WESTSeerFrame::WESTSeerFrame(wxWindow* parent,wxWindowID id)
     StatusBar1->SetFieldsCount(1,__wxStatusBarWidths_1);
     StatusBar1->SetStatusStyles(1,__wxStatusBarStyles_1);
     SetStatusBar(StatusBar1);
+    Timer1.SetOwner(this, ID_TIMER1);
+    Timer1.Start(1000, false);
     SetSizer(FlexGridSizer1);
     Layout();
 
     Connect(ID_CHOICE1,wxEVT_COMMAND_CHOICE_SELECTED,(wxObjectEventFunction)&WESTSeerFrame::OnChoiceScopeSelect);
-    Connect(ID_BUTTON1,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&WESTSeerFrame::OnButtonNewClick);
-    Connect(ID_BUTTON2,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&WESTSeerFrame::OnButtonPauseClick);
-    Connect(ID_BUTTON3,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&WESTSeerFrame::OnButtonResumeClick);
+    Connect(ID_BUTTON1,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&WESTSeerFrame::OnButtonRefreshClick);
+    Connect(ID_CHOICE2,wxEVT_COMMAND_CHOICE_SELECTED,(wxObjectEventFunction)&WESTSeerFrame::OnChoiceHL1Select);
+    Connect(ID_RADIOBOX1,wxEVT_COMMAND_RADIOBOX_SELECTED,(wxObjectEventFunction)&WESTSeerFrame::OnRadioBox1Select);
+    Connect(ID_CHOICE3,wxEVT_COMMAND_CHOICE_SELECTED,(wxObjectEventFunction)&WESTSeerFrame::OnChoiceHL2Select);
+    Connect(ID_RADIOBOX2,wxEVT_COMMAND_RADIOBOX_SELECTED,(wxObjectEventFunction)&WESTSeerFrame::OnRadioBox2Select);
     Connect(ID_LISTCTRL1,wxEVT_COMMAND_LIST_ITEM_SELECTED,(wxObjectEventFunction)&WESTSeerFrame::OnListCtrlPublicationsItemSelect);
+    Connect(ID_LISTCTRL1,wxEVT_COMMAND_LIST_ITEM_RIGHT_CLICK,(wxObjectEventFunction)&WESTSeerFrame::OnListCtrlPublicationsItemRClick);
+    Connect(ID_LISTCTRL3,wxEVT_COMMAND_LIST_ITEM_RIGHT_CLICK,(wxObjectEventFunction)&WESTSeerFrame::OnListCtrlCitationsItemRClick);
+    Connect(ID_MENUITEM10,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&WESTSeerFrame::OnMenuAddScopeSelected);
     Connect(ID_MENUITEM3,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&WESTSeerFrame::OnMenuItemOptionsSelected);
     Connect(ID_MENUITEM4,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&WESTSeerFrame::OnExportWoSSelected);
     Connect(ID_MENUITEM5,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&WESTSeerFrame::OnSaveResultsSelected);
     Connect(idMenuQuit,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&WESTSeerFrame::OnQuit);
     Connect(ID_MENUITEM2,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&WESTSeerFrame::OnTextModeSelected);
     Connect(ID_MENUITEM1,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&WESTSeerFrame::OnExploreModeSelected);
-    Connect(ID_MENUITEM8,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&WESTSeerFrame::OnMenuFinishedScopesSelected);
+    Connect(ID_MENUITEM9,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&WESTSeerFrame::OnMenuViewSchedulesSelected);
+    Connect(ID_MENUITEM8,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&WESTSeerFrame::OnMenuViewDownloadsSelected);
     Connect(ID_MENUITEM6,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&WESTSeerFrame::OnMenuItemSQLSelected);
     Connect(ID_MENUITEM7,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&WESTSeerFrame::OnMenuItemLogSelected);
     Connect(idMenuAbout,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&WESTSeerFrame::OnAbout);
+    Connect(ID_TIMER1,wxEVT_TIMER,(wxObjectEventFunction)&WESTSeerFrame::OnTimer1Trigger);
     //*)
 
-    _openAlex = NULL;
-    _termExtraction = NULL;
-    _termTfirdf = NULL;
-    _bitermDf = NULL;
-    _bitermWeight = NULL;
-    _candidateIdentification = NULL;
-    _topicIdentification = NULL;
-    _timeSeriesExtraction = NULL;
-    _predictionModel = NULL;
-    _metricModel = NULL;
     _exploreMode = false;
+    _numTermGroups = 0;
+    _numBitermGroups = 0;
     _displayThread = NULL;
-    _progressReporter = new MyProgressReporter(this);
     GeneralConfig config;
-    std::vector<std::string> scopes = ResearchScope::getResearchScopes(config.getDatabase());
+    std::vector<std::string> scopes = MetricModel::getScopesWithMetrics(config.getDatabase());
     for (std::string scope: scopes)
     {
         ChoiceScope->Append(scope);
     }
+    StatusBar1->SetFieldsCount(9);
 }
 
 WESTSeerFrame::~WESTSeerFrame()
@@ -239,9 +269,6 @@ WESTSeerFrame::~WESTSeerFrame()
 
 void WESTSeerFrame::showCandidate(uint64_t id)
 {
-    if (_metricModel == NULL || _topicIdentification == NULL || _timeSeriesExtraction == NULL || _timeSeries.size() == 0)
-        return;
-
     if (_displayThread != NULL)
     {
         _displayThread->join();
@@ -250,10 +277,11 @@ void WESTSeerFrame::showCandidate(uint64_t id)
     }
 
     _displayThread = new std::thread([this, id]{
+        int idxColor1 = RadioBox1->GetSelection();
+        int idxColor2 = RadioBox2->GetSelection();
+
         ListCtrlPublications->Disable();
         NotebookInfo->Disable();
-        StatusBar1->SetStatusText("Publication Info Retrieval (0%)", 1);
-
         GeneralConfig config;
         std::string path = config.getDatabase();
         std::string kws = ChoiceScope->GetString(ChoiceScope->GetSelection()).ToStdString();
@@ -281,7 +309,6 @@ void WESTSeerFrame::showCandidate(uint64_t id)
             }
             TextCtrlTopic->SetValue(ss.str());
         }
-        StatusBar1->SetStatusText("Publication Info Retrieval (20%)", 1);
 
         TextCtrlAbstract->SetValue(me.abstract());
         {
@@ -318,7 +345,6 @@ void WESTSeerFrame::showCandidate(uint64_t id)
                 TextCtrlVerification->SetValue(ss.str().c_str());
             }
         }
-        StatusBar1->SetStatusText("Publication Info Retrieval (60%)", 1);
 
         ListCtrlCitations->ClearAll();
         ListCtrlCitations->AppendColumn("Year");
@@ -344,7 +370,6 @@ void WESTSeerFrame::showCandidate(uint64_t id)
             ListCtrlCitations->SetItem(i, 3, pub.source().c_str());
             ListCtrlCitations->SetItem(i, 4, wxString::Format("%llu", pub.id()));
         }
-        StatusBar1->SetStatusText("Publication Info Retrieval (80%)", 1);
 
         ListCtrlReferences->ClearAll();
         ListCtrlReferences->AppendColumn("Year");
@@ -370,15 +395,19 @@ void WESTSeerFrame::showCandidate(uint64_t id)
             ListCtrlReferences->SetItem(i, 3, pub.source().c_str());
             ListCtrlReferences->SetItem(i, 4, wxString::Format("%llu", pub.id()));
         }
+        highlightCitations(id, idxColor1, idxColor2);
         ListCtrlPublications->Enable();
         NotebookInfo->Enable();
-        StatusBar1->SetStatusText("Publication Info Retrieval (100%)", 1);
     });
 }
 
 void WESTSeerFrame::showCandidates()
 {
-    if (_candidateIdentification == NULL || _metricModel == NULL || _timeSeriesExtraction == NULL)
+    if (ChoiceScope->GetSelection() <0)
+        return;
+
+    std::string keywords = ChoiceScope->GetString(ChoiceScope->GetSelection()).ToStdString();
+    if (keywords.size() == 0)
         return;
 
     if (_displayThread != NULL)
@@ -388,7 +417,7 @@ void WESTSeerFrame::showCandidates()
         _displayThread = NULL;
     }
 
-    _displayThread = new std::thread([this]{
+    _displayThread = new std::thread([this, keywords]{
         ListCtrlPublications->Disable();
         NotebookInfo->Disable();
 
@@ -398,8 +427,13 @@ void WESTSeerFrame::showCandidates()
         _topics.clear();
         _scores.clear();
         _citations.clear();
-
-        StatusBar1->SetStatusText("Result Info Retrieval (0%)", 1);
+        _termHLs.clear();
+        _bitermHLs.clear();
+        _hlws1.clear();
+        _hlws2.clear();
+        ListCtrlPublications->ClearAll();
+        ListCtrlReferences->ClearAll();
+        ListCtrlCitations->ClearAll();
 
         ListCtrlPublications->AppendColumn("Year");
         ListCtrlPublications->AppendColumn("Title", wxLIST_FORMAT_LEFT, 600);
@@ -423,26 +457,42 @@ void WESTSeerFrame::showCandidates()
         ListCtrlPublications->AppendColumn("RPYS2-NTop1");
         ListCtrlPublications->AppendColumn("NC");
         int ye = _exploreMode ? WESTSeerApp::year() + 5 : WESTSeerApp::year();
-        if (!_timeSeriesExtraction->load(ye, &_timeSeries))
+        if (!TimeSeriesExtraction::load(keywords, ye, &_timeSeries))
         {
             logError("cannot load time series");
             return;
         }
-        StatusBar1->SetStatusText("Result Info Retrieval (10%)", 1);
 
-        if (!_topicIdentification->load(ye, &_topics))
+        if (!TopicIdentification::load(keywords, ye, &_topics))
         {
             logError("cannot load topics");
             return;
         }
-        StatusBar1->SetStatusText("Result Info Retrieval (20%)", 1);
 
-        if (!_metricModel->load(ye, &_scores))
+        if (!MetricModel::load(keywords, ye, &_scores, &_termHLs, &_bitermHLs))
         {
             logError("cannot load scores");
             return;
         }
-        StatusBar1->SetStatusText("Result Info Retrieval (30%)", 1);
+        std::vector<std::string> kwGroups = splitString(keywords,";");
+        _numTermGroups = kwGroups.size();
+        _numBitermGroups = _numTermGroups * (_numTermGroups - 1) / 2;
+        ChoiceHL1->Clear();
+        ChoiceHL2->Clear();
+        for (size_t i = 0; i < kwGroups.size(); i++)
+        {
+            ChoiceHL1->Append(kwGroups[i].c_str());
+            ChoiceHL2->Append(kwGroups[i].c_str());
+        }
+        for (size_t i1 = 0; i1 < kwGroups.size(); i1++)
+        {
+            for (size_t i2 = i1 + 1; i2 < kwGroups.size(); i2++)
+            {
+                std::string temp = kwGroups[i1] + ";" + kwGroups[i2];
+                ChoiceHL1->Append(temp.c_str());
+                ChoiceHL2->Append(temp.c_str());
+            }
+        }
 
         GeneralConfig config;
         std::string path = config.getDatabase();
@@ -450,10 +500,8 @@ void WESTSeerFrame::showCandidates()
         ResearchScope scope(path, kws);
         std::vector<uint64_t> ids;
         std::vector<int> pRanks, vRanks;
-        if (_candidateIdentification->load(ye, &ids))
+        if (CandidateIdentification::load(keywords, ye, &ids))
         {
-            StatusBar1->SetStatusText("Result Info Retrieval (35%)", 1);
-
             pRanks.resize(ids.size());
             vRanks.resize(ids.size());
             for (size_t i = 0; i < ids.size(); i++)
@@ -485,22 +533,23 @@ void WESTSeerFrame::showCandidates()
                 _vRanks[pRanks[i]] = vRanks[i];
             }
             _citations = scope.getCitations(_ids, ye);
-            StatusBar1->SetStatusText("Result Info Retrieval (40%)", 1);
+            std::map<uint64_t,std::vector<uint64_t>> cids;
+            for (auto idToCs: _citations)
+            {
+                std::vector<uint64_t> myCids;
+                for (Publication &pub: idToCs.second)
+                {
+                    myCids.push_back(pub.id());
+                }
+                cids[idToCs.first] = myCids;
+            }
 
             std::vector<Publication> pubs = scope.getPublications(_ids);
             std::map<uint64_t,Publication> pubMap;
             for (Publication pub: pubs)
             {
-                int progress0 = 40 + 50 * pubMap.size() / pubs.size();
                 pubMap[pub.id()] = pub;
-                int progress1 = 40 + 50 * pubMap.size() / pubs.size();
-                if (progress1 > progress0)
-                {
-                    wxString s = wxString::Format("Result Info Retrieval (%d)", progress1);
-                    StatusBar1->SetStatusText(s, 1);
-                }
             }
-            StatusBar1->SetStatusText("Result Info Retrieval (90%)", 1);
 
             for (int i = 0; i < (int)_ids.size() ; i++)
             {
@@ -561,19 +610,179 @@ void WESTSeerFrame::showCandidates()
                     ListCtrlPublications->SetItem(i, 16, wxString::Format("%d", rpys2NTop1));
                     ListCtrlPublications->SetItem(i, 17, wxString::Format("%d", nc));
                 }
-                int progress0 = 90 + 10 * i / (int)_ids.size();
-                int progress1 = 90 + 10 * (i + 1) / (int)_ids.size();
-                if (progress1 > progress0)
-                {
-                    wxString s = wxString::Format("Result Info Retrieval (%d\%)", progress1);
-                    StatusBar1->SetStatusText(s, 1);
-                }
             }
         }
 
         ListCtrlPublications->Enable();
         NotebookInfo->Enable();
     });
+}
+
+wxColor getColor(int idxColor1, int idxColor2, double h1, double h2)
+{
+    double h = h1 > h2 ? h1 : h2;
+    int r = 255, g = 255, b = 255;
+    if (idxColor1 == idxColor2)
+    {
+        switch (idxColor1)
+        {
+        case 0:
+            {
+                r = (int)round(h * 255);
+                g = (int)round((1 - h) * 255);
+                b = (int)round((1 - h) * 255);
+            }
+            break;
+        case 1:
+            {
+                r = (int)round((1 - h) * 255);
+                g = (int)round(h * 255);
+                b = (int)round((1 - h) * 255);
+            }
+            break;
+        default:
+            {
+                r = (int)round((1 - h) * 255);
+                g = (int)round((1 - h) * 255);
+                b = (int)round(h * 255);
+            }
+        }
+    }
+    else
+    {
+        if (0 != idxColor1 && 0 != idxColor2)
+        {
+            r = (int)round((1 - h) * 255);
+        }
+        else if (1 != idxColor1 && 1 != idxColor2)
+        {
+            g = (int)round((1 - h) * 255);
+        }
+        else if (2 != idxColor1 && 2 != idxColor2)
+        {
+            b = (int)round((1 - h) * 255);
+        }
+        switch (idxColor1)
+        {
+        case 0:
+            r = (int)round(h1 * 255);
+            break;
+        case 1:
+            g = (int)round(h1 * 255);
+            break;
+        default:
+            b = (int)round(h1 * 255);
+            break;
+        }
+        switch (idxColor2)
+        {
+        case 0:
+            r = (int)round(h2 * 255);
+            break;
+        case 1:
+            g = (int)round(h2 * 255);
+            break;
+        default:
+            b = (int)round(h2 * 255);
+            break;
+        }
+    }
+    return wxColor(r,g,b);
+}
+
+void WESTSeerFrame::highlightCitations(uint64_t id, int idxColor1, int idxColor2)
+{
+    auto idToH1 = _hlws1.find(id);
+    auto idToH2 = _hlws2.find(id);
+    int numCitations = ListCtrlCitations->GetItemCount();
+    for (int idxCitation = 0; idxCitation < numCitations; idxCitation++)
+    {
+        uint64_t cid = std::stoull(ListCtrlCitations->GetItemText(idxCitation, 4).ToStdString());
+        double ch1 = 0, ch2 = 0;
+        if (idToH1 != _hlws1.end())
+        {
+            auto cidToCH1 = idToH1->second.find(cid);
+            if (cidToCH1 != idToH1->second.end())
+            {
+                ch1 = cidToCH1->second;
+            }
+        }
+        if (idToH2 != _hlws2.end())
+        {
+            auto cidToCH2 = idToH2->second.find(cid);
+            if (cidToCH2 != idToH2->second.end())
+            {
+                ch2 = cidToCH2->second;
+            }
+        }
+
+        ListCtrlCitations->SetItemBackgroundColour(idxCitation, getColor(idxColor1,idxColor2,ch1,ch2));
+        ListCtrlCitations->RefreshItem(idxCitation);
+    }
+}
+
+void WESTSeerFrame::highlightCandidates()
+{
+    if (ChoiceScope->GetSelection() <0)
+        return;
+
+    if (_displayThread != NULL)
+    {
+        _displayThread->join();
+        delete _displayThread;
+        _displayThread = NULL;
+    }
+
+    _displayThread = new std::thread(
+        [this]
+        {
+            int idxColor1 = RadioBox1->GetSelection();
+            int idxColor2 = RadioBox2->GetSelection();
+            int numItems = ListCtrlPublications->GetItemCount();
+            for (int idxItem = 0; idxItem < numItems; idxItem++)
+            {
+                uint64_t id = _ids[idxItem];
+
+                double h1 = 0, h2 = 0;
+                auto idToH1 = _hlws1.find(id);
+                if (idToH1 != _hlws1.end())
+                {
+                    double sum1 = idToH1->second.size(), sum2 = 0;
+                    for (auto cidToH1 : idToH1->second)
+                    {
+                        sum2 += cidToH1.second;
+                    }
+                    if (sum1 > 0 && sum2 > 0)
+                        h1 = sum2 / sum1;
+                    if (h1 > 1)
+                        h1 = 1;
+                }
+                auto idToH2 = _hlws2.find(id);
+                if (idToH2 != _hlws2.end())
+                {
+                    double sum1 = idToH2->second.size(), sum2 = 0;
+                    for (auto cidToH2 : idToH2->second)
+                    {
+                        sum2 += cidToH2.second;
+                    }
+                    if (sum1 > 0 && sum2 > 0)
+                        h2 = sum2 / sum1;
+                    if (h2 > 1)
+                        h2 = 1;
+                }
+
+                ListCtrlPublications->SetItemBackgroundColour(idxItem, getColor(idxColor1,idxColor2,h1,h2));
+                ListCtrlPublications->RefreshItem(idxItem);
+            }
+
+            int idxPubSelection = (int)ListCtrlPublications->GetNextItem(-1, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
+            if (idxPubSelection >= 0 && idxPubSelection < (int) _ids.size())
+            {
+                uint64_t id = std::stoull(ListCtrlPublications->GetItemText(idxPubSelection, 4).ToStdString());
+                highlightCitations(id, idxColor1, idxColor2);
+            }
+        }
+    );
 }
 
 void WESTSeerFrame::saveCandidates()
@@ -628,47 +837,6 @@ void WESTSeerFrame::clearCandidates()
     TextCtrlVerification->SetValue("");
     TextCtrlTopic->SetValue("");
     _ids.clear();
-}
-
-WESTSeerFrame::MyProgressReporter::MyProgressReporter(WESTSeerFrame *frame)
-{
-    _frame = frame;
-    _frame->StatusBar1->SetFieldsCount(3);
-    _frame->GaugeOverall->SetRange(100);
-    _frame->GaugeStep->SetRange(100);
-}
-
-void WESTSeerFrame::MyProgressReporter::report(
-    const char *taskName, int taskId, int numTasks, int taskProgress)
-{
-    std::stringstream ss1;
-    ss1 << "task " << taskId << " of " << numTasks;
-    _frame->StatusBar1->SetStatusText(ss1.str().c_str(), 0);
-    _frame->StatusBar1->SetStatusText(taskName, 1);
-    std::stringstream ss2;
-    ss2 << taskProgress << "%(" << _frame->getElapseSeconds() << " seconds)";
-    _frame->StatusBar1->SetStatusText(ss2.str().c_str(), 2);
-    _frame->GaugeStep->SetValue(taskProgress);
-    _frame->GaugeOverall->SetValue(100 * taskId / numTasks);
-
-    if (strcmp(taskName, "Done") == 0 || strcmp(taskName, "Cancelled") == 0)
-    {
-        if (strcmp(taskName, "Done") == 0)
-        {
-            _frame->showCandidates();
-        }
-        _frame->ButtonPause->Disable();
-        _frame->ButtonResume->Disable();
-        _frame->ChoiceScope->Enable();
-        _frame->ButtonNew->Enable();
-    }
-    else
-    {
-        _frame->ButtonPause->Enable();
-        _frame->ButtonResume->Disable();
-        _frame->ChoiceScope->Disable();
-        _frame->ButtonNew->Disable();
-    }
 }
 
 void WESTSeerFrame::OnQuit(wxCommandEvent& event)
@@ -747,147 +915,18 @@ void WESTSeerFrame::OnMenuItemLogSelected(wxCommandEvent& event)
 
 void WESTSeerFrame::OnChoiceScopeSelect(wxCommandEvent& event)
 {
-    if (_displayThread != NULL)
-    {
-        _displayThread->join();
-        delete _displayThread;
-        _displayThread = NULL;
-    }
-
-    clearCandidates();
-    clearScope();
-    AbstractTask::setProgressReporter(_progressReporter);
-    GeneralConfig config;
-    std::string path = config.getDatabase();
-    std::string kws = ChoiceScope->GetString(ChoiceScope->GetSelection()).ToStdString();
-    time(&_timeStart);
-    _openAlex = new OpenAlex(config.getEmail(), path, kws);
-
-    _termExtraction = new TermExtraction(path, kws);
-    _openAlex->setNext(_termExtraction);
-
-    _termTfirdf = new TermTfIrdf(path, kws, _termExtraction);
-    _termExtraction->setNext(_termTfirdf);
-
-    _bitermDf = new BitermDf(path, kws, _termTfirdf);
-    _termTfirdf->setNext(_bitermDf);
-
-    _bitermWeight = new BitermWeight(path, kws, _termTfirdf, _bitermDf);
-    _bitermDf->setNext(_bitermWeight);
-
-    _candidateIdentification = new CandidateIdentification(path, kws);
-    _bitermWeight->setNext(_candidateIdentification);
-
-    _topicIdentification = new TopicIdentification(path, kws, _termExtraction, _bitermWeight, _candidateIdentification);
-    _candidateIdentification->setNext(_topicIdentification);
-
-    _timeSeriesExtraction = new TimeSeriesExtraction(path, kws, _bitermWeight, _candidateIdentification, _topicIdentification);
-    _topicIdentification->setNext(_timeSeriesExtraction);
-
-    _predictionModel = new PredictionModel(path, kws, _timeSeriesExtraction);
-    _timeSeriesExtraction->setNext(_predictionModel);
-
-    _metricModel = new MetricModel(path, kws, _timeSeriesExtraction, _predictionModel);
-    _predictionModel->setNext(_metricModel);
-
-    _openAlex->runAll();
-}
-
-void WESTSeerFrame::clearScope()
-{
-    _ids.clear();
-    _vRanks.clear();
-    _timeSeries.clear();
-    _topics.clear();
-    _scores.clear();
-    if (_openAlex != NULL)
-    {
-        delete _openAlex;
-        _openAlex = NULL;
-    }
-    if (_termExtraction != NULL)
-    {
-        delete _termExtraction;
-        _termExtraction = NULL;
-    }
-    if (_termTfirdf != NULL)
-    {
-        delete _termTfirdf;
-        _termTfirdf = NULL;
-    }
-    if (_bitermDf != NULL)
-    {
-        delete _bitermDf;
-        _bitermDf = NULL;
-    }
-    if (_bitermWeight != NULL)
-    {
-        delete _bitermWeight;
-        _bitermWeight = NULL;
-    }
-    if (_candidateIdentification != NULL)
-    {
-        delete _candidateIdentification;
-        _candidateIdentification = NULL;
-    }
-    if (_topicIdentification != NULL)
-    {
-        delete _topicIdentification;
-        _topicIdentification = NULL;
-    }
-    if (_timeSeriesExtraction != NULL)
-    {
-        delete _timeSeriesExtraction;
-        _timeSeriesExtraction = NULL;
-    }
-    if (_predictionModel != NULL)
-    {
-        delete _predictionModel;
-        _predictionModel = NULL;
-    }
-    if (_metricModel != NULL)
-    {
-        delete _metricModel;
-        _metricModel = NULL;
-    }
-}
-
-void WESTSeerFrame::OnButtonPauseClick(wxCommandEvent& event)
-{
-    AbstractTask::setProgressReporter(NULL);
-    AbstractTask::cancel();
-    AbstractTask::finalize();
-    ButtonResume->Enable();
-}
-
-void WESTSeerFrame::OnButtonResumeClick(wxCommandEvent& event)
-{
-    OnChoiceScopeSelect(event);
+    showCandidates();
 }
 
 void WESTSeerFrame::OnExploreModeSelected(wxCommandEvent& event)
 {
-    if (_displayThread != NULL)
-    {
-        _displayThread->join();
-        delete _displayThread;
-        _displayThread = NULL;
-    }
     _exploreMode = true;
-    clearCandidates();
     showCandidates();
 }
 
 void WESTSeerFrame::OnTextModeSelected(wxCommandEvent& event)
 {
-    if (_displayThread != NULL)
-    {
-        _displayThread->join();
-        delete _displayThread;
-        _displayThread = NULL;
-    }
     _exploreMode = false;
-    clearCandidates();
     showCandidates();
 }
 
@@ -932,15 +971,185 @@ void WESTSeerFrame::OnNotebookInfoPageChanged(wxNotebookEvent& event)
 {
 }
 
-int WESTSeerFrame::getElapseSeconds()
+void WESTSeerFrame::OnMenuViewDownloadsSelected(wxCommandEvent& event)
 {
-    time_t t;
-    time(&t);
-    return t - _timeStart;
+    DownloadsDialog dlg(this);
+    dlg.ShowModal();
 }
 
-void WESTSeerFrame::OnMenuFinishedScopesSelected(wxCommandEvent& event)
+void WESTSeerFrame::OnMenuViewSchedulesSelected(wxCommandEvent& event)
 {
-    FinishedScopeDialog dlg(this);
+    SchedulesDialog dlg(this);
     dlg.ShowModal();
+}
+
+void WESTSeerFrame::OnMenuAddScopeSelected(wxCommandEvent& event)
+{
+    // pop up an OpenAlexImportDialog
+    OpenAlexImportDialog dlg(this);
+    dlg.addScope();
+}
+
+void WESTSeerFrame::OnTimer1Trigger(wxTimerEvent& event)
+{
+    bool paused = false;
+    std::vector<std::pair<std::string,std::string>> schedule = AbstractTask::loadSchedule(&paused);
+    size_t numDone = 0;
+    std::string latestStatus;
+    for (size_t i = 0; i < schedule.size(); i++)
+    {
+        if (schedule[i].second == "Done")
+            numDone++;
+        else if (schedule[i].second != "Pending")
+            latestStatus = schedule[i].second;
+    }
+    StatusBar1->SetStatusText(wxString::Format("#Sched: %d", (int)schedule.size()), 0);
+    StatusBar1->SetStatusText(wxString::Format("#Done: %d", (int)numDone), 1);
+    StatusBar1->SetStatusText(("Scope Progress:" + latestStatus).c_str(), 2);
+    StatusBar1->SetStatusText(wxString::Format("#Read: %d", (int)CallbackData::getNumDataRead()),3);
+    StatusBar1->SetStatusText(wxString::Format("Size Read: %d M", (int)(CallbackData::getSizeRead() >> 20)),4);
+    StatusBar1->SetStatusText(wxString::Format("#Write: %d", (int)CallbackData::getNumDataWrite()),5);
+    StatusBar1->SetStatusText(wxString::Format("Size Write: %d M", (int)(CallbackData::getSizeWrite() >> 20)),6);
+    StatusBar1->SetStatusText(wxString::Format("#Receive: %d", (int)OpenAlex::numDownloaded()),7);
+    StatusBar1->SetStatusText(wxString::Format("Size Receive: %d M", (int)(OpenAlex::sizeDownloaded() >> 20)),8);
+}
+
+void WESTSeerFrame::OnChoiceHL1Select(wxCommandEvent& event)
+{
+    if (_displayThread != NULL)
+    {
+        _displayThread->join();
+        delete _displayThread;
+        _displayThread = NULL;
+    }
+
+    _hlws1.clear();
+    int idxSelection = ChoiceHL1->GetSelection();
+    if (idxSelection <0 || idxSelection >= _numTermGroups + _numBitermGroups)
+    {
+        return;
+    }
+
+    if (idxSelection < _numTermGroups)
+    {
+        for (auto idToCHL = _termHLs.begin(); idToCHL != _termHLs.end(); idToCHL++)
+        {
+            std::map<uint64_t, double> chls;
+            for (auto cidToHL = idToCHL->second.begin(); cidToHL != idToCHL->second.end(); cidToHL++)
+            {
+                chls[cidToHL->first] = cidToHL->second[idxSelection];
+            }
+            _hlws1[idToCHL->first] = chls;
+        }
+    }
+    else
+    {
+        for (auto idToCHL = _bitermHLs.begin(); idToCHL != _bitermHLs.end(); idToCHL++)
+        {
+            std::map<uint64_t, double> chls;
+            for (auto cidToHL = idToCHL->second.begin(); cidToHL != idToCHL->second.end(); cidToHL++)
+            {
+                chls[cidToHL->first] = cidToHL->second[idxSelection - _numTermGroups];
+            }
+            _hlws1[idToCHL->first] = chls;
+        }
+    }
+
+    highlightCandidates();
+}
+
+void WESTSeerFrame::OnChoiceHL2Select(wxCommandEvent& event)
+{
+    if (_displayThread != NULL)
+    {
+        _displayThread->join();
+        delete _displayThread;
+        _displayThread = NULL;
+    }
+
+    _hlws2.clear();
+    int idxSelection = ChoiceHL2->GetSelection();
+    if (idxSelection <0 || idxSelection >= _numTermGroups + _numBitermGroups)
+    {
+        return;
+    }
+
+    if (idxSelection < _numTermGroups)
+    {
+        for (auto idToCHL = _termHLs.begin(); idToCHL != _termHLs.end(); idToCHL++)
+        {
+            std::map<uint64_t, double> chls;
+            for (auto cidToHL = idToCHL->second.begin(); cidToHL != idToCHL->second.end(); cidToHL++)
+            {
+                chls[cidToHL->first] = cidToHL->second[idxSelection];
+            }
+            _hlws2[idToCHL->first] = chls;
+        }
+    }
+    else
+    {
+        for (auto idToCHL = _bitermHLs.begin(); idToCHL != _bitermHLs.end(); idToCHL++)
+        {
+            std::map<uint64_t, double> chls;
+            for (auto cidToHL = idToCHL->second.begin(); cidToHL != idToCHL->second.end(); cidToHL++)
+            {
+                chls[cidToHL->first] = cidToHL->second[idxSelection - _numTermGroups];
+            }
+            _hlws2[idToCHL->first] = chls;
+        }
+    }
+
+    highlightCandidates();
+}
+
+void WESTSeerFrame::OnListCtrlPublicationsItemRClick(wxListEvent& event)
+{
+    int idxItem = (int)ListCtrlPublications->GetNextItem(-1, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
+    if (idxItem < 0 || idxItem >= (int)ListCtrlPublications->GetItemCount())
+        return;
+    uint64_t id = std::stoull(ListCtrlPublications->GetItemText(idxItem, 4).ToStdString());
+    GeneralConfig config;
+    std::string path = config.getDatabase();
+    std::string kws = ChoiceScope->GetString(ChoiceScope->GetSelection()).ToStdString();
+    ResearchScope scope(path, kws);
+
+    Publication pub = scope.getPublication(id);
+    wxMessageBox(pub.abstract(), "Abstract of Publication");
+}
+
+void WESTSeerFrame::OnListCtrlCitationsItemRClick(wxListEvent& event)
+{
+    int idxItem = (int)ListCtrlCitations->GetNextItem(-1, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
+    if (idxItem < 0 || idxItem >= (int)ListCtrlCitations->GetItemCount())
+        return;
+    uint64_t id = std::stoull(ListCtrlCitations->GetItemText(idxItem, 4).ToStdString());
+    GeneralConfig config;
+    std::string path = config.getDatabase();
+    std::string kws = ChoiceScope->GetString(ChoiceScope->GetSelection()).ToStdString();
+    ResearchScope scope(path, kws);
+
+    Publication pub = scope.getPublication(id);
+    wxMessageBox(pub.abstract(), "Abstract of Citation");
+}
+
+void WESTSeerFrame::OnButtonRefreshClick(wxCommandEvent& event)
+{
+    clearCandidates();
+    ChoiceScope->Clear();
+    GeneralConfig config;
+    std::vector<std::string> scopes = MetricModel::getScopesWithMetrics(config.getDatabase());
+    for (std::string scope: scopes)
+    {
+        ChoiceScope->Append(scope);
+    }
+}
+
+void WESTSeerFrame::OnRadioBox1Select(wxCommandEvent& event)
+{
+    highlightCandidates();
+}
+
+void WESTSeerFrame::OnRadioBox2Select(wxCommandEvent& event)
+{
+    highlightCandidates();
 }

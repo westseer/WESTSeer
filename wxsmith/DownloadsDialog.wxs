@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<wxsmith>
+	<object class="wxDialog" name="DownloadsDialog">
+		<title>Downloads</title>
+		<id_arg>0</id_arg>
+		<style>wxCAPTION|wxDEFAULT_DIALOG_STYLE|wxCLOSE_BOX|wxMAXIMIZE_BOX|wxMINIMIZE_BOX</style>
+		<handler function="OnKeyDown" entry="EVT_KEY_DOWN" />
+		<object class="wxListCtrl" name="ID_LISTCTRL1" variable="ListCtrlScope" member="yes">
+			<pos>352,352</pos>
+			<tooltip>Select a scope and press &quot;Del&quot; to delete the scope. &#x0A;Select a scope and press &quot;-&quot; to remove one year of records in the scope.&#x0A;Remove some records of the scope to force an update of the scope.</tooltip>
+			<style>wxLC_REPORT|wxVSCROLL|wxHSCROLL</style>
+			<handler function="OnListCtrlScopeItemRClick" entry="EVT_LIST_ITEM_RIGHT_CLICK" />
+		</object>
+	</object>
+</wxsmith>

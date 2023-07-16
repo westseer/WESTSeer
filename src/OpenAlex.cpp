@@ -10,7 +10,10 @@
 #define CPPHTTPLIB_OPENSSL_SUPPORT
 #include <httplib.h>
 
-void OpenAlex::init()
+uint64_t OpenAlex::_numDownloaded = 0;
+uint64_t OpenAlex::_sizeDownloaded = 0;
+
+void OpenAlex::init(bool sampleOnly)
 {
     GeneralConfig config;
     _y2 = WESTSeerApp::year();
@@ -39,14 +42,15 @@ void OpenAlex::init()
         _urls.push_back(yUrls);
     }
     _samples.resize(numCombs);
-    _scope.init();
-    _samplesOnly = false;
+    _samplesOnly = sampleOnly;
+    if (!sampleOnly)
+        _scope.init();
 }
 
-OpenAlex::OpenAlex(const std::string email, const std::string path, const std::string kws): _scope(path, kws)
+OpenAlex::OpenAlex(const std::string email, const std::string path, const std::string kws, bool sampleOnly): _scope(path, kws)
 {
     _email = email;
-    init();
+    init(sampleOnly);
 }
 
 OpenAlex::~OpenAlex()
@@ -75,7 +79,7 @@ const char *OpenAlex::name()
 int OpenAlex::numSteps()
 {
     if (_urls.size() > 0)
-        return _urls.size() * _urls[0].second.size();
+        return _samplesOnly ? _urls.size() : _urls.size() * _urls[0].second.size();
     else
         return 0;
 }
@@ -149,6 +153,8 @@ void OpenAlex::doStep(int stepId)
     _samples[j].clear();
     if (numResultsOnPage > 0)
     {
+        _numDownloaded += numResultsOnPage;
+        _sizeDownloaded += res->body.size();
         for (auto &result: resultsOnPage)
         {
             Publication pub(result);
@@ -182,6 +188,8 @@ void OpenAlex::doStep(int stepId)
         response = nlohmann::json::parse(res->body);
         nextCursor = getNextCursor(response);
         resultsOnPage = response["results"];
+        _numDownloaded += resultsOnPage.size();
+        _sizeDownloaded += res->body.size();
         for (auto &result: resultsOnPage)
         {
             Publication pub(result);
@@ -250,6 +258,8 @@ void OpenAlex::doStep(int stepId)
 			// parse response
 			response = nlohmann::json::parse(res->body);
 			auto resultsOfResponse = response["results"];
+			_numDownloaded += resultsOfResponse.size();
+			_sizeDownloaded += res->body.size();
 			for (auto result: resultsOfResponse) {
                 Publication refPub(result);
 				refsOfY[refPub.id()] = refPub;
