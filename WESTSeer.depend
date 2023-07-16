@@ -3491,7 +3491,7 @@
 	<map>
 	<cassert>
 
-1689310070 source:d:\c++\westseer\src\researchscope.cpp
+1689537021 source:d:\c++\westseer\src\researchscope.cpp
 	"ResearchScope.h"
 	<algorithm>
 	<stdexcept>
@@ -3706,7 +3706,7 @@
 	<unordered_map>
 	"porter2_stemmer.h"
 
-1689450602 source:d:\c++\westseer\src\termextraction.cpp
+1689537159 source:d:\c++\westseer\src\termextraction.cpp
 	"TermExtraction.h"
 	<../WESTSeerApp.h>
 	<StringProcessing.h>
@@ -3732,7 +3732,7 @@
 	<StopWordMatcher.h>
 	<Matcher.h>
 
-1689450805 source:d:\c++\westseer\src\termtfirdf.cpp
+1689537199 source:d:\c++\westseer\src\termtfirdf.cpp
 	"TermTfIrdf.h"
 	<../WESTSeerApp.h>
 	<GeneralConfig.h>
@@ -7396,7 +7396,7 @@
 	<stdlib.h>
 	<string.h>
 
-1689452833 source:d:\c++\westseer\src\candidateidentification.cpp
+1689536932 source:d:\c++\westseer\src\candidateidentification.cpp
 	"CandidateIdentification.h"
 	<../WESTSeerApp.h>
 	<GeneralConfig.h>
@@ -7412,7 +7412,7 @@
 	<ResearchScope.h>
 	<vector>
 
-1689453513 source:d:\c++\westseer\src\metricmodel.cpp
+1689536966 source:d:\c++\westseer\src\metricmodel.cpp
 	"MetricModel.h"
 	<../WESTSeerApp.h>
 	<GeneralConfig.h>
@@ -7452,7 +7452,7 @@
 	<string>
 	<map>
 
-1689451329 source:d:\c++\westseer\src\bitermweight.cpp
+1689536904 source:d:\c++\westseer\src\bitermweight.cpp
 	"BitermWeight.h"
 	<../WESTSeerApp.h>
 	<GeneralConfig.h>
@@ -8351,7 +8351,7 @@
 
 1688169264 d:\c++\westseer\include\eigen\src\eigenvalues\selfadjointeigensolver_lapacke.h
 
-1689453339 source:d:\c++\westseer\src\predictionmodel.cpp
+1689536994 source:d:\c++\westseer\src\predictionmodel.cpp
 	"PredictionModel.h"
 	<../WESTSeerApp.h>
 	<GeneralConfig.h>
@@ -11798,7 +11798,7 @@
 	<TopicIdentification.h>
 	<map>
 
-1689453197 source:d:\c++\westseer\src\timeseriesextraction.cpp
+1689537252 source:d:\c++\westseer\src\timeseriesextraction.cpp
 	"TimeSeriesExtraction.h"
 	<../WESTSeerApp.h>
 	<GeneralConfig.h>
@@ -11814,7 +11814,7 @@
 	<map>
 	<string>
 
-1689462441 source:d:\c++\westseer\src\topicidentification.cpp
+1689537279 source:d:\c++\westseer\src\topicidentification.cpp
 	"TopicIdentification.h"
 	<../WESTSeerApp.h>
 	<GeneralConfig.h>

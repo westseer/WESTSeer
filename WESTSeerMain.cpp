@@ -1007,11 +1007,11 @@ void WESTSeerFrame::OnTimer1Trigger(wxTimerEvent& event)
     StatusBar1->SetStatusText(wxString::Format("#Done: %d", (int)numDone), 1);
     StatusBar1->SetStatusText(("Scope Progress:" + latestStatus).c_str(), 2);
     StatusBar1->SetStatusText(wxString::Format("#Read: %d", (int)CallbackData::getNumDataRead()),3);
-    StatusBar1->SetStatusText(wxString::Format("Size Read: %d M", (int)(CallbackData::getSizeRead() >> 20)),4);
+    StatusBar1->SetStatusText(wxString::Format("MBs Read: %d", (int)(CallbackData::getSizeRead() >> 20)),4);
     StatusBar1->SetStatusText(wxString::Format("#Write: %d", (int)CallbackData::getNumDataWrite()),5);
-    StatusBar1->SetStatusText(wxString::Format("Size Write: %d M", (int)(CallbackData::getSizeWrite() >> 20)),6);
+    StatusBar1->SetStatusText(wxString::Format("MBs Write: %d", (int)(CallbackData::getSizeWrite() >> 20)),6);
     StatusBar1->SetStatusText(wxString::Format("#Receive: %d", (int)OpenAlex::numDownloaded()),7);
-    StatusBar1->SetStatusText(wxString::Format("Size Receive: %d M", (int)(OpenAlex::sizeDownloaded() >> 20)),8);
+    StatusBar1->SetStatusText(wxString::Format("MBs Receive: %d", (int)(OpenAlex::sizeDownloaded() >> 20)),8);
 }
 
 void WESTSeerFrame::OnChoiceHL1Select(wxCommandEvent& event)
