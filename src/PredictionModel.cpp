@@ -44,7 +44,7 @@ void PredictionModel::doStep(int stepId)
     process(stepId);
 }
 
-bool PredictionModel::load(const std::string keywords, int y, std::map<uint64_t, std::vector<double>> *prediction)
+bool PredictionModel::load(const std::string keywords, int y, std::map<uint64_t, std::pair<std::vector<double>,std::vector<double>>> *prediction)
 {
     GeneralConfig config;
     std::string path = config.getDatabase();
@@ -62,7 +62,7 @@ bool PredictionModel::load(const std::string keywords, int y, std::map<uint64_t,
     {
         CallbackData data;
         std::stringstream ss;
-        ss << "SELECT id, scope_keywords, year, rts FROM pub_scope_prediction WHERE scope_keywords = '"
+        ss << "SELECT id, scope_keywords, year, rts, topic_rts FROM pub_scope_prediction WHERE scope_keywords = '"
             << keywords << "' AND year = " << y << ";";
         std::string strSql = ss.str();
         rc = sqlite3x_exec(db, strSql.c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
@@ -76,14 +76,16 @@ bool PredictionModel::load(const std::string keywords, int y, std::map<uint64_t,
         {
             uint64_t id = std::stoull(result["id"]);
             std::vector<double> rts = getDoubleVector(result["rts"]);
-            (*prediction)[id] = rts;
+            std::vector<double> topicRts = getDoubleVector(result["topic_rts"]);
+            std::pair<std::vector<double>,std::vector<double>> myPrediction(rts,topicRts);
+            (*prediction)[id] = myPrediction;
         }
     }
 
     return true;
 }
 
-bool PredictionModel::load(int y, std::map<uint64_t, std::vector<double>> *prediction)
+bool PredictionModel::load(int y, std::map<uint64_t, std::pair<std::vector<double>,std::vector<double>>> *prediction)
 {
     GeneralConfig config;
     std::string path = config.getDatabase();
@@ -103,7 +105,7 @@ bool PredictionModel::load(int y, std::map<uint64_t, std::vector<double>> *predi
     {
         CallbackData data;
         std::stringstream ss;
-        ss << "SELECT id, scope_keywords, year, rts FROM pub_scope_prediction WHERE scope_keywords = '"
+        ss << "SELECT id, scope_keywords, year, rts, topic_rts FROM pub_scope_prediction WHERE scope_keywords = '"
             << keywords << "' AND year = " << y << ";";
         std::string strSql = ss.str();
         rc = sqlite3x_exec(db, strSql.c_str(), CallbackData::sqliteCallback, &data, &errorMessage);
@@ -117,7 +119,9 @@ bool PredictionModel::load(int y, std::map<uint64_t, std::vector<double>> *predi
         {
             uint64_t id = std::stoull(result["id"]);
             std::vector<double> rts = getDoubleVector(result["rts"]);
-            (*prediction)[id] = rts;
+            std::vector<double> topicRts = getDoubleVector(result["topic_rts"]);
+            std::pair<std::vector<double>,std::vector<double>> myPrediction(rts,topicRts);
+            (*prediction)[id] = myPrediction;
         }
     }
 
@@ -145,7 +149,7 @@ bool PredictionModel::load(int y, std::map<uint64_t, std::vector<double>> *predi
     return true;
 }
 
-bool PredictionModel::save(int y, std::map<uint64_t, std::vector<double>> &prediction)
+bool PredictionModel::save(int y, std::map<uint64_t, std::pair<std::vector<double>,std::vector<double>>> &prediction)
 {
     GeneralConfig config;
     std::string path = config.getDatabase();
@@ -173,6 +177,7 @@ bool PredictionModel::save(int y, std::map<uint64_t, std::vector<double>> &predi
         "scope_keywords TEXT,"
         "year INTEGER,"
         "rts TEXT,"
+        "topic_rts TEXT,"
         "PRIMARY KEY(id,scope_keywords,year))",
     };
     for (const char*sql: sqls)
@@ -191,15 +196,17 @@ bool PredictionModel::save(int y, std::map<uint64_t, std::vector<double>> &predi
     std::string keywords = _scope.getKeywords();
     {
         std::stringstream ss;
-        ss << "INSERT OR IGNORE INTO pub_scope_prediction(id, scope_keywords, year, rts) VALUES ";
+        ss << "INSERT OR IGNORE INTO pub_scope_prediction(id, scope_keywords, year, rts, topic_rts) VALUES ";
         for (auto idToTS = prediction.begin(); idToTS != prediction.end(); idToTS++)
         {
             uint64_t id = idToTS->first;
-            std::vector<double> rts = idToTS->second;
+            std::vector<double> rts = idToTS->second.first;
+            std::vector<double> topicRts = idToTS->second.second;
             std::string strRts = getVectorStr(rts);
+            std::string strTopicRts = getVectorStr(topicRts);
             if (idToTS != prediction.begin())
                 ss << ",";
-            ss << "(" << id << ",'" << keywords << "'," << y << ",'" << strRts << "')";
+            ss << "(" << id << ",'" << keywords << "'," << y << ",'" << strRts << "','" << strTopicRts << "')";
         }
         ss << ";";
         std::string strSql = ss.str();
@@ -240,7 +247,7 @@ bool PredictionModel::save(int y, std::map<uint64_t, std::vector<double>> &predi
 bool PredictionModel::process(int iStep)
 {
     int y = iStep == 0 ? _y2 : _y2 + 5;
-    std::map<uint64_t, std::vector<double>> prediction;
+    std::map<uint64_t, std::pair<std::vector<double>,std::vector<double>>> prediction;
 
     std::map<uint64_t, TSM> timeSeries;
     if (!_tse->load(y, &timeSeries))
@@ -250,19 +257,25 @@ bool PredictionModel::process(int iStep)
     for (auto &idToTs: timeSeries)
     {
         std::vector<int> lts = idToTs.second.first.first;
-        std::vector<double> lts2(lts.size());
+        std::vector<int> topicLts = idToTs.second.second.first;
+        std::vector<double> lts2(lts.size()), topicLts2(lts.size());
         for (size_t i = 0; i < lts.size(); i++)
         {
             lts2[i] = lts[i];
+            topicLts2[i] = topicLts[i];
         }
         TimeSeriesRegression regression(lts2, TimeSeriesRegression::TP_QUADRATIC);
+        TimeSeriesRegression topicRegression(topicLts2, TimeSeriesRegression::TP_QUADRATIC);
         double cosErr = regression.cosError();
-        std::vector<double> rts(5);
+        double topicCosErr = topicRegression.cosError();
+        std::vector<double> rts(5), topicRts(5);
         for (int i = 0; i < 5; i++)
         {
             rts[i] = regression.predict(10 + i) * cosErr;
+            topicRts[i] = topicRegression.predict(10 + i) * topicCosErr;
         }
-        prediction[idToTs.first] = rts;
+        std::pair<std::vector<double>,std::vector<double>> myPrediction(rts,topicRts);
+        prediction[idToTs.first] = myPrediction;
         if (cancelled())
             return false;
     }

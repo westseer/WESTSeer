@@ -253,7 +253,7 @@ bool MetricModel::process(int y)
         return false;
 
     // step 2: load prediction
-    std::map<uint64_t, std::vector<double>> prediction;
+    std::map<uint64_t, std::pair<std::vector<double>,std::vector<double>>> prediction;
     if (!_pm->load(y, &prediction))
         return false;
     if (cancelled())
@@ -443,11 +443,13 @@ bool MetricModel::process(int y)
     {
         uint64_t id = idToP.first;
         std::vector<int> lts = timeSeries[idToP.first].first.first;
-        std::vector<double> rts = idToP.second;
+        std::vector<int> topicLts = timeSeries[idToP.first].second.first;
+        std::vector<double> rts = idToP.second.first;
+        std::vector<double> topicRts = idToP.second.second;
 
         // get old citations
-        int oldC[10], oldCOnTopic[10];
-        double sumOld = 0, sumOldOnTopic = 0, maxOldOnTopic = 0;
+        int oldC[10], oldCOnTopic[10], oldT[10];
+        double sumOld = 0, sumOldOnTopic = 0, maxOldOnTopic = 0, sumOldT = 0;
         for (int i = 0; i < 10; i++)
         {
             auto idToC = oldCitations[i].find(id);
@@ -461,18 +463,23 @@ bool MetricModel::process(int y)
             }
 
             oldCOnTopic[i] = lts[i];
+            oldT[i] = topicLts[i];
             sumOld += oldC[i];
             sumOldOnTopic += oldCOnTopic[i];
+            sumOldT += oldT[i];
             if (oldCOnTopic[i] > maxOldOnTopic)
                 maxOldOnTopic = oldCOnTopic[i];
         }
         if (sumOldOnTopic == 0)
             sumOldOnTopic = 1;
+        if (sumOldT == 0)
+            sumOldT = 1;
 
         // get new citations
         int newC[5];
         double newCOnTopic[5];
-        double sumNew = 0, sumNewOnTopic = 0;
+        double newT[5];
+        double sumNew = 0, sumNewOnTopic = 0, sumNewT = 0;
         for (int i = 0; i < 5; i++)
         {
             auto idToC = newCitations[i].find(id);
@@ -486,26 +493,33 @@ bool MetricModel::process(int y)
             }
 
             newCOnTopic[i] = rts[i];
+            newT[i] = topicRts[i];
             sumNew += newC[i];
             sumNewOnTopic += newCOnTopic[i];
+            sumNewT += newT[i];
         }
 
         // compute irdf
         double irdf = log(sumOldPubs / sumOld);
         double predIrdf = log(sumOldPubs / sumOldOnTopic);
+        double predTIrdf = log(sumOldPubs / sumOldT);
 
         // compute growth
         double meanOld = sumOld * 0.1;
         double meanOldOnTopic = sumOldOnTopic * 0.1;
+        double meanOldT = sumOldT * 0.1;
         double meanNew = sumNew * 0.2;
         double meanNewOnTopic = sumNewOnTopic * 0.2;
+        double meanNewT = sumNewT * 0.2;
         if (meanNewOnTopic < 0)
             meanNewOnTopic = 0;
         double growth = meanNew / meanOld;
         double predGrowth = meanNewOnTopic / meanOldOnTopic;
+        double predTGrowth = meanNewT / meanOldT;
 
         // compute scores
-        double predScore = predGrowth * predIrdf;
+        // 1 / (0.7/0/7 + 0.3/0/3) = 0.5 > 0.362 = 1/(0.7/0.3+0.3/0.7)
+        double predScore = (predGrowth <= 0 || predTGrowth <= 0) ? 0.0 : 1.0 / (0.7 / (predGrowth * predIrdf) + 0.3 / (predTGrowth * predTIrdf));
         double realScore = growth * irdf;
         double rpys1C = 0, rpys2C = 0, rpys1NTop10 = 0, rpys2NTop10 = 0, rpys1NTop5 = 0, rpys2NTop5 = 0, rpys1NTop1 = 0, rpys2NTop1 = 0;
 
